@@ -40,8 +40,8 @@ export const ColorThemeContextProvider: React.FC = ({ children }) => {
       setColorTheme(theme);
       // inject the color theme into the DOM
       const root = document.documentElement;
-      root.dataset.theme = colorTheme;
-      if (colorTheme === 'light') {
+      root.dataset.theme = theme;
+      if (theme === 'light') {
         root.classList.add('light');
         root.classList.remove('dark');
       } else {
