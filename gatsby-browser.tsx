@@ -11,7 +11,7 @@ import '@fontsource/poppins/700.css';
 import '@fontsource/poppins/900.css';
 
 // tailwind
-import './src/styles/global.css';
+import './src/styles/main.css';
 
 export const wrapPageElement: GatsbyBrowser['wrapPageElement'] = ({
   element,

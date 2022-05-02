@@ -13,7 +13,7 @@ import '@fontsource/poppins/700.css';
 import '@fontsource/poppins/900.css';
 
 // tailwind
-import './src/styles/global.css';
+import './src/styles/main.css';
 
 export const wrapPageElement: GatsbySSR['wrapPageElement'] = ({ element }) => {
   return <PageWrap>{element}</PageWrap>;
@@ -22,5 +22,5 @@ export const wrapPageElement: GatsbySSR['wrapPageElement'] = ({ element }) => {
 export const onRenderBody: GatsbySSR['onRenderBody'] = ({
   setPreBodyComponents,
 }) => {
-  setPreBodyComponents([<InjectInitialTheme />]);
+  setPreBodyComponents([<InjectInitialTheme key="inject-initial-theme" />]);
 };
