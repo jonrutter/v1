@@ -8,4 +8,4 @@ Site content\* is licensed under [CC BY-NC-ND 4.0](https://creativecommons.org/l
 
 All other code is licensed under the MIT license. See LICENSE file for more information.
 
-\*The textual content of the website and all material in ~/content.
+\*The textual content of the website and all material in ./content.
