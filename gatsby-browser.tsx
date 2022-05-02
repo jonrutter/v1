@@ -1,3 +1,7 @@
+import React from 'react';
+import { PageWrap } from './src/components/app';
+import type { GatsbyBrowser } from 'gatsby';
+
 // Google fonts
 import '@fontsource/open-sans';
 import '@fontsource/open-sans/600.css';
@@ -8,3 +12,9 @@ import '@fontsource/poppins/900.css';
 
 // tailwind
 import './src/styles/global.css';
+
+export const wrapPageElement: GatsbyBrowser['wrapPageElement'] = ({
+  element,
+}) => {
+  return <PageWrap>{element}</PageWrap>;
+};
