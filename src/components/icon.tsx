@@ -1,5 +1,8 @@
 import React from 'react';
 
+// types
+import { IconBaseProps } from 'react-icons';
+
 // icon imports
 import { FaGithub, FaTwitter, FaLinkedinIn, FaEnvelope } from 'react-icons/fa';
 import {
@@ -22,7 +25,6 @@ import {
   SiMaterialui,
 } from 'react-icons/si';
 import { FiExternalLink } from 'react-icons/fi';
-import { IconType } from 'react-icons';
 
 /*
 Adding an icon to the component:
@@ -59,23 +61,24 @@ const icons = {
 };
 
 // types
-type RIBaseProps = React.ComponentPropsWithoutRef<IconType>;
+type IconProps = IconBaseProps &
+  Omit<React.ComponentPropsWithoutRef<'svg'>, keyof IconBaseProps>;
 
-type IconProps = RIBaseProps &
-  Omit<React.ComponentPropsWithoutRef<'svg'>, keyof RIBaseProps>;
+export type IconName = keyof typeof icons;
 
 interface Props extends IconProps {
-  name: keyof typeof icons;
+  name: IconName;
 }
 
 /**
- * Renders a site icon. Accepts a name props representing a key of `icons`. Passes all other props directly to the underlying icon.
+ * Renders a site icon. Accepts a name prop as an IconName. Passes all other props directly to the underlying icon.
  */
-export const Icon: React.FC<Props> = ({ name, className = '', ...rest }) => {
-  const Icon = icons[name as keyof typeof icons];
-  if (Icon) return <Icon className={className} {...rest} />;
-  console.warn(
-    `Invalid icon name: ${name}. If you expect this icon to be available, make sure it is imported in icons.`
+export const Icon: React.FC<Props> = ({ name, ...rest }) => {
+  const Icon = icons[name as IconName];
+  if (Icon) return <Icon {...rest} />;
+  // if no icon, throw console error and return null
+  console.error(
+    `Invalid icon name: ${name}. If you expect this icon to be available, make sure it is imported and configured correctly.`
   );
   return null;
 };
