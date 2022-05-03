@@ -49,7 +49,7 @@ export const NavBar: React.FC<NavBarProps> = ({
   toggleDrawer,
 }) => (
   <nav>
-    <ul className="hidden md:flex items-center space-x-8">
+    <ul className="hidden md:flex items-center space-x-6">
       {menu.map((link, index) => (
         <li key={index} className="font-heading font-medium text-lg">
           <NavLink to={link.url}>{link.name}</NavLink>
