@@ -10,6 +10,8 @@ type Props<T extends React.ElementType> = {
 /**
  * A styled polymorphic link component, that renders a styled GatsbyLink by default.
  *
+ * Styling: the className prop is passed directly to the underlying component. Because the underline indicator and focus ring colors are based on the currentColor of the text, all you need to do to change the link's color is add classNames for the text-color, and the rest are styled automatically.
+ *
  * @param props.as - The underlying component.
  *
  * All other props are passed directly to the underlying component.
