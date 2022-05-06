@@ -18,6 +18,11 @@ module.exports = {
         sans: ['"Open Sans"', ...defaultTheme.fontFamily.sans],
         heading: ['Poppins', ...defaultTheme.fontFamily.sans],
       },
+      maxWidth: {
+        'site-small': '36rem',
+        'site-med': '64rem',
+        'site-full': '80rem',
+      },
     },
   },
   plugins: [],
