@@ -17,5 +17,10 @@
     "jsx": "react-jsx"
     // "noImplicitAny": false
   },
-  "include": ["src", "src/custom.d.ts"]
+  "include": [
+    "src",
+    "src/custom.d.ts",
+    "content",
+    "content/portfolio/custom.d.ts"
+  ]
 }

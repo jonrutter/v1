@@ -1,0 +1,13 @@
+{
+  "title": "",
+  "description": "",
+  "url": "",
+  "code": "",
+  "type": "",
+  "featured": false,
+  "skills": [{ "label": "", "icon": "" }],
+  "tools": [],
+  "featuredImage": {
+    "src": "./images/"
+  }
+}
