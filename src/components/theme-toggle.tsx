@@ -35,14 +35,14 @@ export const ThemeSwitch = () => {
 
         <div
           className={clsx(
-            'absolute top-[1px] h-[26px] w-[26px] rounded-full bg-slate-50 transition-all z-[32] group-hover:ring-4 border-[1px]border-slate-600 peer-focus:ring-4 ring-sky-400 dark:ring-sky-400 border-[1px] border-slate-600',
+            'absolute top-[1px] h-[26px] w-[26px] rounded-full bg-slate-50 transition-all z-[32] group-hover:ring-4 border-[1px]border-slate-600 peer-focus:ring-4 ring-sea-500 dark:ring-sea-400 border-[1px] border-slate-600',
             colorTheme === 'dark' ? 'right-[1px]' : 'right-[27px]'
           )}
         />
-        <div className="absolute text-lg top-[7px] w-[18px] h-[18px]transition-all flex justify-center items-center left-[5px]">
+        <div className="absolute text-lg top-[7px] w-[18px]transition-all flex justify-center items-center left-[5px]">
           <BsMoonFill aria-hidden className="text-sm" />
         </div>
-        <div className="absolute text-lg top-[7px] w-[18px] h-[18px]transition-all flex justify-center items-center right-[5px]">
+        <div className="absolute text-lg top-[7px] w-[18px]transition-all flex justify-center items-center right-[5px]">
           <BsSunFill aria-hidden className="text-sm" />
         </div>
       </div>
