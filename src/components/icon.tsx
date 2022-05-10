@@ -23,6 +23,7 @@ import {
   SiFigma,
   SiMongodb,
   SiMaterialui,
+  SiStyledcomponents,
 } from 'react-icons/si';
 import { FiExternalLink } from 'react-icons/fi';
 
@@ -58,6 +59,7 @@ const icons = {
   mongodb: SiMongodb,
   materialui: SiMaterialui,
   external: FiExternalLink,
+  styledcomponents: SiStyledcomponents,
 };
 
 // types
