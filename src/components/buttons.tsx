@@ -63,7 +63,7 @@ export const ButtonBase = <T extends React.ElementType = 'button'>({
 
   return (
     <Tag
-      className={`group leading-none py-4 px-8 text-heading font-bold relative inline-block rounded-4xl overflow-hidden z-10 transition-all shadow-lg ${propClassName}`}
+      className={`group leading-none py-4 px-8 text-heading font-bold relative inline-block rounded-lg overflow-hidden z-10 transition-all shadow-lg text-lg font-heading ${propClassName}`}
       {...rest}
     >
       {children}
@@ -84,12 +84,11 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
 }) => (
   <ButtonBase
     as={Link}
-    variant="slide"
     to={to}
-    className="bg-gradient-to-br from-sea-300 to-sea-500 text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900 dark:focus:ring-slate-50 text-lg font-heading font-bold leading-none"
-    decorationClassName="bg-sea-200"
+    className="bg-slate-900 text-white focus:outline-none hover:text-slate-900 focus:text-slate-900 hover:bg-white focus:bg-white transition-all dark:bg-white dark:text-slate-900 outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-white dark:focus:ring-offset-slate-900"
   >
     {children}
+    <div className="shine opacity-0 group-hover:opacity-50 group-focus:opacity-50 transition-all dark:group-hover:opacity-80 dark:group-focus:opacity-80" />
   </ButtonBase>
 );
 
