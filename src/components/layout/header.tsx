@@ -43,38 +43,34 @@ const HeaderContent: React.FC = () => {
   }, [drawerOpen]);
 
   return (
-    <>
-      <div
-        className={clsx(
-          'py-4 px-6 md:px-12 fixed top-0 left-0 right-0 w-full z-30 transition-all text-slate-900 dark:text-slate-50 bg-white dark:bg-slate-900 border-slate-50 dark:border-slate-900',
-          (scrolled || drawerOpen) &&
-            'shadow-lg border-b-[1px] border-b-slate-800/20 dark:border-b-slate-50/20',
-          scrollDir === 'down' && scrolled && !drawerOpen
-            ? '-translate-y-full shadow-none border-b-0'
-            : 'translate-y-0'
-        )}
-      >
-        <header className="max-w-screen-lg mx-auto flex justify-between items-center">
-          <div>
-            <StaticImage
-              src="../../images/site-logo.svg"
-              alt="Jon Rutter"
-              className="max-w-[2rem] md:max-w-[3rem] h-auto block"
-            />
-          </div>
-          <div className="flex items-center space-x-8">
-            <ThemeSwitch />
-            <NavBar
-              drawerOpen={drawerOpen}
-              closeDrawer={closeDrawer}
-              toggleDrawer={toggleDrawer}
-            />
-          </div>
-        </header>
-      </div>
-      {/* spacing to prevent content at top of page disappearing behind header */}
-      <div className="pt-20 transition-all bg-white dark:bg-slate-900" />
-    </>
+    <div
+      className={clsx(
+        'py-4 px-6 md:px-12 fixed top-0 left-0 right-0 w-full z-30 transition-all text-slate-900 dark:text-slate-50 bg-white dark:bg-slate-900 border-slate-50 dark:border-slate-900',
+        (scrolled || drawerOpen) &&
+          'shadow-lg border-b-[1px] border-b-slate-800/20 dark:border-b-slate-50/20',
+        scrollDir === 'down' && scrolled && !drawerOpen
+          ? '-translate-y-full shadow-none border-b-0'
+          : 'translate-y-0'
+      )}
+    >
+      <header className="max-w-site-full mx-auto flex justify-between items-center">
+        <div>
+          <StaticImage
+            src="../../images/site-logo.svg"
+            alt="Jon Rutter"
+            className="max-w-[2rem] md:max-w-[3rem] h-auto block"
+          />
+        </div>
+        <div className="flex items-center space-x-8">
+          <ThemeSwitch />
+          <NavBar
+            drawerOpen={drawerOpen}
+            closeDrawer={closeDrawer}
+            toggleDrawer={toggleDrawer}
+          />
+        </div>
+      </header>
+    </div>
   );
 };
 
@@ -82,7 +78,12 @@ const HeaderContent: React.FC = () => {
  * Renders the site header.
  */
 export const Header: React.FC = () => (
-  <ClientOnly>
-    <HeaderContent />
-  </ClientOnly>
+  <>
+    <ClientOnly>
+      <HeaderContent />
+    </ClientOnly>
+
+    {/* Spacing to prevent content at top of page disappearing behind header. I'm putting this outside of ClientOnly to prevent content jumps when the Header is rendered */}
+    <div className="pt-20 transition-all bg-white dark:bg-slate-900" />
+  </>
 );
