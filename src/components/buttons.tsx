@@ -79,15 +79,30 @@ type CTAButtonProps = {
 };
 
 export const CTAButton: React.FC<CTAButtonProps> = ({
-  to = '/contact/',
+  to = '/contact',
   children,
 }) => (
   <ButtonBase
     as={Link}
     variant="slide"
     to={to}
-    className="bg-gradient-to-tl from-sky-500 to-cyan-300 text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-50 font-semibold"
-    decorationClassName="bg-white/40"
+    className="bg-gradient-to-br from-sea-300 to-sea-500 text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900 dark:focus:ring-slate-50 text-lg font-heading font-bold leading-none"
+    decorationClassName="bg-sea-200"
+  >
+    {children}
+  </ButtonBase>
+);
+
+export const WhiteButton: React.FC<CTAButtonProps> = ({
+  to = '/contact',
+  children,
+}) => (
+  <ButtonBase
+    as={Link}
+    variant="slide"
+    to={to}
+    className="bg-slate-50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900 dark:focus:ring-slate-50 text-lg font-heading font-bold leading-none"
+    decorationClassName="bg-sea-200"
   >
     {children}
   </ButtonBase>
