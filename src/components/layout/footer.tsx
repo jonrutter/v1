@@ -32,19 +32,19 @@ export const Footer: React.FC<Props> = ({ short }) => (
               className="max-w-[54px] h-auto"
             />
           </div>
-          <ul className="flex flex-col mb-8 md:flex-row md:items-center md:m-0 space-y-6 md:space-y-0 md:space-x-8">
+          <ul className="flex flex-col mb-8 md:flex-row md:items-center md:m-0 space-y-6 md:space-y-0 md:space-x-4 lg:space-x-8">
             {menu.map(({ url, name }, index) => (
               <li key={index}>
                 <StyledLink
                   to={url}
-                  className="hover:text-sky-400  focus:text-sky-400"
+                  className="hover:text-sea-400  focus:text-sea-400"
                 >
                   {name}
                 </StyledLink>
               </li>
             ))}
           </ul>
-          <ul className="flex text-2xl space-x-4 items-center">
+          <ul className="flex text-2xl space-x-1 lg:space-x-4">
             {socialLinks.map(({ url, name, icon }, index) => (
               <li key={index}>
                 <SocialLink href={url} name={name}>
@@ -60,7 +60,7 @@ export const Footer: React.FC<Props> = ({ short }) => (
             target="_blank"
             rel="noreferrer"
             href="https://github.com/rutterjt/v1/tree/main#license"
-            className="hover:text-sky-400  focus:text-sky-400 focus:ring-2 focus:ring-sky-400 hover:before:scale-x-0"
+            className="hover:text-sea-400  focus:text-sea-400 focus:ring-2 focus:ring-sea-400 hover:before:scale-x-0"
           >
             © {new Date().getFullYear()}, Jon Rutter
           </StyledLink>
