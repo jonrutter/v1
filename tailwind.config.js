@@ -19,8 +19,9 @@ module.exports = {
         heading: ['Poppins', ...defaultTheme.fontFamily.sans],
       },
       maxWidth: {
-        'site-small': '36rem',
-        'site-med': '64rem',
+        'site-sm': '36rem',
+        'site-md': '42rem',
+        'site-lg': '64rem',
         'site-full': '80rem',
       },
       colors: {
