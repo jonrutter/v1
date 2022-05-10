@@ -101,7 +101,7 @@
 }
 
 @layer utilities {
-  .max-w-page {
-    @apply max-w-lg md:max-w-screen-lg;
+  .transition-all {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0ms;
   }
 }
