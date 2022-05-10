@@ -35,7 +35,7 @@ export const SocialLink: React.FC<Props> = ({
     <div
       aria-hidden
       className={clsx(
-        'absolute -z-10 top-1 left-1 min-w-[3rem] min-h-[3rem] rounded-full transition-all bg-gradient-to-tl from-sky-500 to-cyan-300 scale-0 group-hover:scale-100 group-focus:scale-100 outline-none',
+        'absolute -z-10 top-1 left-1 min-w-[3rem] min-h-[3rem] rounded-full transition-all bg-gradient-to-br from-sea-300 to-sea-500 scale-0 group-hover:scale-100 group-focus:scale-100 outline-none',
         decorationClassName
       )}
     />
