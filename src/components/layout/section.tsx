@@ -24,7 +24,9 @@ export const Section = <T extends ElementType = 'section'>({
         className
       )}
     >
-      <Tag className="max-w-xl md:max-w-screen-lg mx-auto">{children}</Tag>
+      <Tag className="max-w-site-sm md:max-w-site-md lg:max-w-site-lg mx-auto">
+        {children}
+      </Tag>
     </div>
   );
 };
