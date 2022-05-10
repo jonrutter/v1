@@ -48,7 +48,7 @@ type PCardProps = {
 
 const Skill = ({ skill }: { skill: SkillType }) => (
   <div style={{ color: skill.color }} className="flex items-center">
-    {skill.icon && <Icon name={skill.icon} className="mr-2 dark:text-white" />}
+    {skill.icon && <Icon name={skill.icon} className="mr-1 dark:text-white" />}
     <span className="text-slate-700 dark:text-slate-200">{skill.label}</span>
   </div>
 );
@@ -83,15 +83,15 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
           'row-span-full z-[5] bg-white/95 backdrop-blur dark:bg-slate-900/95 py-8 px-6 rounded-4xl shadow-lg place-self-end md:place-self-auto',
           reversed
             ? 'col-start-1 col-end-12 md:col-start-1 md:col-end-10 lg:col-end-7'
-            : 'col-start-2 col-end-13 md:col-start-4 md:col-end-13 lg:col-start-7'
+            : 'col-start-2 col-end-13 md:col-start-6 md:col-end-13 lg:col-start-7'
         )}
       >
-        <H3>
+        <H3 className="mb-4 md:mb-5">
           <a
             href={url}
             target="_blank"
             rel="noreferrer"
-            className="inline-block text-slate-900 dark:text-slate-50 hover:text-sky-500 dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-400 transition-all outline-none focus:ring-2 focus:ring-sky-500 dark:focus-ring-sky-400 p-1 -ml-1"
+            className="inline-block text-slate-900 dark:text-slate-50 hover:text-sea-600 dark:hover:text-sea-400 focus:text-sea-600 dark:focus:text-sea-400 transition-all outline-none focus:ring-2 focus:ring-sea-600 dark:focus-ring-sky-400 p-1 -ml-1"
           >
             {title}
           </a>
@@ -101,9 +101,9 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
           dangerouslySetInnerHTML={{ __html: description }}
         />
         {skills.length > 0 && (
-          <ul className="flex flex-wrap mb-4 ml-1 -mt-3">
+          <ul className="text-sm flex flex-wrap mb-4 ml-0 -mt-4">
             {skills.map((skill, index) => (
-              <li key={index} className="text-sm ml-3 mt-3">
+              <li key={index} className="flex items-center ml-4 mt-4">
                 <Skill skill={skill} />
               </li>
             ))}
@@ -115,7 +115,7 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
               href={code}
               title="Project code"
               aria-label="Project code"
-              className="transition-all hover:text-sky-500 dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-400 outline-none focus:ring-2 focus:ring-sky-500 dark:focus-ring-sky-400 p-1"
+              className="transition-all hover:text-sea-600 dark:hover:text-sea-400 focus:text-sea-600 dark:focus:text-sea-400 outline-none focus:ring-2 focus:ring-sea-600 dark:focus-ring-sea-400 p-1"
               target="_blank"
               rel="noreferrer"
             >
@@ -127,7 +127,7 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
               href={url}
               title="Live site"
               aria-label="Live site"
-              className="transition-all hover:text-sky-500 dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-400 outline-none focus:ring-2 focus:ring-sky-500 dark:focus-ring-sky-400 p-1"
+              className="transition-all hover:text-sea-600 dark:hover:text-sea-400 focus:text-sea-600 dark:focus:text-sea-400 outline-none focus:ring-2 focus:ring-sea-600 dark:focus-ring-sea-400 p-1"
               target="_blank"
               rel="noreferrer"
             >
@@ -140,5 +140,4 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
   );
 };
 
-// TODO: figure out if SkillCard still needed based on design changes
-/* ~~~ SkillCard ~~~ */
+// TODO: blog card
