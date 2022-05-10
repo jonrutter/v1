@@ -45,7 +45,10 @@ const HeaderContent: React.FC = () => {
   return (
     <div
       className={clsx(
-        'py-4 px-6 md:px-12 fixed top-0 left-0 right-0 w-full z-30 transition-all text-slate-900 dark:text-slate-50 bg-white dark:bg-slate-900 border-slate-50 dark:border-slate-900',
+        'py-4 px-6 md:px-12 fixed top-0 left-0 right-0 w-full z-30 transition-all text-slate-900 dark:text-slate-50',
+        !scrolled && !drawerOpen
+          ? 'bg-transparent'
+          : 'bg-white dark:bg-slate-900',
         (scrolled || drawerOpen) &&
           'shadow-lg border-b-[1px] border-b-slate-800/20 dark:border-b-slate-50/20',
         scrollDir === 'down' && scrolled && !drawerOpen
