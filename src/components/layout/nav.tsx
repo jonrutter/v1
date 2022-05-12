@@ -27,7 +27,7 @@ export const NavLink: React.FC<NavLinkProps> = ({
 }) => (
   <StyledLink
     to={to}
-    className="rounded-md text-slate-900 dark:text-slate-50 p-1"
+    className="rounded-md text-slate-900 dark:text-slate-50 p-1 hover:text-sea-600 dark:hover:text-sea-400"
     activeClassName="before:scale-x-100 !text-slate-900 hover:!text-slate-900 focus:text-sky-500 dark:focus:text-sky-400 dark:!text-slate-50"
     tabIndex={tabIndex}
   >

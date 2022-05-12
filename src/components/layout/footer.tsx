@@ -35,7 +35,7 @@ export const Footer: React.FC<Props> = ({ short }) => (
           <ul className="flex flex-col mb-8 md:flex-row md:items-center md:m-0 space-y-6 md:space-y-0 md:space-x-4 lg:space-x-8">
             {menu.map(({ url, name }, index) => (
               <li key={index}>
-                <StyledLink to={url} className="rounded-md p-1 text-white">
+                <StyledLink to={url} className="text-white hover:text-sea-400">
                   {name}
                 </StyledLink>
               </li>
@@ -57,7 +57,7 @@ export const Footer: React.FC<Props> = ({ short }) => (
             target="_blank"
             rel="noreferrer"
             href="https://github.com/rutterjt/v1/tree/main#license"
-            className="rounded-md p-1 text-white"
+            className="text-white hover:text-sea-400"
           >
             © {new Date().getFullYear()}, Jon Rutter
           </StyledLink>
