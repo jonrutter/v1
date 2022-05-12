@@ -45,7 +45,7 @@ const HeaderContent: React.FC = () => {
   return (
     <div
       className={clsx(
-        'py-4 px-6 md:px-12 fixed top-0 left-0 right-0 w-full z-30 transition-all text-slate-900 dark:text-slate-50',
+        'py-4 px-6 md:px-12 fixed top-0 left-0 right-0 w-full z-30 transition-all text-slate-900 dark:text-slate-50 motion-reduce:!translate-y-0',
         !scrolled && !drawerOpen
           ? 'bg-transparent'
           : 'bg-white dark:bg-slate-900',
