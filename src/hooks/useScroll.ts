@@ -30,7 +30,7 @@ export const useScroll = ({
   off,
 }: Props = defaultProps): ScrollInformation => {
   const [scrollDir, setScrollDir] = useState<Direction>(initialDirection);
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(window.pageYOffset > 20);
 
   useEffect(() => {
     const threshold = thresholdPixels || 0;
