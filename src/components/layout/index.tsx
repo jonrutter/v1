@@ -24,3 +24,10 @@ export const Layout: React.FC<Props> = ({ withCTA, children }) => (
     </div>
   </div>
 );
+
+export * from './footer';
+export * from './header';
+export * from './hero';
+export * from './nav';
+export * from './section';
+export * from './skip-to-main';
