@@ -26,7 +26,7 @@ export const SocialLink: React.FC<Props> = ({
     rel="noreferrer"
     aria-label={name === 'Email Me' ? name : `My ${name}`}
     className={clsx(
-      'p-4 inline-block text-2xl relative transition-all z-10 w-14 group outline-none focus:outline-none',
+      'p-4 inline-block text-2xl relative transition-all z-10 w-14 group outline-none focus:ring-2 focus:ring-current rounded-md',
       className
     )}
     {...rest}
@@ -35,9 +35,9 @@ export const SocialLink: React.FC<Props> = ({
     <div
       aria-hidden
       className={clsx(
-        'absolute -z-10 top-1 left-1 min-w-[3rem] min-h-[3rem] rounded-full transition-all bg-gradient-to-br from-sea-300 to-sea-500 scale-0 group-hover:scale-100 group-focus:scale-100 outline-none',
+        'absolute -z-10 top-1 left-1 min-w-[3rem] min-h-[3rem] rounded-full transition-all bg-gradient-to-br from-sea-300 to-sea-500 scale-0 group-hover:scale-100 outline-none overflow-hidden',
         decorationClassName
       )}
-    />
+    ></div>
   </a>
 );
