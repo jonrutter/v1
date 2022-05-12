@@ -3,12 +3,13 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 import clsx from 'clsx';
 
 // types
-import { PortfolioItemType } from '../types';
+import { PortfolioItemType, BlogPostPreview } from '../types';
 
 // components
-import { H3 } from './typography';
+import { H3, P } from './typography';
 import { Icon } from './icon';
 import { SkillType } from '../../content/portfolio/portfolioItems';
+import { StyledLink } from './styled-link';
 
 /* ~~~ Card Base ~~~ */
 
@@ -87,14 +88,15 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
         )}
       >
         <H3 className="mb-4 md:mb-5">
-          <a
+          <StyledLink
+            as="a"
             href={url}
             target="_blank"
             rel="noreferrer"
-            className="inline-block text-slate-900 dark:text-slate-50 hover:text-sea-600 dark:hover:text-sea-400 focus:text-sea-600 dark:focus:text-sea-400 transition-all outline-none focus:ring-2 focus:ring-sea-600 dark:focus-ring-sky-400 p-1 -ml-1"
+            className="inline-block py-1 px-2 -ml-2 hover:text-sea-600 dark:hover:text-sea-400"
           >
             {title}
-          </a>
+          </StyledLink>
         </H3>
         <div
           className="text-base mb-4"
@@ -115,7 +117,7 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
               href={code}
               title="Project code"
               aria-label="Project code"
-              className="transition-all hover:text-sea-600 dark:hover:text-sea-400 focus:text-sea-600 dark:focus:text-sea-400 outline-none focus:ring-2 focus:ring-sea-600 dark:focus-ring-sea-400 p-1"
+              className="transition-all outline-none focus:ring-2 focus:ring-slate-900 dark:focus:ring-slate-50 p-1 rounded-md hover:text-sea-600 dark:hover:text-sea-400"
               target="_blank"
               rel="noreferrer"
             >
@@ -127,7 +129,7 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
               href={url}
               title="Live site"
               aria-label="Live site"
-              className="transition-all hover:text-sea-600 dark:hover:text-sea-400 focus:text-sea-600 dark:focus:text-sea-400 outline-none focus:ring-2 focus:ring-sea-600 dark:focus-ring-sea-400 p-1"
+              className="transition-all outline-none focus:ring-2 focus:ring-slate-900 dark:focus:ring-slate-50 p-1 rounded-md hover:text-sea-600 dark:hover:text-sea-400"
               target="_blank"
               rel="noreferrer"
             >
@@ -140,4 +142,46 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
   );
 };
 
-// TODO: blog card
+/* ~~~ Blog Excerpt Card ~~~ */
+
+type BlogProps = {
+  item: BlogPostPreview;
+};
+
+export const BlogCard: React.FC<BlogProps> = ({ item }) => {
+  return (
+    <article className="shadow-lg rounded-2xl overflow-hidden bg-white dark:bg-slate-900 flex flex-col md:flex-row lg:flex-col w-full max-w-[325px] md:max-w-full lg:max-w-[325px] mx-auto">
+      {/* image wrap */}
+      {item.frontmatter.featured_image && (
+        <div>
+          <GatsbyImage
+            alt={`Preview image for post ${item.frontmatter.title}`}
+            image={
+              item.frontmatter.featured_image.childImageSharp.gatsbyImageData
+            }
+            className="max-w-[325px] rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none lg:rounded-t-2xl lg:rounded-bl-none"
+          />
+        </div>
+      )}
+      {/* content wrap */}
+      <div className="max-w-prose p-8 lg:p-6">
+        <header>
+          <H3 className="mb-3">
+            <StyledLink
+              to={`/blog/${item.slug}`}
+              className="py-1 px-2 -ml-2 rounded-md hover:text-sea-600 dark:hover:text-sea-400"
+            >
+              {item.frontmatter.title}
+            </StyledLink>
+          </H3>
+          <small className="block mb-4 text-slate-600 dark:text-slate-300">
+            {item.frontmatter.date} • {item.timeToRead} minute read
+          </small>
+        </header>
+        <div>
+          <P>{item.frontmatter.excerpt}</P>
+        </div>
+      </div>
+    </article>
+  );
+};
