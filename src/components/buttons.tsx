@@ -10,7 +10,7 @@ type DecoratorProps = {
 
 const Slider: React.FC<DecoratorProps> = ({ className }) => (
   <div
-    className={` absolute -top-1 -bottom-1 -right-1 -left-1  -translate-x-full -z-10 transition-all group-hover:translate-x-0 group-focus:translate-x-0 ${className}`}
+    className={`absolute -top-1 -bottom-1 -right-1 -left-1  -translate-x-full -z-10 transition-all group-hover:translate-x-0 ${className}`}
   />
 );
 
@@ -76,19 +76,22 @@ export const ButtonBase = <T extends React.ElementType = 'button'>({
 
 type CTAButtonProps = {
   to?: string;
+  className?: string;
 };
 
 export const CTAButton: React.FC<CTAButtonProps> = ({
   to = '/contact',
+  className = '',
   children,
 }) => (
   <ButtonBase
+    variant="slide"
     as={Link}
     to={to}
-    className="bg-slate-900 text-white focus:outline-none hover:text-slate-900 focus:text-slate-900 hover:bg-white focus:bg-white transition-all dark:bg-white dark:text-slate-900 outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-white dark:focus:ring-offset-slate-900"
+    className={`bg-slate-900 text-white focus:outline-none hover:text-slate-900  transition-all dark:bg-white dark:text-slate-900 outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-white dark:focus:ring-offset-slate-900 ${className}`}
+    decorationClassName="bg-sea-200"
   >
     {children}
-    <div className="shine opacity-0 group-hover:opacity-50 group-focus:opacity-50 transition-all dark:group-hover:opacity-80 dark:group-focus:opacity-80" />
   </ButtonBase>
 );
 
