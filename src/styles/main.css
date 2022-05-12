@@ -2,7 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @media (prefers-reduced-motion) {
+    *,
+    *::after,
+    *::before {
+      animation: none !important;
+      transition-duration: 0ms !important;
+    }
+  }
+}
+
+@keyframes shine {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
 @layer components {
+  .shine {
+    background-image: linear-gradient(
+      to bottom right,
+      #33d3ff,
+      #60a5fa,
+      #8b5cf6,
+      #f43f5e,
+      #fde047
+    );
+    position: absolute;
+    z-index: -1;
+    top: -1rem;
+    bottom: -1rem;
+    left: -1rem;
+    right: -1rem;
+    border-radius: 2.5rem;
+    filter: blur(50px);
+    background-size: 200% 200%;
+    animation: shine 3s ease infinite alternate;
+  }
+
+  @media (prefers-reduced-motion) {
+    .shine {
+      background-position: 0% 50%;
+    }
+  }
+
   /* Original idea for this body-blur implementation is from Brittany Chiang's website: https://github.com/bchiang7/v4 */
   .body-blur {
     overflow: hidden;
@@ -102,6 +152,7 @@
 
 @layer utilities {
   .transition-all {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0ms;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0ms,
+      border 0ms;
   }
 }
