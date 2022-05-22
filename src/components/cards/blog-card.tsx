@@ -29,7 +29,7 @@ export const BlogCard: React.FC<Props> = ({ item }) => {
       {/* content wrap */}
       <div className="max-w-prose p-8 lg:p-6">
         <header>
-          <h3 className="font-heading font-bold mb-3 text-2xl">
+          <h3 className="font-heading font-bold mb-3 text-2xl text-slate-900 dark:text-slate-50">
             <StyledLink
               to={`/blog/${item.slug}`}
               className="py-1 px-2 -ml-2 rounded-md hover:text-sea-600 dark:hover:text-sea-400"
