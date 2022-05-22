@@ -5,7 +5,6 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 // components
 import { Icon } from '../icon';
 import { StyledLink } from '../styled-link';
-import { H3 } from '../typography';
 
 // types
 import { SkillType, PortfolioItemType } from '../../types';
@@ -54,10 +53,10 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
           'row-start-2 row-end-4 md:row-span-full z-[5] bg-white/95 backdrop-blur dark:bg-slate-900/95 py-8 px-6 rounded-4xl shadow-lg place-self-end md:place-self-auto',
           reversed
             ? 'col-start-1 col-end-11 md:col-start-1 md:col-end-10 lg:col-end-7'
-            : 'col-start-3 col-end-13 md:col-start-6 md:col-end-13 lg:col-start-7'
+            : 'col-start-3 col-end-13 md:col-start-4 md:col-end-13 lg:col-start-7'
         )}
       >
-        <H3 className="mb-4 md:mb-5">
+        <h3 className="mb-3 lg:mb-4 font-heading font-bold text-2xl text-slate-900 dark:text-slate-50">
           <StyledLink
             as="a"
             href={url}
@@ -67,8 +66,8 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
           >
             {title}
           </StyledLink>
-        </H3>
-        <div
+        </h3>
+        <p
           className="text-base mb-4"
           dangerouslySetInnerHTML={{ __html: description }}
         />
