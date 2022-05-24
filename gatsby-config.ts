@@ -1,4 +1,5 @@
 import type { GatsbyConfig } from 'gatsby';
+import path from 'path';
 
 const config: GatsbyConfig = {
   siteMetadata: {
@@ -26,7 +27,17 @@ const config: GatsbyConfig = {
       },
     },
     'gatsby-plugin-mdx',
-    'gatsby-plugin-sharp',
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        defaults: {
+          formats: [`auto`, `webp`],
+          placeholder: `blurred`,
+          quality: 100,
+          backgroundColor: `transparent`,
+        },
+      },
+    },
     'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-source-filesystem',
@@ -38,13 +49,35 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'pages',
-        path: './src/pages/',
+        name: 'blog',
+        path: './content/blog/',
       },
     },
-
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'portfolio',
+        path: './content/portfolio/',
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'portfolioImages',
+        path: './content/portfolio/images',
+      },
+    },
     'gatsby-plugin-postcss',
+    `gatsby-transformer-json`,
+    {
+      resolve: `gatsby-plugin-root-import`,
+      options: {
+        '@': path.join(__dirname, 'src'),
+        '@content': path.join(__dirname, 'content'),
+      },
+    },
   ],
+  trailingSlash: 'never',
 };
 
 export default config;
