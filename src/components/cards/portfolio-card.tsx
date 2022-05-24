@@ -3,11 +3,10 @@ import clsx from 'clsx';
 import { GatsbyImage } from 'gatsby-plugin-image';
 
 // components
-import { Icon } from '../icon';
-import { StyledLink } from '../styled-link';
+import { Icon, StyledLink } from '@/components';
 
 // types
-import { SkillType, PortfolioItemType } from '../../types';
+import { SkillType, PortfolioItemType } from '@/types';
 
 /* ~~~ PortfolioCard ~~~ */
 
@@ -33,7 +32,7 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
       {/* preview image wrapper */}
       <div
         className={clsx(
-          'row-start-1 row-end-3 md:row-span-full select-none pointer-events-none rounded-4xl',
+          'row-start-1 row-end-3 md:row-span-full select-none pointer-events-none rounded-xl',
           reversed
             ? 'col-span-full md:col-start-6 md:col-end-13'
             : 'col-span-full md:col-start-1 md:col-end-8'
@@ -43,14 +42,14 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
           <GatsbyImage
             image={image}
             alt={`Picture of ${title}`}
-            className="w-full h-full select-none pointer-events-none rounded-4xl shadow-xl"
+            className="w-full h-full select-none pointer-events-none rounded-xl shadow-xl"
             imgClassName="w-full h-full object-cover select-none pointer-events-none"
           />
         )}
       </div>
       <div
         className={clsx(
-          'row-start-2 row-end-4 md:row-span-full z-[5] bg-white/95 backdrop-blur dark:bg-slate-900/95 py-8 px-6 rounded-4xl shadow-lg place-self-end md:place-self-auto',
+          'row-start-2 row-end-4 md:row-span-full z-[5] bg-white/95 backdrop-blur dark:bg-slate-900/95 py-8 px-6 rounded-xl shadow-lg place-self-end md:place-self-auto',
           reversed
             ? 'col-start-1 col-end-11 md:col-start-1 md:col-end-10 lg:col-end-7'
             : 'col-start-3 col-end-13 md:col-start-4 md:col-end-13 lg:col-start-7'

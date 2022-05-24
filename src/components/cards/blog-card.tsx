@@ -2,10 +2,10 @@ import React from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
 
 // components
-import { StyledLink } from '../';
+import { StyledLink } from '@/components';
 
 // types
-import type { BlogPostPreview } from '../../types';
+import type { BlogPostPreview } from '@/types';
 
 type Props = {
   item: BlogPostPreview;
@@ -13,7 +13,7 @@ type Props = {
 
 export const BlogCard: React.FC<Props> = ({ item }) => {
   return (
-    <article className="shadow-lg rounded-2xl overflow-hidden bg-white dark:bg-slate-900 flex flex-col md:flex-row lg:flex-col w-full max-w-[325px] md:max-w-full lg:max-w-[325px] mx-auto">
+    <article className="shadow-lg rounded-xl overflow-hidden bg-white dark:bg-slate-900 flex flex-col md:flex-row lg:flex-col w-full max-w-[325px] md:max-w-full lg:max-w-[325px] mx-auto">
       {/* image wrap */}
       {item.frontmatter.featured_image && (
         <div>
