@@ -1,18 +1,23 @@
-import * as React from 'react';
-import { Link } from 'gatsby';
+import React from 'react';
 
-// markup
-const NotFoundPage = () => {
-  return (
-    <main className="max-w-screen-md bg-white text-slate-900 mx-auto py-8">
-      <h1 className="text-center font-black text-6xl font-heading mb-12">
-        404 Not Found.
-      </h1>
-      <Link to="/" className="text-indigo-800 hover:underline">
-        Back to Home
-      </Link>
-    </main>
-  );
-};
+// components
+import { Layout, Seo, Hero, CTAButton } from '@/components';
+
+const NotFoundPage: React.FC = () => (
+  <Layout>
+    <Seo title="404: Not Found" />
+    <Hero title="Oops!" subtitle="404: Not Found">
+      <p className="mb-4">
+        The page you were looking for could not be found. It may have been
+        moved, deleted, or never existed at all. Sorry about that!
+      </p>
+      <div className="text-center md:text-left mt-12 md:mt-8 mb-16">
+        <CTAButton to="/" className="w-full sm:w-auto">
+          Home
+        </CTAButton>
+      </div>
+    </Hero>
+  </Layout>
+);
 
 export default NotFoundPage;
