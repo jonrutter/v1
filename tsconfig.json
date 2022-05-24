@@ -14,13 +14,19 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
-    // "noImplicitAny": false
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@content/*": ["content/*"]
+    }
   },
   "include": [
+    ".",
     "src",
     "src/custom.d.ts",
     "content",
     "content/portfolio/custom.d.ts"
-  ]
+  ],
+  "exclude": ["node_modules"]
 }

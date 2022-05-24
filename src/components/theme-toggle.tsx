@@ -4,7 +4,7 @@ import clsx from 'clsx';
 // icons
 import { BsSunFill, BsMoonFill } from 'react-icons/bs';
 
-import { useColorThemeContext } from '../styles/useColorTheme';
+import { useColorThemeContext } from '@/styles/useColorTheme';
 
 /**
  * Renders a toggle switch for changing the site color theme.

@@ -2,12 +2,10 @@ import React from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
 
 // data
-import { menu, socialLinks } from '../../config';
+import { menu, socialLinks } from '@/config';
 
 // components
-import { StyledLink } from '../styled-link';
-import { SocialLink } from '../social-link';
-import { Icon } from '../icon';
+import { Icon, StyledLink, SocialLink } from '@/components';
 
 type Props = {
   short?: boolean;

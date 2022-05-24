@@ -3,12 +3,11 @@ import { StaticImage } from 'gatsby-plugin-image';
 import clsx from 'clsx';
 
 // components
-import { NavBar } from './nav';
-import { ThemeSwitch } from '../theme-toggle';
-import { ClientOnly } from '../../hooks/useHasMounted';
+import { NavBar, ThemeSwitch } from '@/components';
+import { ClientOnly } from '@/hooks/useHasMounted';
 
 // hooks
-import { useScroll } from '../../hooks/useScroll';
+import { useScroll } from '@/hooks/useScroll';
 
 /**
  * The main header content.

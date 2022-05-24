@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ColorThemeContextProvider } from '../styles/useColorTheme';
+import { ColorThemeContextProvider } from '@/styles/useColorTheme';
 
 /**
  * Wraps all pages on the site.

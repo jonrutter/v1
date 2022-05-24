@@ -1,7 +1,7 @@
 import React from 'react';
 
 // components
-import { CTAButton } from '../buttons';
+import { CTAButton } from '@/components';
 
 /**
  * Renders a page's CTA Box

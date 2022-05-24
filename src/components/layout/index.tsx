@@ -1,9 +1,7 @@
 import React from 'react';
 
 // components
-import { Footer } from './footer';
-import { Header } from './header';
-import { SkipToContent } from './skip-to-main';
+import { Footer, Header, SkipToContent } from '@/components';
 
 type Props = {
   withCTA?: boolean;

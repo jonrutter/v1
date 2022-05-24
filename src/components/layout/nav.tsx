@@ -2,13 +2,10 @@ import React from 'react';
 import clsx from 'clsx';
 
 // link data
-import { menu, socialLinks } from '../../config';
+import { menu, socialLinks } from '@/config';
 
 // components
-import { Hamburger } from '../hamburger';
-import { StyledLink } from '../styled-link';
-import { SocialLink } from '../social-link';
-import { Icon } from '../icon';
+import { Hamburger, StyledLink, SocialLink, Icon } from '@/components';
 
 /* ~~~ NavLink ~~~ */
 
