@@ -20,7 +20,7 @@ export const Section = <T extends ElementType = 'section'>({
   return (
     <div
       className={clsx(
-        'py-8 md:py-20 px-6 md:px-12 transition-all bg-inherit text-inherit',
+        'py-12 sm:py-16 md:py-20 px-6 md:px-12 transition-all bg-inherit text-inherit',
         className
       )}
     >
