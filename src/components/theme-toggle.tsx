@@ -35,7 +35,7 @@ export const ThemeSwitch = () => {
 
         <div
           className={clsx(
-            'absolute top-[1px] h-[26px] w-[26px] rounded-full bg-slate-50 transition-toggle z-[32] group-hover:ring-4 border-[1px]border-slate-600 peer-focus:ring-4 ring-sea-500 dark:ring-sea-400 border-[1px] border-slate-600',
+            'absolute top-[1px] h-[26px] w-[26px] rounded-full bg-slate-50 transition-all-with-shadow z-[32] group-hover:ring-4 border-[1px]border-slate-600 peer-focus:ring-4 ring-sea-500 dark:ring-sea-400 border-[1px] border-slate-600',
             colorTheme === 'dark' ? 'right-[1px]' : 'right-[27px]'
           )}
         />
