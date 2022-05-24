@@ -1,7 +1,7 @@
 import React from 'react';
 
 // components
-import { Layout, Seo, Hero, CTAButton } from '@/components';
+import { Layout, Seo, Hero, PrimaryButton } from '@/components';
 
 const NotFoundPage: React.FC = () => (
   <Layout>
@@ -12,9 +12,9 @@ const NotFoundPage: React.FC = () => (
         moved, deleted, or never existed at all. Sorry about that!
       </p>
       <div className="text-center md:text-left mt-12 md:mt-8 mb-16">
-        <CTAButton to="/" className="w-full sm:w-auto">
+        <PrimaryButton to="/" className="w-full sm:w-auto">
           Home
-        </CTAButton>
+        </PrimaryButton>
       </div>
     </Hero>
   </Layout>

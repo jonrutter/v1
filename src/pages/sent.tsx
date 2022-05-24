@@ -1,7 +1,7 @@
 import React from 'react';
 
 // components
-import { Layout, Seo, Hero, CTAButton } from '@/components';
+import { Layout, Seo, Hero, PrimaryButton } from '@/components';
 
 const SentPage: React.FC = () => (
   <Layout>
@@ -11,9 +11,9 @@ const SentPage: React.FC = () => (
         Thank you for your message! I'll get back to you as soon as I can!
       </p>
       <div className="text-center md:text-left mt-12 md:mt-8 mb-16">
-        <CTAButton to="/" className="w-full sm:w-auto">
+        <PrimaryButton to="/" className="w-full sm:w-auto">
           Home
-        </CTAButton>
+        </PrimaryButton>
       </div>
     </Hero>
   </Layout>

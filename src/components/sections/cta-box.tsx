@@ -1,7 +1,7 @@
 import React from 'react';
 
 // components
-import { CTAButton } from '@/components';
+import { PrimaryButton } from '@/components';
 
 /**
  * Renders a page's CTA Box
@@ -18,7 +18,7 @@ export const CTABox: React.FC = () => (
           or just to say hi!
         </p>
         <div className="md:col-span-full lg:col-auto">
-          <CTAButton to="/contact">Contact me</CTAButton>
+          <PrimaryButton to="/contact">Contact me</PrimaryButton>
         </div>
       </section>
       <div className="shine opacity-50 dark:opacity-40" />

@@ -1,111 +1,72 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { BsArrowRight } from 'react-icons/bs';
+import clsx from 'clsx';
 
-/* ~~~ Button Decorator Components ~~~ */
+/* ~~~ Button Decorators ~~~ */
 
-type DecoratorProps = {
-  className?: string;
-};
-
-const Slider: React.FC<DecoratorProps> = ({ className }) => (
+const Slider: React.FC<{ className?: string }> = ({ className = '' }) => (
   <div
     className={`absolute -top-1 -bottom-1 -right-1 -left-1  -translate-x-full -z-10 transition-all group-hover:translate-x-0 ${className}`}
   />
 );
 
-const Arrow: React.FC<DecoratorProps> = ({ className }) => (
-  <BsArrowRight
-    className={`transition-all text-2xl leading-none absolute top-3 right-2 -translate-x-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 ${className}`}
-    aria-hidden
-  />
-);
+/* ~~~ Primary Button ~~~ */
 
-/* ~~~ Base Button Component ~~~ */
-
-type ButtonProps<T extends React.ElementType> = {
+type Props<T extends React.ElementType> = {
   as?: T;
-  variant?: 'slide' | 'arrow';
   className?: string;
-  decorationClassName?: string;
 };
 
 /**
- * Polymorphic button component with minimal styling.
+ * Renders the site's primary button component
  *
- * @param props.as - Underlying component. Intended to be 'a', 'button', or GatsbyLink
- * @param props.variant - Supports to variants: 'slide' and 'arrow'. Adds additional styling.
- * @param props.className - Passed to underlying component.
- * @param props.decorationClassName - Passed to the decoration component (if applicable).
- *
+ * A polymorphic component, supports rendering as `<button>`, `<a>`, or `<Link>`
  */
-export const ButtonBase = <T extends React.ElementType = 'button'>({
-  children,
-  variant,
+export const PrimaryButton = <T extends React.ElementType = typeof Link>({
   as,
-  className: propClassName,
-  decorationClassName,
+  className = '',
+  children,
   ...rest
-}: ButtonProps<T> &
-  Omit<React.ComponentPropsWithoutRef<T>, keyof ButtonProps<T>>) => {
-  // determining the underlying component
-  // const Tag = as === 'link' ? Link : as === 'a' ? 'a' : 'button';
-
-  const Tag = as || 'button';
-
-  // determining the type of decoration
-  const decorator =
-    variant === 'slide' ? (
-      <Slider className={decorationClassName} />
-    ) : variant === 'arrow' ? (
-      <Arrow className={decorationClassName} />
-    ) : null;
-
+}: Props<T> & Omit<React.ComponentPropsWithoutRef<T>, keyof Props<T>>) => {
+  const Tag = as || Link;
   return (
     <Tag
-      className={`group leading-none py-4 px-8 text-heading font-bold relative inline-block rounded-lg overflow-hidden z-10 transition-all shadow-lg text-lg font-heading ${propClassName}`}
+      className={clsx(
+        'group leading-none py-4 px-8 text-heading font-bold relative inline-block rounded-lg overflow-hidden z-10 transition-all shadow-lg text-lg font-heading bg-slate-900 text-white focus:outline-none hover:text-slate-900 dark:bg-white dark:text-slate-900 outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-white dark:focus:ring-offset-slate-900',
+        className
+      )}
       {...rest}
     >
       {children}
-      {decorator}
+      <Slider className="bg-sea-200" />
     </Tag>
   );
 };
 
-/* ~~~ CTAButton Component ~~~ */
+/* ~~~ Primary Button ~~~ */
 
-type CTAButtonProps = {
-  to?: string;
-  className?: string;
-};
-
-export const CTAButton: React.FC<CTAButtonProps> = ({
-  to = '/contact',
+/**
+ * Renders the site's primary button component
+ *
+ * A polymorphic component, supports rendering as `<button>`, `<a>`, or `<Link>`
+ */
+export const SecondaryButton = <T extends React.ElementType = typeof Link>({
+  as,
   className = '',
   children,
-}) => (
-  <ButtonBase
-    variant="slide"
-    as={Link}
-    to={to}
-    className={`bg-slate-900 text-white focus:outline-none hover:text-slate-900  transition-all dark:bg-white dark:text-slate-900 outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-white dark:focus:ring-offset-slate-900 ${className}`}
-    decorationClassName="bg-sea-200"
-  >
-    {children}
-  </ButtonBase>
-);
-
-export const WhiteButton: React.FC<CTAButtonProps> = ({
-  to = '/contact',
-  children,
-}) => (
-  <ButtonBase
-    as={Link}
-    variant="slide"
-    to={to}
-    className="bg-slate-50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900 dark:focus:ring-slate-50 text-lg font-heading font-bold leading-none"
-    decorationClassName="bg-sea-200"
-  >
-    {children}
-  </ButtonBase>
-);
+  ...rest
+}: Props<T> & Omit<React.ComponentPropsWithoutRef<T>, keyof Props<T>>) => {
+  const Tag = as || Link;
+  return (
+    <Tag
+      className={clsx(
+        'group leading-none py-[calc(1rem-2px)] px-[calc(2rem-2px)] text-heading font-bold relative inline-block rounded-lg overflow-hidden z-10 transition-all shadow-lg text-lg font-heading bg-white text-slate-900 focus:outline-none hover:text-slate-900 dark:bg-slate-900 dark:text-white border-2 border-slate-900 dark:border-white outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-white dark:focus:ring-offset-slate-900',
+        className
+      )}
+      {...rest}
+    >
+      {children}
+      <Slider className="bg-sea-200" />
+    </Tag>
+  );
+};
