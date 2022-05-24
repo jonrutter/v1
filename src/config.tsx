@@ -5,7 +5,10 @@
  */
 
 // types
-import type { IconName } from './components/icon';
+import type { IconName } from '@/components/icon';
+import type { SkillType } from '@/types';
+
+import * as Skill from '@content/portfolio/skills';
 
 export type SocialLinkType = {
   name: string;
@@ -18,16 +21,9 @@ export type MenuItem = {
   url: string;
 };
 
-export type Skill = {
-  label: string;
-  icon: IconName;
-  href: string;
-  color: string;
-};
-
 export type SkillGroup = {
-  title: string;
-  data: Skill[];
+  label: string;
+  list: SkillType[];
 };
 
 // config
@@ -75,114 +71,34 @@ export const socialLinks: SocialLinkType[] = [
 
 export const skills: SkillGroup[] = [
   {
-    title: 'Languages',
-    data: [
-      {
-        label: 'JavaScript',
-        icon: 'javascript',
-        href: 'https://developer.mozilla.org/en-US/docs/Glossary/JavaScript',
-        color: '#F7DF1E',
-      },
-      {
-        label: 'TypeScript',
-        icon: 'typescript',
-        href: 'https://www.typescriptlang.org/',
-        color: '#3178C6',
-      },
-      {
-        label: 'HTML',
-        icon: 'html',
-        href: 'https://developer.mozilla.org/en-US/docs/Glossary/HTML5',
-        color: '#E34F26',
-      },
-      {
-        label: 'CSS',
-        icon: 'css',
-        href: 'https://developer.mozilla.org/en-US/docs/Glossary/CSS',
-        color: '#1572B6',
-      },
-      {
-        label: 'SCSS/Sass',
-        icon: 'sass',
-        href: 'https://sass-lang.com/',
-        color: '#CC6699',
-      },
+    label: 'Languages',
+    list: [
+      Skill.JavaScript,
+      Skill.TypeScript,
+      Skill.HTML,
+      Skill.CSS,
+      Skill.Sass,
     ],
   },
   {
-    title: 'Libraries & Frameworks',
-    data: [
-      {
-        label: 'React',
-        icon: 'react',
-        href: 'https://reactjs.org/',
-        color: '#61DAFB',
-      },
-      {
-        label: 'Gatsby',
-        icon: 'gatsby',
-        href: 'https://www.gatsbyjs.com/',
-        color: '#663399',
-      },
-      {
-        label: 'Tailwind CSS',
-        icon: 'tailwind',
-        href: 'https://tailwindcss.com/',
-        color: '#38B2AC',
-      },
-      {
-        label: 'Material UI',
-        icon: 'materialui',
-        href: 'https://mui.com/',
-        color: '#0081CB',
-      },
-      {
-        label: 'Redux',
-        icon: 'redux',
-        href: 'https://redux.js.org/',
-        color: '#764ABC',
-      },
+    label: 'Libraries & Frameworks',
+    list: [
+      Skill.React,
+      Skill.Gatsby,
+      Skill.Tailwind,
+      Skill.MaterialUI,
+      Skill.Redux,
     ],
   },
   {
-    title: 'Tools & Platforms',
-    data: [
-      {
-        label: 'Git',
-        icon: 'git',
-        href: 'https://developer.mozilla.org/en-US/docs/Glossary/Git',
-        color: '#F05032',
-      },
-      {
-        label: 'GitHub',
-        icon: 'github',
-        href: 'https://github.com/',
-        color: '#181717',
-      },
-      {
-        label: 'VS Code',
-        icon: 'vscode',
-        href: 'https://code.visualstudio.com/',
-        color: '#007ACC',
-      },
-      {
-        label: 'Netlify',
-        icon: 'netlify',
-        href: 'https://www.netlify.com/',
-        color: '#00C7B7',
-      },
-      {
-        label: 'Figma',
-        icon: 'figma',
-        href: 'https://www.figma.com/',
-        color: '#F24E1E',
-      },
-      {
-        label: 'Headless WordPress',
-        icon: 'wordpress',
-        href: 'https://wordpress.com/',
-        color: '#21759B',
-      },
+    label: 'Tools & Platforms',
+    list: [
+      Skill.Git,
+      Skill.GitHub,
+      Skill.VSCode,
+      Skill.Netlify,
+      Skill.Figma,
+      Skill.WordPress,
     ],
   },
 ];
