@@ -15,7 +15,7 @@ export const Hero: React.FC<Props> = ({ title, subtitle, short, children }) => (
     {/* outer wrapper: bg color, padding, full-width */}
     <div
       className={clsx(
-        'py-12 px-6 md:py-24 md:px-12 transition-all bg-white dark:bg-slate-900 text-base lg:text-lg lg:flex lg:items-center',
+        'py-12 px-6 md:py-24 md:px-12 transition-all bg-white dark:bg-slate-900 text-base sm:text-lg lg:flex lg:items-center',
         !short && 'lg:min-h-[calc(100vh-5rem)]'
       )}
     >
