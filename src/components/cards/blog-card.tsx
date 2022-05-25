@@ -22,7 +22,7 @@ export const BlogCard: React.FC<Props> = ({ item }) => {
             image={
               item.frontmatter.featured_image.childImageSharp.gatsbyImageData
             }
-            className="max-w-[325px] rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none lg:rounded-t-2xl lg:rounded-bl-none"
+            className="max-w-[325px] rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none lg:rounded-t-2xl lg:rounded-bl-none pointer-events-none select-none"
           />
         </div>
       )}
