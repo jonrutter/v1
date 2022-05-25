@@ -29,8 +29,10 @@ export const Hero: React.FC<Props> = ({ title, subtitle, short, children }) => (
           {/* hero content */}
           <div className="mb-6 md:mb-8 relative z-10 inline-block">
             <h1
-              className="transition-all font-heading font-black text-4xl md:text-5xl lg:text-6xl mb-3 md:mb-4
-         text-slate-900 dark:text-white"
+              className={clsx(
+                'transition-all font-heading font-black text-4xl md:text-5xl lg:text-6xl text-slate-900 dark:text-white',
+                subtitle ? 'mb-3 md:mb-4' : 'mb-0'
+              )}
             >
               {title}
             </h1>
