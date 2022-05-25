@@ -25,6 +25,29 @@
   }
 }
 
+@keyframes rotate-outer {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-inner {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dashoffset: -125px;
+  }
+}
+
 @layer components {
   .shine {
     background-image: linear-gradient(
@@ -157,5 +180,12 @@
   }
   .transition-all-with-shadow {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-rotate-outer {
+    animation: rotate-outer 2s linear infinite;
+  }
+  .animate-rotate-inner {
+    animation: rotate-inner 1.5s ease-in-out infinite;
   }
 }

@@ -1,18 +1,22 @@
 import React from 'react';
-import clsx from 'clsx';
 
-type Props = {
-  size?: 'sm' | 'md' | 'lg';
-};
+/*
+Credit: https://codepen.io/ingomc/pen/ONrMqe
+*/
 
-/**
- * Renders a spinner component.
- */
-export const Spinner: React.FC<Props> = ({ size = 'md' }) => (
-  <div
-    className={clsx(
-      'rounded-full border-[6px] border-b-cyan-500  animate-spin',
-      size === 'sm' ? 'w-12 h-12' : size === 'md' ? 'w-20 h-20' : 'w-32 h-32'
-    )}
-  />
+export const Spinner: React.FC = () => (
+  <svg
+    viewBox="25 25 50 50"
+    className="w-16 origin-center animate-rotate-outer"
+  >
+    <circle
+      cx="50"
+      cy="50"
+      r="20"
+      strokeDasharray="1, 200"
+      strokeDashoffset="0"
+      fill="none"
+      className="animate-rotate-inner stroke-slate-900 dark:stroke-white stroke-[3]"
+    />
+  </svg>
 );
