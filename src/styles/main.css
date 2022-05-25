@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @media (prefers-reduced-motion) {
+    *,
+    *::after,
+    *::before {
+      animation: none !important;
+      transition-duration: 0ms !important;
+    }
+  }
+}
+
+@keyframes shine {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+@keyframes rotate-outer {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-inner {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dashoffset: -125px;
+  }
+}
+
+@layer components {
+  .shine {
+    background-image: linear-gradient(
+      to bottom right,
+      #33d3ff,
+      #60a5fa,
+      #8b5cf6,
+      #f43f5e,
+      #fde047
+    );
+    position: absolute;
+    z-index: -1;
+    top: -1rem;
+    bottom: -1rem;
+    left: -1rem;
+    right: -1rem;
+    border-radius: 2.5rem;
+    filter: blur(50px);
+    background-size: 200% 200%;
+    animation: shine 3s ease infinite alternate;
+  }
+
+  @media (prefers-reduced-motion) {
+    .shine {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Original idea for this body-blur implementation is from Brittany Chiang's website: https://github.com/bchiang7/v4 */
+  .body-blur {
+    overflow: hidden;
+  }
+  body.body-blur #main > * {
+    @apply transition-all blur pointer-events-none select-none;
+  }
+
+  /*
+    Adapted from Jon Suh's hamburgers, (c) 2016 Jonathan Suh <hello@jonsuh.com> (jonsuh.com), licensed under the MIT license (https://github.com/jonsuh/hamburgers/blob/master/LICENSE)
+  */
+  .hamburger {
+    padding: 0.5rem;
+    display: inline-block;
+    cursor: pointer;
+    transition-property: opacity, filter;
+    transition-duration: 0.15s;
+    transition-timing-function: linear;
+    font-size: 0rem;
+    color: inherit;
+    height: auto;
+    line-height: 1;
+    text-transform: none;
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+    overflow: visible;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    z-index: 30;
+    @apply outline-none focus:outline-none focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-400;
+  }
+  .hamburger:hover,
+  .hamburger.active:hover {
+    opacity: 0.7;
+  }
+  .hamburger.active .hamburger-inner,
+  .hamburger.active .hamburger-inner::before,
+  .hamburger.active .hamburger-inner::after {
+    @apply bg-slate-900 dark:bg-slate-50 transition-all;
+  }
+  .hamburger-box {
+    width: 1.75rem;
+    height: 24px;
+    display: inline-block;
+    position: relative;
+  }
+  .hamburger-inner {
+    top: 50%;
+    margin-top: -2px;
+    transition-duration: 0.075s;
+    transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  .hamburger-inner,
+  .hamburger-inner::before,
+  .hamburger-inner::after {
+    @apply bg-slate-900 dark:bg-slate-50;
+    display: block;
+    width: 1.75rem;
+    height: 3px;
+    border-radius: 2px;
+    position: absolute;
+    transition: transform 0.15s ease, background-color 0.3s;
+  }
+  .hamburger-inner::before,
+  .hamburger-inner::after {
+    content: '';
+  }
+  .hamburger-inner::before {
+    top: -8px;
+    transition: top 0.075s 0.12s ease, opacity 0.075s ease,
+      background-color 0.3s;
+  }
+  .hamburger-inner::after {
+    bottom: -8px;
+    transition: bottom 0.075s 0.12s ease,
+      transform 0.075s cubic-bezier(0.55, 0.055, 0.675, 0.19),
+      background-color 0.3s;
+  }
+  .hamburger.active .hamburger-inner {
+    transform: rotate(45deg);
+    transition-delay: 0.12s;
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  .hamburger.active .hamburger-inner::before {
+    top: 0;
+    opacity: 0;
+    transition: top 0.075s ease, opacity 0.075s 0.12s ease;
+  }
+  .hamburger.active .hamburger-inner::after {
+    bottom: 0;
+    transform: rotate(-90deg);
+    transition: bottom 0.075s ease,
+      transform 0.075s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+}
+
+@layer utilities {
+  .transition-all {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0ms,
+      border 0ms;
+  }
+  .transition-all-with-shadow {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-rotate-outer {
+    animation: rotate-outer 2s linear infinite;
+  }
+  .animate-rotate-inner {
+    animation: rotate-inner 1.5s ease-in-out infinite;
+  }
+}

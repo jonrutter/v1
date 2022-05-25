@@ -3,13 +3,12 @@ import React from 'react';
 // components
 import { Layout, Seo, Hero, PrimaryButton } from '@/components';
 
-const NotFoundPage: React.FC = () => (
+const SentPage: React.FC = () => (
   <Layout>
-    <Seo title="404: Not Found" />
-    <Hero title="Oops!" subtitle="404: Not Found">
+    <Seo title="Thank You | Jon Rutter" pathname="/sent" />
+    <Hero title="Message sent" subtitle="Thank you!">
       <p className="mb-4">
-        The page you were looking for could not be found. It may have been
-        moved, deleted, or never existed at all. Sorry about that!
+        Thanks for your message! I'll get back to you as soon as I can!
       </p>
       <div className="text-center md:text-left mt-12 md:mt-8 mb-16">
         <PrimaryButton to="/" className="w-full sm:w-auto">
@@ -20,4 +19,4 @@ const NotFoundPage: React.FC = () => (
   </Layout>
 );
 
-export default NotFoundPage;
+export default SentPage;
