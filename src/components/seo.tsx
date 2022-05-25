@@ -54,6 +54,13 @@ export const Seo: React.FC<Props> = ({
     }
   `);
 
+  // remove trailing slashes from pathname
+  let seoPathname;
+  if (pathname) {
+    seoPathname =
+      pathname[pathname.length - 1] === '/' ? pathname.slice(0, -1) : pathname;
+  }
+
   // compare props to query results: favor props, then fall back to siteMetadata
   const seo = {
     title: title || siteMetadata.title,
@@ -67,7 +74,10 @@ export const Seo: React.FC<Props> = ({
             width: metaImage.width,
           }
         : null,
-    canonical: pathname ? `${siteMetadata.siteUrl}${pathname}` : null,
+    canonical:
+      seoPathname !== undefined
+        ? `${siteMetadata.siteUrl}${seoPathname}`
+        : undefined,
     keywords,
     twitterUsername: twitterUsername || siteMetadata.twitterUsername,
     author: author || siteMetadata.author,

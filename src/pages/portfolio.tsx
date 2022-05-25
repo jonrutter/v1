@@ -53,7 +53,7 @@ const PortfolioPage = ({
 
   return (
     <Layout withCTA>
-      <Seo title="Jon Rutter | Web Developer" pathname="/" />
+      <Seo title="Jon Rutter | Web Developer" pathname="/portfolio" />
       <PortfolioHero />
       <div className="bg-slate-50 dark:bg-slate-800">
         <Section>
