@@ -46,26 +46,33 @@ export const menu: MenuItem[] = [
   },
 ];
 
+export const links = {
+  github: 'https://github.com/rutterjt',
+  twitter: 'https://twitter.com/rutterjt',
+  linkedin: 'https://www.linkedin.com/in/rutterjt/',
+  email: 'mailto:contact@jonrutter.io',
+};
+
 export const socialLinks: SocialLinkType[] = [
   {
     name: 'GitHub',
     icon: 'github',
-    url: 'https://github.com/rutterjt',
+    url: links.github,
   },
   {
     name: 'Twitter',
     icon: 'twitter',
-    url: 'https://twitter.com/rutterjt',
+    url: links.twitter,
   },
   {
     name: 'LinkedIn',
     icon: 'linkedin',
-    url: 'https://www.linkedin.com/in/rutterjt/',
+    url: links.linkedin,
   },
   {
     name: 'Email Me',
     icon: 'email',
-    url: 'mailto:contact@jonrutter.io',
+    url: links.email,
   },
 ];
 
