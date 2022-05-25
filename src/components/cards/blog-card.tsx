@@ -22,7 +22,7 @@ export const BlogCard: React.FC<Props> = ({ item }) => {
             image={
               item.frontmatter.featured_image.childImageSharp.gatsbyImageData
             }
-            className="max-w-[325px] rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none lg:rounded-t-2xl lg:rounded-bl-none pointer-events-none select-none"
+            className="max-w-[325px] rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none md:h-full md:object-cover lg:h-auto lg:object-none lg:rounded-t-2xl lg:rounded-bl-none pointer-events-none select-none"
           />
         </div>
       )}
@@ -32,7 +32,7 @@ export const BlogCard: React.FC<Props> = ({ item }) => {
           <h3 className="font-heading font-bold mb-3 text-2xl text-slate-900 dark:text-slate-50">
             <StyledLink
               to={`/blog/${item.slug}`}
-              className="py-1 px-2 -ml-2 rounded-md hover:text-sea-600 dark:hover:text-sea-400"
+              className="py-1 px-2 -ml-2 rounded-md hover:text-sea-600 dark:hover:text-sea-400 block"
             >
               {item.frontmatter.title}
             </StyledLink>
