@@ -1,7 +1,4 @@
 import React from 'react';
-import { PageWrap } from './src/components/app';
-import { InjectInitialTheme } from './src/styles/useColorTheme';
-
 import type { GatsbySSR } from 'gatsby';
 
 // Google fonts
@@ -12,8 +9,20 @@ import '@fontsource/poppins/500.css';
 import '@fontsource/poppins/700.css';
 import '@fontsource/poppins/900.css';
 
+// page wrapper component
+import { PageWrap } from '@/components/app';
+
+// light/dark theme
+import { InjectInitialTheme } from '@/styles/useColorTheme';
+
+// reach tabs styling
+import '@reach/tabs/styles.css';
+
 // tailwind
-import './src/styles/main.css';
+import '@/styles/main.css';
+
+// prism.js custom theme
+import '@/styles/prism-atom-theme.css';
 
 export const wrapPageElement: GatsbySSR['wrapPageElement'] = ({ element }) => {
   return <PageWrap>{element}</PageWrap>;
