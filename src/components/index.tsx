@@ -15,4 +15,3 @@ export * from './social-link';
 export * from './spinner';
 export * from './styled-link';
 export * from './theme-toggle';
-export * from './typography';
