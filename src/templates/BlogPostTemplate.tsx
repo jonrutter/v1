@@ -5,7 +5,7 @@ import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 // components
-import { Layout, Seo, Section, CTABox } from '@/components';
+import { Layout, Seo, Section, CTABox, CodeBlock } from '@/components';
 
 // types
 import type { PostNode, BlogPost } from '@/types';
@@ -26,7 +26,7 @@ type PageContext = {
   previous: PostNode | null;
 };
 
-const shortcodes = {};
+const shortcodes = { pre: CodeBlock };
 
 const BlogPostTemplate = ({
   data,
