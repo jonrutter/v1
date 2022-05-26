@@ -1,0 +1,271 @@
+/*
+One Dark Theme styling for prism-react-renderer
+
+Design based on Binaryify's OneDark-Pro theme for VSCode: https://github.com/Binaryify/OneDark-Pro
+*/
+
+/* main wrapper */
+pre[class*='language-'] {
+  --darkGrey: #282c34;
+  --medGrey: #5c6370;
+  --grey: #818896;
+  --lightGrey: #abb2bf;
+  --highlight: #67769660;
+  --red: #e06c75;
+  --brick: #be5046;
+  --purple: #c678dd;
+  --yellow: #e6c07b;
+  --amber: #d19a66;
+  --green: #98c379;
+  --blue: #61aeee;
+  --teal: #56b6c2;
+
+  background-color: var(--darkGrey);
+  color: var(--lightGrey);
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+  tab-size: 2;
+  hyphens: none;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+
+  font-family: monospace;
+
+  position: relative;
+  padding: 2rem 0 2.5rem;
+  border-radius: 0.25rem;
+
+  min-width: 100%;
+
+  /* make full-width on xs screens */
+  @apply -mx-6 sm:mx-0;
+}
+
+/* inner wrapper */
+pre[class*='language-'] > code {
+  display: inline-block;
+  min-width: 100%;
+  position: relative;
+}
+
+/* language indicator */
+pre[data-language]::after {
+  content: attr(data-language);
+  position: sticky;
+  right: 0;
+  width: 150px;
+  margin-left: -150px;
+  transform: translate(-16px, 32px);
+  opacity: 0.8;
+  @apply text-xs inline-block text-right;
+}
+
+/* line number indicators */
+/* don't include line numbers in bash */
+pre:not([data-language='bash']) .token-line::before {
+  content: attr(data-line);
+  position: sticky;
+  left: 0;
+  text-align: right;
+  display: inline-block;
+  width: 3.5rem;
+  padding-right: 1.5rem;
+  background-color: var(--darkGrey);
+}
+/* re-add left padding in bash, since no line numbers */
+pre[data-language='bash'] .token-line {
+  padding-left: 1.5rem;
+}
+
+/* general styles */
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic,
+.token.comment {
+  font-style: italic;
+}
+
+.token-line {
+  position: relative;
+  padding-right: 1rem;
+  display: block;
+  width: 100%;
+  min-width: 100%;
+}
+
+.token.comment,
+.token.prolog,
+.token.cdata {
+  color: var(--medGrey);
+}
+
+.token.punctuation,
+.token.tag.punctuation,
+.token.doctype,
+.token.entity {
+  color: var(--lightGrey);
+}
+
+.token.number,
+.token.boolean,
+.token.constant,
+.token.attr-name,
+.token.tag.attr-name,
+.token.atrule {
+  color: var(--amber);
+}
+
+.token.class-name,
+.token.tag.class-name {
+  color: var(--yellow);
+}
+
+.token.keyword {
+  color: var(--purple);
+}
+
+.token.tag,
+.token.property,
+.token.symbol,
+.token.deleted,
+.token.important {
+  color: var(--red);
+}
+
+.token.string,
+.token.selector,
+.token.attr-value,
+.token.char,
+.token.builtin,
+.token.inserted,
+.token.regex {
+  color: var(--green);
+}
+
+.token.variable,
+.token.operator,
+.token.function {
+  color: var(--blue);
+}
+
+.token.url {
+  color: var(--teal);
+}
+
+/* selection */
+code[class*='language-']::selection,
+code[class*='language-'] *::selection,
+pre[class*='language-'] *::selection {
+  background: #67769660;
+  color: inherit;
+}
+
+/* Language-specific styles: */
+
+/* HTML */
+.token.attr-value.punctuation.attr-equals {
+  color: var(--lightGrey);
+}
+
+/* CSS */
+.language-css .token.selector,
+.language-css .token.unit {
+  color: var(--red);
+}
+
+.language-css .token.property,
+.language-css .token.attribute.operator {
+  color: var(--lightGrey);
+}
+
+.language-css .token.function {
+  color: var(--teal);
+}
+
+.language-css .token.url.string,
+.language-css .token.selector.attr-value {
+  color: var(--green);
+}
+
+.language-css .token.important,
+.language-css .token.atrule {
+  color: var(--purple);
+}
+
+.language-css .token.selector.class,
+.language-css .token.selector.attr-name,
+.language-css .token.selector.attribute.punctuation {
+  color: var(--amber);
+}
+
+.language-css .token.selector.id {
+  color: var(--blue);
+}
+
+/* JavaScript */
+.language-javascript .token.console.class-name {
+  color: var(--red);
+}
+
+.token.arrow.operator {
+  color: var(--purple);
+}
+
+.token.template-string.interpolation {
+  color: var(--red);
+}
+
+.token.template-string.interpolation-punctuation {
+  color: var(--purple);
+}
+
+/* JSON */
+.language-json .token.operator {
+  color: var(--lightGrey);
+}
+
+.language-json .token.null.keyword {
+  color: var(--yellow);
+}
+
+/* markdown */
+.language-markdown .token.url {
+  color: var(--lightGrey);
+}
+
+.language-markdown .token.url.content {
+  color: var(--blue);
+}
+
+.language-markdown .token.blockquote.punctuation,
+.language-markdown .token.hr.punctuation {
+  color: var(var(--grey));
+}
+
+.language-markdown .token.code {
+  color: var(--green);
+}
+
+.language-markdown .token.bold,
+.language-markdown .token.list.punctuation {
+  color: var(--yellow);
+}
+
+.language-markdown .token.italic {
+  color: var(--purple);
+}
+
+.language-markdown .token.title {
+  color: var(--red);
+}
+
+/* typescript */
+.language-typescript .token.builtin {
+  color: var(--yellow);
+}
