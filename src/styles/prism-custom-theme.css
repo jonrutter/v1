@@ -269,3 +269,8 @@ pre[class*='language-'] *::selection {
 .language-typescript .token.builtin {
   color: var(--yellow);
 }
+
+/* TSX */
+.language-tsx .maybe-class-name {
+  color: var(--yellow);
+}

@@ -11,6 +11,28 @@
       transition-duration: 0ms !important;
     }
   }
+
+  /* override a few @tailwindcss/typography styles */
+  /* prevent adding backticks to code excerpts */
+  /* .prose code::before,
+  .prose code::after {
+    content: '' !important;
+  } */
+
+  /* add heading theme styling */
+  .prose h2,
+  .prose h3 {
+    @apply font-heading font-black;
+  }
+
+  .anchor.before svg {
+    @apply fill-slate-900 dark:fill-slate-50;
+  }
+
+  .code-tabs pre {
+    margin-top: 0 !important;
+    border-top-left-radius: 0 !important;
+  }
 }
 
 @keyframes shine {
