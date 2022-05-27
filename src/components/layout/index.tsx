@@ -13,7 +13,7 @@ type Props = {
  * @param props.withCTA - (Optional) renders a Call to action box at the bottom of the page.
  */
 export const Layout: React.FC<Props> = ({ withCTA, children }) => (
-  <div className="overflow-x-hidden bg-white dark:bg-slate-900 transition-all text-slate-700 dark:text-slate-200">
+  <div className="overflow-x-hidden max-w-[100vw] bg-white dark:bg-slate-900 transition-all text-slate-700 dark:text-slate-200">
     <SkipToContent />
     <Header />
     <div id="main">
