@@ -1,7 +1,7 @@
-import React, { ComponentPropsWithoutRef, ElementType } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 
-type Props<T extends ElementType> = {
+type Props<T extends React.ElementType> = {
   as?: T;
   className?: string;
 };
@@ -11,7 +11,7 @@ type Props<T extends ElementType> = {
  *
  * Should be used as a direct child of `<Layout>`, in order to maintain correct site layout.
  */
-export const Section = <T extends ElementType = 'section'>({
+export const Section = <T extends React.ElementType = 'section'>({
   as,
   className = '',
   children,
