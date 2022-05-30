@@ -20,13 +20,12 @@
   } */
 
   /* add heading theme styling */
-  .prose h2,
-  .prose h3 {
-    @apply font-heading font-black;
+  .prose h2 {
+    @apply text-3xl md:text-4xl font-heading font-black;
   }
 
-  .anchor.before svg {
-    @apply fill-slate-900 dark:fill-slate-50;
+  .prose h3 {
+    @apply font-heading font-bold;
   }
 
   .code-tabs pre {

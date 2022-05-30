@@ -37,13 +37,6 @@ const config: GatsbyConfig = {
               sizeByPixelDensity: true,
             },
           },
-          {
-            resolve: `gatsby-remark-autolink-headers`,
-            options: {
-              offsetY: '50',
-              className: 'anchor before h-full block',
-            },
-          },
         ],
       },
     },
