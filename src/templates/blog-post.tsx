@@ -66,7 +66,7 @@ const BlogPostTemplate = ({
 
   let seoImage = src && height && width ? { src, height, width } : undefined;
 
-  const editLink = `${links.github}/v1/edit/dev/content/blog/${node.slug.slice(
+  const editLink = `${links.github}/v1/edit/main/content/blog/${node.slug.slice(
     0,
     -1
   )}/index.mdx`;
