@@ -1,5 +1,6 @@
 import React from 'react';
 import Highlight, { defaultProps, Language } from 'prism-react-renderer';
+import vsDark from 'prism-react-renderer/themes/vsDark';
 
 type Props = {
   children: React.ReactElement;
@@ -19,12 +20,7 @@ export const CodeBlock: React.FC<Props> = ({ children }) => {
   const code = children?.props?.children.trim();
 
   return (
-    <Highlight
-      {...defaultProps}
-      code={code}
-      language={language}
-      theme={undefined}
-    >
+    <Highlight {...defaultProps} code={code} language={language} theme={vsDark}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre className={className} style={style} data-language={language}>
           <code>

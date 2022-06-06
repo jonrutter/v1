@@ -58,10 +58,8 @@ const CodeTab: React.FC<TabProps> = ({ index, active, children }) => {
   return (
     <Tab
       className={clsx(
-        'px-4 py-2 text-sm block border-[1px] [border-style:_solid] border-b-0 border-[#282c34] first-of-type:rounded-tl-md last-of-type:rounded-tr-md font-bold',
-        index === active
-          ? 'bg-[#282c34] active:bg-[#282c34] text-slate-50'
-          : 'bg-transparent active:bg-transparent'
+        'py-2 text-base block border-b-2 rounded-sm outline-none hover:bg-slate-200/80 focus:bg-slate-200/80 dark:hover:bg-slate-700/80 dark:focus:bg-slate-700/80',
+        index === active ? 'border-b-current' : 'border-b-transparent'
       )}
     >
       {content}
@@ -88,8 +86,8 @@ type Props = {
 export const CodeTabs: React.FC<Props> = ({ one, two, children }) => {
   const [active, setActive] = useState<number>(0);
   return (
-    <Tabs className="code-tabs" onChange={(index) => setActive(index)}>
-      <TabList className="bg-transparent">
+    <Tabs className="code-tabs mt-8" onChange={(index) => setActive(index)}>
+      <TabList className="bg-transparent flex space-x-4 pb-2">
         <CodeTab index={0} active={active}>
           {one}
         </CodeTab>
