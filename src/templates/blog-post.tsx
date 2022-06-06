@@ -139,7 +139,7 @@ const BlogPostTemplate = ({
                 <hr />
               </div>
 
-              <div className="flex flex-col space-y-4">
+              <div className="flex flex-col space-y-8">
                 {previous && (
                   <div className="self-start">
                     <BlogLink to={`/blog/${previous.childMdx.slug}`}>
