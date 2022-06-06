@@ -14,7 +14,7 @@ export const BlogCard: React.FC<Props> = ({ item }) => {
     <article className="shadow-lg rounded-xl overflow-hidden bg-white dark:bg-slate-900 flex flex-col md:flex-row lg:flex-col w-full max-w-[325px] md:max-w-full lg:max-w-[325px] mx-auto">
       {/* image wrap */}
       {item.frontmatter.featured_image && (
-        <div>
+        <div className="md:flex-[3] lg:flex-auto">
           <GatsbyImage
             alt={`Preview image for post ${item.frontmatter.title}`}
             image={
@@ -25,7 +25,7 @@ export const BlogCard: React.FC<Props> = ({ item }) => {
         </div>
       )}
       {/* content wrap */}
-      <div className="max-w-prose p-8 lg:p-6">
+      <div className="max-w-prose p-8 lg:p-6 md:flex-[5] lg:flex-auto">
         <header>
           <h3 className="font-heading font-bold mb-3 text-2xl text-slate-900 dark:text-slate-50">
             <Link
