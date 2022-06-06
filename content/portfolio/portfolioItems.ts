@@ -21,6 +21,7 @@ import {
   VSCode,
   StyledComponents,
   Figma,
+  MaterialUI,
 } from './skills';
 
 // types
@@ -56,6 +57,18 @@ export interface PortfolioItemType extends DraftPortfolioItemType {
 
 export const portfolioItems: DraftPortfolioItemType[] = [
   {
+    title: 'TaskList',
+    description:
+      'TaskList is a lightweight, intuitive, open source to-do list app, that supports tagging and filtering tasks by labels, due date, and priority level.',
+    url: 'https://tasklist-rutterjt.netlify.app/',
+    code: 'https://github.com/rutterjt/tasklist',
+    type: 'app',
+    featured: true,
+    skills: [React, TypeScript, MaterialUI],
+    tools: [Git, GitHub, Netlify, VSCode],
+    src: 'images/tasklist.png',
+  },
+  {
     title: 'React Film Database',
     description:
       'React Film Database is a web application that allows users to browse and search for details about films.',
@@ -86,7 +99,7 @@ export const portfolioItems: DraftPortfolioItemType[] = [
     url: 'https://jonrutter-quiz.netlify.app/',
     code: 'https://github.com/rutterjt/react-ts-quiz',
     type: 'app',
-    featured: true,
+    featured: false,
     skills: [React, Tailwind, TypeScript],
     tools: [Git, GitHub, Netlify, VSCode],
     src: './images/quiz.png',
