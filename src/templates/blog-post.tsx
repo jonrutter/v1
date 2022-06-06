@@ -4,6 +4,8 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
+import { links } from '@/config';
+
 // components
 import {
   Layout,
@@ -36,6 +38,18 @@ type PageContext = {
 
 const shortcodes = { pre: CodeBlock, CodeTabs, CodePanel };
 
+/**
+ * Custom link for blog posts
+ */
+const BlogLink: React.FC<{ to: string }> = ({ to, children }) => (
+  <Link
+    to={to}
+    className="text-lg inline-block text-sea-900 dark:text-sea-400 underline hover:no-underline"
+  >
+    {children}
+  </Link>
+);
+
 const BlogPostTemplate = ({
   data,
   pageContext,
@@ -52,6 +66,11 @@ const BlogPostTemplate = ({
 
   let seoImage = src && height && width ? { src, height, width } : undefined;
 
+  const editLink = `${links.github}/v1/edit/dev/content/blog/${node.slug.slice(
+    0,
+    -1
+  )}/index.mdx`;
+
   return (
     <Layout withCTA>
       <Seo
@@ -62,10 +81,13 @@ const BlogPostTemplate = ({
         description={node.frontmatter.excerpt}
         image={seoImage}
       />
-      <div className="bg-white dark:bg-slate-900 pt-8 transition-all">
+      <div className="bg-white dark:bg-slate-900 transition-all">
         <Section as="div">
           <article className="max-w-xl md:max-w-screen-md mx-auto">
             <header className="mb-10 sm:mb-12 md:mb-16">
+              <div className="mb-12 lg:mb-16">
+                <BlogLink to="/blog">← Back to posts</BlogLink>
+              </div>
               <h1 className="transition-all font-heading font-black text-4xl md:text-5xl lg:text-6xl text-slate-900 dark:text-white mb-3 md:mb-4">
                 {node.frontmatter.title}
               </h1>
@@ -104,26 +126,32 @@ const BlogPostTemplate = ({
               </MDXProvider>
               <hr />
             </div>
-            <footer className="prose md:prose-lg mx-auto">
+            <footer className="prose prose-slate dark:prose-invert md:prose-lg mx-auto">
+              <div>
+                <a
+                  href={editLink}
+                  className="text-lg inline-block text-sea-900 dark:text-sea-400 underline hover:no-underline"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Edit on GitHub
+                </a>
+                <hr />
+              </div>
+
               <div className="flex flex-col space-y-4">
                 {previous && (
                   <div className="self-start">
-                    <Link
-                      to={`/blog/${previous.childMdx.slug}`}
-                      className="text-sea-900 dark:text-sea-400 hover:opacity-80 no-underline hover:underline"
-                    >
+                    <BlogLink to={`/blog/${previous.childMdx.slug}`}>
                       ← {previous.childMdx.frontmatter.title}
-                    </Link>
+                    </BlogLink>
                   </div>
                 )}
                 {next && (
                   <div className="self-end">
-                    <Link
-                      to={`/blog/${next.childMdx.slug}`}
-                      className="text-sea-900 dark:text-sea-400 hover:opacity-80 no-underline hover:underline"
-                    >
+                    <BlogLink to={`/blog/${next.childMdx.slug}`}>
                       {next.childMdx.frontmatter.title} →
-                    </Link>
+                    </BlogLink>
                   </div>
                 )}
               </div>
