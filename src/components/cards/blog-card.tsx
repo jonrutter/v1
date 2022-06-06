@@ -1,8 +1,6 @@
 import React from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
-
-// components
-import { StyledLink } from '@/components';
+import { Link } from 'gatsby';
 
 // types
 import type { BlogPostPreview } from '@/types';
@@ -30,12 +28,12 @@ export const BlogCard: React.FC<Props> = ({ item }) => {
       <div className="max-w-prose p-8 lg:p-6">
         <header>
           <h3 className="font-heading font-bold mb-3 text-2xl text-slate-900 dark:text-slate-50">
-            <StyledLink
+            <Link
               to={`/blog/${item.slug}`}
-              className="py-1 px-2 -ml-2 rounded-md hover:text-sea-600 dark:hover:text-sea-400 block"
+              className="py-1 px-2 -ml-2 rounded-md hover:text-sea-600 dark:hover:text-sea-400 inline-block transition-all outline-none focus:ring-2 focus:ring-current"
             >
               {item.frontmatter.title}
-            </StyledLink>
+            </Link>
           </h3>
           <small className="block mb-4 text-slate-600 dark:text-slate-300">
             {item.frontmatter.date} • {item.timeToRead} minute read
