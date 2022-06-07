@@ -5,7 +5,7 @@ import { StaticImage } from 'gatsby-plugin-image';
 import { menu, socialLinks } from '@/config';
 
 // components
-import { Icon, StyledLink, SocialLink } from '@/components';
+import { Icon, StyledLink, IconButton } from '@/components';
 
 type Props = {
   short?: boolean;
@@ -42,9 +42,16 @@ export const Footer: React.FC<Props> = ({ short }) => (
           <ul className="flex text-2xl space-x-1 lg:space-x-4">
             {socialLinks.map(({ url, name, icon }, index) => (
               <li key={index}>
-                <SocialLink href={url} name={name}>
+                <IconButton
+                  as="a"
+                  href={url}
+                  aria-label={name}
+                  title={name}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <Icon name={icon} aria-hidden />
-                </SocialLink>
+                </IconButton>
               </li>
             ))}
           </ul>

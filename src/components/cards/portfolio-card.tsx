@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { GatsbyImage } from 'gatsby-plugin-image';
 
 // components
-import { Icon, StyledLink } from '@/components';
+import { Icon, StyledLink, IconButton } from '@/components';
 
 // types
 import { SkillType, PortfolioItemType } from '@/types';
@@ -79,30 +79,30 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
             ))}
           </ul>
         )}
-        <div className="flex justify-end space-x-8 text-2xl">
+        <div className="flex justify-end space-x-2 text-2xl">
           {code && (
-            <a
+            <IconButton
+              as="a"
               href={code}
+              aria-label="View project code"
               title="Project code"
-              aria-label="Project code"
-              className="transition-all outline-none focus:ring-2 focus:ring-slate-900 dark:focus:ring-slate-50 p-1 rounded-md hover:text-sea-600 dark:hover:text-sea-400"
               target="_blank"
               rel="noreferrer"
             >
               <Icon name="github" aria-hidden />
-            </a>
+            </IconButton>
           )}
           {url && (
-            <a
+            <IconButton
+              as="a"
               href={url}
+              aria-label="View live site"
               title="Live site"
-              aria-label="Live site"
-              className="transition-all outline-none focus:ring-2 focus:ring-slate-900 dark:focus:ring-slate-50 p-1 rounded-md hover:text-sea-600 dark:hover:text-sea-400"
               target="_blank"
               rel="noreferrer"
             >
               <Icon name="external" aria-hidden />
-            </a>
+            </IconButton>
           )}
         </div>
       </div>

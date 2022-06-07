@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { menu, socialLinks } from '@/config';
 
 // components
-import { Hamburger, StyledLink, SocialLink, Icon } from '@/components';
+import { Hamburger, StyledLink, IconButton, Icon } from '@/components';
 
 /* ~~~ NavLink ~~~ */
 
@@ -101,9 +101,17 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({ open, closeDrawer }) => {
           <ul className="flex justify-center text-2xl space-x-1">
             {socialLinks.map(({ name, icon, url }, index) => (
               <li key={index}>
-                <SocialLink href={url} name={name} tabIndex={tabIndex}>
+                <IconButton
+                  as="a"
+                  href={url}
+                  aria-label={name}
+                  title={name}
+                  tabIndex={tabIndex}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <Icon name={icon} />
-                </SocialLink>
+                </IconButton>
               </li>
             ))}
           </ul>

@@ -11,7 +11,6 @@ export * from './hamburger';
 export * from './icon';
 export * from './portfolio-tabs';
 export * from './seo';
-export * from './social-link';
 export * from './spinner';
 export * from './styled-link';
 export * from './theme-toggle';
