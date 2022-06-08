@@ -15,6 +15,8 @@ import {
   CodeBlock,
   CodeTabs,
   CodePanel,
+  AutoLinkH2,
+  AutoLinkH3,
 } from '@/components';
 
 // types
@@ -36,7 +38,13 @@ type PageContext = {
   previous: PostNode | null;
 };
 
-const shortcodes = { pre: CodeBlock, CodeTabs, CodePanel };
+const shortcodes = {
+  pre: CodeBlock,
+  CodeTabs,
+  CodePanel,
+  h2: AutoLinkH2,
+  h3: AutoLinkH3,
+};
 
 /**
  * Custom link for blog posts
