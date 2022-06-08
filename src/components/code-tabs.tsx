@@ -24,13 +24,7 @@ type TabProps = {
  */
 const Skill = ({ skill }: { skill: SkillType }) =>
   skill.icon ? (
-    <Icon
-      name={skill.icon}
-      className="mr-2"
-      style={{ color: skill.color }}
-      aria-hidden
-      role="none"
-    />
+    <Icon name={skill.icon} className="mr-2" style={{ color: skill.color }} />
   ) : null;
 
 /**
