@@ -18,7 +18,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@content/*": ["content/*"]
+      "@content/*": ["content/*"],
+      "test-utils": ["./test/modules/test-utils"]
     }
   },
   "include": [
