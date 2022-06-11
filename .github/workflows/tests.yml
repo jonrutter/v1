@@ -1,14 +1,14 @@
-name: CI
+name: Tests
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
   # add: test, a11y, build
-  
+
   # checks that there are no type errors
   typecheck:
     strategy:
