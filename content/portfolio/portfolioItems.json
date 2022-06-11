@@ -1,5 +1,52 @@
 [
   {
+    "title": "TaskList",
+    "description": "TaskList is a lightweight, intuitive, open source to-do list app, that supports tagging and filtering tasks by labels, due date, and priority level.",
+    "url": "https://tasklist-rutterjt.netlify.app/",
+    "code": "https://github.com/rutterjt/tasklist",
+    "type": "app",
+    "featured": true,
+    "skills": [
+      {
+        "label": "React",
+        "icon": "react",
+        "color": "#61DAFB"
+      },
+      {
+        "label": "TypeScript",
+        "icon": "typescript",
+        "color": "#3178C6"
+      },
+      { "label": "Material UI", "icon": "materialui", "color": "#0081CB" }
+    ],
+    "tools": [
+      {
+        "label": "Git",
+        "icon": "git",
+        "color": "#F05032"
+      },
+      {
+        "label": "GitHub",
+        "icon": "github",
+        "color": "#181717"
+      },
+      {
+        "label": "Netlify",
+        "icon": "netlify",
+        "color": "#00C7B7"
+      },
+      {
+        "label": "VS Code",
+        "icon": "vscode",
+        "color": "#007ACC"
+      }
+    ],
+    "featuredImage": {
+      "src": "./images/tasklist.png"
+    }
+  },
+
+  {
     "title": "React Film Database",
     "description": "React Film Database is a web application that allows users to browse and search for details about films.",
     "url": "https://rfdb.netlify.app/",
@@ -115,7 +162,7 @@
     "url": "https://jonrutter-quiz.netlify.app/",
     "code": "https://github.com/rutterjt/react-ts-quiz",
     "type": "app",
-    "featured": true,
+    "featured": false,
     "skills": [
       {
         "label": "React",

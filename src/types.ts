@@ -28,7 +28,7 @@ export type BlogPostPreview = {
     };
   };
   slug: string;
-  timeToRead: string;
+  timeToRead: number;
   id: string;
 };
 

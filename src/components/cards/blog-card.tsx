@@ -1,8 +1,6 @@
 import React from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
-
-// components
-import { StyledLink } from '@/components';
+import { Link } from 'gatsby';
 
 // types
 import type { BlogPostPreview } from '@/types';
@@ -16,26 +14,26 @@ export const BlogCard: React.FC<Props> = ({ item }) => {
     <article className="shadow-lg rounded-xl overflow-hidden bg-white dark:bg-slate-900 flex flex-col md:flex-row lg:flex-col w-full max-w-[325px] md:max-w-full lg:max-w-[325px] mx-auto">
       {/* image wrap */}
       {item.frontmatter.featured_image && (
-        <div>
+        <div className="md:flex-[3] lg:flex-auto">
           <GatsbyImage
             alt={`Preview image for post ${item.frontmatter.title}`}
             image={
               item.frontmatter.featured_image.childImageSharp.gatsbyImageData
             }
-            className="max-w-[325px] rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none lg:rounded-t-2xl lg:rounded-bl-none pointer-events-none select-none"
+            className="max-w-[325px] rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none md:h-full md:object-cover lg:h-auto lg:object-none lg:rounded-t-2xl lg:rounded-bl-none pointer-events-none select-none"
           />
         </div>
       )}
       {/* content wrap */}
-      <div className="max-w-prose p-8 lg:p-6">
+      <div className="max-w-prose p-8 lg:p-6 md:flex-[5] lg:flex-auto">
         <header>
           <h3 className="font-heading font-bold mb-3 text-2xl text-slate-900 dark:text-slate-50">
-            <StyledLink
+            <Link
               to={`/blog/${item.slug}`}
-              className="py-1 px-2 -ml-2 rounded-md hover:text-sea-600 dark:hover:text-sea-400"
+              className="py-1 px-2 -ml-2 rounded-md hover:text-sea-600 dark:hover:text-sea-400 inline-block transition-all outline-none focus:ring-2 focus:ring-current"
             >
               {item.frontmatter.title}
-            </StyledLink>
+            </Link>
           </h3>
           <small className="block mb-4 text-slate-600 dark:text-slate-300">
             {item.frontmatter.date} • {item.timeToRead} minute read

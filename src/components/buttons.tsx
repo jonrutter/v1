@@ -12,10 +12,10 @@ const Slider: React.FC<{ className?: string }> = ({ className = '' }) => (
 
 /* ~~~ Primary Button ~~~ */
 
-type Props<T extends React.ElementType> = {
+interface Props<T extends React.ElementType> {
   as?: T;
   className?: string;
-};
+}
 
 /**
  * Renders the site's primary button component
@@ -43,10 +43,10 @@ export const PrimaryButton = <T extends React.ElementType = typeof Link>({
   );
 };
 
-/* ~~~ Primary Button ~~~ */
+/* ~~~ Secondary Button ~~~ */
 
 /**
- * Renders the site's primary button component
+ * Renders the site's secondary button component
  *
  * A polymorphic component, supports rendering as `<button>`, `<a>`, or `<Link>`
  */
@@ -67,6 +67,31 @@ export const SecondaryButton = <T extends React.ElementType = typeof Link>({
     >
       {children}
       <Slider className="bg-sea-200" />
+    </Tag>
+  );
+};
+
+/* ~~~ Icon button ~~~ */
+
+/**
+ * Icon button
+ */
+export const IconButton = <T extends React.ElementType = typeof Link>({
+  as,
+  children,
+  ...rest
+}: Props<T> & Omit<React.ComponentPropsWithoutRef<T>, keyof Props<T>>) => {
+  const Tag = as || Link;
+  return (
+    <Tag
+      className="p-4 inline-block text-2xl relative transition-all z-10 w-14 group outline-none focus:ring-2 focus:ring-current rounded-md"
+      {...rest}
+    >
+      {children}
+      <div
+        aria-hidden
+        className="absolute -z-10 top-1 left-1 min-w-[3rem] min-h-[3rem] rounded-full transition-all bg-gradient-to-br from-sea-300 to-sea-500 scale-0 group-hover:scale-100 outline-none overflow-hidden"
+      />
     </Tag>
   );
 };

@@ -3,7 +3,7 @@ import { StaticImage } from 'gatsby-plugin-image';
 import clsx from 'clsx';
 
 // components
-import { NavBar, ThemeSwitch } from '@/components';
+import { NavBar, ThemeSwitch, NavDrawer } from '@/components';
 import { ClientOnly } from '@/hooks/useHasMounted';
 
 // hooks
@@ -42,37 +42,36 @@ const HeaderContent: React.FC = () => {
   }, [drawerOpen]);
 
   return (
-    <div
-      className={clsx(
-        'py-4 px-6 md:px-12 fixed top-0 left-0 right-0 w-full z-30 transition-all text-slate-900 dark:text-slate-50 motion-reduce:!translate-y-0',
-        !scrolled && !drawerOpen
-          ? 'bg-transparent'
-          : 'bg-white dark:bg-slate-900',
-        (scrolled || drawerOpen) &&
-          'shadow-lg border-b-[1px] border-b-slate-800/20 dark:border-b-slate-50/20',
-        scrollDir === 'down' && scrolled && !drawerOpen
-          ? '-translate-y-full shadow-none border-b-0'
-          : 'translate-y-0'
-      )}
-    >
-      <header className="max-w-site-full mx-auto flex justify-between items-center">
-        <div>
-          <StaticImage
-            src="../../images/site-logo.svg"
-            alt="Jon Rutter"
-            className="max-w-[2rem] md:max-w-[3rem] h-auto block"
-          />
-        </div>
-        <div className="flex items-center space-x-8">
-          <ThemeSwitch />
-          <NavBar
-            drawerOpen={drawerOpen}
-            closeDrawer={closeDrawer}
-            toggleDrawer={toggleDrawer}
-          />
-        </div>
-      </header>
-    </div>
+    <>
+      <div
+        className={clsx(
+          'py-4 px-6 md:px-12 fixed top-0 left-0 right-0 w-full z-40 transition-all text-slate-900 dark:text-slate-50 motion-reduce:!translate-y-0',
+          !scrolled && !drawerOpen
+            ? 'bg-transparent'
+            : 'bg-white dark:bg-slate-900',
+          (scrolled || drawerOpen) &&
+            'shadow-lg border-b-[1px] border-b-slate-800/20 dark:border-b-slate-50/20',
+          scrollDir === 'down' && scrolled && !drawerOpen
+            ? '-translate-y-full shadow-none border-b-0'
+            : 'translate-y-0'
+        )}
+      >
+        <header className="max-w-site-full mx-auto flex justify-between items-center">
+          <div>
+            <StaticImage
+              src="../../images/site-logo.svg"
+              alt="Jon Rutter"
+              className="max-w-[2rem] md:max-w-[3rem] h-auto block"
+            />
+          </div>
+          <div className="flex items-center space-x-8">
+            <ThemeSwitch />
+            <NavBar drawerOpen={drawerOpen} toggleDrawer={toggleDrawer} />
+          </div>
+        </header>
+      </div>
+      <NavDrawer closeDrawer={closeDrawer} open={drawerOpen} />
+    </>
   );
 };
 

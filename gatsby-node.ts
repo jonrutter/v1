@@ -75,7 +75,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
       reporter.log(`Building node: ${node.childMdx.slug}`);
       createPage({
         path: `/blog/${node.childMdx.slug}`,
-        component: path.resolve(`./src/templates/BlogPostTemplate.tsx`),
+        component: path.resolve(`./src/templates/blog-post.tsx`),
         context: { id: node.id, next, previous },
       });
     });

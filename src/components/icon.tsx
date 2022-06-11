@@ -77,7 +77,7 @@ interface Props extends IconProps {
  */
 export const Icon: React.FC<Props> = ({ name, ...rest }) => {
   const Icon = icons[name as IconName];
-  if (Icon) return <Icon {...rest} />;
+  if (Icon) return <Icon {...rest} role="none" aria-hidden />;
   // if no icon, throw console error and return null
   console.error(
     `Invalid icon name: ${name}. If you expect this icon to be available, make sure it is imported and configured correctly.`

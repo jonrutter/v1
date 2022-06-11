@@ -11,6 +11,26 @@
       transition-duration: 0ms !important;
     }
   }
+
+  /* override a few @tailwindcss/typography styles */
+  /* prevent adding backticks to code excerpts */
+  /* .prose code::before,
+  .prose code::after {
+    content: '' !important;
+  } */
+
+  /* add heading theme styling */
+  .prose h2 {
+    @apply text-3xl md:text-4xl font-heading font-black;
+  }
+
+  .prose h3 {
+    @apply font-heading font-bold;
+  }
+
+  .code-tabs pre {
+    margin-top: 0 !important;
+  }
 }
 
 @keyframes shine {
@@ -106,16 +126,12 @@
     -webkit-tap-highlight-color: transparent;
     position: relative;
     z-index: 30;
-    @apply outline-none focus:outline-none focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-400;
-  }
-  .hamburger:hover,
-  .hamburger.active:hover {
-    opacity: 0.7;
+    @apply outline-none focus:ring-2 focus:ring-current;
   }
   .hamburger.active .hamburger-inner,
   .hamburger.active .hamburger-inner::before,
   .hamburger.active .hamburger-inner::after {
-    @apply bg-slate-900 dark:bg-slate-50 transition-all;
+    @apply text-inherit bg-current transition-all;
   }
   .hamburger-box {
     width: 1.75rem;
@@ -132,13 +148,13 @@
   .hamburger-inner,
   .hamburger-inner::before,
   .hamburger-inner::after {
-    @apply bg-slate-900 dark:bg-slate-50;
+    @apply bg-current;
     display: block;
     width: 1.75rem;
     height: 3px;
     border-radius: 2px;
     position: absolute;
-    transition: transform 0.15s ease, background-color 0.3s;
+    transition: transform 0.15s ease, color 0.3s;
   }
   .hamburger-inner::before,
   .hamburger-inner::after {

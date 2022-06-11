@@ -8,14 +8,14 @@ interface Props extends React.ComponentPropsWithoutRef<'button'> {
 export const Hamburger: React.FC<Props> = ({ open, ...rest }) => (
   <button
     className={clsx(
-      'hamburger hamburger--collapse rounded-md focus:ring-2 focus:ring-slate-900 dark:focus:ring-slate-50',
+      'hamburger hamburger--collapse rounded-md text-slate-900 dark:text-slate-50 hover:text-sea-600 dark:hover:text-sea-400',
       open && 'active'
     )}
     type="button"
     {...rest}
   >
     <span className="hamburger-box">
-      <span className="hamburger-inner"></span>
+      <span className="hamburger-inner" />
     </span>
   </button>
 );

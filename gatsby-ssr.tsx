@@ -22,7 +22,7 @@ import '@reach/tabs/styles.css';
 import '@/styles/main.css';
 
 // prism.js custom theme
-import '@/styles/prism-atom-theme.css';
+import '@/styles/prism-custom-theme.css';
 
 export const wrapPageElement: GatsbySSR['wrapPageElement'] = ({ element }) => {
   return <PageWrap>{element}</PageWrap>;

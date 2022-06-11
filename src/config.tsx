@@ -55,22 +55,22 @@ export const links = {
 
 export const socialLinks: SocialLinkType[] = [
   {
-    name: 'GitHub',
+    name: 'My GitHub',
     icon: 'github',
     url: links.github,
   },
   {
-    name: 'Twitter',
+    name: 'My Twitter',
     icon: 'twitter',
     url: links.twitter,
   },
   {
-    name: 'LinkedIn',
+    name: 'My LinkedIn',
     icon: 'linkedin',
     url: links.linkedin,
   },
   {
-    name: 'Email Me',
+    name: 'Email me',
     icon: 'email',
     url: links.email,
   },

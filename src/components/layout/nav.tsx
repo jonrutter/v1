@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { menu, socialLinks } from '@/config';
 
 // components
-import { Hamburger, StyledLink, SocialLink, Icon } from '@/components';
+import { Hamburger, StyledLink, IconButton, Icon } from '@/components';
 
 /* ~~~ NavLink ~~~ */
 
@@ -36,15 +36,10 @@ export const NavLink: React.FC<NavLinkProps> = ({
 
 type NavBarProps = {
   drawerOpen: boolean;
-  closeDrawer: () => void;
   toggleDrawer: () => void;
 };
 
-export const NavBar: React.FC<NavBarProps> = ({
-  drawerOpen,
-  closeDrawer,
-  toggleDrawer,
-}) => (
+export const NavBar: React.FC<NavBarProps> = ({ drawerOpen, toggleDrawer }) => (
   <nav>
     <ul className="hidden md:flex items-center space-x-6">
       {menu.map((link, index) => (
@@ -60,7 +55,6 @@ export const NavBar: React.FC<NavBarProps> = ({
         aria-label="Toggle navigation menu"
       />
     </div>
-    <NavDrawer closeDrawer={closeDrawer} open={drawerOpen} />
   </nav>
 );
 
@@ -71,25 +65,26 @@ type NavDrawerProps = {
   closeDrawer: () => void;
 };
 
-// TODO: refactor with nav to avoid having to set h-screen
-
 export const NavDrawer: React.FC<NavDrawerProps> = ({ open, closeDrawer }) => {
   const tabIndex = open ? 0 : -1;
 
   return (
-    <>
+    <div
+      className={clsx(
+        'fixed top-0 left-0 bottom-0 right-0 z-30 transition-all',
+        open ? 'visible' : 'invisible'
+      )}
+      aria-hidden={!open}
+    >
       {/* click outside indicator */}
       <div
-        className={clsx(
-          'fixed top-[4.5rem] left-0 right-0 bottom-0 bg-transparent -z-10 min-h-screen cursor-pointer',
-          open ? 'block' : 'hidden'
-        )}
+        className="fixed top-0 left-0 right-0 bottom-0 bg-transparent -z-10 min-h-screen cursor-pointer"
         onClick={closeDrawer}
       />
       {/* main dropdown box */}
       <div
         className={clsx(
-          'fixed top-[4.5rem] bottom-0 right-0 w-11/12 max-w-sm overflow-y-auto transition-all font-heading z-30 h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-50 text-xl shadow-xl border-l-[1px] border-l-slate-800/20 dark:border-l-slate-50/20',
+          'fixed top-0 pt-[4.5rem] right-0 w-11/12 max-w-sm overflow-y-auto transition-all font-heading h-full bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-50 text-xl shadow-xl border-l-[1px] border-l-slate-800/20 dark:border-l-slate-50/20',
           open ? 'translate-x-0' : 'translate-x-full'
         )}
       >
@@ -106,14 +101,22 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({ open, closeDrawer }) => {
           <ul className="flex justify-center text-2xl space-x-1">
             {socialLinks.map(({ name, icon, url }, index) => (
               <li key={index}>
-                <SocialLink href={url} name={name} tabIndex={tabIndex}>
+                <IconButton
+                  as="a"
+                  href={url}
+                  aria-label={name}
+                  title={name}
+                  tabIndex={tabIndex}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <Icon name={icon} />
-                </SocialLink>
+                </IconButton>
               </li>
             ))}
           </ul>
         </div>
       </div>
-    </>
+    </div>
   );
 };
