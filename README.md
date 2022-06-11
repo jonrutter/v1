@@ -1,7 +1,7 @@
 # jonrutter.io
 
 [![Production deployment](https://img.shields.io/github/deployments/rutterjt/v1/production?label=vercel&logo=vercel&logoColor=white)](https://www.jonrutter.io)
-[![Current Version](https://img.shields.io/badge/version-1.0.0-green.svg)](https://github.com/rutterjt/v1)
+[![Current Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/rutterjt/v1)
 ![Workflow status](https://github.com/rutterjt/v1/actions/workflows/tests.yml/badge.svg?event=push)
 
 My personal portfolio website.
