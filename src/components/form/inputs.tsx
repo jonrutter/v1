@@ -67,20 +67,3 @@ export const Input = <T extends React.ElementType = 'input'>({
   );
 };
 
-/* ~~~ Email Input ~~~ */
-
-type EmailProps = {
-  name: FieldName;
-  register: UseFormRegister<FormDataType>;
-  required?: boolean;
-  error?: FieldError;
-};
-
-export const Email: React.FC<EmailProps> = ({
-  name,
-  register,
-  required,
-  error,
-}) => (
-  <Input name={name} register={register} required label="Email" error={error} />
-);
