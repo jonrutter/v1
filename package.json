@@ -14,8 +14,9 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "jest",
+    "test:dev": "npm test -- --coverage --watchAll",
     "test:watch": "npm test -- --watch",
-    "test:coverage": "npm test --coverage",
+    "test:coverage": "npm test -- --coverage",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
