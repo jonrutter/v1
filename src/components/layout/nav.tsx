@@ -24,7 +24,7 @@ export const NavLink: React.FC<NavLinkProps> = ({
 }) => (
   <StyledLink
     to={to}
-    className="rounded-md text-slate-900 dark:text-slate-50 p-1 hover:text-sea-600 dark:hover:text-sea-400"
+    className="text-slate-900 dark:text-slate-50 hover:text-sea-600 dark:hover:text-sea-400"
     activeClassName="before:scale-x-100 !text-slate-900 hover:!text-slate-900 focus:text-sky-500 dark:focus:text-sky-400 dark:!text-slate-50"
     tabIndex={tabIndex}
   >
@@ -78,7 +78,7 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({ open, closeDrawer }) => {
     >
       {/* click outside indicator */}
       <div
-        className="fixed top-0 left-0 right-0 bottom-0 bg-transparent -z-10 min-h-screen cursor-pointer"
+        className="fixed top-0 left-0 right-0 bottom-0 -z-10 min-h-screen cursor-pointer backdrop-blur"
         onClick={closeDrawer}
       />
       {/* main dropdown box */}

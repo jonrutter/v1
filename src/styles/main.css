@@ -96,14 +96,6 @@
     }
   }
 
-  /* Original idea for this body-blur implementation is from Brittany Chiang's website: https://github.com/bchiang7/v4 */
-  .body-blur {
-    overflow: hidden;
-  }
-  body.body-blur #main > * {
-    @apply transition-all blur pointer-events-none select-none;
-  }
-
   /*
     Adapted from Jon Suh's hamburgers, (c) 2016 Jonathan Suh <hello@jonsuh.com> (jonsuh.com), licensed under the MIT license (https://github.com/jonsuh/hamburgers/blob/master/LICENSE)
   */
