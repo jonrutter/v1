@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { StaticImage } from 'gatsby-plugin-image';
 import clsx from 'clsx';
 
 // components
@@ -8,6 +7,9 @@ import { ClientOnly } from '@/hooks/useHasMounted';
 
 // hooks
 import { useScroll } from '@/hooks/useScroll';
+
+// logo
+import Logo from '@/images/site-logo.png';
 
 /**
  * The main header content.
@@ -58,8 +60,8 @@ const HeaderContent: React.FC = () => {
       >
         <header className="max-w-site-full mx-auto flex justify-between items-center">
           <div>
-            <StaticImage
-              src="../../images/site-logo.svg"
+            <img
+              src={Logo}
               alt="Jon Rutter"
               className="max-w-[2rem] md:max-w-[3rem] h-auto block"
             />
