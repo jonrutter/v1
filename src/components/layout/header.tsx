@@ -27,9 +27,9 @@ const HeaderContent: React.FC = () => {
     const body = document.querySelector('body');
     if (body !== null) {
       if (drawerOpen) {
-        body.classList.add('body-blur');
+        body.classList.add('overflow-y-hidden', 'max-h-screen');
       } else {
-        body.classList.remove('body-blur');
+        body.classList.remove('overflow-y-hidden', 'max-h-screen');
       }
     }
     // close drawer by pressing escape key
