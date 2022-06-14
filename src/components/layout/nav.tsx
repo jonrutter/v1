@@ -75,6 +75,7 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({ open, closeDrawer }) => {
         open ? 'visible' : 'invisible'
       )}
       aria-hidden={!open}
+      data-testid="nav-drawer"
     >
       {/* click outside indicator */}
       <div
