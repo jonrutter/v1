@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 
 // components
-import { NavBar, ThemeSwitch, NavDrawer } from '@/components';
+import { ThemeSwitch } from '@/components';
+import { NavBar } from './nav';
+import { NavDrawer } from './nav';
 import { ClientOnly } from '@/hooks/useHasMounted';
 
 // hooks
@@ -14,7 +16,7 @@ import Logo from '@/images/site-logo.png';
 /**
  * The main header content.
  */
-const HeaderContent: React.FC = () => {
+export const PureHeader: React.FC = () => {
   // get scroll information from custom hook
   const { scrollDir, scrolled } = useScroll();
 
@@ -64,6 +66,7 @@ const HeaderContent: React.FC = () => {
               src={Logo}
               alt="Jon Rutter"
               className="max-w-[2rem] md:max-w-[3rem] h-auto block"
+              data-testid="header-logo"
             />
           </div>
           <div className="flex items-center space-x-8">
@@ -83,7 +86,7 @@ const HeaderContent: React.FC = () => {
 export const Header: React.FC = () => (
   <>
     <ClientOnly>
-      <HeaderContent />
+      <PureHeader />
     </ClientOnly>
 
     {/* Spacing to prevent content at top of page disappearing behind header. I'm putting this outside of ClientOnly to prevent content jumps when the Header is rendered */}
