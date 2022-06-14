@@ -28,6 +28,18 @@
     @apply font-heading font-bold;
   }
 
+  .prose a {
+    color: inherit !important;
+  }
+
+  .prose a:hover {
+    text-decoration: none !important;
+  }
+
+  .prose .note p {
+    margin: 0;
+  }
+
   .code-tabs pre {
     margin-top: 0 !important;
   }
