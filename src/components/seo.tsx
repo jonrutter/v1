@@ -8,7 +8,7 @@ type HeaderImage = {
   width: number;
 };
 
-type Props = {
+type BaseProps = {
   title?: string;
   description?: string;
   author?: string;
@@ -21,10 +21,21 @@ type Props = {
   meta?: any[];
 };
 
-/**
- * An extensible, general-purpose SEO component for Gatsby sites. Queries your siteMetadata, accepts overriding props, and injects the metadata into your page's head.
- */
-export const Seo: React.FC<Props> = ({
+type SiteMetadata = {
+  title: string;
+  description: string;
+  author: string;
+  siteUrl: string;
+  twitterUsername: string;
+  lang: string;
+};
+
+interface Props extends BaseProps {
+  siteMetadata: SiteMetadata;
+}
+
+export const PureSeo: React.FC<Props> = ({
+  siteMetadata,
   title,
   description,
   author,
@@ -36,24 +47,6 @@ export const Seo: React.FC<Props> = ({
   keywords = [],
   meta = [],
 }) => {
-  // query to get site metadata
-  const {
-    site: { siteMetadata },
-  } = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          title
-          description
-          author
-          siteUrl
-          twitterUsername
-          lang
-        }
-      }
-    }
-  `);
-
   // remove trailing slashes from pathname
   let seoPathname;
   if (pathname) {
@@ -117,13 +110,13 @@ export const Seo: React.FC<Props> = ({
             // image
             { name: 'image', content: seo.image.src },
             { property: 'og:image', content: seo.image.src },
-            { property: 'og:image:width', content: seo.image.width },
+            { property: 'og:image:width', content: `${seo.image.width}` },
             {
               property: 'og:image:height',
-              content: seo.image.height,
+              content: `${seo.image.height}`,
             },
             { name: 'twitter:card', content: 'summary_large_image' },
-            { name: 'twitter:image', content: seo.image.src },
+            { name: 'twitter:image', content: `${seo.image.src}` },
           ]
         : [
             // fallback twitter card type, in case of no image
@@ -171,4 +164,28 @@ export const Seo: React.FC<Props> = ({
       meta={metaContent}
     />
   );
+};
+
+/**
+ * An extensible, general-purpose SEO component for Gatsby sites. Queries your siteMetadata, accepts overriding props, and injects the metadata into your page's head.
+ */
+export const Seo: React.FC<BaseProps> = (props) => {
+  // query to get site metadata
+  const {
+    site: { siteMetadata },
+  } = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+          description
+          author
+          siteUrl
+          twitterUsername
+          lang
+        }
+      }
+    }
+  `);
+  return <PureSeo siteMetadata={siteMetadata} {...props} />;
 };
