@@ -30,6 +30,7 @@ export const ThemeSwitch = () => {
           checked={colorTheme === 'dark'}
           onChange={toggleChecked}
           className="sr-only peer"
+          data-colortheme={colorTheme}
         />
         <div className="absolute top-[3px] left-[2px] right-[2px] bottom-[3px] bg-slate-600 rounded-full" />
 
