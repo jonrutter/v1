@@ -3,12 +3,10 @@ import { navigate } from 'gatsby';
 
 import { useForm } from 'react-hook-form';
 
+import { sendData } from './api';
+
 // components
 import { Input, Spinner, PrimaryButton } from '@/components';
-
-// contact form api endpoint
-const ENDPOINT =
-  'https://www.admin.jonrutter.io/wp-json/contact-form-7/v1/contact-forms/7/feedback';
 
 // types
 export type FormDataType = {
@@ -45,28 +43,18 @@ export const ContactForm: React.FC = () => {
     if (loading || sent) return;
     setLoading(true);
 
-    // encode formData for submission to the back-end
-    const formData = new FormData();
-    for (const field in data) {
-      formData.append(field, data[field as keyof FormDataType]);
-    }
-
-    fetch(ENDPOINT, { method: 'POST', body: formData })
-      .then((response) => {
-        // check for HTTP response errors
-        if (response.status !== 200) throw new Error();
-        return response.json();
-      })
-      .then((data) => {
-        // check for errors in the back-end
-        if (data.status === 'validation_failed') throw new Error();
-        // if no errors, update state and navigate to the sent page
+    sendData(data)
+      .then(() => {
         setError('');
         setSent(true);
         navigate('/sent');
       })
-      .catch(() => setError('Sorry, there was a problem sending your message.'))
-      .finally(() => setLoading(false));
+      .catch(() => {
+        setError('Sorry, there was a problem sending your message.');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
