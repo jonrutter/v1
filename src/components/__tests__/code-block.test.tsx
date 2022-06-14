@@ -6,7 +6,7 @@ import { CodeBlock } from '../code-block';
 
 const Component = (
   <CodeBlock>
-    <code className="language-markdown">
+    <code className="language-javascript">
       console.log('Hello, JavaScript!');
     </code>
   </CodeBlock>
@@ -20,7 +20,7 @@ describe('CodeBlock', () => {
   it('parses the correct language', () => {
     render(Component);
     const codeBlock = screen.getByTestId('code-block');
-    expect(codeBlock).toHaveAttribute('data-language', 'markdown');
+    expect(codeBlock).toHaveAttribute('data-language', 'javascript');
   });
   it('displays line numbers', () => {
     render(Component);
