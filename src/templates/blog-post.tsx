@@ -17,6 +17,7 @@ import {
   CodePanel,
   AutoLinkH2,
   AutoLinkH3,
+  Note,
 } from '@/components';
 
 // types
@@ -44,6 +45,7 @@ const shortcodes = {
   CodePanel,
   h2: AutoLinkH2,
   h3: AutoLinkH3,
+  Note,
 };
 
 /**
@@ -100,10 +102,8 @@ const BlogPostTemplate = ({
                 {node.frontmatter.title}
               </h1>
               <p className="text-base md:text-lg font-normal mt-0 mb-6 md:mb-8 block">
-                <time dateTime={node.frontmatter.date}>
-                  {node.frontmatter.date}
-                </time>{' '}
-                • {node.timeToRead} minute read
+                <span>{node.frontmatter.date}</span> • {node.timeToRead} minute
+                read
               </p>
 
               {image && (

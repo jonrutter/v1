@@ -9,16 +9,11 @@ import { links } from '@/config';
 export const PortfolioHero: React.FC = () => (
   <Hero title="My portfolio" subtitle="Check out some of my latest work">
     <p className="mb-4">
-      Here are some of my recent projects and client websites. Please take a
-      look around!
+      Here are some of my recent projects and client websites.
     </p>
     <p className="mb-4">
       Feel free to also check out my GitHub account to see more of my projects
       and open source contributions.
-    </p>
-    <p className="mb-4">
-      Like what you see? Get in touch with me for inquiries, or to chat about
-      web development.
     </p>
     <div className="text-center md:text-left mt-8 md:mt-8 flex flex-col sm:flex-row sm:items-center space-y-6 sm:space-y-0 sm:space-x-8">
       <PrimaryButton to="/contact" className="w-full sm:w-auto">

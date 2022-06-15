@@ -7,6 +7,8 @@ import { menu, socialLinks } from '@/config';
 // components
 import { Icon, StyledLink, IconButton } from '@/components';
 
+import Logo from '@/images/site-logo.png';
+
 type Props = {
   short?: boolean;
 };
@@ -24,10 +26,10 @@ export const Footer: React.FC<Props> = ({ short }) => (
       <footer className="max-w-screen-lg mx-auto">
         <div className="flex flex-col md:flex-row items-center text-center mb-16 md:justify-between">
           <div className="mb-12 md:mr-8 md:mb-0">
-            <StaticImage
-              src="../../images/site-logo.svg"
+            <img
+              src={Logo}
               alt="Jon Rutter"
-              className="max-w-[54px] h-auto"
+              className="max-w-[54px] h-auto select-none pointer-events-none"
             />
           </div>
           <ul className="flex flex-col mb-8 md:flex-row md:items-center md:m-0 space-y-6 md:space-y-0 md:space-x-4 lg:space-x-8">

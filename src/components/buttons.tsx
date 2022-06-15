@@ -7,6 +7,7 @@ import clsx from 'clsx';
 const Slider: React.FC<{ className?: string }> = ({ className = '' }) => (
   <div
     className={`absolute -top-1 -bottom-1 -right-1 -left-1  -translate-x-full -z-10 transition-all group-hover:translate-x-0 ${className}`}
+    data-testid="button-slider"
   />
 );
 

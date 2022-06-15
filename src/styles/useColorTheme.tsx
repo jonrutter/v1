@@ -16,11 +16,17 @@ type ContextValue = {
 // context
 const ColorThemeContext = React.createContext<ContextValue>({} as ContextValue);
 
+type ProviderProps = {
+  initial?: ColorTheme;
+};
 /**
  * Provider for the site's colorTheme context.
  */
-export const ColorThemeContextProvider: React.FC = ({ children }) => {
-  const [colorTheme, setColorTheme] = useState<ColorTheme>(undefined);
+export const ColorThemeContextProvider: React.FC<ProviderProps> = ({
+  initial = undefined,
+  children,
+}) => {
+  const [colorTheme, setColorTheme] = useState<ColorTheme>(initial);
 
   // on first render: reads the initial color theme from the root element and updates state accordingly
   useEffect(() => {

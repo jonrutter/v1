@@ -22,12 +22,18 @@ export const CodeBlock: React.FC<Props> = ({ children }) => {
   return (
     <Highlight {...defaultProps} code={code} language={language} theme={vsDark}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <pre className={className} style={style} data-language={language}>
+        <pre
+          className={className}
+          style={style}
+          data-language={language}
+          data-testid="code-block"
+        >
           <code>
             {tokens.map((line, i) => (
               <div
                 key={i}
                 data-line={i + 1}
+                data-testid="code-block-line"
                 {...getLineProps({ line, key: i })}
               >
                 {line.map((token, key) => (

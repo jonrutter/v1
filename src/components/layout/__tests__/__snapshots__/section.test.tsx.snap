@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Section layout component renders the correct content 1`] = `
+<div
+  className="py-12 sm:py-16 md:py-20 px-6 md:px-12 transition-all bg-inherit text-inherit"
+>
+  <section
+    className="max-w-site-sm md:max-w-site-md lg:max-w-site-lg mx-auto"
+  >
+    Hello, world!
+  </section>
+</div>
+`;

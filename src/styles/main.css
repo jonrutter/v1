@@ -28,6 +28,18 @@
     @apply font-heading font-bold;
   }
 
+  .prose a {
+    color: inherit !important;
+  }
+
+  .prose a:hover {
+    text-decoration: none !important;
+  }
+
+  .prose .note p {
+    margin: 0;
+  }
+
   .code-tabs pre {
     margin-top: 0 !important;
   }
@@ -94,14 +106,6 @@
     .shine {
       background-position: 0% 50%;
     }
-  }
-
-  /* Original idea for this body-blur implementation is from Brittany Chiang's website: https://github.com/bchiang7/v4 */
-  .body-blur {
-    overflow: hidden;
-  }
-  body.body-blur #main > * {
-    @apply transition-all blur pointer-events-none select-none;
   }
 
   /*

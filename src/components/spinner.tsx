@@ -8,6 +8,7 @@ export const Spinner: React.FC = () => (
   <svg
     viewBox="25 25 50 50"
     className="w-16 origin-center animate-rotate-outer"
+    data-testid="spinner"
   >
     <circle
       cx="50"
