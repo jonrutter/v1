@@ -18,6 +18,7 @@ import {
   AutoLinkH2,
   AutoLinkH3,
   Note,
+  CodeNote,
 } from '@/components';
 
 // types
@@ -46,6 +47,9 @@ const shortcodes = {
   h2: AutoLinkH2,
   h3: AutoLinkH3,
   Note,
+  CodeNote,
+  AutoLinkH2,
+  AutoLinkH3,
 };
 
 /**

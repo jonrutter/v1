@@ -27,3 +27,12 @@ export const Note: React.FC<Props> = ({ color = 'grey', children }) => (
     {children}
   </div>
 );
+
+export const CodeNote: React.FC<{ href: string }> = ({ href }) => (
+  <Note color="green">
+    <em>
+      You can find all the{' '}
+      <a href={href}>code examples for this tutorial here</a>.
+    </em>
+  </Note>
+);
