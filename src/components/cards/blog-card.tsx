@@ -1,6 +1,8 @@
 import React from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { Link } from 'gatsby';
+import parseISO from 'date-fns/parseISO';
+import format from 'date-fns/format';
 
 // types
 import type { BlogPostPreview } from '@/types';
@@ -36,7 +38,10 @@ export const BlogCard: React.FC<Props> = ({ item }) => {
             </Link>
           </h3>
           <small className="block mb-4 text-slate-600 dark:text-slate-300">
-            {item.frontmatter.date} • {item.timeToRead} minute read
+            <time dateTime={item.frontmatter.date}>
+              {format(parseISO(item.frontmatter.date), 'MMMM d, yyyy')}
+            </time>{' '}
+            • {item.timeToRead} minute read
           </small>
         </header>
         <div>

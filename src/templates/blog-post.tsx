@@ -3,6 +3,8 @@ import { graphql, Link, PageProps } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
+import parseISO from 'date-fns/parseISO';
+import format from 'date-fns/format';
 
 import { links } from '@/config';
 
@@ -106,8 +108,10 @@ const BlogPostTemplate = ({
                 {node.frontmatter.title}
               </h1>
               <p className="text-base md:text-lg font-normal mt-0 mb-6 md:mb-8 block">
-                <span>{node.frontmatter.date}</span> • {node.timeToRead} minute
-                read
+                <time dateTime={node.frontmatter.date}>
+                  {format(parseISO(node.frontmatter.date), 'MMMM d, yyyy')}
+                </time>{' '}
+                • {node.timeToRead} minute read
               </p>
 
               {image && (
@@ -188,7 +192,7 @@ export const pageQuery = graphql`
             timeToRead
             body
             frontmatter {
-              date(formatString: "MMMM DD, YYYY")
+              date
               title
               excerpt
               featured_image_link
