@@ -10,7 +10,7 @@ jobs:
   # add: lighthouse(?), a11y
 
   # lints code
-  test:
+  lint:
     strategy:
       matrix:
         node-version: [16.x]
