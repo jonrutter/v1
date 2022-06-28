@@ -1,7 +1,6 @@
 import React from 'react';
-import { prettyDOM, render, screen, waitFor } from 'test-utils';
+import { render, screen, waitFor } from 'test-utils';
 import userEvent from '@testing-library/user-event';
-import { Helmet } from 'react-helmet';
 
 // components
 import { ThemeSwitch } from '../theme-switch';

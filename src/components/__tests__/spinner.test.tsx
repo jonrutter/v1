@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from 'test-utils';
+import { render } from 'test-utils';
 
 import { Spinner } from '../spinner';
 

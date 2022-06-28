@@ -2,9 +2,6 @@
 import { IGatsbyImageData } from 'gatsby-plugin-image';
 import { IconName } from '../../src/components/icon';
 
-// images
-import BlogrPreview from './images/blogr.png';
-
 // skills
 import {
   React,

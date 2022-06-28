@@ -23,7 +23,7 @@ type DataProps = {
   };
 };
 
-const createPortfolio = (list: PortfolioItemType[], expanded: boolean) => {
+const useCreatePortfolio = (list: PortfolioItemType[], expanded: boolean) => {
   return useMemo(() => {
     return list
       .slice(0, expanded ? undefined : 4)
@@ -48,8 +48,8 @@ const PortfolioPage = ({
     [allPortfolioItemsJson]
   );
 
-  const websiteContent = createPortfolio(websiteItems, expanded);
-  const appContent = createPortfolio(appItems, expanded);
+  const websiteContent = useCreatePortfolio(websiteItems, expanded);
+  const appContent = useCreatePortfolio(appItems, expanded);
 
   return (
     <Layout withCTA>

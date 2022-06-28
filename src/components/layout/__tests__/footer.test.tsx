@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen } from 'test-utils';
-import renderer from 'react-test-renderer';
 
 // component
 import { Footer } from '../footer';

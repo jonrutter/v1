@@ -34,7 +34,7 @@ const useTitle = (rawTitle: React.ReactNode) => {
   }, []);
   return useMemo(
     () => [title, eleRef] as [string, React.RefObject<HTMLHeadingElement>],
-    [title, eleRef.current]
+    [title]
   );
 };
 

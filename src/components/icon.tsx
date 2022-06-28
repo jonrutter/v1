@@ -77,5 +77,5 @@ interface Props extends IconProps {
  */
 export const Icon: React.FC<Props> = ({ name, ...rest }) => {
   const Icon = icons[name];
-  return <Icon role="none" aria-hidden {...rest} />;
+  return <Icon role="presentation" aria-hidden {...rest} />;
 };

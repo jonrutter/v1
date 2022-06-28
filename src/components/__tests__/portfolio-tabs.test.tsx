@@ -18,7 +18,6 @@ describe('PortfolioTabs component', () => {
   });
   it('supports toggling through tabs', async () => {
     render(Component);
-    const websiteTab = screen.getByText(/websites/i);
     const appsTab = screen.getByText(/apps/i);
 
     const wpContent = screen.getByText(/website cards/i);

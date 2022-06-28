@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import { Header } from '../header';
 
-import { menu, socialLinks } from '@/config';
+import { menu } from '@/config';
 
 const Component = <Header />;
 
