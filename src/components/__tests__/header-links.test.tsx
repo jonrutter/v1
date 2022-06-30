@@ -43,6 +43,13 @@ describe('AutoLinkH2', () => {
     const link = screen.getByLabelText(/link to heading/i);
     expect(link).toHaveAttribute('href', `#title-with-special-chars`);
   });
+  it('correctly formats titles with numbers', () => {
+    render(<H2>Top 10 projects</H2>);
+    let heading = screen.getByTestId('top-10-projects');
+    expect(heading).toHaveProperty('id', 'top-10-projects');
+    const link = screen.getByLabelText(/link to heading/i);
+    expect(link).toHaveAttribute('href', `#top-10-projects`);
+  });
 });
 
 describe('AutoLinkH3', () => {
@@ -73,5 +80,12 @@ describe('AutoLinkH3', () => {
     expect(heading).toHaveProperty('id', 'title-with-special-chars');
     const link = screen.getByLabelText(/link to heading/i);
     expect(link).toHaveAttribute('href', `#title-with-special-chars`);
+  });
+  it('correctly formats titles with numbers', () => {
+    render(<H3>Top 10 projects</H3>);
+    let heading = screen.getByTestId('top-10-projects');
+    expect(heading).toHaveProperty('id', 'top-10-projects');
+    const link = screen.getByLabelText(/link to heading/i);
+    expect(link).toHaveAttribute('href', `#top-10-projects`);
   });
 });
