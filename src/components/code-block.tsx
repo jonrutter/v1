@@ -11,9 +11,9 @@ export const CodeBlock: React.FC<Props> = ({ children }) => {
   // attempt to select the child node's className
   const className = children?.props?.className || '';
   // check whether a language was specified in the markdown
-  const match = className.match(/language-(?<lang>.*)/);
-  // extract the language from the match, or provide one if not specified
-  const language: Language = match?.groups?.lang || 'markdown';
+  const match = className.match(/language-(.*)/);
+  // extract the language from regex match, defaulting to markdown if no match is found
+  const language: Language = match !== null ? match[1] : 'markdown';
 
   // getting the code
   // select the text content of the <code> node, and trim any whitespace
