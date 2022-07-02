@@ -21,6 +21,7 @@ import {
   AutoLinkH3,
   Note,
   CodeNote,
+  Icon,
 } from '@/components';
 
 // types
@@ -143,15 +144,18 @@ const BlogPostTemplate = ({
               <hr />
             </div>
             <footer className="prose prose-slate dark:prose-invert md:prose-lg mx-auto">
-              <div>
-                <a
-                  href={editLink}
-                  className="text-lg inline-block text-sea-900 dark:text-sea-400 underline hover:no-underline"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Edit on GitHub
-                </a>
+              <div className="italic text-sm">
+                <p>
+                  Found a problem with this post? Feel free to{' '}
+                  <a
+                    href={editLink}
+                    className="inline-flex items-center text-sea-900 dark:text-sea-400 underline hover:no-underline"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    suggest an edit <Icon name="github" className="ml-1" />
+                  </a>
+                </p>
                 <hr />
               </div>
 
