@@ -26,7 +26,7 @@ export const StyledLink = <T extends React.ElementType = typeof Link>({
   return (
     <Tag
       className={clsx(
-        'leading-none overflow-hidden relative transition-all before:block before:absolute before:bottom-0 before:left-underline before:h-[3px] before:w-6 before:rounded-md before:transition-all before:bg-current before:scale-x-0 hover:before:scale-x-100 outline-none focus:outline-none p-1 focus:ring-2 focus:ring-current rounded-md',
+        'leading-none overflow-hidden relative transition-all before:block before:absolute before:bottom-0 before:left-1/4 before:h-[3px] before:w-1/2 before:rounded-sm before:transition-all before:bg-current before:scale-x-0 hover:before:scale-x-100 focus:before:scale-x-100 outline-none p-1',
         className
       )}
       {...rest}

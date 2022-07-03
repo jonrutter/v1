@@ -11,9 +11,6 @@ module.exports = {
       borderRadius: {
         '4xl': '2rem',
       },
-      spacing: {
-        underline: 'calc(50% - 0.75rem)',
-      },
       fontFamily: {
         sans: ['"Open Sans"', ...defaultTheme.fontFamily.sans],
         heading: ['Poppins', ...defaultTheme.fontFamily.sans],
