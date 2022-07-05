@@ -21,7 +21,7 @@ const HashLink: React.FC<LinkProps> = ({ to, heading }) => (
   <Link
     to={to}
     aria-label={`Link to heading ${heading}`}
-    className="not-prose ml-2 opacity-0 group-hover:opacity-100 select-none before:[content:_'#'] focus:opacity-100 inline-block relative hover:!text-sea-600 dark:!text-sea-400"
+    className="not-prose ml-2 opacity-0 group-hover:opacity-100 select-none before:[content:_'#'] focus:opacity-100 inline-block relative after:hidden hover:after:block focus:after:block after:absolute after:bottom-0 after:left-0 after:bg-current after:h-[4px] after:w-full outline-none"
   />
 );
 
