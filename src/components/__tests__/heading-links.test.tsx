@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from 'test-utils';
 
-import { AutoLinkH2 as H2, AutoLinkH3 as H3 } from '../heading-links';
+import { AutoLinkH2 as H2, AutoLinkH3 as H3 } from '../autolink-headings';
 
 const TestH2 = <H2>Test Heading Two</H2>;
 const TestH3 = <H3>Test Heading Three</H3>;

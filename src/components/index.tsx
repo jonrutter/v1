@@ -8,7 +8,7 @@ export * from './buttons';
 export * from './code-block';
 export * from './code-tabs';
 export * from './hamburger';
-export * from './header-links';
+export * from './autolink-headings';
 export * from './icon';
 export * from './note';
 export * from './portfolio-tabs';
