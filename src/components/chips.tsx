@@ -37,7 +37,7 @@ export const Chip = <T extends React.ElementType = 'div'>({
     >
       <div
         className={clsx(
-          'absolute top-0 left-0 right-0 bottom-0 -z-10 opacity-0 rounded-full',
+          'absolute top-0 left-0 right-0 bottom-0 -z-10 opacity-0 rounded-full transition-all',
           interactive && 'group-hover:opacity-20 group-focus:opacity-20'
         )}
         style={{ backgroundColor: displayColor }}
