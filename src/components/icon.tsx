@@ -25,7 +25,8 @@ import {
   SiMaterialui,
   SiStyledcomponents,
 } from 'react-icons/si';
-import { FiExternalLink } from 'react-icons/fi';
+import { FiExternalLink, FiMenu } from 'react-icons/fi';
+import { BiSun, BiMoon } from 'react-icons/bi';
 
 /*
 Adding an icon to the component:
@@ -60,6 +61,9 @@ const icons = {
   materialui: SiMaterialui,
   external: FiExternalLink,
   styledcomponents: SiStyledcomponents,
+  moon: BiMoon,
+  sun: BiSun,
+  menu: FiMenu,
 };
 
 // types
