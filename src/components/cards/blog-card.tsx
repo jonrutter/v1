@@ -1,11 +1,13 @@
 import React from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
-import { Link } from 'gatsby';
 import parseISO from 'date-fns/parseISO';
 import format from 'date-fns/format';
 
 // types
 import type { BlogPostPreview } from '@/types';
+
+// components
+import { StyledLink } from '../styled-link';
 
 type Props = {
   item: BlogPostPreview;
@@ -30,12 +32,9 @@ export const BlogCard: React.FC<Props> = ({ item }) => {
       <div className="max-w-prose p-8 lg:p-6 md:flex-[5] lg:flex-auto">
         <header>
           <h3 className="font-heading font-bold mb-3 text-2xl text-slate-900 dark:text-slate-50">
-            <Link
-              to={`/blog/${item.slug}`}
-              className="py-1 px-2 -ml-2 rounded-md hover:text-sea-600 dark:hover:text-sea-400 inline-block transition-all outline-none focus:ring-2 focus:ring-current"
-            >
+            <StyledLink to={`/blog/${item.slug}`} className="inline-block">
               {item.frontmatter.title}
-            </Link>
+            </StyledLink>
           </h3>
           <small className="block mb-4 text-slate-600 dark:text-slate-300">
             <time dateTime={item.frontmatter.date}>
