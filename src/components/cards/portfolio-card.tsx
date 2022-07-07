@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { GatsbyImage } from 'gatsby-plugin-image';
 
 // components
-import { Icon, IconButton } from '@/components';
+import { Icon, IconButton, StyledLink } from '@/components';
 
 // types
 import { SkillType, PortfolioItemType } from '@/types';
@@ -55,15 +55,16 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
             : 'col-start-3 col-end-13 md:col-start-4 md:col-end-13 lg:col-start-7'
         )}
       >
-        <h3 className="mb-3 lg:mb-4 font-heading font-bold text-2xl text-slate-900 dark:text-slate-50">
-          <a
+        <h3 className="mb-1 lg:mb-2 font-heading font-bold text-2xl text-slate-900 dark:text-slate-50">
+          <StyledLink
+            as="a"
             href={url}
             target="_blank"
             rel="noreferrer"
-            className="py-1 px-2 -ml-2 rounded-md hover:text-sea-600 dark:hover:text-sea-400 inline-block transition-all outline-none focus:ring-2 focus:ring-current"
+            className="inline-block pb-2"
           >
             {title}
-          </a>
+          </StyledLink>
         </h3>
         <p
           className="text-base mb-4"
