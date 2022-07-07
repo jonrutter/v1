@@ -2,15 +2,6 @@ import React from 'react';
 import { Link } from 'gatsby';
 import clsx from 'clsx';
 
-/* ~~~ Button Decorators ~~~ */
-
-const Slider: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <div
-    className={`absolute -top-1 -bottom-1 -right-1 -left-1  -translate-x-full -z-10 transition-all group-hover:translate-x-0 ${className}`}
-    data-testid="button-slider"
-  />
-);
-
 /* ~~~ Primary Button ~~~ */
 
 interface Props<T extends React.ElementType> {
@@ -33,13 +24,12 @@ export const PrimaryButton = <T extends React.ElementType = typeof Link>({
   return (
     <Tag
       className={clsx(
-        'group leading-none py-4 px-8 text-heading font-bold relative inline-block rounded-lg overflow-hidden z-10 transition-all shadow-lg text-lg font-heading bg-slate-900 text-white focus:outline-none hover:text-slate-900 dark:bg-white dark:text-slate-900 outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-white dark:focus:ring-offset-slate-900',
+        'group leading-none py-4 px-8 text-heading font-bold relative inline-block rounded-lg overflow-hidden z-10 transition-all shadow-lg text-lg font-heading bg-slate-900 text-white dark:bg-white dark:text-slate-900 outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus:ring-2 focus:ring-offset-2 hover:bg-slate-500 dark:hover:bg-slate-400',
         className
       )}
       {...rest}
     >
       {children}
-      <Slider className="bg-sea-200" />
     </Tag>
   );
 };
@@ -61,13 +51,12 @@ export const SecondaryButton = <T extends React.ElementType = typeof Link>({
   return (
     <Tag
       className={clsx(
-        'group leading-none py-[calc(1rem-2px)] px-[calc(2rem-2px)] text-heading font-bold relative inline-block rounded-lg overflow-hidden z-10 transition-all shadow-lg text-lg font-heading bg-white text-slate-900 focus:outline-none hover:text-slate-900 dark:bg-slate-900 dark:text-white border-2 border-slate-900 dark:border-white outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-white dark:focus:ring-offset-slate-900 dark:hover:text-slate-900',
+        'group leading-none py-[calc(1rem-2px)] px-[calc(2rem-2px)] text-heading font-bold relative inline-block rounded-lg overflow-hidden z-10 transition-all shadow-lg text-lg font-heading bg-white text-slate-500 hover:text-slate-900 focus:text-slate-900 dark:focus:text-white focus:outline-none dark:bg-slate-900 dark:text-slate-300 dark:hover:text-white border-2 border-slate-500 dark:border-slate-300 outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus:ring-2 focus:ring-offset-2 hover:border-slate-900 dark:hover:border-white',
         className
       )}
       {...rest}
     >
       {children}
-      <Slider className="bg-sea-200" />
     </Tag>
   );
 };
