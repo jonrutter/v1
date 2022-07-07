@@ -111,7 +111,28 @@ export const IconButton = <T extends React.ElementType = typeof Link>({
   );
 };
 
+/**
+ * A polymorphic svg animated icon button
+ *
+ * Used for niche cases around the site: such as the hamburger menu button and light/dark toggle
+ */
+export const AnimatedIconButton = <T extends React.ElementType = 'button'>({
+  as,
+  children,
+  ...rest
+}: IBProps<T> & Omit<React.ComponentPropsWithoutRef<T>, keyof IBProps<T>>) => {
+  const Tag = as || 'button';
+
+  return (
+    <Tag
+      {...rest}
+      className="relative flex items-center justify-center group outline-none w-12 h-12 text-2xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white focus:text-slate-900 dark:focus:text-white"
+    >
+      <div
+        aria-hidden
+        className="absolute top-0 left-0 right-0 bottom-0 rounded-full transition-all-with-shadow border-2 border-slate-300 dark:border-slate-700 group-hover:border-slate-900 dark:group-hover:border-white group-focus:border-slate-900 dark:group-focus:border-white outline-none overflow-hidden"
       />
+      {children}
     </Tag>
   );
 };
