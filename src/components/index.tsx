@@ -15,4 +15,4 @@ export * from './portfolio-tabs';
 export * from './seo';
 export * from './spinner';
 export * from './styled-link';
-export * from './theme-switch';
+export * from './theme-toggle';
