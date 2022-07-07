@@ -4,6 +4,7 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 
 // components
 import { Icon, IconButton, StyledLink } from '@/components';
+import { Chip } from '../chips';
 
 // types
 import { SkillType, PortfolioItemType } from '@/types';
@@ -17,8 +18,10 @@ type PCardProps = {
 
 const Skill = ({ skill }: { skill: SkillType }) => (
   <div style={{ color: skill.color }} className="flex items-center">
-    {skill.icon && <Icon name={skill.icon} className="mr-1 dark:text-white" />}
-    <span className="text-slate-700 dark:text-slate-200">{skill.label}</span>
+    {skill.icon && <Icon name={skill.icon} className="mr-2 dark:text-white" />}
+    <span className="text-slate-700 dark:text-slate-200 leading-none">
+      {skill.label}
+    </span>
   </div>
 );
 
@@ -74,7 +77,21 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
           <ul className="text-sm hidden md:flex flex-wrap mb-4 ml-0 -mt-4">
             {skills.map((skill, index) => (
               <li key={index} className="flex items-center ml-4 mt-4">
-                <Skill skill={skill} />
+                {skill.href ? (
+                  <Chip
+                    color={skill.color}
+                    as="a"
+                    href={skill.href || ''}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Skill skill={skill} />
+                  </Chip>
+                ) : (
+                  <Chip color={skill.color}>
+                    <Skill skill={skill} />
+                  </Chip>
+                )}
               </li>
             ))}
           </ul>
