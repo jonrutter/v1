@@ -74,24 +74,43 @@ export const SecondaryButton = <T extends React.ElementType = typeof Link>({
 
 /* ~~~ Icon button ~~~ */
 
+interface IBProps<T extends React.ElementType> extends Props<T> {
+  fontSize?: number;
+}
+
 /**
  * Icon button
  */
 export const IconButton = <T extends React.ElementType = typeof Link>({
   as,
+  fontSize = 6,
+  className = '',
   children,
   ...rest
-}: Props<T> & Omit<React.ComponentPropsWithoutRef<T>, keyof Props<T>>) => {
+}: IBProps<T> & Omit<React.ComponentPropsWithoutRef<T>, keyof IBProps<T>>) => {
   const Tag = as || Link;
   return (
     <Tag
-      className="p-4 inline-block text-2xl relative transition-all z-10 w-14 group outline-none focus:ring-2 focus:ring-current rounded-md"
+      className={clsx(
+        'relative flex items-center justify-center group outline-none',
+        className
+      )}
+      style={{
+        width: `${(fontSize * 2) / 4}rem`,
+        height: `${(fontSize * 2) / 4}rem`,
+        fontSize: `${fontSize / 4}rem`,
+      }}
       {...rest}
     >
       {children}
       <div
         aria-hidden
-        className="absolute -z-10 top-1 left-1 min-w-[3rem] min-h-[3rem] rounded-full transition-all bg-gradient-to-br from-sea-300 to-sea-500 scale-0 group-hover:scale-100 outline-none overflow-hidden"
+        className="absolute top-0 left-0 right-0 bottom-0 rounded-full transition-all border-2 border-current opacity-0 group-hover:opacity-100 group-focus:opacity-100 outline-none overflow-hidden"
+      />
+    </Tag>
+  );
+};
+
       />
     </Tag>
   );
