@@ -97,6 +97,7 @@ export const query = graphql`
           label
           icon
           color
+          href
         }
         tools {
           label
