@@ -1,7 +1,6 @@
 import React from 'react';
 
 // components
-// import { Footer, Header, SkipToContent } from '@/components';
 import { Footer } from './footer';
 import { Header } from './header';
 import { SkipToContent } from './skip-to-main';
@@ -29,6 +28,5 @@ export const Layout: React.FC<Props> = ({ withCTA, children }) => (
 export * from './footer';
 export * from './header';
 export * from './hero';
-export * from './nav';
 export * from './section';
 export * from './skip-to-main';
