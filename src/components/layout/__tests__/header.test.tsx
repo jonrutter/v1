@@ -15,7 +15,7 @@ describe('Header', () => {
   it('renders the correct content', () => {
     render(Component);
     // it should render the logo
-    screen.getAllByAltText('Jon Rutter');
+    screen.getByLabelText('Jon Rutter');
 
     // it should render all of the nav links
     menu.forEach((item) => {
@@ -25,27 +25,23 @@ describe('Header', () => {
   });
   it('supports toggling the nav drawer', async () => {
     render(Component);
-    let button = screen.getByLabelText(/toggle navigation menu/i);
+    let button = screen.getByLabelText(/(open|close) navigation menu/i);
     let navDrawer = screen.getByTestId('nav-drawer');
-    let socialLink = screen.getByLabelText(/my github/i);
 
     // nav drawer and contents should be hidden initially
     expect(navDrawer).toHaveAttribute('aria-hidden', 'true');
-    expect(socialLink).toHaveAttribute('tabindex', '-1');
 
     await userEvent.click(button);
 
     await waitFor(() => {
       // after clicking toggle button, nav drawer and contents should be visible and focusable
       expect(navDrawer).toHaveAttribute('aria-hidden', 'false');
-      expect(socialLink).toHaveAttribute('tabindex', '0');
     });
 
     // clicking the toggle button should close the nav drawer again
     await userEvent.click(button);
     await waitFor(() => {
       expect(navDrawer).toHaveAttribute('aria-hidden', 'true');
-      expect(socialLink).toHaveAttribute('tabindex', '-1');
     });
 
     // pressing the Escape key should close the nav drawer when open
