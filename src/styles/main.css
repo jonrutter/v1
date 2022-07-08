@@ -28,12 +28,16 @@
     @apply font-heading font-bold;
   }
 
+  .prose code {
+    display: inline-block;
+  }
+
   .prose a {
-    color: inherit !important;
+    color: inherit;
   }
 
   .prose a:hover {
-    text-decoration: none !important;
+    text-decoration: none;
   }
 
   .prose .note p {
