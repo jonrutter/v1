@@ -8,6 +8,8 @@ export const Logo: FC = () => (
     viewBox="0 0 135.47 135.47"
     xmlns="http://www.w3.org/2000/svg"
     className="w-full h-auto"
+    role="img"
+    aria-label="Jon Rutter"
   >
     <g transform="translate(-123.5 -173.39)">
       <circle
