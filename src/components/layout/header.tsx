@@ -62,8 +62,8 @@ type MenuButtonProps = {
 
 const MenuButton: FC<MenuButtonProps> = ({ open, onClick }) => (
   <AnimatedIconButton
-    aria-label={open ? 'Open the menu' : 'Close the menu'}
-    title={open ? 'Open the menu' : 'Close the menu'}
+    aria-label={open ? 'Open navigation menu' : 'Close navigation menu'}
+    title={open ? 'Open navigation menu' : 'Close navigation menu'}
     onClick={onClick}
   >
     {open ? <Icon name="close" /> : <Icon name="menu" />}
