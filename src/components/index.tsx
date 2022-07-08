@@ -7,7 +7,6 @@ export * from './app';
 export * from './buttons';
 export * from './code-block';
 export * from './code-tabs';
-export * from './hamburger';
 export * from './autolink-headings';
 export * from './icon';
 export * from './note';
