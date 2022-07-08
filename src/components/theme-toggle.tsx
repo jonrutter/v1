@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 
 // components
 import { Icon } from './icon';
@@ -21,7 +22,24 @@ export const ThemeToggle = () => {
         toggleColorTheme(colorTheme === 'light' ? 'dark' : 'light')
       }
     >
-      {colorTheme === 'dark' ? <Icon name="moon" /> : <Icon name="sun" />}
+      <div className="absolute top-0 left-0 right-0 bottom-0 rounded-full overflow-hidden">
+        <div
+          className={clsx(
+            'absolute top-3 left-3 transition-all',
+            colorTheme === 'dark' && '-translate-x-10'
+          )}
+        >
+          <Icon name="sun" />
+        </div>
+        <div
+          className={clsx(
+            'absolute top-3 left-3  transition-all',
+            colorTheme !== 'dark' && 'translate-x-10'
+          )}
+        >
+          <Icon name="moon" />
+        </div>
+      </div>
     </AnimatedIconButton>
   );
 };
