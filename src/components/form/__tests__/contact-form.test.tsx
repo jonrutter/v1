@@ -3,13 +3,6 @@ import { render, screen, waitFor } from 'test-utils';
 import userEvent from '@testing-library/user-event';
 
 import { ContactForm } from '../contact-form';
-import { navigate } from 'gatsby';
-
-jest.mock('../api', () => {
-  return {
-    sendData: jest.fn().mockResolvedValueOnce(true).mockRejectedValueOnce(''),
-  };
-});
 
 const testData = {
   'your-name': 'Jon Rutter',
@@ -73,40 +66,11 @@ describe('Contact Form', () => {
     await userEvent.type(subjectField, testData['your-subject']);
     await userEvent.type(messageField, testData['your-message']);
 
-    await userEvent.click(submitButton);
+    userEvent.click(submitButton);
 
     await waitFor(() => {
       let errorMessage = screen.queryByText(/there was an error/i);
       expect(errorMessage).not.toBeInTheDocument();
-      expect(navigate).toHaveBeenCalled();
-    });
-  });
-  it('correctly handles server errors', async () => {
-    render(<ContactForm />);
-
-    // select fields
-    const submitButton = screen.getByRole('button');
-    const nameField = screen.getByLabelText(/name/i);
-    const emailField = screen.getByLabelText(/email/i);
-    const subjectField = screen.getByLabelText(/subject/i);
-    const messageField = screen.getByLabelText(/message/i);
-
-    // enter stock information
-    await userEvent.type(nameField, testData['your-name']);
-    await userEvent.type(emailField, testData['your-email']);
-    await userEvent.type(subjectField, testData['your-subject']);
-    await userEvent.type(messageField, testData['your-message']);
-
-    // there should initially be no error message
-    let errorMessage = screen.queryByText(/there was an error/i);
-    expect(errorMessage).not.toBeInTheDocument();
-
-    await userEvent.click(submitButton);
-
-    // after the server error, an error message should appear
-    await waitFor(() => {
-      let errorMessage = screen.queryByText(/there was an error/i);
-      expect(errorMessage).toBeInTheDocument();
     });
   });
 });
