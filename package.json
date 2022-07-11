@@ -69,10 +69,12 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^28.1.1",
     "jest-environment-jsdom": "^28.1.1",
+    "msw": "^0.43.1",
     "postcss": "^8.4.13",
     "react-test-renderer": "^17.0.2",
     "tailwindcss": "^3.0.24",
     "ts-jest": "^28.0.4",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "whatwg-fetch": "^3.6.2"
   }
 }
