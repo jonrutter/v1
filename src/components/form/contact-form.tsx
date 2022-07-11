@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import { navigate } from 'gatsby';
 
 import { useForm } from 'react-hook-form';
-
-import { sendData } from './api';
 
 // components
 import { Input, Spinner, PrimaryButton } from '@/components';
@@ -26,6 +23,10 @@ const defaultValues: FormDataType = {
   'your-message': '',
 };
 
+// contact form api endpoint
+export const ENDPOINT =
+  'https://www.admin.jonrutter.io/wp-json/contact-form-7/v1/contact-forms/7/feedback';
+
 export const ContactForm: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [sent, setSent] = useState<boolean>(false);
@@ -43,16 +44,28 @@ export const ContactForm: React.FC = () => {
     if (loading || sent) return;
     setLoading(true);
 
-    sendData(data)
-      .then(() => {
-        setError('');
+    let formData = new FormData();
+    for (const [key, value] of Object.entries(data)) {
+      formData.append(key, value);
+    }
+
+    fetch(ENDPOINT, { method: 'POST', body: formData })
+      .then((response) => {
+        if (response.status !== 200)
+          throw new Error(`Response status ${response.status}`);
+        return response.json();
+      })
+      .then((data) => {
+        if (data.status === 'validation_failed')
+          throw new Error('Form validation failed');
         setSent(true);
-        navigate('/sent');
+        setError('');
+        setLoading(false);
       })
-      .catch(() => {
-        setError('Sorry, there was a problem sending your message.');
-      })
-      .finally(() => {
+      .catch((err) => {
+        setError(
+          'Sorry! There was an error sending your message. Please try again.'
+        );
         setLoading(false);
       });
   };
