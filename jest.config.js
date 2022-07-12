@@ -23,6 +23,14 @@ module.exports = {
   testEnvironment: `jsdom`,
   setupFiles: [`<rootDir>/test/loadershim.js`],
   setupFilesAfterEnv: ['<rootDir>/test/setup-test-env.js'],
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80,
+    },
+  },
   coveragePathIgnorePatterns: [
     '/node_modules/',
     '<rootDir>/test/mock-contact-form/',
