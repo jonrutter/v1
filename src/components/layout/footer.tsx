@@ -1,13 +1,11 @@
 import React from 'react';
-import { StaticImage } from 'gatsby-plugin-image';
 
 // data
 import { menu, socialLinks } from '@/config';
 
 // components
 import { Icon, StyledLink, IconButton } from '@/components';
-
-import Logo from '@/images/site-logo.png';
+import { Logo } from '../logo';
 
 type Props = {
   short?: boolean;
@@ -25,17 +23,13 @@ export const Footer: React.FC<Props> = ({ short }) => (
     >
       <footer className="max-w-screen-lg mx-auto">
         <div className="flex flex-col md:flex-row items-center text-center mb-16 md:justify-between">
-          <div className="mb-12 md:mr-8 md:mb-0">
-            <img
-              src={Logo}
-              alt="Jon Rutter"
-              className="max-w-[54px] h-auto select-none pointer-events-none"
-            />
+          <div className="mb-12 md:mr-8 md:mb-0 w-12 h-auto">
+            <Logo />
           </div>
           <ul className="flex flex-col mb-8 md:flex-row md:items-center md:m-0 space-y-6 md:space-y-0 md:space-x-4 lg:space-x-8">
             {menu.map(({ url, name }, index) => (
               <li key={index}>
-                <StyledLink to={url} className="text-white hover:text-sea-400">
+                <StyledLink to={url} className="text-white">
                   {name}
                 </StyledLink>
               </li>
@@ -64,7 +58,7 @@ export const Footer: React.FC<Props> = ({ short }) => (
             target="_blank"
             rel="noreferrer"
             href="https://github.com/rutterjt/v1/tree/main#license"
-            className="text-white hover:text-sea-400"
+            className="text-white"
           >
             © {new Date().getFullYear()}, Jon Rutter
           </StyledLink>

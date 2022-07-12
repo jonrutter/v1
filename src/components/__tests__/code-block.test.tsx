@@ -22,7 +22,16 @@ describe('CodeBlock', () => {
     const codeBlock = screen.getByTestId('code-block');
     expect(codeBlock).toHaveAttribute('data-language', 'javascript');
   });
-  it('displays line numbers', () => {
+  it('defaults to markdown if no language is specified', () => {
+    render(
+      <CodeBlock>
+        <code>console.log('Hello, JavaScript!');</code>
+      </CodeBlock>
+    );
+    const codeBlock = screen.getByTestId('code-block');
+    expect(codeBlock).toHaveAttribute('data-language', 'markdown');
+  });
+  it('correctly displays line numbers', () => {
     render(Component);
     const lineWrapper = screen.getByTestId('code-block-line');
     expect(lineWrapper).toHaveAttribute('data-line', '1');

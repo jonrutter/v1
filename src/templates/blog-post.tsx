@@ -3,6 +3,8 @@ import { graphql, Link, PageProps } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
+import parseISO from 'date-fns/parseISO';
+import format from 'date-fns/format';
 
 import { links } from '@/config';
 
@@ -18,6 +20,8 @@ import {
   AutoLinkH2,
   AutoLinkH3,
   Note,
+  CodeNote,
+  Icon,
 } from '@/components';
 
 // types
@@ -46,6 +50,9 @@ const shortcodes = {
   h2: AutoLinkH2,
   h3: AutoLinkH3,
   Note,
+  CodeNote,
+  AutoLinkH2,
+  AutoLinkH3,
 };
 
 /**
@@ -102,8 +109,10 @@ const BlogPostTemplate = ({
                 {node.frontmatter.title}
               </h1>
               <p className="text-base md:text-lg font-normal mt-0 mb-6 md:mb-8 block">
-                <span>{node.frontmatter.date}</span> • {node.timeToRead} minute
-                read
+                <time dateTime={node.frontmatter.date}>
+                  {format(parseISO(node.frontmatter.date), 'MMMM d, yyyy')}
+                </time>{' '}
+                • {node.timeToRead} minute read
               </p>
 
               {image && (
@@ -135,15 +144,18 @@ const BlogPostTemplate = ({
               <hr />
             </div>
             <footer className="prose prose-slate dark:prose-invert md:prose-lg mx-auto">
-              <div>
-                <a
-                  href={editLink}
-                  className="text-lg inline-block text-sea-900 dark:text-sea-400 underline hover:no-underline"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Edit on GitHub
-                </a>
+              <div className="italic text-sm">
+                <p>
+                  Found a problem with this post? Feel free to{' '}
+                  <a
+                    href={editLink}
+                    className="inline-flex items-center text-sea-900 dark:text-sea-400 underline hover:no-underline"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    suggest an edit <Icon name="github" className="ml-1" />
+                  </a>
+                </p>
                 <hr />
               </div>
 
@@ -184,7 +196,7 @@ export const pageQuery = graphql`
             timeToRead
             body
             frontmatter {
-              date(formatString: "MMMM DD, YYYY")
+              date
               title
               excerpt
               featured_image_link

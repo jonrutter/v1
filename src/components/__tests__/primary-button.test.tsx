@@ -28,7 +28,6 @@ describe('PrimaryButton', () => {
     render(PBasLink);
     const link = screen.getByText(/home/i);
     expect(link).toHaveAttribute('href', '/');
-    screen.getByTestId('button-slider');
   });
   it('can render as an anchor tag', () => {
     render(PBasAnchor);

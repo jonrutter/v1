@@ -1,8 +1,6 @@
 import React from 'react';
 import { render, screen } from 'test-utils';
 import renderer from 'react-test-renderer';
-import userEvent from '@testing-library/user-event';
-import { prettyDOM } from '@testing-library/react';
 
 import { Layout } from '@/components/layout';
 import { PageWrap } from '@/components/app';

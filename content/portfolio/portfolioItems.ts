@@ -2,9 +2,6 @@
 import { IGatsbyImageData } from 'gatsby-plugin-image';
 import { IconName } from '../../src/components/icon';
 
-// images
-import BlogrPreview from './images/blogr.png';
-
 // skills
 import {
   React,
@@ -144,7 +141,7 @@ export const portfolioItems: DraftPortfolioItemType[] = [
     title: 'Fylo Landing Page',
     description: 'A demo landing page for a fictitious cloud storage company.',
     url: 'https://jonrutter-fylo-landing-page.netlify.app/',
-    code: 'https://github.com/rutterjt/front-end-projects/',
+    code: 'https://github.com/rutterjt-archive/front-end-projects',
     type: 'website',
     featured: false,
     skills: [HTML, JavaScript, Sass],
@@ -155,7 +152,7 @@ export const portfolioItems: DraftPortfolioItemType[] = [
     title: 'Insure Landing Page',
     description: 'A demo landing page for a fictitious insurance company.',
     url: 'https://jonrutter-insure-landing-page.netlify.app/',
-    code: 'https://github.com/rutterjt/front-end-projects/',
+    code: 'https://github.com/rutterjt-archive/front-end-projects',
     type: 'website',
     featured: false,
     skills: [HTML, JavaScript, Sass],

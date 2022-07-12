@@ -97,6 +97,7 @@ export const query = graphql`
           label
           icon
           color
+          href
         }
         tools {
           label
@@ -121,7 +122,7 @@ export const query = graphql`
         frontmatter {
           title
           excerpt
-          date(formatString: "MMMM DD, YYYY")
+          date
           featured_image {
             childImageSharp {
               gatsbyImageData(placeholder: BLURRED, width: 650)

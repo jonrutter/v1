@@ -9,7 +9,7 @@ const item: BlogPostPreview = {
   id: '1',
   timeToRead: 3,
   frontmatter: {
-    date: 'June 1, 2022',
+    date: '2022-06-01',
     excerpt: 'This is a test excerpt',
     title: 'Test Blog Post',
     featured_image: {
@@ -54,9 +54,8 @@ describe('Blog Card', () => {
     screen.getByText(item.frontmatter.excerpt);
 
     // metadata
-    screen.getByText(
-      `${item.frontmatter.date} • ${item.timeToRead} minute read`
-    );
+    screen.getByText('June 1, 2022');
+    screen.getByText(`• ${item.timeToRead} minute read`);
 
     // title link: should have inner text of the title, and href to the blog slug
     const titleLink = screen.getByText(item.frontmatter.title);

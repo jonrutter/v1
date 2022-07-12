@@ -10,14 +10,21 @@
       {
         "label": "React",
         "icon": "react",
-        "color": "#61DAFB"
+        "color": "#61DAFB",
+        "href": "https://reactjs.org/"
       },
       {
         "label": "TypeScript",
         "icon": "typescript",
-        "color": "#3178C6"
+        "color": "#3178C6",
+        "href": "https://www.typescriptlang.org/"
       },
-      { "label": "Material UI", "icon": "materialui", "color": "#0081CB" }
+      {
+        "label": "Material UI",
+        "icon": "materialui",
+        "color": "#0081CB",
+        "href": "https://mui.com/"
+      }
     ],
     "tools": [
       {
@@ -57,17 +64,20 @@
       {
         "label": "React",
         "icon": "react",
-        "color": "#61DAFB"
+        "color": "#61DAFB",
+        "href": "https://reactjs.org/"
       },
       {
         "label": "Tailwind CSS",
         "icon": "tailwind",
-        "color": "#38B2AC"
+        "color": "#38B2AC",
+        "href": "https://tailwindcss.com/"
       },
       {
         "label": "TypeScript",
         "icon": "typescript",
-        "color": "#3178C6"
+        "color": "#3178C6",
+        "href": "https://www.typescriptlang.org/"
       }
     ],
     "tools": [
@@ -107,22 +117,26 @@
       {
         "label": "Gatsby",
         "icon": "gatsby",
-        "color": "#663399"
+        "color": "#663399",
+        "href": "https://www.gatsbyjs.com/"
       },
       {
         "label": "JavaScript",
         "icon": "javascript",
-        "color": "#F7DF1E"
+        "color": "#F7DF1E",
+        "href": "https://developer.mozilla.org/en-US/docs/Glossary/JavaScript"
       },
       {
         "label": "React",
         "icon": "react",
-        "color": "#61DAFB"
+        "color": "#61DAFB",
+        "href": "https://reactjs.org/"
       },
       {
         "label": "Styled Components",
         "icon": "styledcomponents",
-        "color": "#DB7093"
+        "color": "#DB7093",
+        "href": "https://styled-components.com/"
       }
     ],
     "tools": [
@@ -167,17 +181,20 @@
       {
         "label": "React",
         "icon": "react",
-        "color": "#61DAFB"
+        "color": "#61DAFB",
+        "href": "https://reactjs.org/"
       },
       {
         "label": "Tailwind CSS",
         "icon": "tailwind",
-        "color": "#38B2AC"
+        "color": "#38B2AC",
+        "href": "https://tailwindcss.com/"
       },
       {
         "label": "TypeScript",
         "icon": "typescript",
-        "color": "#3178C6"
+        "color": "#3178C6",
+        "href": "https://www.typescriptlang.org/"
       }
     ],
     "tools": [
@@ -217,22 +234,26 @@
       {
         "label": "Gatsby",
         "icon": "gatsby",
-        "color": "#663399"
+        "color": "#663399",
+        "href": "https://www.gatsbyjs.com/"
       },
       {
         "label": "JavaScript",
         "icon": "javascript",
-        "color": "#F7DF1E"
+        "color": "#F7DF1E",
+        "href": "https://developer.mozilla.org/en-US/docs/Glossary/JavaScript"
       },
       {
         "label": "React",
         "icon": "react",
-        "color": "#61DAFB"
+        "color": "#61DAFB",
+        "href": "https://reactjs.org/"
       },
       {
         "label": "Tailwind CSS",
         "icon": "tailwind",
-        "color": "#38B2AC"
+        "color": "#38B2AC",
+        "href": "https://tailwindcss.com/"
       }
     ],
     "tools": [
@@ -277,17 +298,20 @@
       {
         "label": "CSS",
         "icon": "css",
-        "color": "#1572B6"
+        "color": "#1572B6",
+        "href": "https://developer.mozilla.org/en-US/docs/Glossary/CSS"
       },
       {
         "label": "JavaScript",
         "icon": "javascript",
-        "color": "#F7DF1E"
+        "color": "#F7DF1E",
+        "href": "https://developer.mozilla.org/en-US/docs/Glossary/JavaScript"
       },
       {
         "label": "React",
         "icon": "react",
-        "color": "#61DAFB"
+        "color": "#61DAFB",
+        "href": "https://reactjs.org/"
       }
     ],
     "tools": [
@@ -327,17 +351,20 @@
       {
         "label": "CSS",
         "icon": "css",
-        "color": "#1572B6"
+        "color": "#1572B6",
+        "href": "https://developer.mozilla.org/en-US/docs/Glossary/CSS"
       },
       {
         "label": "JavaScript",
         "icon": "javascript",
-        "color": "#F7DF1E"
+        "color": "#F7DF1E",
+        "href": "https://developer.mozilla.org/en-US/docs/Glossary/JavaScript"
       },
       {
         "label": "React",
         "icon": "react",
-        "color": "#61DAFB"
+        "color": "#61DAFB",
+        "href": "https://reactjs.org/"
       }
     ],
     "tools": [
@@ -370,24 +397,27 @@
     "title": "Fylo Landing Page",
     "description": "A demo landing page for a fictitious cloud storage company.",
     "url": "https://jonrutter-fylo-landing-page.netlify.app/",
-    "code": "https://github.com/rutterjt/front-end-projects/",
+    "code": "https://github.com/rutterjt-archive/front-end-projects",
     "type": "website",
     "featured": false,
     "skills": [
       {
         "label": "HTML",
         "icon": "html",
-        "color": "#E34F26"
+        "color": "#E34F26",
+        "href": "https://developer.mozilla.org/en-US/docs/Glossary/HTML5"
       },
       {
         "label": "JavaScript",
         "icon": "javascript",
-        "color": "#F7DF1E"
+        "color": "#F7DF1E",
+        "href": "https://developer.mozilla.org/en-US/docs/Glossary/JavaScript"
       },
       {
         "label": "Sass",
         "icon": "sass",
-        "color": "#CC6699"
+        "color": "#CC6699",
+        "href": "https://sass-lang.com/"
       }
     ],
     "tools": [
@@ -420,24 +450,27 @@
     "title": "Insure Landing Page",
     "description": "A demo landing page for a fictitious insurance company.",
     "url": "https://jonrutter-insure-landing-page.netlify.app/",
-    "code": "https://github.com/rutterjt/front-end-projects/",
+    "code": "https://github.com/rutterjt-archive/front-end-projects",
     "type": "website",
     "featured": false,
     "skills": [
       {
         "label": "HTML",
         "icon": "html",
-        "color": "#E34F26"
+        "color": "#E34F26",
+        "href": "https://developer.mozilla.org/en-US/docs/Glossary/HTML5"
       },
       {
         "label": "JavaScript",
         "icon": "javascript",
-        "color": "#F7DF1E"
+        "color": "#F7DF1E",
+        "href": "https://developer.mozilla.org/en-US/docs/Glossary/JavaScript"
       },
       {
         "label": "Sass",
         "icon": "sass",
-        "color": "#CC6699"
+        "color": "#CC6699",
+        "href": "https://sass-lang.com/"
       }
     ],
     "tools": [
@@ -477,22 +510,26 @@
       {
         "label": "Gatsby",
         "icon": "gatsby",
-        "color": "#663399"
+        "color": "#663399",
+        "href": "https://www.gatsbyjs.com/"
       },
       {
         "label": "JavaScript",
         "icon": "javascript",
-        "color": "#F7DF1E"
+        "color": "#F7DF1E",
+        "href": "https://developer.mozilla.org/en-US/docs/Glossary/JavaScript"
       },
       {
         "label": "React",
         "icon": "react",
-        "color": "#61DAFB"
+        "color": "#61DAFB",
+        "href": "https://reactjs.org/"
       },
       {
         "label": "Tailwind CSS",
         "icon": "tailwind",
-        "color": "#38B2AC"
+        "color": "#38B2AC",
+        "href": "https://tailwindcss.com/"
       }
     ],
     "tools": [
@@ -537,17 +574,20 @@
       {
         "label": "CSS",
         "icon": "css",
-        "color": "#1572B6"
+        "color": "#1572B6",
+        "href": "https://developer.mozilla.org/en-US/docs/Glossary/CSS"
       },
       {
         "label": "JavaScript",
         "icon": "javascript",
-        "color": "#F7DF1E"
+        "color": "#F7DF1E",
+        "href": "https://developer.mozilla.org/en-US/docs/Glossary/JavaScript"
       },
       {
         "label": "React",
         "icon": "react",
-        "color": "#61DAFB"
+        "color": "#61DAFB",
+        "href": "https://reactjs.org/"
       }
     ],
     "tools": [
@@ -592,17 +632,20 @@
       {
         "label": "CSS",
         "icon": "css",
-        "color": "#1572B6"
+        "color": "#1572B6",
+        "href": "https://developer.mozilla.org/en-US/docs/Glossary/CSS"
       },
       {
         "label": "JavaScript",
         "icon": "javascript",
-        "color": "#F7DF1E"
+        "color": "#F7DF1E",
+        "href": "https://developer.mozilla.org/en-US/docs/Glossary/JavaScript"
       },
       {
         "label": "React",
         "icon": "react",
-        "color": "#61DAFB"
+        "color": "#61DAFB",
+        "href": "https://reactjs.org/"
       }
     ],
     "tools": [
@@ -647,17 +690,20 @@
       {
         "label": "CSS",
         "icon": "css",
-        "color": "#1572B6"
+        "color": "#1572B6",
+        "href": "https://developer.mozilla.org/en-US/docs/Glossary/CSS"
       },
       {
         "label": "JavaScript",
         "icon": "javascript",
-        "color": "#F7DF1E"
+        "color": "#F7DF1E",
+        "href": "https://developer.mozilla.org/en-US/docs/Glossary/JavaScript"
       },
       {
         "label": "HTML",
         "icon": "html",
-        "color": "#E34F26"
+        "color": "#E34F26",
+        "href": "https://developer.mozilla.org/en-US/docs/Glossary/HTML5"
       }
     ],
     "tools": [

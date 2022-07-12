@@ -26,6 +26,8 @@ import {
   SiStyledcomponents,
 } from 'react-icons/si';
 import { FiExternalLink } from 'react-icons/fi';
+import { BiSun, BiMoon } from 'react-icons/bi';
+import { CgMenu, CgClose } from 'react-icons/cg';
 
 /*
 Adding an icon to the component:
@@ -60,6 +62,10 @@ const icons = {
   materialui: SiMaterialui,
   external: FiExternalLink,
   styledcomponents: SiStyledcomponents,
+  moon: BiMoon,
+  sun: BiSun,
+  menu: CgMenu,
+  close: CgClose,
 };
 
 // types
@@ -77,5 +83,5 @@ interface Props extends IconProps {
  */
 export const Icon: React.FC<Props> = ({ name, ...rest }) => {
   const Icon = icons[name];
-  return <Icon role="none" aria-hidden {...rest} />;
+  return <Icon role="presentation" aria-hidden {...rest} />;
 };

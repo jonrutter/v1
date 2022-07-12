@@ -1,4 +1,4 @@
-name: Tests
+name: CI
 
 on:
   push:
@@ -9,8 +9,8 @@ on:
 jobs:
   # add: lighthouse(?), a11y
 
-  # runs all jest tests
-  test:
+  # lints code
+  Lint:
     strategy:
       matrix:
         node-version: [16.x]
@@ -19,11 +19,11 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install dependencies
         run: npm ci
-      - name: Run tests
-        run: npm run test:coverage
+      - name: Run linting
+        run: npm run lint
 
   # checks that there are no type errors
-  typecheck:
+  Typecheck:
     strategy:
       matrix:
         node-version: [16.x]
@@ -35,8 +35,8 @@ jobs:
       - name: Check types
         run: npm run typecheck
 
-  # attempts to build the site
-  build:
+  # runs all jest tests
+  Tests:
     strategy:
       matrix:
         node-version: [16.x]
@@ -45,5 +45,5 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install dependencies
         run: npm ci
-      - name: Build site
-        run: npm run build
+      - name: Run tests
+        run: npm run test:coverage

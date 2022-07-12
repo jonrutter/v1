@@ -1,5 +1,4 @@
 import type { GatsbyNode } from 'gatsby';
-('gatsby-source-filesystem');
 import path from 'path';
 
 // types

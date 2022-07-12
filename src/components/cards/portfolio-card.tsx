@@ -3,7 +3,8 @@ import clsx from 'clsx';
 import { GatsbyImage } from 'gatsby-plugin-image';
 
 // components
-import { Icon, IconButton } from '@/components';
+import { Icon, IconButton, StyledLink } from '@/components';
+import { Chip } from '../chips';
 
 // types
 import { SkillType, PortfolioItemType } from '@/types';
@@ -17,8 +18,10 @@ type PCardProps = {
 
 const Skill = ({ skill }: { skill: SkillType }) => (
   <div style={{ color: skill.color }} className="flex items-center">
-    {skill.icon && <Icon name={skill.icon} className="mr-1 dark:text-white" />}
-    <span className="text-slate-700 dark:text-slate-200">{skill.label}</span>
+    {skill.icon && <Icon name={skill.icon} className="mr-2 dark:text-white" />}
+    <span className="text-slate-700 dark:text-slate-200 leading-none">
+      {skill.label}
+    </span>
   </div>
 );
 
@@ -55,15 +58,16 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
             : 'col-start-3 col-end-13 md:col-start-4 md:col-end-13 lg:col-start-7'
         )}
       >
-        <h3 className="mb-3 lg:mb-4 font-heading font-bold text-2xl text-slate-900 dark:text-slate-50">
-          <a
+        <h3 className="mb-1 lg:mb-2 font-heading font-bold text-2xl text-slate-900 dark:text-slate-50">
+          <StyledLink
+            as="a"
             href={url}
             target="_blank"
             rel="noreferrer"
-            className="py-1 px-2 -ml-2 rounded-md hover:text-sea-600 dark:hover:text-sea-400 inline-block transition-all outline-none focus:ring-2 focus:ring-current"
+            className="inline-block pb-2"
           >
             {title}
-          </a>
+          </StyledLink>
         </h3>
         <p
           className="text-base mb-4"
@@ -73,7 +77,21 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
           <ul className="text-sm hidden md:flex flex-wrap mb-4 ml-0 -mt-4">
             {skills.map((skill, index) => (
               <li key={index} className="flex items-center ml-4 mt-4">
-                <Skill skill={skill} />
+                {skill.href ? (
+                  <Chip
+                    color={skill.color}
+                    as="a"
+                    href={skill.href || ''}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Skill skill={skill} />
+                  </Chip>
+                ) : (
+                  <Chip color={skill.color}>
+                    <Skill skill={skill} />
+                  </Chip>
+                )}
               </li>
             ))}
           </ul>
