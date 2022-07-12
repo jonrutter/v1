@@ -270,10 +270,10 @@ exports[`Layout matches the snapshot 1`] = `
           className="block lg:hidden"
         >
           <button
-            aria-label="Close navigation menu"
+            aria-label="Open navigation menu"
             className="relative flex items-center justify-center group outline-none w-12 h-12 text-2xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white focus:text-slate-900 dark:focus:text-white"
             onClick={[Function]}
-            title="Close navigation menu"
+            title="Open navigation menu"
           >
             <div
               aria-hidden={true}
