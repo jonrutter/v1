@@ -61,7 +61,7 @@ const shortcodes = {
 const BlogLink: React.FC<{ to: string }> = ({ to, children }) => (
   <Link
     to={to}
-    className="text-lg inline-block text-sea-900 dark:text-sea-400 underline hover:no-underline"
+    className="text-lg inline-block text-slate-600 dark:text-slate-300 no-underline hover:underline"
   >
     {children}
   </Link>
@@ -103,9 +103,9 @@ const BlogPostTemplate = ({
           <article className="max-w-xl md:max-w-screen-md mx-auto">
             <header className="mb-10 sm:mb-12 md:mb-16">
               <div className="mb-12 lg:mb-16">
-                <BlogLink to="/blog">← Back to posts</BlogLink>
+                <BlogLink to="/blog">← All posts</BlogLink>
               </div>
-              <h1 className="transition-all font-heading font-black text-4xl md:text-5xl lg:text-6xl text-slate-900 dark:text-white mb-3 md:mb-4">
+              <h1 className="transition-all font-heading font-black text-4xl md:text-5xl lg:text-6xl text-slate-900 dark:text-white mb-3 md:mb-4 lg:mb-6">
                 {node.frontmatter.title}
               </h1>
               <p className="text-base md:text-lg font-normal mt-0 mb-6 md:mb-8 block">
@@ -144,20 +144,27 @@ const BlogPostTemplate = ({
               <hr />
             </div>
             <footer className="prose prose-slate dark:prose-invert md:prose-lg mx-auto">
-              <div className="italic text-sm">
-                <p>
-                  Found a problem with this post? Feel free to{' '}
-                  <a
-                    href={editLink}
-                    className="inline-flex items-center text-sea-900 dark:text-sea-400 underline hover:no-underline"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    suggest an edit <Icon name="github" className="ml-1" />
-                  </a>
-                </p>
-                <hr />
+              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 sm:items-center flex-wrap">
+                <a
+                  href={`https://twitter.com/intent/tweet?url=https://www.jonrutter.io/blog/${node.slug}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Tweet this post
+                </a>
+                <span className="hidden sm:inline text-slate-600 dark:text-slate-300">
+                  •
+                </span>
+                <a
+                  href={editLink}
+                  className="inline-flex items-center"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Edit on GitHub <Icon name="github" className="ml-1" />
+                </a>
               </div>
+              <hr />
 
               <div className="flex flex-col space-y-8">
                 {previous && (
