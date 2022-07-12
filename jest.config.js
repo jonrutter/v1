@@ -23,4 +23,9 @@ module.exports = {
   testEnvironment: `jsdom`,
   setupFiles: [`<rootDir>/test/loadershim.js`],
   setupFilesAfterEnv: ['<rootDir>/test/setup-test-env.js'],
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    '<rootDir>/test/mock-contact-form/',
+    '<rootDir>/src/styles/useColorTheme.tsx',
+  ],
 };
