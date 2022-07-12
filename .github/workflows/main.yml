@@ -10,43 +10,43 @@ jobs:
   # add: lighthouse(?), a11y
 
   # lints code
-  Lint:
-    strategy:
-      matrix:
-        node-version: [16.x]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install dependencies
-        run: npm ci
-      - name: Run linting
-        run: npm run lint
+  # Lint:
+  #   strategy:
+  #     matrix:
+  #       node-version: [16.x]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Install dependencies
+  #       run: npm ci
+  #     - name: Run linting
+  #       run: npm run lint
 
-    # checks that there are no type errors
-  Typecheck:
-    strategy:
-      matrix:
-        node-version: [16.x]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install dependencies
-        run: npm ci
-      - name: Check types
-        run: npm run typecheck
+  # checks that there are no type errors
+  # Typecheck:
+  #   strategy:
+  #     matrix:
+  #       node-version: [16.x]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Install dependencies
+  #       run: npm ci
+  #     - name: Check types
+  #       run: npm run typecheck
 
   # runs all jest tests
-  Tests:
-    strategy:
-      matrix:
-        node-version: [16.x]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install dependencies
-        run: npm ci
-      - name: Run tests
-        run: npm run test:coverage
+  # Tests:
+  #   strategy:
+  #     matrix:
+  #       node-version: [16.x]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Install dependencies
+  #       run: npm ci
+  #     - name: Run tests
+  #       run: npm run test:coverage
 
   # attempts to build the site
   Lighthouse:
