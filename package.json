@@ -19,7 +19,8 @@
     "test:coverage": "npm test -- --coverage",
     "typecheck": "tsc --noEmit",
     "lint": "eslint --ignore-path .gitignore .",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "checks": "npm run lint && npm run typecheck && npm run test:coverage"
   },
   "dependencies": {
     "@fontsource/open-sans": "^4.5.8",
