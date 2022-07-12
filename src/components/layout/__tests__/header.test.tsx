@@ -43,6 +43,11 @@ describe('Header', () => {
     await waitFor(() => {
       expect(navDrawer).toHaveAttribute('aria-hidden', 'true');
     });
+  });
+  it('closes the nav drawer after pressing Escape', async () => {
+    render(Component);
+    let button = screen.getByLabelText(/(open|close) navigation menu/i);
+    let navDrawer = screen.getByTestId('nav-drawer');
 
     // pressing the Escape key should close the nav drawer when open
     // open the nav drawer again
