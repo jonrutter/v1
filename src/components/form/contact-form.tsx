@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { useForm } from 'react-hook-form';
 
 // components
@@ -27,9 +26,13 @@ const defaultValues: FormDataType = {
 export const ENDPOINT =
   'https://www.admin.jonrutter.io/wp-json/contact-form-7/v1/contact-forms/7/feedback';
 
-export const ContactForm: React.FC = () => {
+type Props = {
+  sent: boolean;
+  setSent: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const ContactForm: React.FC<Props> = ({ sent, setSent }) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [sent, setSent] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
 
   const tabIndex = loading || sent ? -1 : 0;
@@ -60,15 +63,18 @@ export const ContactForm: React.FC = () => {
           throw new Error('Form validation failed');
         setSent(true);
         setError('');
-        setLoading(false);
       })
       .catch((err) => {
         setError(
           'Sorry! There was an error sending your message. Please try again.'
         );
+      })
+      .finally(() => {
         setLoading(false);
       });
   };
+
+  if (sent) return null;
 
   return (
     <form
@@ -76,6 +82,7 @@ export const ContactForm: React.FC = () => {
       noValidate
       name="contact"
       className="w-full mx-auto relative text-left text-lg text-slate-900 dark:text-slate-50"
+      data-testid="contact-form"
     >
       <div className="w-full grid grid-cols-1 gap-y-8 gap-x-4 mb-8 sm:grid-cols-2">
         <div className="col-span-1">
@@ -120,19 +127,8 @@ export const ContactForm: React.FC = () => {
           />
         </div>
       </div>
-      {/* form error message */}
-      {error && (
-        <div>
-          <h2 className="text-2xl text-center mb-2">Oops!</h2>
-          <p className="mb-4">
-            There was an error, and your message wasn't sent. Sorry about that!
-            Please try again.
-          </p>
-        </div>
-      )}
-      {/* submit button */}
       <div className="flex justify-center items-center">
-        {loading || sent ? (
+        {loading ? (
           <Spinner />
         ) : (
           <PrimaryButton as="button" type="submit" tabIndex={tabIndex}>
@@ -140,6 +136,16 @@ export const ContactForm: React.FC = () => {
           </PrimaryButton>
         )}
       </div>
+      {/* form error message */}
+      {error && (
+        <div className="mt-8">
+          <h2 className="text-2xl text-center mb-2">Oops!</h2>
+          <p className="mb-4">
+            There was an error, and your message wasn't sent. Sorry about that!
+            Please try again.
+          </p>
+        </div>
+      )}
     </form>
   );
 };

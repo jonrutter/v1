@@ -11,12 +11,14 @@ const testData = {
   'your-message': 'Test Message',
 };
 
+const Component = <ContactForm sent={false} setSent={() => null} />;
+
 describe('Contact Form', () => {
   it('renders correctly', () => {
-    render(<ContactForm />);
+    render(Component);
   });
   it('produces error messages correctly', async () => {
-    render(<ContactForm />);
+    render(Component);
 
     // select fields
     const submitButton = screen.getByRole('button');
@@ -51,7 +53,7 @@ describe('Contact Form', () => {
     });
   });
   it('correctly submits data', async () => {
-    render(<ContactForm />);
+    render(Component);
 
     // select fields
     const submitButton = screen.getByRole('button');
@@ -72,5 +74,10 @@ describe('Contact Form', () => {
       let errorMessage = screen.queryByText(/there was an error/i);
       expect(errorMessage).not.toBeInTheDocument();
     });
+  });
+  it('does not render if the form was submitted', () => {
+    render(<ContactForm sent={true} setSent={() => null} />);
+    expect(screen.queryByRole('form')).not.toBeInTheDocument();
+    expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
 });
