@@ -1,4 +1,4 @@
-name: Tests
+name: CI
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
   # add: lighthouse(?), a11y
 
   # lints code
-  lint:
+  Lint:
     strategy:
       matrix:
         node-version: [16.x]
@@ -22,21 +22,8 @@ jobs:
       - name: Run linting
         run: npm run lint
 
-  # runs all jest tests
-  test:
-    strategy:
-      matrix:
-        node-version: [16.x]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install dependencies
-        run: npm ci
-      - name: Run tests
-        run: npm run test:coverage
-
-  # checks that there are no type errors
-  typecheck:
+    # checks that there are no type errors
+  Typecheck:
     strategy:
       matrix:
         node-version: [16.x]
@@ -48,8 +35,21 @@ jobs:
       - name: Check types
         run: npm run typecheck
 
+  # runs all jest tests
+  Tests:
+    strategy:
+      matrix:
+        node-version: [16.x]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm run test:coverage
+
   # attempts to build the site
-  build:
+  Lighthouse:
     strategy:
       matrix:
         node-version: [16.x]
@@ -60,3 +60,7 @@ jobs:
         run: npm ci
       - name: Build site
         run: npm run build
+      - name: run Lighthouse CI
+        run: |
+          npm install -g @lhci/cli@0.8.x
+          lhci autorun
