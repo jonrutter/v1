@@ -47,7 +47,7 @@ const IndexPage = ({
               />
             ))}
             <div className="text-center">
-              <PrimaryButton to="/portfolio">See more</PrimaryButton>
+              <PrimaryButton to="/portfolio">Full portfolio</PrimaryButton>
             </div>
           </div>
         </Section>
@@ -72,7 +72,7 @@ const IndexPage = ({
             ))}
           </div>
           <div className="text-center">
-            <PrimaryButton to="/blog">See more</PrimaryButton>
+            <PrimaryButton to="/blog">More posts</PrimaryButton>
           </div>
         </Section>
         <CTABox />
