@@ -84,11 +84,15 @@ const BlogPage = ({ data: { allMdx } }: PageProps<DataProps>) => {
             ))}
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-            {posts.map((item, index) => (
-              <div key={index}>
-                <BlogCard item={item} />
-              </div>
-            ))}
+            {posts.length > 0 ? (
+              posts.map((item, index) => (
+                <div key={index}>
+                  <BlogCard item={item} />
+                </div>
+              ))
+            ) : (
+              <p className="text-xl">Sorry, no posts were found.</p>
+            )}
           </div>
         </Section>
         <CTABox />
