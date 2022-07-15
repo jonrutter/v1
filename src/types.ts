@@ -26,7 +26,7 @@ export type BlogPostPreview = {
         gatsbyImageData: IGatsbyImageData;
       };
     };
-    topics: string[] | null;
+    topics?: string[] | null;
   };
   slug: string;
   timeToRead: number;
