@@ -9,8 +9,7 @@ My personal portfolio website.
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#description">Description</a></li>
-    <li><a href="#live-demo">Live Demo</a></li>
+    <li><a href="#live-site">Live Site</a></li>
     <li><a href="#built-with">Built With</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#author">Author</a></li>
