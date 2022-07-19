@@ -21,20 +21,21 @@ type Topics = {
 const BlogPage = ({ data: { allMdx } }: PageProps<DataProps>) => {
   const [posts, setPosts] = useState<BlogPostPreview[]>(allMdx.nodes);
   const [active, setActive] = useState<string | null>(null);
-  const topics = useMemo<Topics>(() => {
-    let result: Topics = {};
+  const topics = useMemo<string[]>(() => {
+    console.log('Filtering topics');
+    let topicObj: Topics = {};
     allMdx.nodes.forEach((post) => {
       if (Array.isArray(post.frontmatter.topics)) {
         for (let topic of post.frontmatter.topics) {
-          if (topic in result) {
-            result[topic] += 1;
+          if (topic in topicObj) {
+            topicObj[topic] += 1;
           } else {
-            result[topic] = 1;
+            topicObj[topic] = 1;
           }
         }
       }
     });
-    return result;
+    return Object.keys(topicObj).sort((a, b) => topicObj[b] - topicObj[a]);
   }, [allMdx.nodes]);
 
   const handleTopicClick = (topic: string) => {
@@ -65,8 +66,8 @@ const BlogPage = ({ data: { allMdx } }: PageProps<DataProps>) => {
             Filter by topic
           </span>
           <div className="flex flex-wrap -ml-4 -mt-4 mb-8 md:mb-12">
-            {Object.keys(topics).map((topic) => (
-              <div className="ml-4 mt-4 text-base md:text-lg">
+            {topics.map((topic) => (
+              <div className="ml-4 mt-4 text-base md:text-lg" key={topic}>
                 <button
                   aria-label={`Filter posts by topic ${topic}`}
                   aria-pressed={active === topic}
