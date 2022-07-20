@@ -115,7 +115,7 @@ export const AnimatedIconButton = <T extends React.ElementType = 'button'>({
   return (
     <Tag
       {...rest}
-      className="relative flex items-center justify-center group outline-none w-12 h-12 text-2xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white focus:text-slate-900 dark:focus:text-white"
+      className="relative flex items-center justify-center group outline-none w-12 h-12 text-2xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white focus:text-slate-900 dark:focus:text-white z-0"
     >
       <div
         aria-hidden
