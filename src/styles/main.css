@@ -32,15 +32,11 @@
     display: inline-block;
   }
 
-  .prose a {
+  .prose :where(a):not(:where([class~='not-prose'])) {
     color: inherit;
     font-weight: bold;
     text-decoration: none;
-    @apply text-slate-900 dark:text-white;
-  }
-
-  .prose a:hover {
-    text-decoration: underline;
+    @apply text-slate-900 dark:text-white hover:underline;
   }
 
   .prose .note p {
@@ -91,6 +87,24 @@
   }
 }
 
+@keyframes animate-arrow {
+  0% {
+    transform: translateX(0%);
+  }
+  25% {
+    transform: translateX(10%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  75% {
+    transform: translateX(-10%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
 @layer components {
   .shine {
     background-image: linear-gradient(
@@ -134,5 +148,8 @@
   }
   .animate-rotate-inner {
     animation: rotate-inner 1.5s ease-in-out infinite;
+  }
+  .animate-arrow {
+    animation: animate-arrow 0.9s linear infinite;
   }
 }
