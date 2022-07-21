@@ -72,7 +72,7 @@ const BlogPage = ({ data: { allMdx } }: PageProps<DataProps>) => {
           <span className="block mb-4 font-heading font-black text-xl">
             Filter by topic
           </span>
-          <div className="flex flex-wrap -ml-4 -mt-4 mb-8 md:mb-12">
+          <div className="flex flex-wrap -ml-4 -mt-4 mb-12 md:mb-16">
             {topics.map((topic) => (
               <div className="ml-4 mt-4 text-base md:text-lg" key={topic}>
                 <PushButton
