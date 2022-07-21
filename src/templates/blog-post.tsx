@@ -105,7 +105,7 @@ const BlogPostTemplate = ({
               <div className="mb-12 lg:mb-16">
                 <BlogLink to="/blog">← All posts</BlogLink>
               </div>
-              <h1 className="transition-all font-heading font-black text-4xl md:text-5xl lg:text-6xl text-slate-900 dark:text-white mb-3 md:mb-4 lg:mb-6">
+              <h1 className="transition-all font-heading font-black text-4xl md:text-5xl lg:text-6xl text-slate-900 dark:text-white mb-3 md:mb-4 lg:mb-6 md:leading-[1.1] lg:leading-[1.1]">
                 {node.frontmatter.title}
               </h1>
               <p className="text-base md:text-lg font-normal mt-0 mb-6 md:mb-8 block">
