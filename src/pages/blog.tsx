@@ -2,11 +2,18 @@ import React, { useMemo, useState } from 'react';
 import { graphql, PageProps } from 'gatsby';
 
 // components
-import { Layout, Seo, CTABox, Hero, BlogCard, Section } from '@/components';
+import {
+  Layout,
+  Seo,
+  CTABox,
+  Hero,
+  BlogCard,
+  Section,
+  PushButton,
+} from '@/components';
 
 // types
 import type { BlogPostPreview } from '@/types';
-import clsx from 'clsx';
 
 type DataProps = {
   allMdx: {
@@ -68,19 +75,13 @@ const BlogPage = ({ data: { allMdx } }: PageProps<DataProps>) => {
           <div className="flex flex-wrap -ml-4 -mt-4 mb-8 md:mb-12">
             {topics.map((topic) => (
               <div className="ml-4 mt-4 text-base md:text-lg" key={topic}>
-                <button
+                <PushButton
                   aria-label={`Filter posts by topic ${topic}`}
-                  aria-pressed={active === topic}
                   onClick={() => handleTopicClick(topic)}
-                  className={clsx(
-                    'rounded-lg transition-all border-2 py-1 px-2 md:py-2 md:px-4 shadow-lg outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus:ring-2 focus:ring-offset-2',
-                    active === topic
-                      ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white hover:bg-slate-700 dark:hover:bg-slate-200'
-                      : 'border-slate-600 dark:border-slate-200 text-slate-600 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 bg-white dark:bg-slate-900'
-                  )}
+                  pressed={active === topic}
                 >
                   {topic}
-                </button>
+                </PushButton>
               </div>
             ))}
           </div>
