@@ -166,8 +166,7 @@ exports[`Portfolio Card renders the component correctly 1`] = `
           className="inline-block border-[1px] rounded-full py-1 px-3 transition-all relative group z-0 overflow-hidden"
           style={
             Object {
-              "--color": "#61DAFB",
-              "borderColor": "var(--color)",
+              "borderColor": "#61DAFB",
             }
           }
         >
@@ -224,8 +223,7 @@ exports[`Portfolio Card renders the component correctly 1`] = `
           className="inline-block border-[1px] rounded-full py-1 px-3 transition-all relative group z-0 overflow-hidden"
           style={
             Object {
-              "--color": "#3178C6",
-              "borderColor": "var(--color)",
+              "borderColor": "#3178C6",
             }
           }
         >
@@ -282,8 +280,7 @@ exports[`Portfolio Card renders the component correctly 1`] = `
           className="inline-block border-[1px] rounded-full py-1 px-3 transition-all relative group z-0 overflow-hidden"
           style={
             Object {
-              "--color": "#0081CB",
-              "borderColor": "var(--color)",
+              "borderColor": "#0081CB",
             }
           }
         >
@@ -599,8 +596,7 @@ exports[`Portfolio Card renders the reversed component correctly 1`] = `
           className="inline-block border-[1px] rounded-full py-1 px-3 transition-all relative group z-0 overflow-hidden"
           style={
             Object {
-              "--color": "#61DAFB",
-              "borderColor": "var(--color)",
+              "borderColor": "#61DAFB",
             }
           }
         >
@@ -657,8 +653,7 @@ exports[`Portfolio Card renders the reversed component correctly 1`] = `
           className="inline-block border-[1px] rounded-full py-1 px-3 transition-all relative group z-0 overflow-hidden"
           style={
             Object {
-              "--color": "#3178C6",
-              "borderColor": "var(--color)",
+              "borderColor": "#3178C6",
             }
           }
         >
@@ -715,8 +710,7 @@ exports[`Portfolio Card renders the reversed component correctly 1`] = `
           className="inline-block border-[1px] rounded-full py-1 px-3 transition-all relative group z-0 overflow-hidden"
           style={
             Object {
-              "--color": "#0081CB",
-              "borderColor": "var(--color)",
+              "borderColor": "#0081CB",
             }
           }
         >
