@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import FocusLock from 'react-focus-lock';
 
 // components
-import { AnimatedIconButton, Icon, IconButton } from '@/components';
+import { RingButton, Icon, IconButton } from '@/components';
 import { StyledLink } from '../styled-link';
 import { Logo } from '../logo';
 import { ThemeToggle } from '../theme-toggle';
@@ -61,13 +61,13 @@ type MenuButtonProps = {
 };
 
 const MenuButton: FC<MenuButtonProps> = ({ open, onClick }) => (
-  <AnimatedIconButton
+  <RingButton
     aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
     title={open ? 'Close navigation menu' : 'Open navigation menu'}
     onClick={onClick}
   >
     {open ? <Icon name="close" /> : <Icon name="menu" />}
-  </AnimatedIconButton>
+  </RingButton>
 );
 
 // ~~~ Nav Menu ~~~

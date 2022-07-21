@@ -1,12 +1,17 @@
-import React, { ComponentPropsWithoutRef } from 'react';
+import React from 'react';
 import { Link } from 'gatsby';
 import clsx from 'clsx';
 
-interface Props<T extends React.ElementType> {
-  as?: T | typeof Link;
-  color?: string;
-}
+// types
+import type { PolymorphicProps } from '@/utils/polymorphic';
 
+type Props = {
+  color?: string;
+};
+
+/**
+ * returns whether the passed color is a valid color hex code
+ */
 const isValidColor = (color: any) => {
   if (typeof color !== 'string') return false;
   return /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(color);
@@ -20,10 +25,10 @@ export const Chip = <T extends React.ElementType = 'div'>({
   color,
   children,
   ...rest
-}: Props<T> & Omit<ComponentPropsWithoutRef<T>, keyof Props<T>>) => {
+}: PolymorphicProps<T, Props>) => {
   // generate tag
   const Tag = as || 'div';
-  const interactive = as === 'button' || as === 'a' || as === Link;
+  const interactive = as === 'button' || as === 'a' || as === typeof Link; // whether the chip is clickable
   const displayColor = isValidColor(color) ? color : '#0f172a';
   return (
     <Tag
@@ -32,7 +37,7 @@ export const Chip = <T extends React.ElementType = 'div'>({
         interactive &&
           'outline-none focus:ring-2 focus:ring-slate-900 dark:focus:ring-slate-50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-900'
       )}
-      style={{ '--color': displayColor, borderColor: 'var(--color)' }}
+      style={{ borderColor: displayColor }}
       {...rest}
     >
       <div

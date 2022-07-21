@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 // components
 import { Icon } from './icon';
-import { AnimatedIconButton } from './buttons';
+import { RingButton } from './buttons';
 
 // hooks
 import { useColorThemeContext, ColorTheme } from '@/styles/useColorTheme';
@@ -68,7 +68,7 @@ export const ThemeToggle = () => {
   };
 
   return (
-    <AnimatedIconButton
+    <RingButton
       aria-label="Toggle dark mode"
       title="Toggle dark mode"
       aria-pressed={colorTheme === 'dark'}
@@ -101,6 +101,6 @@ export const ThemeToggle = () => {
           icon={'moon'}
         />
       </div>
-    </AnimatedIconButton>
+    </RingButton>
   );
 };
