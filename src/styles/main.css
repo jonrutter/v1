@@ -39,6 +39,15 @@
     @apply text-slate-900 dark:text-white hover:underline;
   }
 
+  .prose :where(code):not(:where([class~='not-prose'])) {
+    @apply !text-slate-900 !bg-slate-600/10 dark:!text-white dark:!bg-slate-50/20 rounded-md px-1 leading-normal md:leading-snug !inline-block;
+  }
+
+  .prose :where(code):not(:where([class~='not-prose']))::before,
+  .prose :where(code):not(:where([class~='not-prose']))::after {
+    content: '' !important;
+  }
+
   .prose .note p {
     margin: 0;
   }

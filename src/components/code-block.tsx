@@ -28,7 +28,7 @@ export const CodeBlock: React.FC<Props> = ({ children }) => {
           data-language={language}
           data-testid="code-block"
         >
-          <code>
+          <code className="not-prose">
             {tokens.map((line, i) => (
               <div
                 key={i}
