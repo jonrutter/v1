@@ -12,9 +12,6 @@ import '@fontsource/poppins/500.css';
 import '@fontsource/poppins/700.css';
 import '@fontsource/poppins/900.css';
 
-// reach tabs
-import '@reach/tabs/styles.css';
-
 // tailwind
 import '@/styles/main.css';
 

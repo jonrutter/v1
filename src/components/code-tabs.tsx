@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 
 // reach ui components
-import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@reach/tabs';
+import { Tab } from '@headlessui/react';
 
 // components
 import { Icon } from '@/components';
@@ -14,8 +14,6 @@ import { SkillType } from '@/types';
 /* ~~~ Code Tab ~~~ */
 
 type TabProps = {
-  index: number;
-  active: number;
   children: string;
 };
 
@@ -35,7 +33,7 @@ const Skill = ({ skill }: { skill: SkillType }) =>
 /**
  * Internal component to avoid reusing styling between tabs
  */
-const CodeTab: React.FC<TabProps> = ({ index, active, children }) => {
+const CodeTab: React.FC<TabProps> = ({ children }) => {
   let content = null;
   if (
     children.toLowerCase() === 'jsx' ||
@@ -62,10 +60,12 @@ const CodeTab: React.FC<TabProps> = ({ index, active, children }) => {
   }
   return (
     <Tab
-      className={clsx(
-        'py-2 text-base block border-b-2 rounded-sm outline-none hover:bg-slate-200/80 focus:bg-slate-200/80 dark:hover:bg-slate-700/80 dark:focus:bg-slate-700/80',
-        index === active ? 'border-b-current' : 'border-b-transparent'
-      )}
+      className={({ selected }) =>
+        clsx(
+          'p-2 text-base block border-b-2 rounded-sm outline-none hover:bg-slate-200/80 focus:bg-slate-200/80 dark:hover:bg-slate-700/80 dark:focus:bg-slate-700/80',
+          selected ? 'border-b-current' : 'border-b-transparent'
+        )
+      }
     >
       {content}
     </Tab>
@@ -88,28 +88,23 @@ type Props = {
  * @param props.two - The name of the second tab
  *
  */
-export const CodeTabs: React.FC<Props> = ({ one, two, children }) => {
-  const [active, setActive] = useState<number>(0);
-  return (
-    <Tabs className="code-tabs mt-8" onChange={(index) => setActive(index)}>
-      <TabList className="bg-transparent flex space-x-4 pb-2">
-        <CodeTab index={0} active={active}>
-          {one}
-        </CodeTab>
-        <CodeTab index={1} active={active}>
-          {two}
-        </CodeTab>
-      </TabList>
-      <TabPanels>{children}</TabPanels>
-    </Tabs>
-  );
-};
+export const CodeTabs: React.FC<Props> = ({ one, two, children }) => (
+  <div className="code-tabs mt-8">
+    <Tab.Group>
+      <Tab.List className="bg-transparent flex space-x-4 pb-2">
+        <CodeTab>{one}</CodeTab>
+        <CodeTab>{two}</CodeTab>
+      </Tab.List>
+      <Tab.Panels>{children}</Tab.Panels>
+    </Tab.Group>
+  </div>
+);
 
 /**
  * Renders the a tabpanel within `<CodeTabs>`.
  *
  * Should directly wrap a `<CodeBlock>` component.
  */
-export const CodePanel: React.FC = ({ children }) => {
-  return <TabPanel>{children}</TabPanel>;
-};
+export const CodePanel: React.FC = ({ children }) => (
+  <Tab.Panel>{children}</Tab.Panel>
+);

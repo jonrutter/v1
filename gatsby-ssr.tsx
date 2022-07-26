@@ -15,9 +15,6 @@ import { PageWrap } from '@/components/app';
 // light/dark theme
 import { InjectInitialTheme } from '@/styles/useColorTheme';
 
-// reach tabs styling
-import '@reach/tabs/styles.css';
-
 // tailwind
 import '@/styles/main.css';
 
