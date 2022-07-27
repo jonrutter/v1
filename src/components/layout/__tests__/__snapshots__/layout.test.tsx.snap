@@ -10,10 +10,10 @@ exports[`Layout matches the snapshot 1`] = `
   >
     Skip to content
   </a>
-  <header
+  <nav
     className="py-8 lg:py-12 px-6 md:px-12 w-full z-40 transition-all text-slate-900 dark:text-slate-50 motion-reduce:!translate-y-0 bg-transparent"
   >
-    <nav
+    <div
       className="max-w-site-full mx-auto flex justify-between items-center"
     >
       <div
@@ -67,7 +67,6 @@ exports[`Layout matches the snapshot 1`] = `
           <a
             className="overflow-hidden relative transition-all before:block before:absolute before:bottom-0 before:left-1/4 before:h-[3px] before:w-1/2 before:rounded-sm before:transition-all before:bg-current before:scale-x-0 hover:before:scale-x-100 focus:before:scale-x-100 outline-none pb-1"
             href="/"
-            tabIndex={0}
           >
             Home
           </a>
@@ -76,7 +75,6 @@ exports[`Layout matches the snapshot 1`] = `
           <a
             className="overflow-hidden relative transition-all before:block before:absolute before:bottom-0 before:left-1/4 before:h-[3px] before:w-1/2 before:rounded-sm before:transition-all before:bg-current before:scale-x-0 hover:before:scale-x-100 focus:before:scale-x-100 outline-none pb-1"
             href="/portfolio"
-            tabIndex={0}
           >
             Portfolio
           </a>
@@ -85,7 +83,6 @@ exports[`Layout matches the snapshot 1`] = `
           <a
             className="overflow-hidden relative transition-all before:block before:absolute before:bottom-0 before:left-1/4 before:h-[3px] before:w-1/2 before:rounded-sm before:transition-all before:bg-current before:scale-x-0 hover:before:scale-x-100 focus:before:scale-x-100 outline-none pb-1"
             href="/blog"
-            tabIndex={0}
           >
             Blog
           </a>
@@ -94,7 +91,6 @@ exports[`Layout matches the snapshot 1`] = `
           <a
             className="overflow-hidden relative transition-all before:block before:absolute before:bottom-0 before:left-1/4 before:h-[3px] before:w-1/2 before:rounded-sm before:transition-all before:bg-current before:scale-x-0 hover:before:scale-x-100 focus:before:scale-x-100 outline-none pb-1"
             href="/contact"
-            tabIndex={0}
           >
             Contact
           </a>
@@ -311,22 +307,8 @@ exports[`Layout matches the snapshot 1`] = `
           </button>
         </div>
       </div>
-      <div
-        aria-hidden={true}
-        className="fixed top-0 left-0 bottom-0 right-0 z-30 transition-all invisible"
-        data-testid="nav-drawer"
-        id="nav-drawer"
-      >
-        <div
-          className="fixed top-0 left-0 right-0 bottom-0 -z-10 min-h-screen cursor-pointer backdrop-blur"
-          onClick={[Function]}
-        />
-        <div
-          className="fixed top-0 right-0 w-11/12 max-w-sm overflow-y-auto transition-all font-heading h-full bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-50 text-xl shadow-xl border-l-[1px] border-l-slate-800/20 dark:border-l-slate-50/20 translate-x-full"
-        />
-      </div>
-    </nav>
-  </header>
+    </div>
+  </nav>
   <div
     id="main"
   >

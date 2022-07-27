@@ -2,11 +2,11 @@ import React from 'react';
 import { render, screen, waitFor } from 'test-utils';
 import userEvent from '@testing-library/user-event';
 
-import { Header } from '../header';
+import { Nav } from '../nav';
 
 import { menu } from '@/config';
 
-const Component = <Header />;
+const Component = <Nav />;
 
 describe('Header', () => {
   it('renders the component correctly', () => {
@@ -26,40 +26,22 @@ describe('Header', () => {
   it('supports toggling the nav drawer', async () => {
     render(Component);
     let button = screen.getByLabelText(/(open|close) navigation menu/i);
-    let navDrawer = screen.getByTestId('nav-drawer');
 
     // nav drawer and contents should be hidden initially
-    expect(navDrawer).toHaveAttribute('aria-hidden', 'true');
+    expect(screen.queryByTestId('nav-drawer')).not.toBeInTheDocument();
 
     await userEvent.click(button);
 
     await waitFor(() => {
       // after clicking toggle button, nav drawer and contents should be visible and focusable
-      expect(navDrawer).toHaveAttribute('aria-hidden', 'false');
+      expect(screen.getByTestId('nav-drawer')).toBeInTheDocument();
     });
 
-    // clicking the toggle button should close the nav drawer again
-    await userEvent.click(button);
-    await waitFor(() => {
-      expect(navDrawer).toHaveAttribute('aria-hidden', 'true');
-    });
-  });
-  it('closes the nav drawer after pressing Escape', async () => {
-    render(Component);
-    let button = screen.getByLabelText(/(open|close) navigation menu/i);
-    let navDrawer = screen.getByTestId('nav-drawer');
-
-    // pressing the Escape key should close the nav drawer when open
-    // open the nav drawer again
-    await userEvent.click(button);
-    await waitFor(() => {
-      expect(navDrawer).toHaveAttribute('aria-hidden', 'false');
-    });
-    // press Escape key
+    // pressing the escape key should close the drawer
     await userEvent.keyboard('{Escape}');
     // nav drawer should close
     await waitFor(() => {
-      expect(navDrawer).toHaveAttribute('aria-hidden', 'true');
+      expect(screen.queryByTestId('nav-drawer')).not.toBeInTheDocument();
     });
   });
 });

@@ -2,7 +2,7 @@ import React from 'react';
 
 // components
 import { Footer } from './footer';
-import { Header } from './header';
+import { Nav } from './nav';
 import { SkipToContent } from './skip-to-main';
 
 type Props = {
@@ -17,7 +17,7 @@ type Props = {
 export const Layout: React.FC<Props> = ({ withCTA, children }) => (
   <div className="overflow-x-hidden max-w-[100vw] bg-white dark:bg-slate-900 transition-all text-slate-700 dark:text-slate-200">
     <SkipToContent />
-    <Header />
+    <Nav />
     <div id="main">
       <main>{children}</main>
       <Footer short={!withCTA} />
@@ -26,7 +26,7 @@ export const Layout: React.FC<Props> = ({ withCTA, children }) => (
 );
 
 export * from './footer';
-export * from './header';
+export * from './nav';
 export * from './hero';
 export * from './section';
 export * from './skip-to-main';
