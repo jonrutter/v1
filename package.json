@@ -15,7 +15,7 @@
     "clean": "gatsby clean",
     "test": "jest",
     "test:dev": "npm test -- --coverage --watch",
-    "test:watch": "npm test -- --watchAll",
+    "test:all": "npm test -- --coverage --watchAll",
     "test:coverage": "npm test -- --coverage",
     "test:ci": "CI=true npm run test -- --coverage",
     "typecheck": "tsc --noEmit",
