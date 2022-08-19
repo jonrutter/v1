@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen } from 'test-utils';
-import renderer from 'react-test-renderer';
 
 import { Hero } from '../hero';
 
@@ -15,13 +14,5 @@ describe('Hero component', () => {
     render(<Component />);
     screen.getByText('Test Title');
     screen.getByText('This is a test Hero component.');
-  });
-  it('matches the snapshot', () => {
-    const tree = renderer.create(<Component />);
-    expect(tree).toMatchSnapshot();
-  });
-  it('matches the snapshot when short', () => {
-    const tree = renderer.create(<Component short />);
-    expect(tree).toMatchSnapshot();
   });
 });

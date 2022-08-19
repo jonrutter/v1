@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen } from 'test-utils';
-import renderer from 'react-test-renderer';
 
 import { PortfolioCard } from '../portfolio-card';
 import { PortfolioItemType } from '@/types';
@@ -66,16 +65,6 @@ const item: PortfolioItemType = {
 const Component = <PortfolioCard item={item} />;
 
 describe('Portfolio Card', () => {
-  it('renders the component correctly', () => {
-    const tree = renderer.create(<PortfolioCard item={item} />).toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-  it('renders the reversed component correctly', () => {
-    const tree = renderer
-      .create(<PortfolioCard item={item} reversed />)
-      .toJSON();
-    expect(tree).toMatchSnapshot();
-  });
   it('renders the correct content', () => {
     render(Component);
 
