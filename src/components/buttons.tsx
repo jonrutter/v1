@@ -31,7 +31,7 @@ export const PrimaryButton = <T extends React.ElementType = typeof Link>({
   return (
     <Tag
       className={clsx(
-        'group leading-none py-4 px-8 text-heading font-bold relative inline-block rounded-lg overflow-hidden z-10 transition-all shadow-lg text-lg font-heading bg-slate-900 text-white dark:bg-white dark:text-slate-900 outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus:ring-2 focus:ring-offset-2 hover:bg-slate-600 dark:hover:bg-slate-300',
+        'group leading-none py-4 px-8 text-heading font-bold relative inline-block rounded-xl overflow-hidden z-10 transition-all shadow-lg text-lg font-heading bg-slate-900 text-white dark:bg-white dark:text-slate-900 outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus:ring-2 focus:ring-offset-2 hover:bg-slate-600 dark:hover:bg-slate-300',
         className
       )}
       {...rest}
@@ -58,7 +58,7 @@ export const SecondaryButton = <T extends React.ElementType = typeof Link>({
   return (
     <Tag
       className={clsx(
-        'group leading-none py-[calc(1rem-2px)] px-[calc(2rem-2px)] text-heading font-bold relative inline-block rounded-lg overflow-hidden z-10 transition-all shadow-lg text-lg font-heading bg-white text-slate-900  dark:focus:text-white focus:outline-none dark:bg-slate-900 dark:text-white dark:hover:text-white border-2 border-slate-900 dark:border-white outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus:ring-2 focus:ring-offset-2 hover:bg-slate-200 dark:hover:bg-slate-700',
+        'group leading-none py-[calc(1rem-2px)] px-[calc(2rem-2px)] text-heading font-bold relative inline-block rounded-xl overflow-hidden z-10 transition-all shadow-lg text-lg font-heading bg-white text-slate-900  dark:focus:text-white focus:outline-none dark:bg-slate-900 dark:text-white dark:hover:text-white border-2 border-slate-900 dark:border-white outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus:ring-2 focus:ring-offset-2 hover:bg-slate-200 dark:hover:bg-slate-700',
         className
       )}
       {...rest}
@@ -85,7 +85,7 @@ export const PushButton: React.FC<PushButtonProps> = ({
     aria-pressed={pressed}
     onClick={onClick}
     className={clsx(
-      'rounded-lg transition-all border-2 py-1 px-2 md:py-2 md:px-4 shadow-lg outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus:ring-2 focus:ring-offset-2 font-bold',
+      'rounded-xl transition-all border-2 py-1 px-2 md:py-2 md:px-4 shadow-lg outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus:ring-2 focus:ring-offset-2 font-bold',
       pressed
         ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white hover:bg-slate-700 dark:hover:bg-slate-200'
         : 'border-slate-600 dark:border-slate-200 text-slate-600 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 bg-white dark:bg-slate-900'
