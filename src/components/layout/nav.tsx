@@ -89,7 +89,7 @@ export const NavDialog: FC<NavDialogProps> = ({ open, onClose }) => {
           leaveTo="opacity-0"
         >
           <div
-            className="fixed top-0 left-0 right-0 bottom-0 bg-slate-900/80"
+            className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm"
             aria-hidden={true}
           />
         </Transition.Child>
@@ -107,7 +107,7 @@ export const NavDialog: FC<NavDialogProps> = ({ open, onClose }) => {
             id="nav-drawer"
             data-testid="nav-drawer"
           >
-            <Dialog.Panel className="fixed top-0 right-0 w-11/12 max-w-sm overflow-y-auto transition-all font-heading h-full bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-50 text-xl shadow-xl border-l-[1px] border-l-slate-800/20 dark:border-l-slate-50/20 translate-x-0">
+            <Dialog.Panel className="fixed top-0 right-0 w-10/12 max-w-sm overflow-y-auto transition-all font-heading h-full bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-50 text-xl shadow-xl border-l-[1px] border-l-slate-800/20 dark:border-l-slate-50/20 translate-x-0">
               <div className="py-8 px-8 md:px-12 flex justify-end">
                 <NavButton open={open} onClick={handleClose} />
               </div>
