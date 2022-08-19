@@ -36,6 +36,8 @@ const SocialLinks: FC = () => (
         <IconButton
           as="a"
           href={link.url}
+          target="_blank"
+          rel="noreferrer"
           fontSize={5}
           aria-label={link.name}
           className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-50 focus:text-slate-900 dark:focus:text-slate-50"
