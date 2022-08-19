@@ -29,20 +29,20 @@ import { customHook } from '@/hooks';
 
 ## Configuring root imports
 
-The first step to prettifying our file imports will be configuring our Gatsby project to support root imports, such as:
+The first step to simplifying our file imports will be configuring our Gatsby project to support importing files relative to the project root, like:
 
 ```javascript
 import { TestComponent } from 'src/components/test-component';
 ```
 
-There's a few things we'll need to do to achieve this:
+There's a couple things we'll need to do to achieve this:
 
 1. Configure webpack to understand absolute imports.
 2. Configure other technologies that need to know about how to correctly import files (e.g., TypeScript or Jest).
 
 ### Configuring Webpack to support root imports
 
-Configuring webpack can be complex, but fortunately there's a Gatsby plugin that'll take care of that for us: [gatsby-plugin-root-import](https://www.gatsbyjs.com/plugins/gatsby-plugin-root-import/). Let's install it:
+In general, configuring webpack can get fairly complex, but fortunately there's a Gatsby plugin that'll take care of that for us: [gatsby-plugin-root-import](https://www.gatsbyjs.com/plugins/gatsby-plugin-root-import/). Let's install it:
 
 ```bash
 npm install gatsby-plugin-root-import
@@ -56,7 +56,10 @@ Next, we'll need to add the plugin to our gatsby-config:
 ```javascript
 const config = {
   // ...
-  plugins: [`gatsby-plugin-root-import`],
+  plugins: [
+    // ... other plugins
+    `gatsby-plugin-root-import`,
+  ],
 };
 export default config;
 ```
@@ -69,7 +72,10 @@ import type { GatsbyConfig } from 'gatsby';
 
 const config: GatsbyConfig = {
   // ...
-  plugins: [`gatsby-plugin-root-import`],
+  plugins: [
+    // ... other plugins
+    `gatsby-plugin-root-import`,
+  ],
 };
 export default config;
 ```
@@ -77,7 +83,7 @@ export default config;
   </CodePanel>
 </CodeTabs>
 
-We'll add some additional configuration later, but by default the plugin supports directly importing files relative to the project's root. So now we can directly import files from the `src` folder, like:
+This plugin supports root imports out of the box, without any need for additional configuration. So now our new imports should be working:
 
 ```javascript
 import { CustomButton } from 'src/components/buttons/custom-button';
@@ -93,7 +99,7 @@ _**Note**: if you'd like to try configuring webpack yourself, you can do that th
 
 ### Adding TypeScript support for root imports
 
-If your project uses TypeScript, you'll need to add another step so that the TypeScript compiler can understand the absolute imports.
+If your project uses TypeScript, you'll need to add another step to make the TypeScript compiler understand absolute imports.
 
 In your `tsconfig.json` file, add the following:
 
@@ -106,11 +112,11 @@ In your `tsconfig.json` file, add the following:
 }
 ```
 
-This lets TypeScript know that whatever you set as the `baseUrl` (in this case, the project root) should be treated as the base directory when resolving non-relative file imports. So in our example, when TypeScript encounters `src/components`, it'll treat that as `./src/components` (relative to the project root).
+This lets TypeScript know that whatever you set as the `baseUrl` (in this case, the project root) should be treated as the base directory when resolving non-relative file imports. So in our example, when TypeScript encounters `src/components`, it'll understand that this means `./src/components`.
 
 ## Adding import aliases
 
-Your project should now support absolute file paths in imports. Great! But there are a few more tweaks we can do to make our imports even simpler.
+Your project should now support absolute file paths in import statements. Great! But there are a few more tweaks we can do to make our imports even simpler.
 
 First, we can use import aliases.
 
@@ -126,11 +132,11 @@ Let's add an import alias to turn that into:
 import { CustomButton } from '@/components/buttons/custom-button';
 ```
 
-Although that doesn't look like a big difference now, it's a starting point to make our imports much shorter.
+Although that doesn't look like a big difference now, it's a starting point to make our imports much shorter later.
 
 ### Update webpack config to support aliases
 
-Again, we'll need to let webpack know of our changes. Fortunately, `gatsby-plugin-root-import` can do the heavy lifting for us again. Update your gatsby-config like so:
+Again, we'll need to let webpack know of our changes. Fortunately, `gatsby-plugin-root-import` can do the heavy lifting for us. Update your `gatsby-config` like so:
 
 <CodeTabs one="JavaScript" two="TypeScript">
   <CodePanel>
@@ -177,15 +183,15 @@ export default config;
   </CodePanel>
 </CodeTabs>
 
-Each entry added to `options` will be treated by the plugin as a webpack import alias. So in other words, we've just told webpack to convert `@` to `src`.
+So what's happening here? Every entry added to `options` will be treated by the plugin as a webpack import alias. So in other words, we've just told webpack to convert `@` to `src`.
 
 You can add as many import aliases as you like. For example, you could add a separate alias for `@components` or `@hooks`.
 
-This is especially useful if you're using deeply nested folders. For example, Redux recommends [organizing your logic into "feature folders"](https://redux.js.org/faq/code-structure#what-should-my-file-structure-look-like-how-should-i-group-my-action-creators-and-reducers-in-my-project-where-should-my-selectors-go), like `./src/features/todos`. If you structure your program like this, you may find it convenient to alias `./src/features/todos` as simply `@todos`.
+This is especially useful if you're using deeply nested folders. For example, Redux recommends [organizing your logic into "feature folders"](https://redux.js.org/faq/code-structure#what-should-my-file-structure-look-like-how-should-i-group-my-action-creators-and-reducers-in-my-project-where-should-my-selectors-go), like `./src/features/todos`. If you choose to structure your program like that, you may find it convenient to alias `./src/features/todos` as simply `@todos`.
 
 ### Update TypeScript to support aliases
 
-Now that we've added an import alias to our config, we'll need to update TypeScript to understand how to compile the new imports. In our `tsconfig.json` file:
+Just like before, we'll need to update TypeScript to mirror our new config. In our `tsconfig.json` file:
 
 ```json
 {
@@ -198,7 +204,7 @@ Now that we've added an import alias to our config, we'll need to update TypeScr
 }
 ```
 
-Any entries added to [`paths`](https://www.typescriptlang.org/tsconfig#paths) be re-mapped by TypeScript. Note that all mappings are relative to whatever was specified in the `baseUrl`. If you're interested, you can read more about [tsconfig paths](https://www.typescriptlang.org/tsconfig#paths) in the TypeScript docs.
+Any entries added to `paths` will be re-mapped by TypeScript. Note that all mappings are relative to whatever was specified in the `baseUrl`. If you're interested, you can read more about [tsconfig paths](https://www.typescriptlang.org/tsconfig#paths) in the TypeScript docs.
 
 <Note color="blue">
 
@@ -206,9 +212,9 @@ _**Note**: If you're using VS Code, you may need to restart it before the new im
 
 </Note>
 
-### Support aliases in Jest
+### Configuring Jest
 
-If you're using Jest to test your Gatsby project, you'll need to update your Jest config to support import aliases. First, make sure you've correctly configured Jest to work with Gatsby. For more information on that, check out this tutorial from the Gatsby docs on [adding unit tests to Gatsby](https://www.gatsbyjs.com/docs/how-to/testing/unit-testing/).
+If you're using Jest to test your Gatsby project, you'll need to update your Jest config to support import aliases. If you haven't already, make sure you've correctly configured Jest to work with Gatsby. If you need more information on that, the Gatsby docs have a great article on [adding unit tests to Gatsby](https://www.gatsbyjs.com/docs/how-to/testing/unit-testing/).
 
 You can configure Jest to understand path aliases by adding them to `moduleNameMapper` in your `jest.config.js`. If your project uses TypeScript, you can easily import the path aliases from `tsconfig.json` using a utility function from [ts-jest](https://github.com/kulshekhar/ts-jest):
 
@@ -232,7 +238,7 @@ module.exports = {
 };
 ```
 
-Using `pathsToModuleNameMapper`, Jest will always be in sync with your `tsconfig.json` import aliases, and any time you update your import aliases in `tsconfig.json`, the changes will be automatically recognized by Jest. Otherwise, you'll need to manually specify all of the path aliases in `jest.config.js`:
+By dynamically importing your import aliases through `pathsToModuleNameMapper`, Jest will always be in sync with your `tsconfig.json`, and any time you update your import aliases in `tsconfig.json`, the changes will be automatically recognized by Jest. Otherwise, you'd need to manually specify each of the path aliases in `jest.config.js`:
 
 ```javascript
 module.exports = {
@@ -255,7 +261,7 @@ _See the Jest docs for [more information about mapping module names](https://jes
 
 ## Re-export components
 
-A final step that I like to do in some of my projects is to re-export components from the base `./components` directory.
+A final, optional step that I sometimes like to do in my projects is to re-export components from the base `./components` directory.
 
 For example, consider a project structured like this:
 
@@ -268,7 +274,7 @@ src
         └── custom-button.tsx
 ```
 
-In the buttons folder, we can add an `index.js` or `index.ts` file, and re-export all the other files in `./buttons`:
+In the `buttons` folder, we can add an `index.js` or `index.ts` file, and re-export all the other files in `buttons`:
 
 ```javascript
 export * from './custom-button';
@@ -298,4 +304,4 @@ This is a personal preference, and some may disagree with re-exporting everythin
 
 ## Summary
 
-And there you have it! That's how you can transform relative imports into root imports in Gatsby!
+And that about sums it up! That's how you can transform your relative imports into root imports in your Gatsby project!
