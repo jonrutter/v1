@@ -1,5 +1,5 @@
 ---
-title: Add Syntax Highlighting to MDX in Gatsby
+title: Add Syntax Highlighting to a Gatsby/MDX Blog
 date: '2022-07-12'
 featured_image: ./images/featured.jpg
 featured_image_alt: A needle with thread simulating a prism.
@@ -8,3 +8,397 @@ featured_image_link: https://unsplash.com/photos/tZIrJ3CgK_Y
 excerpt: Prettify your blog with highlighted code excerpts.
 topics: ['gatsby', 'react']
 ---
+
+If you're writing a developer blog, you'll probably want to include some code excerpts. And if you're anything like me, you'll want to spice up those code excerpts with some pretty syntax highlighting.
+
+This tutorial will walk you through adding syntax highlighting to a Gatsby MDX blog. I'll assume that you already have a working MDX blog, but if you don't, check out this awesome tutorial from the Gatsby docs that describes [how to get an MDX blog up and running](https://www.gatsbyjs.com/docs/tutorial/) with Gatsby.
+
+<CodeNote href="https://github.com/rutterjt/blog-examples/tree/main/gatsby-mdx-prismjs" />
+
+## The Goal
+
+Code blocks are written in MDX by enclosing text in triple backticks (with the opening set optionally followed by the name of the coding language). The goal for this project will be to convert native MDX codeblocks like this into syntax-highlighted code. So, for example, we would write this in our MDX code:
+
+````markdown
+```javascript
+console.log('Hello, world!');
+```
+````
+
+And it would render like this on our blog:
+
+```javascript
+console.log('Hello, world!');
+```
+
+## Setup
+
+In order to support syntax highlighting in MDX, we'll need to use a package called [prism-react-renderer](https://github.com/FormidableLabs/prism-react-renderer). This package exports a React component `<Highlight />`, which can render code blocks with the [Prism](https://prismjs.com/) syntax highlighter. Let's install it:
+
+```bash
+npm install prism-react-renderer
+```
+
+## The `<Highlight />` Component
+
+The `prism-react-renderer`docs have an example of [how to use the`<Highlight />` component](https://github.com/FormidableLabs/prism-react-renderer#usage). Let's take a quick look, to see what we're dealing with:
+
+```jsx
+import React from 'react';
+import { render } from 'react-dom';
+import Highlight, { defaultProps } from 'prism-react-renderer';
+
+const exampleCode = `
+(function someDemo() {
+  var test = "Hello World!";
+  console.log(test);
+})();
+
+return () => <App />;
+`;
+
+const Content = (
+  <Highlight {...defaultProps} code={exampleCode} language="jsx">
+    {({ className, style, tokens, getLineProps, getTokenProps }) => (
+      <pre className={className} style={style}>
+        {tokens.map((line, i) => (
+          <div {...getLineProps({ line, key: i })}>
+            {line.map((token, key) => (
+              <span {...getTokenProps({ token, key })} />
+            ))}
+          </div>
+        ))}
+      </pre>
+    )}
+  </Highlight>
+);
+```
+
+That's a lot, so let's break it down.
+
+`<Highlight />` accepts a number of props:
+
+- `code`, which is the text that we want to apply syntax highlight to. Here, it's stored in `exampleCode`, and directly passed to `<Highlight />`.
+- `language`, which is a string representing the code's language. This will affect how the code gets parsed. For reference, here's a list of [supported languages](https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/vendor/prism/includeLangs.js).
+- `defaultProps`, which is exported from the package and is simply destructured as props directly into the component.
+- A [render prop](https://reactjs.org/docs/render-props.html), passed as `children`. This is where the main work of rendering the code block is done. `<Highlight />` works by parsing the input code line-by-line, separating each line into 'tokens', which represent specific bits of code (e.g., variables, strings, functions). `<Highlight />` then exposes all the line/token data to our render function, and we can then map over it to render the code. For our purposes, we'll just copy and paste the render function from the example. But if you want to modify how the code gets displayed (e.g., adding line numbers or individual line diff highlighting), this is where you'd do it.
+
+As you can see, this is a lot of code to write every time we want to render a code block. Ideally, we'd like to have one component that accepts the code as a prop, and then passes it directly to `<Highlight />`. Let's create that component now.
+
+## Creating a `<CodeBlock />` Component
+
+Here's the starting point for our component. Most of this is just copied from the `prism-react-renderer` docs:
+
+<CodeTabs one="JSX" two="TSX">
+  <CodePanel>
+
+```jsx filename=src/components/code-block.js
+import React from 'react';
+import Highlight, { defaultProps } from 'prism-react-renderer';
+
+export const CodeBlock = () => {
+  return (
+    <Highlight {...defaultProps}>
+      {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        <pre className={className} style={style}>
+          {tokens.map((line, i) => (
+            <div {...getLineProps({ line, key: i })}>
+              {line.map((token, key) => (
+                <span {...getTokenProps({ token, key })} />
+              ))}
+            </div>
+          ))}
+        </pre>
+      )}
+    </Highlight>
+  );
+};
+```
+
+  </CodePanel>
+  <CodePanel>
+
+```tsx filename=src/components/code-block.tsx
+import React from 'react';
+import Highlight, { defaultProps } from 'prism-react-renderer';
+
+export const CodeBlock: React.FC<{}> = () => {
+  return (
+    <Highlight {...defaultProps}>
+      {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        <pre className={className} style={style}>
+          {tokens.map((line, i) => (
+            <div {...getLineProps({ line, key: i })}>
+              {line.map((token, key) => (
+                <span {...getTokenProps({ token, key })} />
+              ))}
+            </div>
+          ))}
+        </pre>
+      )}
+    </Highlight>
+  );
+};
+```
+
+  </CodePanel>
+</CodeTabs>
+
+To get our component working, there's two main tasks ahead of us: we need a way to automatically pass: 1) the code excerpt, and 2) the language, from our MDX to `<CodeBlock />`, so the code can be correctly parsed by the `<Highlight />` component.
+
+### Getting the Code from MDX
+
+First, we need to figure out how to pass the code from our MDX blog post to `<CodeBlock />`.
+
+It might help to take a step back and see what's actually happening in our MDX. This is the syntax that we'll write in our MDX to render a code block:
+
+````markdown
+```javascript
+console.log('Hello, world!');
+```
+````
+
+And this is what the resulting HTML will look like, after Gatsby and MDX finish parsing it:
+
+```html
+<pre>
+  <code class="language-javascript">
+    console.log('Hello, world!');
+  </code>
+</pre>
+```
+
+So our code is wrapped in a `<code>` tag (with a class of `language-javascript`), which is nested in a `<pre>` tag. It would be great if we could just tell MDX to replace all `<pre>` tags with our `<CodeBlock />` component, so the code would be accessible as `<Codeblock/>`'s `children` prop.
+
+As it turns out, this is totally possible in MDX! To make it work, we'll need to use something called [shortcodes](https://mdxjs.com/blog/shortcodes/).
+
+Shortcodes allow you to pass global components to all MDX documents in your project, without needing to import them each time. You can also overwrite default HTML elements with custom components. This will let us convert all our `<pre>` tags to `<CodeBlock />`!
+
+First, find wherever your MDX is rendered. If you followed the [Gatsby tutorial](https://www.gatsbyjs.com/docs/tutorial/part-6/), it should be `./src/pages/blog/{mdx.slug}.jsx`.
+
+We'll need to import a couple things here: the `<CodeBlock />` component, and a component called `<MDXProvider>` from `@mdx-js/react`:
+
+```javascript filename=src/pages/blog/{mdx.slug}.jsx
+import { CodeBlock } from '../components/CodeBlock';
+import { MDXProvider } from '@mdx-js/react';
+```
+
+Next, we need to define our shortcodes. We can do that by creating an object that maps the names of any HTML elements (in this case, `pre`), to the components that should replace them:
+
+```javascript filename=src/pages/blog/{mdx.slug}.jsx
+let shortcodes = { pre: CodeBlock };
+```
+
+Finally, we'll wrap our `<MDXRenderer>` with the `<MDXProvider>` that we just imported, and pass it our shortcodes as `components`:
+
+```jsx filename=src/pages/blog/{mdx.slug}.jsx
+<MDXProvider components={shortcodes}>
+  <MDXRenderer>{/*your mdx */}</MDXRenderer>
+</MDXProvider>
+```
+
+This will convert every `<pre>` tag in our MDX to the `<CodeBlock />` component. So now, the contents of the old `<pre>` tag (the `<code class="language-javascript">` and its children) will be accessible as `<CodeBlock />`'s children! Here's a rough visualiation of the change:
+
+```jsx
+<CodeBlock>
+  <code class="language-javascript">
+    console.log('Hello, world!');
+  </code>
+<CodeBlock>
+```
+
+The code that we want to parse is actually the `children` of `<code class="language-javascript">`, which is itself now the `children` of `<CodeBlock />`. So, inside our `<CodeBlock />` component, we can access the code with `props.children.props.children`. It's a little cumbersome, but it works! All that's left to do now is call `trim()` on the code's text to remove any lingering whitespace, then pass it to the `<Highlight />` component:
+
+<CodeTabs one="JSX" two="TSX">
+  <CodePanel>
+
+```jsx filename=src/components/code-block.js
+import React from 'react';
+import Highlight, { defaultProps } from 'prism-react-renderer';
+
+export const CodeBlock = ({ children }) => {
+  const code = children.props.children.trim();
+  return (
+    <Highlight {...defaultProps} code={code}>
+      {/* ...render prop omitted */}
+    </Highlight>
+  );
+};
+```
+
+  </CodePanel>
+  <CodePanel>
+
+```tsx filename=src/components/code-block.tsx
+import React from 'react';
+import Highlight, { defaultProps } from 'prism-react-renderer';
+
+type Props = {
+  children: React.ReactElement;
+};
+
+export const CodeBlock: React.FC<Props> = ({ children }) => {
+  const code = children.props.children.trim();
+  return (
+    <Highlight {...defaultProps} code={code}>
+      {/* ...render prop omitted */}
+    </Highlight>
+  );
+};
+```
+
+  </CodePanel>
+</CodeTabs>
+
+<Note color="blue">
+
+If you use TypeScript, you may have noticed that `code` is type `any` by default, which is [usually a no-no](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html#any). This probably isn't an issue though, because the way MDX works should ensure that whatever ends up getting parsed as `children.props.children` will be a string. But if you're concerned, you can feel free to add some type checks, to be safe.
+
+</Note>
+
+### Getting the Language from MDX
+
+Just like with the `code`, we also need to get the code's `language` from our MDX blog post, and pass it to `<Highlight />`.
+
+As a reminder, here's our MDX code:
+
+````markdown
+```javascript
+console.log('Hello, world!');
+```
+````
+
+And the rendered html:
+
+```html
+<pre>
+  <code class="language-javascript">
+    console.log('Hello, world!');
+  </code>
+</pre>
+```
+
+As you can see, whatever language is specified after the triple backticks gets added to the `<code />` element's `className`, as `class="language-<language>"`. So to parse the language, we'll need to get fancy with some regular expressions.
+
+```javascript filename=src/components/code-block.js
+const className = children.props.className || 'language-markdown';
+const match = className.match(/language-(?<language>.*)/);
+const language = match?.groups?.language;
+```
+
+<Note color="yellow">
+
+**Be careful**: unlike `code`, here we need to be more careful about empty values. If no language is specified in the MDX, the `<code>`'s `className` will be `undefined`, and trying to call `match()` on it will produce a `TypeError`. I've opted to fall back to `language-markdown`, to ensure that a valid language will be passed to `<Highlight />`, even if one isn't provided.
+
+</Note>
+
+Now that we have a language, all that's left is to pass it to `<Highlight />`:
+
+```jsx
+return (
+  <Highlight
+    {...defaultProps}
+    code={code}
+    language={language}>
+)
+```
+
+### The Final `<CodeBlock />` Component
+
+Putting it all together, our shiny new `<CodeBlock />` component looks like:
+
+<CodeTabs one="JSX" two="TSX">
+  <CodePanel>
+
+```jsx filename=src/components/code-block.js
+import React from 'react';
+import Highlight, { defaultProps } from 'prism-react-renderer';
+
+export const CodeBlock = ({ children }) => {
+  const code = children.props.children.trim();
+
+  const className = children.props.className || 'language-markdown';
+  const match = className.match(/language-(?<lang>.*)/);
+  const language = match?.groups?.lang;
+
+  return (
+    <Highlight {...defaultProps} code={code} language={language}>
+      {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        <pre className={className} style={style}>
+          {tokens.map((line, i) => (
+            <div {...getLineProps({ line, key: i })}>
+              {line.map((token, key) => (
+                <span {...getTokenProps({ token, key })} />
+              ))}
+            </div>
+          ))}
+        </pre>
+      )}
+    </Highlight>
+  );
+};
+```
+
+  </CodePanel>
+  <CodePanel>
+
+```tsx filename=src/components/code-block.tsx
+import React from 'react';
+import Highlight, { defaultProps } from 'prism-react-renderer';
+
+type Props = {
+  children: React.ReactElement;
+};
+
+export const CodeBlock: React.FC<Props> = ({ children }) => {
+  const code = children.props.children.trim();
+
+  const className = children.props.className || 'language-markdown';
+  const match = className.match(/language-(?<lang>.*)/);
+  const language = match?.groups?.lang;
+  return (
+    <Highlight {...defaultProps} code={code} language={language}>
+      {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        <pre className={className} style={style}>
+          {tokens.map((line, i) => (
+            <div {...getLineProps({ line, key: i })}>
+              {line.map((token, key) => (
+                <span {...getTokenProps({ token, key })} />
+              ))}
+            </div>
+          ))}
+        </pre>
+      )}
+    </Highlight>
+  );
+};
+```
+
+  </CodePanel>
+</CodeTabs>
+
+## Customization
+
+There are a lot of ways that you can customize your new syntax-highlighted code blocks. Most of them (like adding line-numbers or diff highlighting) involve getting into the nitty-gritty of `<Highlight />`'s render function. Those really deserve their own post, and I won't get into them here. But we can look at one really easy way of customizing your code blocks: themes.
+
+### Theme Customization
+
+If you've followed the tutorial this far, you'll have noticed that your syntax-highlighted code blocks already have a color theme. This is because a default theme is included in `{...defaultProps}`, so the component can work out of the box, without the need to specify a theme. But you can optionally pick a different color theme if you want to customize your code blocks.
+
+`prism-react-renderer` provides a variety of [available themes](https://github.com/FormidableLabs/prism-react-renderer/tree/master/src/themes), which can be imported in your component, and passed to `<Highlight>` as `theme`:
+
+```jsx filename=src/components/code-block.js
+import vsDark from 'prism-react-renderer/themes/vsDark';
+
+// ...
+
+<Highlight theme={vsDark}>
+```
+
+But you're not just limited to the built-in themes. You can also add a custom Prism CSS file for your theme. There a bunch of great [Prism themes](https://github.com/PrismJS/prism-themes) available, so take a look if you're interested!
+
+To add a custom Prism theme, you'll need to copy the CSS and include it somewhere in your project. You'll also need to pass `theme={undefined}` to `<Highlight />`, to tell `<Highlight />` not to use the defualt theme.
+
+## Conclusion
+
+And there you have it! You've successfully added some awesome syntax-highlighting to your code blocks!
