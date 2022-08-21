@@ -28,6 +28,10 @@ pre[class*='language-'] {
   @apply -mx-6 sm:mx-0 rounded-none sm:rounded-md;
 }
 
+pre[class*='language'][data-file='true'] {
+  padding-top: 0rem;
+}
+
 /* inner wrapper */
 pre[class*='language-'] > code {
   display: inline-block;
