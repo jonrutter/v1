@@ -53,7 +53,7 @@ Next, we'll need to add the plugin to our gatsby-config:
 <CodeTabs one="JavaScript" two="TypeScript">
   <CodePanel>
 
-```javascript
+```javascript filename=gatsby-config.js
 const config = {
   // ...
   plugins: [
@@ -67,7 +67,7 @@ export default config;
   </CodePanel>
   <CodePanel>
 
-```typescript
+```typescript filename=gatsby-config.ts
 import type { GatsbyConfig } from 'gatsby';
 
 const config: GatsbyConfig = {
@@ -103,7 +103,7 @@ If your project uses TypeScript, you'll need to add another step to make the Typ
 
 In your `tsconfig.json` file, add the following:
 
-```json
+```json filename=tsconfig.json
 {
   "compilerOptions": {
     // ...
@@ -141,7 +141,7 @@ Again, we'll need to let webpack know of our changes. Fortunately, `gatsby-plugi
 <CodeTabs one="JavaScript" two="TypeScript">
   <CodePanel>
 
-```javascript
+```javascript filename=gatsby-config.js
 import path from 'path';
 const config = {
   // ...
@@ -161,7 +161,7 @@ export default config;
   </CodePanel>
   <CodePanel>
 
-```typescript
+```typescript filename=gatsby-config.ts
 import type { GatsbyConfig } from 'gatsby';
 import path from 'path';
 
@@ -193,7 +193,7 @@ This is especially useful if you're using deeply nested folders. For example, Re
 
 Just like before, we'll need to update TypeScript to mirror our new config. In our `tsconfig.json` file:
 
-```json
+```json filename=tsconfig.json
 {
   "compilerOptions": {
     // ...
@@ -218,7 +218,7 @@ If you're using Jest to test your Gatsby project, you'll need to update your Jes
 
 You can configure Jest to understand path aliases by adding them to `moduleNameMapper` in your `jest.config.js`. If your project uses TypeScript, you can easily import the path aliases from `tsconfig.json` using a utility function from [ts-jest](https://github.com/kulshekhar/ts-jest):
 
-```javascript
+```javascript filename=jest.config.js
 const { compilerOptions } = require('./tsconfig.json');
 const { pathsToModuleNameMapper } = require('ts-jest');
 
@@ -240,7 +240,7 @@ module.exports = {
 
 By dynamically importing your import aliases through `pathsToModuleNameMapper`, Jest will always be in sync with your `tsconfig.json`, and any time you update your import aliases in `tsconfig.json`, the changes will be automatically recognized by Jest. Otherwise, you'd need to manually specify each of the path aliases in `jest.config.js`:
 
-```javascript
+```javascript filename=jest.config.js
 module.exports = {
   // ...
 
@@ -276,7 +276,7 @@ src
 
 In the `buttons` folder, we can add an `index.js` or `index.ts` file, and re-export all the other files in `buttons`:
 
-```javascript
+```javascript filename=src/components/buttons/index.js
 export * from './custom-button';
 ```
 
@@ -288,7 +288,7 @@ import { CustomButton } from '@/components/buttons';
 
 But we can take it one step further, and again re-export components from the root of `./components`. In `components/index.js`:
 
-```javascript
+```javascript filename=src/components/index.js
 export * from './test-component-one';
 export * from './test-component-two';
 export * from './buttons';

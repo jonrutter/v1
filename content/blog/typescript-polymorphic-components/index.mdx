@@ -62,7 +62,7 @@ Polymorphic components are simple enough to create with JavaScript, but (as is o
 
 Creating our polymorphic component in JavaScript is fairly straightforward:
 
-```jsx
+```jsx filename=src/components/container.js
 import React from 'react';
 
 // component:
@@ -137,7 +137,7 @@ One big benefit of TypeScript is that, if we build our component correctly, it w
 
 The first thing I like to do when writing a new React component is to think about what props it might need, and type them. Let's take an initial stab at that. It's not immediately clear how to type `as`, so let's set it as `unknown` for the moment:
 
-```tsx
+```tsx filename=src/components/container.tsx
 type Props = {
   as?: unknown; // we'll come back to this
   children: React.ReactNode;
@@ -146,7 +146,7 @@ type Props = {
 
 Then we need to type our props in the component:
 
-```tsx
+```tsx filename=src/components/container.tsx
 export const Container = ({ as, children, ...rest }: Props) => {
   const Tag = as || 'div';
   return <Tag {...rest}>{children}</Tag>;
@@ -159,7 +159,7 @@ Predictably, this code produces a TypeScript error, complaining that 'Tag does n
 
 To fix the error we need to correctly type `as`. Looking at the React type definitions, there is a built-in React type called `ElementType` that represents a [JSX element or React Component](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts#L70). This seems like the right fit, so let's use that:
 
-```tsx
+```tsx filename=src/components/container.tsx
 import React from 'react';
 
 type Props = {
@@ -180,7 +180,7 @@ The error is gone! By typing `as` as a `React.ElementType`, we get two benefits:
 
 Great! But our component still isn't ready. Let's try passing some props and see what happens:
 
-```tsx
+```tsx filename=src/App.tsx
 export const App = () => {
   return (
     <Container as="main" style={{ fontSize: '1.5rem' }}>
@@ -200,7 +200,7 @@ It turns out that there's a React type that does exactly this: ComponentProps. T
 
 `ComponentPropsWithoutRef` is a [generic type](https://www.typescriptlang.org/docs/handbook/2/generics.html) that expects us to pass it an element type. It will then return all HTML attributes that are supported by that element. So, for example, `ComponentPropsWithoutRef<'button'>` will include all HTML attributes that can be used by the `button` tag (e.g., `onClick`, `type`, `disabled`, etc.) and will _exclude_ all HTML attributes that are not valid for buttons (like `href`). Seems like exactly what we need! So let's add it to our Props via a type union:
 
-```tsx
+```tsx filename=src/components/container.tsx
 type Props = {
   as?: React.ElementType;
   children: React.ReactNode;
@@ -211,7 +211,7 @@ That silences that error, and TypeScript now recognizes that our component can r
 
 The answer is to make our `Props` type generic:
 
-```tsx
+```tsx filename=src/components/container.tsx
 type Props<T extends React.ElementType> = {
   as?: T;
   children: React.ReactNode;
@@ -220,7 +220,7 @@ type Props<T extends React.ElementType> = {
 
 So our `Props` type is now generic and expects a type parameter representing a React element, and sets that value to `as` and `ComponentPropsWithoutRef`. In order to use this in our component, all we need to do now is define our component as a [generic function](https://www.typescriptlang.org/docs/handbook/2/generics.html) that also expects a type parameter of an `ElementType`, and pass that type along to `Props`. Because of type argument inference, TypeScript will automatically figure out that the value passed to `as` is type `T`:
 
-```tsx
+```tsx filename=src/components/container.tsx
 export const Container = <T extends React.ElementType = 'div'>({
   as,
   children,
@@ -239,7 +239,7 @@ _**Note**: we also needed to provide a default type value of `React.ElementType 
 
 Now, TypeScript will correctly evaluate our props based on what we specify with `as`, so if we try something like:
 
-```tsx
+```tsx filename=src/App.tsx
 export const App = () => {
   return (
     <Container as="main" href="/">
@@ -253,7 +253,7 @@ TypeScript will correctly give us an error message, telling us that "Property 'h
 
 There's just one more thing we need to do before our component is fully functional. There are possible edge cases where our user-specified props might clash with the default HTML props. For a (somewhat contrived) example, we might want to modify our `<Container />` component to accept an optional `title` prop, as an HTML element to put before the main content:
 
-```tsx
+```tsx filename=src/components/container.tsx
 type Props<T extends React.ElementType> = {
   as?: T;
   title?: React.ReactNode;
@@ -265,7 +265,7 @@ The problem is that ['title' is also a valid HTML attribute](https://developer.m
 
 So really what we want is to remove from `ComponentPropsWithoutRef` anything that is also in `Props`. Fortunately, TypeScript has an [Omit utility](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys) that will do just that. Let's restructure our props to make this easier, and update `Props` to use `Omit`:
 
-```tsx
+```tsx filename=src/components/container.tsx
 type ContainerProps<T extends React.ElementType> = {
   as?: T;
   title?: React.ReactNode;
@@ -285,7 +285,7 @@ Doing that, we've dynamically filtered `title` out of `ComponentPropsWithoutRef`
 
 That takes care of the basic functionality! Our polymorphic component should now be working correctly. Here's the full code:
 
-```tsx
+```tsx filename=src/components/container.tsx
 import React from 'react';
 
 type ContainerProps<T extends React.ElementType> = {
@@ -314,7 +314,7 @@ Our polymorphic component is now working correctly, but it's got some boilerplat
 
 First let's create a new file, `src/utils/polymorphic.ts`, and give it a basic type export:
 
-```typescript
+```typescript filename=src/utils/polymorphic.ts
 import React from 'react';
 
 export type PolymorphicProps<T extends React.ElementType, P = {}> = P;
@@ -322,7 +322,7 @@ export type PolymorphicProps<T extends React.ElementType, P = {}> = P;
 
 What can we generalize about all polymorphic components? All polymorphic components will use the `as` prop, so that's a good place to start. Let's extract that to its own type and add it to `PolymorphicProps`:
 
-```typescript
+```typescript filename=src/utils/polymorphic.ts
 import React from 'react';
 
 type As<T extends React.ElementType> = {
@@ -334,7 +334,7 @@ export type PolymorphicProps<T extends React.ElementType, P = {}> = P & As<T>;
 
 Finally, all that's left is to add the props inherited from `ComponentPropsWithoutRef`. Like `As`, let's extract that to its own type for simplicity, and then add it to `PolymorphicProps`.
 
-```typescript
+```typescript filename=src/utils/polymorphic.ts
 import React from 'react';
 
 type As<T extends React.ElementType> = {
@@ -353,7 +353,7 @@ export type PolymorphicProps<T extends React.ElementType, P = {}> = P &
 
 Now that our `PolymorphicProps` has been extracted to its own type, we can import it and simplify our `<Container />` component:
 
-```tsx
+```tsx filename=src/components/container.tsx
 import React from 'react';
 import type { PolymorphicProps } from '../utils/polymorphic';
 
@@ -381,7 +381,7 @@ However, if you ever need to [forward refs](https://reactjs.org/docs/forwarding-
 
 First, we'll need to add a few new types to our `polymorphic.ts` module. Since we originally wrote our `PolymorphicProps` to use `ComponentPropsWithoutRef`, we'll need to write some new types to add `ref`:
 
-```typescript
+```typescript filename=src/utils/polymorphic.ts
 export type PolymorphicRef<T extends React.ElementType> =
   React.ComponentPropsWithRef<T>['ref'];
 
@@ -404,7 +404,7 @@ _**Note**: we could have updated our original `PolymorphicProps` to support refs
 
 We can now rewrite our `<Container />` component to use `React.forwardRef`:
 
-```tsx
+```tsx filename=src/components/container.tsx
 import React from 'react';
 import type {
   PolymorphicPropsWithRef,
@@ -434,7 +434,7 @@ export const Container = React.forwardRef(
 
 This code should work, but unfortunately there's a problem: by wrapping our component in `forwardRef`, TypeScript no longer knows how to type the `<Container />` component, so all of our type support is suddenly broken! You can verify this by trying out:
 
-```tsx
+```tsx filename=src/App.tsx
 export const App = () => {
   return (
     <div>
@@ -450,7 +450,7 @@ Oops! That's not what we wanted.
 
 The solution I found to this problem is to explicitly type the component itself. Here's an example of one way to do that:
 
-```tsx
+```tsx filename=src/components/container.tsx
 type ContainerType = <T extends React.ElementType = 'div'>(
   props: PolymorphicPropsWithRef<T, Props>
 ) => React.ReactElement | null;
@@ -462,7 +462,7 @@ Basically what we're doing here is mirroring [React's own component type definti
 
 But it would be a pain to have to write out an explicit type definition of every polymorphic component we create. And that repetition could introduce typos and bugs. So let's create a general purpose `PolymorphicComponent` type, to type our polymorphic components that support ref forwarding:
 
-```typescript
+```typescript filename=src/utils/polymorphic.ts
 export type PolymorphicComponent<
   P = {},
   D extends React.ElementType = 'div'
@@ -476,7 +476,7 @@ export const Container: PolymorphicComponent<Props, 'div'> = // ...
 
 This is largely just copied from `ContainerType`, except we've added an optional extra type parameter, `D`, representing the component's default element type. By passing in a default element type, we can easily extend our `PolymorphicComponent` with different types, and the functionality will not break if we omit `as`:
 
-```tsx
+```tsx filename=src/components/button.tsx
 import { PolymorphicComponent } from '../utils/polymorphic';
 
 // `Props` omitted
@@ -486,7 +486,7 @@ export const Button: PolymorphicComponent<Props, 'button'> = // ...
 
 In the spirit of React's own type definitions (`React.FunctionComponent` = `React.FC`), we can also create a shorthand of `PolymorphicComponent` and export it:
 
-```typescript
+```typescript filename=src/utils/polymorphic.ts
 export type PC<
   P = {},
   D extends React.ElementType = 'div'
@@ -495,7 +495,7 @@ export type PC<
 
 Finally, here is our completed, strongly typed `<Container />` component, with full support for ref forwarding:
 
-```tsx
+```tsx filename=src/container/container.tsx
 import React from 'react';
 import {
   PolymorphicPropsWithRef,
