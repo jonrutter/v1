@@ -85,7 +85,7 @@
     "whatwg-fetch": "^3.6.2"
   },
   "lint-staged": {
-    ".{js,jsx,ts,tsx}": [
+    "*.{js,jsx,ts,tsx}": [
       "eslint --max-warnings 0 --ignore-path .gitignore",
       "prettier --ignore-path .gitignore --check",
       "jest --passWithNoTests --bail --onlyChanged --watchAll=false --findRelatedTests"
