@@ -53,7 +53,7 @@ Next, we'll need to add the plugin to our gatsby-config:
 <CodeTabs one="JavaScript" two="TypeScript">
   <CodePanel>
 
-```javascript filename=gatsby-config.js
+```javascript filename=gatsby-config.js lines=5
 const config = {
   // ...
   plugins: [
@@ -67,7 +67,7 @@ export default config;
   </CodePanel>
   <CodePanel>
 
-```typescript filename=gatsby-config.ts
+```typescript filename=gatsby-config.ts lines=7
 import type { GatsbyConfig } from 'gatsby';
 
 const config: GatsbyConfig = {
@@ -103,7 +103,7 @@ If your project uses TypeScript, you'll need to add another step to make the Typ
 
 In your `tsconfig.json` file, add the following:
 
-```json filename=tsconfig.json
+```json filename=tsconfig.json lines=4
 {
   "compilerOptions": {
     // ...
@@ -141,7 +141,7 @@ Again, we'll need to let webpack know of our changes. Fortunately, `gatsby-plugi
 <CodeTabs one="JavaScript" two="TypeScript">
   <CodePanel>
 
-```javascript filename=gatsby-config.js
+```javascript filename=gatsby-config.js lines=1,6,7,8,9,10,11
 import path from 'path';
 const config = {
   // ...
@@ -161,7 +161,7 @@ export default config;
   </CodePanel>
   <CodePanel>
 
-```typescript filename=gatsby-config.ts
+```typescript filename=gatsby-config.ts lines=2,8,9,10,11,12,13
 import type { GatsbyConfig } from 'gatsby';
 import path from 'path';
 
@@ -193,7 +193,7 @@ This is especially useful if you're using deeply nested folders. For example, Re
 
 Just like before, we'll need to update TypeScript to mirror our new config. In our `tsconfig.json` file:
 
-```json filename=tsconfig.json
+```json filename=tsconfig.json lines=4,5,6
 {
   "compilerOptions": {
     // ...
