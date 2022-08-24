@@ -299,3 +299,16 @@ code[class*='language-html'] {
 .language-html .token.punctuation {
   color: #808080;
 }
+
+.token-line[data-highlighted='true'] {
+  /* background: #4d4d4d; */
+  background: #1b3d32;
+  text-shadow: 1px 1px 1px #1e1e1e !important;
+}
+
+.token-line[data-highlighted='true']:before {
+  /* background: hsl(0, 0%, 30%) !important; */
+  background-color: #1b3d32 !important;
+  text-shadow: 1px 1px 5px #1e1e1e !important;
+  box-shadow: inset 5px 0 0 #10b981;
+}

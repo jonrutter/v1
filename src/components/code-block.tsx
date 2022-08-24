@@ -50,6 +50,8 @@ export const CodeBlock: React.FC<Props> = ({ children }) => {
   // getting metadata
   const fileName = children.props.filename || null;
 
+  const lines = children.props.lines ? children.props.lines.split(',') : [];
+
   return (
     <Highlight
       {...defaultProps}
@@ -75,6 +77,7 @@ export const CodeBlock: React.FC<Props> = ({ children }) => {
               <div
                 key={i}
                 data-line={i + 1}
+                data-highlighted={lines.length && lines.includes(String(i + 1))}
                 data-testid="code-block-line"
                 {...getLineProps({ line, key: i })}
               >
