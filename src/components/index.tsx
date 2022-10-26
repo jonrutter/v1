@@ -10,7 +10,6 @@ export * from './code-tabs';
 export * from './autolink-headings';
 export * from './icon';
 export * from './note';
-export * from './portfolio-tabs';
 export * from './seo';
 export * from './spinner';
 export * from './styled-link';

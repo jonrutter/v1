@@ -31,7 +31,7 @@ export const BlogCard: React.FC<Props> = ({ item }) => {
       {/* content wrap */}
       <div className="max-w-prose p-8 lg:p-6 md:flex-[5] lg:flex-auto">
         <header>
-          <h3 className="font-heading font-bold mb-3 text-2xl text-slate-900 dark:text-slate-50">
+          <h3 className="font-heading font-bold mb-1 text-2xl text-slate-900 dark:text-slate-50">
             <StyledLink to={`/blog/${item.slug}`} className="inline-block">
               {item.frontmatter.title}
             </StyledLink>

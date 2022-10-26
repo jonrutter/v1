@@ -1,8 +1,10 @@
 import React from 'react';
 import clsx from 'clsx';
 
-type Props<T extends React.ElementType> = {
-  as?: T;
+// types
+import type { PolymorphicProps } from '@/utils/polymorphic';
+
+type Props = {
   className?: string;
 };
 
@@ -15,7 +17,7 @@ export const Section = <T extends React.ElementType = 'section'>({
   as,
   className = '',
   children,
-}: Props<T> & Omit<React.ComponentPropsWithoutRef<T>, keyof Props<T>>) => {
+}: PolymorphicProps<T, Props>) => {
   const Tag = as || 'section';
   return (
     <div

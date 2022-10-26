@@ -64,21 +64,18 @@ describe('CodeTabs', () => {
     expect(mdButton).toHaveAccessibleName(/markdown/i);
     expect(bashButton).toHaveAccessibleName(/bash/i);
   });
-  it('only shows the active tab panel', async () => {
+  it('only renders the active tab panel', async () => {
     render(Component);
     const tabs = screen.getAllByRole('tab');
     const tsxButton = tabs[1];
 
-    const jsText = screen.getByText(/hello, javascript!/i);
-    const tsText = screen.getByText(/hello, typescript!/i);
-
-    expect(jsText).toBeVisible();
-    expect(tsText).not.toBeVisible();
+    expect(screen.getByText(/hello, javascript!/i)).toBeInTheDocument();
+    expect(screen.queryByText(/hello, typescript!/i)).not.toBeInTheDocument();
 
     await userEvent.click(tsxButton);
     await waitFor(() => {
-      expect(jsText).not.toBeVisible();
-      expect(tsText).toBeVisible();
+      expect(screen.getByText(/hello, typescript!/i)).toBeInTheDocument();
+      expect(screen.queryByText(/hello, javascript!/i)).not.toBeInTheDocument();
     });
   });
 });

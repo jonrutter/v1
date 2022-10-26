@@ -1,0 +1,238 @@
+---
+title: The Potential Pitfalls of Short-Circuit Evaluation in React
+date: '2022-08-18'
+featured_image: ./images/featured.jpg
+featured_image_alt: A pedestrian traffic light, with don't walk hand and zero seconds remaining
+featured_image_credit: '@theblowup'
+featured_image_link: https://unsplash.com/photos/cakwCpeoAu0
+excerpt: Beware the rogue zero!
+topics: ['javascript', 'react']
+---
+
+Short-circuit evaluation is a React pattern that's frequently used as a shorthand for conditionally rendering JSX based on the result of an expression. For example, you could choose to only render a child component if data that it depends on is [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy):
+
+```jsx
+const Component = ({ input }) => {
+  return <div>{input && <ChildComponent input={input} />}</div>;
+};
+// if input is truthy -> `<div><ChildComponent /><div>`
+// if input is falsy -> `<div></div>`
+```
+
+Many developers prefer using short-circuit evaluation because it's a little more concise than an explicit conditional, like a ternary operator:
+
+```jsx
+const Component = ({ input }) => {
+  return <div>{input ? <ChildComponent input={input} /> : null}</div>;
+};
+```
+
+Although this is a valid and useful React pattern, there are a couple potential pitfalls that React developers can unwittingly fall into when using short-circuit evaluation. This blog post will give a brief overview of short-circuit evaluation, why it works, what kind of issues you could face with it, and how to use this syntax safely.
+
+## What is it, and why does it work?
+
+The first thing to note is that short-circuit evaluation isn't limited to React. It's a general feature of JavaScript that you can use anywhere to concisely choose which expression to evaluate based on their values.
+
+You can create a short-circuit evaluation by using either `&&` (logical AND operator) or `||` (logical OR operator). For example:
+
+```javascript
+const varOne = true && 'A';
+// varOne === 'A'
+
+const varTwo = false || 'B';
+// varTwo === 'B'
+```
+
+This works because logical operators in JavaScript don't function exactly as you might expect. You're probably used to seeing logical operators in `if` statements, like:
+
+```javascript
+if (5 === 5 && true === true) {
+  // if 5 is 5 and true is true: do something
+}
+```
+
+So it would be natural to think think that logical operators return a boolean value, based on a comparison of their operands. However, this isn't technically what happens. Logical operators actually return **one of their operands**, based on a fairly obscure set of rules.
+
+The way the [logical AND operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND) (`&&`) works is that it starts evaluating the operands, from left to right, and returns the value of the first operand if it can be converted to `false`. Otherwise it evaluates and returns the value of the second operand, regardless of its truthiness. So for example:
+
+```javascript
+let varOne = null && 'Hello, world!';
+// varOne === null;
+// because the first operand can be converted to false
+
+let varTwo = 'Hello, world!' && 0;
+// varTwo === 0
+// because the first operand can be converted to true
+
+let varThree = 'Hello, world!' && 'Short-circuiting is fun!';
+// varThree === 'Short-circuiting is fun!'
+// because the first operand can be converted to true
+```
+
+The [logical OR operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_OR) (`||`) works similarly: it evaluates the operands from left to right, and it returns the value of the first operand if it can be converted to `true`. Otherwise it evaluates and returns the value of the second operand. So:
+
+```javascript
+let varOne = null || 'Hello, world!';
+// varOne === 'Hello, world!'
+// because the first operand is falsy
+
+let varTwo = 'Hello, world!' || 0;
+// varTwo === 'Hello, world!'
+// because the first operand is truthy
+
+let varThree = 'Hello, world!' || 'Short-circuiting is fun!';
+// varThree === 'Hello, world!'
+// because the first operand is truthy
+```
+
+<Note color="blue">
+
+**Note**: The reason these operators work in an `if` statement is that the `if` statement will evaluate whatever operand is returned, and convert it into either `true` or `false`. In other words, the logical operator produces a value, and the `if` statement does the work of converting that value into a boolean, if it isn't one already.
+
+</Note>
+
+An important thing to note about short-circuiting evaluation is that it stops evaluating on the first operand if it can, and the second expression may never be evaluated. Take for example:
+
+```javascript
+console.log(false && someDangerousCode());
+console.log(true || someDangerousCode());
+// in both cases, someDangerousCode() will NOT run,
+// because the code can stops on the first operand
+
+// BUT:
+console.log(true && someDangerousCode());
+console.log(false || someDangerousCode());
+// both of these functions will run
+```
+
+## Use in React
+
+Let's look at an example of how this all works in React:
+
+```jsx
+const ProfileName = ({ name }) => {
+  return <span>{name}</span>;
+};
+
+const ProfilePage = ({ user }) => {
+  return (
+    <div>
+      {/* ... the rest of the profile page's contents */}
+      {user?.name && <ProfileName name={user.name} />}
+    </div>
+  );
+};
+```
+
+We don't want to accidentally render bad data, so we only want to render the `<ProfileName />` component if there is a valid username (e.g., if `user` is not `undefined`, and it has a truthy value for its `name` property). So if `user.name` is truthy, then `<ProfilePage />` will render `<ProfileName />` and pass it `user.name`.
+
+You may be wondering what happens if `user.name` is **not** truthy (e.g., it is `undefined`). Recall that for `&&` short-circuit evaluation, if the first operand is falsy, it returns the first operand, and stops executing. So in our example, the whole expression would result in `undefined`, and the component will never be rendered. This is generally ok, because if you try to render values like `false`, `undefined`, or `null` in React, nothing will actually be rendered to the DOM. So here we can safely ignore the fact that the expression is actually returning a value like `undefined`.
+
+## Potential issues
+
+However, consider the following component, which is code that I've adapted from my [weather app project](https://github.com/rutterjt/weather-app):
+
+```jsx
+export const WeatherDetails = ({ weather }) => {
+  const {
+    humidity,
+    //...
+  } = weather;
+  return (
+    <table>
+      <tbody>
+        {/* ... other table entries */}
+        {humidity && (
+          <tr>
+            <th>Humidity</th>
+            <td>{humidity}%</td>
+          </tr>
+        )}
+        {/* ... other table entries */}
+      </tbody>
+    </table>
+  );
+};
+```
+
+For some background: the component accepts a `weather` object as props, which contains details about the current day's weather. The component then extracts the data and renders it in an HTML table.
+
+The problem is that I get my weather data from an API that doesn't always return a consistent response. For example, if there are no recorded wind gusts in the forecast, the API will send a response that doesn't include `windGusts` at all (instead of just having `weather.windGusts: 0` or something). So in other words, `weather.windGusts` could be a `number` or `undefined`, or maybe even `null`, depending entirely on the API.
+
+Because the API is (frankly) not great about documenting which weather properties may or may not be included in the response, I need to check all of the entries in the API response, to be safe. If I didn't check the data before trying to render it, bad things could happen. I might pass my data to functions that expect one data type (like a `number`), when the actual value is `undefined` (potentially causing a `TypeError`). Or I might render empty data, like:
+
+```html
+<tr>
+  <th>Humidity</th>
+  <td>%</td>
+</tr>
+```
+
+But as it stands now, there's actually a big problem with my component. When `weather.humidity` is present in the data, it should be a number, and the number `0` is falsy. So what would happen if `weather.humidity` was `0`?
+
+You might think that, just like in the examples of short-circuiting evaluation in the previous section, React would skip over it and the following code would render nothing:
+
+```jsx
+{
+  humidity && (
+    <tr>
+      <th>Humidity</th>
+      <td>{humidity}%</td>
+    </tr>
+  );
+}
+```
+
+What _actually_ happens is JavaScript evaluates the `&&` according to the rules mentioned above: it sees that the left-hand operand is falsy (`0`), and returns it. React will see the `0` in our JSX, and assume that we're actually trying to render a `0` to the DOM (after all, we render numbers all the time). So it does just that. React renders a rogue `0` inside our table, and we'll probably get a nice console warning about our page containing invalid HTML. Obviously, this isn't what we were going for.
+
+It turns out that for React, not all falsy values are created equal. If you use short-circuit evaluation with `undefined`, `null`, `false`, or `''`, nothing will be rendered to the DOM. However, numbers are a different story. If you're trying to short-circuit with a number, and that number ends up being `0`, then a single `0` will be rendered to the DOM.
+
+The same thing actually happens with `NaN`. So you also need to be careful about using certain [functions or operations that could return NaN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN), particularly when using data from an API:
+
+```jsx
+const BrokenComponent = ({ numFromApi }) => {
+  // imagine that numFromApi is 'five':
+  const numToRender = parseInt(numFromApi);
+  return <div>{numFromApi && numFromApi}</div>;
+};
+// renders <div>NaN</div>
+```
+
+The consequence of all of this is that if you're not being careful with your code, you could accidentally end up rendering rogue `0`s and `NaN`s to your page or app. And because this likely won't produce any actual errors, it might be some time before you even notice the problem.
+
+## Possible solutions
+
+So what should we do? Well, the issue really only applies to numbers, since the only falsy values that will render are `0` and `NaN`. So any time you use short-circuit evaluations with a variable or expression that could result in a number or `NaN`, you should take precautions. One option would be to just use a ternary operator if `num` could be a number:
+
+```jsx
+return <div>{num ? <SomeComponent /> : null}</div>;
+```
+
+This is a pretty straightforward fix, and it's usually what I do. But you could still use short-circuit evaluation if you explicitly convert the value to a boolean:
+
+```jsx
+return <div>{!!num && <SomeComponent />}</div>;
+```
+
+But there might also be cases where you actually _want_ to render something if `num === 0`, and you're really only trying to check if `num` is `undefined` or `null`. This is probably what we're really going for in our weather app example, since 0% humidity is actually useful weather data to give to our users:
+
+```jsx
+return (
+  <table>
+    <tbody>
+      {/* ... other table entries */}
+      {typeof humidity === 'number' && (
+        <tr>
+          <th>Humidity</th>
+          <td>{humidity}%</td>
+        </tr>
+      )}
+      {/* ... other table entries */}
+    </tbody>
+  </table>
+);
+```
+
+## Conclusion
+
+Short-circuit evaluation is a great tool for conditionally rendering components in React. But if you use it, just make sure to be careful with your types!

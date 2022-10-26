@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, Link, PageProps } from 'gatsby';
+import { graphql, PageProps } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
@@ -22,6 +22,7 @@ import {
   Note,
   CodeNote,
   Icon,
+  StyledLink,
 } from '@/components';
 
 // types
@@ -58,13 +59,17 @@ const shortcodes = {
 /**
  * Custom link for blog posts
  */
-const BlogLink: React.FC<{ to: string }> = ({ to, children }) => (
-  <Link
+const BlogLink: React.FC<{ to: string; className: string }> = ({
+  to,
+  className = '',
+  children,
+}) => (
+  <StyledLink
     to={to}
-    className="text-lg inline-block text-sea-900 dark:text-sea-400 underline hover:no-underline"
+    className={`text-lg inline-block text-slate-600 dark:text-slate-300 group ${className}`}
   >
     {children}
-  </Link>
+  </StyledLink>
 );
 
 const BlogPostTemplate = ({
@@ -103,16 +108,21 @@ const BlogPostTemplate = ({
           <article className="max-w-xl md:max-w-screen-md mx-auto">
             <header className="mb-10 sm:mb-12 md:mb-16">
               <div className="mb-12 lg:mb-16">
-                <BlogLink to="/blog">← Back to posts</BlogLink>
+                <BlogLink to="/blog" className="-ml-2">
+                  <span className="group-hover:animate-arrow inline-block px-2">
+                    ←
+                  </span>
+                  All posts
+                </BlogLink>
               </div>
-              <h1 className="transition-all font-heading font-black text-4xl md:text-5xl lg:text-6xl text-slate-900 dark:text-white mb-3 md:mb-4">
+              <h1 className="transition-all font-heading font-black text-4xl md:text-5xl lg:text-6xl text-slate-900 dark:text-white mb-3 md:mb-4 lg:mb-6 md:leading-[1.1] lg:leading-[1.1]">
                 {node.frontmatter.title}
               </h1>
-              <p className="text-base md:text-lg font-normal mt-0 mb-6 md:mb-8 block">
+              <p className="text-base md:text-lg font-normal mt-0 mb-6 md:mb-8 space-x-4 flex">
                 <time dateTime={node.frontmatter.date}>
                   {format(parseISO(node.frontmatter.date), 'MMMM d, yyyy')}
                 </time>{' '}
-                • {node.timeToRead} minute read
+                <span>•</span> <span>{node.timeToRead} minute read</span>
               </p>
 
               {image && (
@@ -137,40 +147,61 @@ const BlogPostTemplate = ({
                 </figure>
               )}
             </header>
-            <div className="prose md:prose-lg prose-slate mx-auto dark:prose-invert mb-8">
+            <div className="prose md:prose-lg prose-slate mx-auto dark:prose-invert">
               <MDXProvider components={shortcodes}>
                 <MDXRenderer>{node.body}</MDXRenderer>
               </MDXProvider>
               <hr />
             </div>
-            <footer className="prose prose-slate dark:prose-invert md:prose-lg mx-auto">
-              <div className="italic text-sm">
-                <p>
-                  Found a problem with this post? Feel free to{' '}
-                  <a
-                    href={editLink}
-                    className="inline-flex items-center text-sea-900 dark:text-sea-400 underline hover:no-underline"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    suggest an edit <Icon name="github" className="ml-1" />
-                  </a>
-                </p>
-                <hr />
+            <footer className="mx-auto max-w-prose md:text-lg">
+              <div className="flex flex-col items-start sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 sm:items-center flex-wrap not-prose py-8">
+                <StyledLink
+                  as="a"
+                  href={`https://twitter.com/intent/tweet?url=https://www.jonrutter.io/blog/${node.slug}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Tweet this post
+                </StyledLink>
+                <span className="hidden sm:inline text-slate-600 dark:text-slate-300">
+                  •
+                </span>
+                <StyledLink
+                  as="a"
+                  href={editLink}
+                  className="inline-flex items-center"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Edit on GitHub <Icon name="github" className="ml-1" />
+                </StyledLink>
               </div>
+              <hr />
 
-              <div className="flex flex-col space-y-8">
+              <div className="flex flex-col space-y-8 pt-8">
                 {previous && (
                   <div className="self-start">
-                    <BlogLink to={`/blog/${previous.childMdx.slug}`}>
-                      ← {previous.childMdx.frontmatter.title}
+                    <BlogLink
+                      to={`/blog/${previous.childMdx.slug}`}
+                      className="-ml-2"
+                    >
+                      <span className="group-hover:animate-arrow inline-block px-2">
+                        ←
+                      </span>
+                      {previous.childMdx.frontmatter.title}
                     </BlogLink>
                   </div>
                 )}
                 {next && (
                   <div className="self-end">
-                    <BlogLink to={`/blog/${next.childMdx.slug}`}>
-                      {next.childMdx.frontmatter.title} →
+                    <BlogLink
+                      to={`/blog/${next.childMdx.slug}`}
+                      className="-mr-2"
+                    >
+                      {next.childMdx.frontmatter.title}{' '}
+                      <span className="group-hover:animate-arrow inline-block px-2">
+                        →
+                      </span>
                     </BlogLink>
                   </div>
                 )}

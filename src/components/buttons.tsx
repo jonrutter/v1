@@ -2,10 +2,17 @@ import React from 'react';
 import { Link } from 'gatsby';
 import clsx from 'clsx';
 
+// types
+import type {
+  PolymorphicProps,
+  PolymorphicRef,
+  PolymorphicPropsWithRef,
+  PC,
+} from '@/utils/polymorphic';
+
 /* ~~~ Primary Button ~~~ */
 
-interface Props<T extends React.ElementType> {
-  as?: T;
+interface Props {
   className?: string;
 }
 
@@ -19,12 +26,12 @@ export const PrimaryButton = <T extends React.ElementType = typeof Link>({
   className = '',
   children,
   ...rest
-}: Props<T> & Omit<React.ComponentPropsWithoutRef<T>, keyof Props<T>>) => {
+}: PolymorphicProps<T, Props>) => {
   const Tag = as || Link;
   return (
     <Tag
       className={clsx(
-        'group leading-none py-4 px-8 text-heading font-bold relative inline-block rounded-lg overflow-hidden z-10 transition-all shadow-lg text-lg font-heading bg-slate-900 text-white dark:bg-white dark:text-slate-900 outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus:ring-2 focus:ring-offset-2 hover:bg-slate-500 dark:hover:bg-slate-400',
+        'group leading-none py-4 px-8 text-heading font-bold relative inline-block rounded-xl overflow-hidden z-10 transition-all shadow-lg text-lg font-heading bg-slate-900 text-white dark:bg-white dark:text-slate-900 outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus:ring-2 focus:ring-offset-2 hover:bg-slate-600 dark:hover:bg-slate-300',
         className
       )}
       {...rest}
@@ -46,12 +53,12 @@ export const SecondaryButton = <T extends React.ElementType = typeof Link>({
   className = '',
   children,
   ...rest
-}: Props<T> & Omit<React.ComponentPropsWithoutRef<T>, keyof Props<T>>) => {
+}: PolymorphicProps<T, Props>) => {
   const Tag = as || Link;
   return (
     <Tag
       className={clsx(
-        'group leading-none py-[calc(1rem-2px)] px-[calc(2rem-2px)] text-heading font-bold relative inline-block rounded-lg overflow-hidden z-10 transition-all shadow-lg text-lg font-heading bg-white text-slate-500 hover:text-slate-900 focus:text-slate-900 dark:focus:text-white focus:outline-none dark:bg-slate-900 dark:text-slate-300 dark:hover:text-white border-2 border-slate-500 dark:border-slate-300 outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus:ring-2 focus:ring-offset-2 hover:border-slate-900 dark:hover:border-white',
+        'group leading-none py-[calc(1rem-2px)] px-[calc(2rem-2px)] text-heading font-bold relative inline-block rounded-xl overflow-hidden z-10 transition-all shadow-lg text-lg font-heading bg-white text-slate-900  dark:focus:text-white focus:outline-none dark:bg-slate-900 dark:text-white dark:hover:text-white border-2 border-slate-900 dark:border-white outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus:ring-2 focus:ring-offset-2 hover:bg-slate-200 dark:hover:bg-slate-700',
         className
       )}
       {...rest}
@@ -61,11 +68,38 @@ export const SecondaryButton = <T extends React.ElementType = typeof Link>({
   );
 };
 
+/* ~~~ Push button ~~~ */
+
+interface PushButtonProps
+  extends React.PropsWithChildren<React.ComponentPropsWithoutRef<'button'>> {
+  pressed: boolean;
+}
+
+export const PushButton: React.FC<PushButtonProps> = ({
+  pressed,
+  onClick,
+  children,
+  ...rest
+}) => (
+  <button
+    aria-pressed={pressed}
+    onClick={onClick}
+    className={clsx(
+      'rounded-xl transition-all border-2 py-1 px-2 md:py-2 md:px-4 shadow-lg outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus:ring-2 focus:ring-offset-2 font-bold',
+      pressed
+        ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white hover:bg-slate-700 dark:hover:bg-slate-200'
+        : 'border-slate-600 dark:border-slate-200 text-slate-600 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 bg-white dark:bg-slate-900'
+    )}
+  >
+    {children}
+  </button>
+);
+
 /* ~~~ Icon button ~~~ */
 
-interface IBProps<T extends React.ElementType> extends Props<T> {
+type IBProps = {
   fontSize?: number;
-}
+} & Props;
 
 /**
  * Icon button
@@ -76,7 +110,7 @@ export const IconButton = <T extends React.ElementType = typeof Link>({
   className = '',
   children,
   ...rest
-}: IBProps<T> & Omit<React.ComponentPropsWithoutRef<T>, keyof IBProps<T>>) => {
+}: PolymorphicProps<T, IBProps>) => {
   const Tag = as || Link;
   return (
     <Tag
@@ -104,24 +138,28 @@ export const IconButton = <T extends React.ElementType = typeof Link>({
  * A polymorphic svg animated icon button
  *
  * Used for niche cases around the site: such as the hamburger menu button and light/dark toggle
+ *
+ * Supports ref forwarding
  */
-export const AnimatedIconButton = <T extends React.ElementType = 'button'>({
-  as,
-  children,
-  ...rest
-}: IBProps<T> & Omit<React.ComponentPropsWithoutRef<T>, keyof IBProps<T>>) => {
-  const Tag = as || 'button';
+export const RingButton: PC<IBProps, 'button'> = React.forwardRef(
+  <T extends React.ElementType = 'button'>(
+    { as, children, ...rest }: PolymorphicPropsWithRef<T, IBProps>,
+    ref?: PolymorphicRef<T>
+  ) => {
+    const Tag = as || 'button';
 
-  return (
-    <Tag
-      {...rest}
-      className="relative flex items-center justify-center group outline-none w-12 h-12 text-2xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white focus:text-slate-900 dark:focus:text-white"
-    >
-      <div
-        aria-hidden
-        className="absolute top-0 left-0 right-0 bottom-0 rounded-full transition-all-with-shadow border-2 border-slate-300 dark:border-slate-700 group-hover:border-slate-900 dark:group-hover:border-white group-focus:border-slate-900 dark:group-focus:border-white outline-none overflow-hidden"
-      />
-      {children}
-    </Tag>
-  );
-};
+    return (
+      <Tag
+        {...rest}
+        className="relative flex items-center justify-center group outline-none w-12 h-12 text-2xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white focus:text-slate-900 dark:focus:text-white z-0"
+        ref={ref}
+      >
+        <div
+          aria-hidden
+          className="absolute top-0 left-0 right-0 bottom-0 rounded-full transition-all-with-shadow border-2 border-slate-300 dark:border-slate-700 group-hover:border-slate-900 dark:group-hover:border-white group-focus:border-slate-900 dark:group-focus:border-white outline-none overflow-hidden"
+        />
+        {children}
+      </Tag>
+    );
+  }
+);
