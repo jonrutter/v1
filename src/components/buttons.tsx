@@ -31,7 +31,7 @@ export const PrimaryButton = <T extends React.ElementType = typeof Link>({
   return (
     <Tag
       className={clsx(
-        'group leading-none py-4 px-8 text-heading font-bold relative inline-block rounded-xl overflow-hidden z-10 transition-all shadow-lg text-lg font-heading bg-slate-900 text-white dark:bg-white dark:text-slate-900 outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus:ring-2 focus:ring-offset-2 hover:bg-slate-600 dark:hover:bg-slate-300',
+        'group leading-none py-4 px-8 text-heading font-bold relative inline-block rounded-xl overflow-hidden z-10 transition-all shadow-lg text-lg font-heading bg-sky-700 text-white outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus-visible:ring-2 focus-visible:ring-offset-2 hover:bg-sky-600',
         className
       )}
       {...rest}
@@ -58,7 +58,7 @@ export const SecondaryButton = <T extends React.ElementType = typeof Link>({
   return (
     <Tag
       className={clsx(
-        'group leading-none py-[calc(1rem-2px)] px-[calc(2rem-2px)] text-heading font-bold relative inline-block rounded-xl overflow-hidden z-10 transition-all shadow-lg text-lg font-heading bg-white text-slate-900  dark:focus:text-white focus:outline-none dark:bg-slate-900 dark:text-white dark:hover:text-white border-2 border-slate-900 dark:border-white outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus:ring-2 focus:ring-offset-2 hover:bg-slate-200 dark:hover:bg-slate-700',
+        'group leading-none py-[calc(1rem-2px)] px-[calc(2rem-2px)] text-heading font-bold relative inline-block rounded-xl overflow-hidden z-10 transition-all shadow-lg text-lg font-heading bg-transparent text-sky-700  dark:focus-visible:text-white focus:outline-none dark:text-sky-200 border-2 border-sky-700 dark:border-sky-200 outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus-visible:ring-2 focus-visible:ring-offset-2 hover:bg-sky-50 dark:hover:bg-sky-900',
         className
       )}
       {...rest}
@@ -67,33 +67,6 @@ export const SecondaryButton = <T extends React.ElementType = typeof Link>({
     </Tag>
   );
 };
-
-/* ~~~ Push button ~~~ */
-
-interface PushButtonProps
-  extends React.PropsWithChildren<React.ComponentPropsWithoutRef<'button'>> {
-  pressed: boolean;
-}
-
-export const PushButton: React.FC<PushButtonProps> = ({
-  pressed,
-  onClick,
-  children,
-  ...rest
-}) => (
-  <button
-    aria-pressed={pressed}
-    onClick={onClick}
-    className={clsx(
-      'rounded-xl transition-all border-2 py-1 px-2 md:py-2 md:px-4 shadow-lg outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus:ring-2 focus:ring-offset-2 font-bold',
-      pressed
-        ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white hover:bg-slate-700 dark:hover:bg-slate-200'
-        : 'border-slate-600 dark:border-slate-200 text-slate-600 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 bg-white dark:bg-slate-900'
-    )}
-  >
-    {children}
-  </button>
-);
 
 /* ~~~ Icon button ~~~ */
 
@@ -115,7 +88,7 @@ export const IconButton = <T extends React.ElementType = typeof Link>({
   return (
     <Tag
       className={clsx(
-        'relative flex items-center justify-center group outline-none',
+        'relative flex items-center justify-center group outline-none transition-all',
         className
       )}
       style={{
@@ -151,12 +124,12 @@ export const RingButton: PC<IBProps, 'button'> = React.forwardRef(
     return (
       <Tag
         {...rest}
-        className="relative flex items-center justify-center group outline-none w-12 h-12 text-2xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white focus:text-slate-900 dark:focus:text-white z-0"
+        className="relative flex items-center justify-center group outline-none w-12 h-12 text-2xl text-slate-900 dark:text-white z-0 bg-white dark:bg-slate-800 transition-all rounded-full"
         ref={ref}
       >
         <div
           aria-hidden
-          className="absolute top-0 left-0 right-0 bottom-0 rounded-full transition-all-with-shadow border-2 border-slate-300 dark:border-slate-700 group-hover:border-slate-900 dark:group-hover:border-white group-focus:border-slate-900 dark:group-focus:border-white outline-none overflow-hidden"
+          className="absolute top-0 left-0 right-0 bottom-0 rounded-full transition-all-with-shadow border-2 border-slate-400 group-hover:border-slate-900 dark:group-hover:border-white group-focus-visible:border-slate-900 dark:group-focus-visible:border-white outline-none overflow-hidden"
         />
         {children}
       </Tag>
