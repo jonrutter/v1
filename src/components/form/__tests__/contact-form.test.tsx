@@ -68,16 +68,26 @@ describe('Contact Form', () => {
     await userEvent.type(subjectField, testData['your-subject']);
     await userEvent.type(messageField, testData['your-message']);
 
-    userEvent.click(submitButton);
+    await userEvent.click(submitButton);
 
+    // the spinner should appear after clicking the submit button
     await waitFor(() => {
-      let errorMessage = screen.queryByText(/there was an error/i);
-      expect(errorMessage).not.toBeInTheDocument();
+      screen.getByTestId('spinner');
     });
+
+    // on successful submission, there should not be error messages or a spinner
+    await waitFor(() => {
+      expect(screen.queryByText(/there was an error/i)).not.toBeInTheDocument();
+      expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+    });
+
+    // on successful submission, the window should scroll to the top
+    expect(window.scrollTo).toBeCalledTimes(1);
   });
   it('does not render if the form was submitted', () => {
     render(<ContactForm sent={true} setSent={() => null} />);
     expect(screen.queryByRole('form')).not.toBeInTheDocument();
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
   });
 });

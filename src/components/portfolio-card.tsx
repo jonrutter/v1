@@ -83,9 +83,10 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
                   <Chip
                     color={skill.color}
                     as="a"
-                    href={skill.href || ''}
+                    href={skill.href}
                     target="_blank"
                     rel="noreferrer"
+                    data-testid={`chip-${skill.label}`}
                   >
                     <Skill skill={skill} />
                   </Chip>

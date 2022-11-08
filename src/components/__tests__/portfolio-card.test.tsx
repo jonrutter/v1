@@ -17,6 +17,7 @@ const item: PortfolioItemType = {
       label: 'React',
       icon: 'react',
       color: '#61DAFB',
+      href: 'https://reactjs.org/',
     },
     {
       label: 'TypeScript',
@@ -26,7 +27,6 @@ const item: PortfolioItemType = {
     {
       label: 'Material UI',
       icon: 'materialui',
-      color: '#0081CB',
     },
   ],
   tools: [],
@@ -62,11 +62,9 @@ const item: PortfolioItemType = {
   },
 };
 
-const Component = <PortfolioCard item={item} />;
-
 describe('Portfolio Card', () => {
   it('renders the correct content', () => {
-    render(Component);
+    render(<PortfolioCard item={item} />);
 
     // title
     const titleLink = screen.getByText(item.title);
@@ -83,5 +81,13 @@ describe('Portfolio Card', () => {
     item.skills.forEach((skill) => {
       screen.getByText(skill.label);
     });
+
+    // if a skill has an href, it should render as a link
+    const reactSkill = item.skills[0];
+    const reactChip = screen.getByTestId(`chip-${reactSkill.label}`);
+    expect(reactChip).toHaveAttribute('href', reactSkill.href);
+  });
+  it('renders correctly as a reversed card', () => {
+    render(<PortfolioCard item={item} reversed />);
   });
 });

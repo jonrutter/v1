@@ -12,9 +12,23 @@ const Component = (
   </PageWrap>
 );
 
+const BlogComponent = (
+  <PageWrap>
+    <Layout blogPost>
+      <h1>Hello, world!</h1>
+    </Layout>
+  </PageWrap>
+);
+
 describe('Layout', () => {
   it('renders the correct content', () => {
     render(Component);
+
+    // page content should be rendered
+    screen.getByText('Hello, world!');
+  });
+  it('renders correctly as a blog post', () => {
+    render(BlogComponent);
 
     // page content should be rendered
     screen.getByText('Hello, world!');

@@ -5,6 +5,8 @@ import 'whatwg-fetch';
 import { server } from './mock-contact-form/server';
 // intersection observer
 import './__mocks__/intersection-observer';
+// window.scrollTo
+import './__mocks__/scroll-to';
 
 // initialize mock server before each test
 beforeAll(() => server.listen());
