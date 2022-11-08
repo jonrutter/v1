@@ -47,7 +47,7 @@ export const Input = <T extends React.ElementType = 'input'>({
   const className = {
     'border-red-600 focus:ring-red-600 dark:border-red-500 dark:focus:ring-red-500':
       error,
-    'border-slate-400 dark:border-slate-500 focus:ring-slate-600 dark:focus:ring-slate-50':
+    'border-slate-400 dark:border-slate-500 focus:ring-sky-600 dark:focus:ring-sky-400':
       !error,
   };
 
