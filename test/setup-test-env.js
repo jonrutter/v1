@@ -3,9 +3,10 @@ import '@testing-library/jest-dom/extend-expect';
 import 'whatwg-fetch';
 // mock server
 import { server } from './mock-contact-form/server';
-// intersection observer
+
+// mocks window.IntersectionObserver
 import './__mocks__/intersection-observer';
-// window.scrollTo
+// mocks window.scrollTo
 import './__mocks__/scroll-to';
 
 // initialize mock server before each test
