@@ -11,7 +11,10 @@ import { Logo } from '../logo';
  * Renders the site footer.
  */
 export const Footer: React.FC = () => (
-  <footer className="relative w-full min-w-screen overflow-x-hidden pt-40 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-200">
+  <footer
+    className="relative w-full min-w-screen overflow-x-hidden pt-40 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-200"
+    tabIndex={-1}
+  >
     {/* divider */}
     <svg
       height="148"
