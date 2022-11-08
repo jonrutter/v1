@@ -8,13 +8,18 @@ import React, { useState, useEffect, useContext } from 'react';
 // types
 export type ColorTheme = 'light' | 'dark' | undefined;
 
-type ContextValue = {
+type ContextValueType = {
   colorTheme: ColorTheme;
   toggleColorTheme: (colorTheme: ColorTheme) => void;
 };
 
 // context
-const ColorThemeContext = React.createContext<ContextValue>({} as ContextValue);
+const defaultContext: ContextValueType = {
+  colorTheme: undefined,
+  toggleColorTheme: (_: ColorTheme) => null,
+};
+
+const ColorThemeContext = React.createContext<ContextValueType>(defaultContext);
 
 type ProviderProps = {
   initial?: ColorTheme;
@@ -30,8 +35,7 @@ export const ColorThemeContextProvider: React.FC<ProviderProps> = ({
 
   // on first render: reads the initial color theme from the root element and updates state accordingly
   useEffect(() => {
-    const root = window.document.documentElement;
-    const initialColorValue = root.dataset.theme;
+    const initialColorValue = window.document.documentElement.dataset.theme;
     if (initialColorValue === 'light' || initialColorValue === 'dark') {
       setColorTheme(initialColorValue);
     }
@@ -111,6 +115,7 @@ const injectTheme = (): void => {
   // inject the preferred theme, or fall back to 'light'
   const colorTheme: ColorTheme = getPreferredTheme() || 'light';
   root.dataset.theme = colorTheme;
+  console.log('Injecting theme', colorTheme);
   if (colorTheme === 'light') {
     root.classList.add('light');
     root.classList.remove('dark');

@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 // components
 import { ThemeToggle } from '../theme-toggle';
-import { ColorThemeContextProvider } from '@/styles/useColorTheme';
+import { ColorThemeContextProvider } from '@/hooks/useColorTheme';
 
 /*
   Because of the way the site renders the colorTheme, on the initial render the 
@@ -18,14 +18,14 @@ const Component = (
   </ColorThemeContextProvider>
 );
 
-describe('ThemeSwitch component', () => {
+describe('ThemeToggle component', () => {
   it('renders the component correctly', () => {
     render(Component);
     screen.getByLabelText(/toggle dark mode/i);
   });
   it('updates the color theme when toggled', async () => {
     render(Component);
-    let toggle = screen.getByLabelText(/toggle dark mode/i);
+    const toggle = screen.getByLabelText(/toggle dark mode/i);
     // when the toggle is not pressed, the site's colorTheme should be 'light'
     expect(toggle).toHaveAttribute('aria-pressed', 'false');
     expect(toggle).toHaveAttribute('data-colortheme', 'light');
@@ -37,5 +37,8 @@ describe('ThemeSwitch component', () => {
       expect(toggle).toHaveAttribute('aria-pressed', 'true');
       expect(toggle).toHaveAttribute('data-colortheme', 'dark');
     });
+    await userEvent.click(toggle);
+    await userEvent.click(toggle);
+    await userEvent.click(toggle);
   });
 });
