@@ -28,7 +28,6 @@ type DataProps = {
 const IndexPage = ({
   data: { allPortfolioItemsJson, allMdx },
 }: PageProps<DataProps>) => {
-  console.log(allPortfolioItemsJson);
   return (
     <Layout>
       <Seo title="Jon Rutter | Web Developer" pathname="/" />
