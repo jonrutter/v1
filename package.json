@@ -13,6 +13,7 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
+    "preview": "gatsby build && gatsby serve",
     "test": "jest",
     "test:dev": "npm test -- --coverage --watch",
     "test:all": "npm test -- --coverage --watchAll",
