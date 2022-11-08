@@ -17,7 +17,7 @@ export const Spinner: React.FC = () => (
       strokeDasharray="1, 200"
       strokeDashoffset="0"
       fill="none"
-      className="animate-rotate-inner stroke-slate-900 dark:stroke-white stroke-[3]"
+      className="animate-rotate-inner stroke-sky-700 dark:stroke-sky-200 stroke-[3]"
     />
   </svg>
 );
