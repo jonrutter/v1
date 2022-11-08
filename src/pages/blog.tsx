@@ -36,7 +36,7 @@ const PushButton: React.FC<PushButtonProps> = ({
       'rounded-full transition-all border-2 py-1 px-3 md:py-2 md:px-4 shadow-lg outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-800 ring-0 ring-offset-0 focus-visible:ring-2 focus-visible:ring-offset-2 text-base',
       pressed
         ? 'bg-sky-700 dark:bg-sky-50 text-white dark:text-slate-900 border-sky-700 dark:border-sky-50'
-        : 'border-sky-700 text-sky-700 dark:text-slate-200 bg-white dark:bg-slate-800 hover:bg-sky-50 dark:hover:bg-sky-900'
+        : 'border-sky-700 dark:border-sky-200 text-sky-700 dark:text-slate-200 bg-white dark:bg-slate-800 hover:bg-sky-50 dark:hover:bg-sky-900'
     )}
   >
     {children}
