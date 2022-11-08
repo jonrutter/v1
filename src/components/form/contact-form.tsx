@@ -63,6 +63,9 @@ export const ContactForm: React.FC<Props> = ({ sent, setSent }) => {
           throw new Error('Form validation failed');
         setSent(true);
         setError('');
+        if (window?.scrollTo) {
+          window.scrollTo(0, 0);
+        }
       })
       .catch((err) => {
         setError(
@@ -81,7 +84,7 @@ export const ContactForm: React.FC<Props> = ({ sent, setSent }) => {
       onSubmit={handleSubmit(onSubmit)}
       noValidate
       name="contact"
-      className="w-full mx-auto relative text-left text-lg text-slate-900 dark:text-slate-50"
+      className="w-full mx-auto relative text-left text-lg"
       data-testid="contact-form"
     >
       <div className="w-full grid grid-cols-1 gap-y-8 gap-x-4 mb-8 sm:grid-cols-2">
