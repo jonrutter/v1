@@ -17,7 +17,7 @@ const NavLinks: FC = () => (
       <li key={link.name}>
         <StyledLink
           to={link.url}
-          activeClassName="before:scale-x-100 !text-slate-900 dark:!text-slate-50"
+          activeClassName="before:scale-x-100 !text-slate-900 dark:!text-white"
           partiallyActive={link.name === 'Blog'}
         >
           {link.name}
@@ -40,7 +40,6 @@ const SocialLinks: FC = () => (
           rel="noreferrer"
           fontSize={5}
           aria-label={link.name}
-          className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-50 focus:text-slate-900 dark:focus:text-slate-50"
         >
           <Icon name={link.icon} />
         </IconButton>
@@ -107,7 +106,7 @@ export const NavDialog: FC<NavDialogProps> = ({ open, onClose }) => {
             id="nav-drawer"
             data-testid="nav-drawer"
           >
-            <Dialog.Panel className="fixed top-0 right-0 w-10/12 max-w-sm overflow-y-auto transition-all font-heading h-full bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-50 text-xl shadow-xl border-l-[1px] border-l-slate-800/20 dark:border-l-slate-50/20 translate-x-0">
+            <Dialog.Panel className="fixed top-0 right-0 w-10/12 max-w-sm overflow-y-auto font-heading h-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-200 text-xl shadow-xl border-l border-l-slate-800/20 dark:border-l-slate-50/20 translate-x-0">
               <div className="py-8 px-8 md:px-12 flex justify-end">
                 <NavButton open={open} onClick={handleClose} />
               </div>
@@ -140,12 +139,12 @@ export const Nav: FC = () => {
   const closeDialog = () => setDialogOpen(false);
 
   return (
-    <nav className="py-8 lg:py-12 px-6 md:px-12 w-full z-40 transition-all text-slate-900 dark:text-slate-50 motion-reduce:!translate-y-0 bg-transparent">
+    <nav className="py-8 xl:py-12 px-6 md:px-12 w-full z-40 motion-reduce:!translate-y-0 bg-transparent text-slate-600 dark:text-slate-200">
       <div className="max-w-site-full mx-auto flex justify-between items-center">
         <div className="max-w-[3rem] h-auto">
           <Logo />
         </div>
-        <ul className="hidden md:flex items-center space-x-8 font-heading font-medium text-lg text-slate-600 dark:text-slate-300">
+        <ul className="hidden md:flex items-center space-x-8 font-heading font-medium text-lg">
           <NavLinks />
         </ul>
         <ul className="hidden lg:flex space-x-4 items-center">
