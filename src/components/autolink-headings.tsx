@@ -12,19 +12,6 @@ const formatId = (str: string) =>
 
 /* Hash Link Component */
 
-type LinkProps = {
-  to: string;
-  heading: string;
-};
-
-const HashLink: React.FC<LinkProps> = ({ to, heading }) => (
-  <Link
-    to={to}
-    aria-label={`Link to heading ${heading}`}
-    className="not-prose ml-2 opacity-0 group-hover:opacity-100 select-none before:[content:_'#'] focus:opacity-100 inline-block relative after:hidden hover:after:block focus:after:block after:absolute after:bottom-0 after:left-0 after:bg-current after:h-[4px] after:w-full outline-none"
-  />
-);
-
 // helper hook
 const useTitle = (rawTitle: React.ReactNode) => {
   const eleRef = useRef<HTMLHeadingElement>(null);
@@ -38,6 +25,15 @@ const useTitle = (rawTitle: React.ReactNode) => {
   );
 };
 
+const Hash: React.FC = () => (
+  <span
+    aria-hidden
+    className="not-prose ml-2 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 select-none pointer-events-none inline-block outline-none"
+  >
+    #
+  </span>
+);
+
 /* Header components */
 type Props = {
   children: React.ReactNode;
@@ -47,9 +43,14 @@ export const AutoLinkH2: React.FC<Props> = ({ children }) => {
   const [title, ref] = useTitle(children);
   const id = formatId(title);
   return (
-    <h2 ref={ref} id={id} className="not-prose group" data-testid={id}>
-      {children}
-      <HashLink to={`#${id}`} heading={title} />
+    <h2 ref={ref} id={id} className="not-prose" data-testid={id}>
+      <Link
+        to={`#${id}`}
+        className="not-prose hover:underline focus-visible:underline group outline-none"
+      >
+        {children}
+        <Hash />
+      </Link>
     </h2>
   );
 };
@@ -59,8 +60,13 @@ export const AutoLinkH3: React.FC<Props> = ({ children }) => {
   const id = formatId(title);
   return (
     <h3 ref={ref} id={id} className="not-prose group" data-testid={id}>
-      {children}
-      <HashLink to={`#${id}`} heading={title} />
+      <Link
+        to={`#${id}`}
+        className="not-prose hover:underline focus-visible:underline group outline-none"
+      >
+        {children}
+        <Hash />
+      </Link>
     </h3>
   );
 };
