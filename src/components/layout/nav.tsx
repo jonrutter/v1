@@ -182,13 +182,16 @@ export const NavContent: FC = () => {
           <NavDialog open={dialogOpen} onClose={closeDialog} />
         </div>
       </nav>
-      <div className="block pt-24" />
     </>
   );
 };
 
 export const Nav: FC = () => (
-  <ClientOnly>
-    <NavContent />
-  </ClientOnly>
+  <>
+    <ClientOnly>
+      <NavContent />
+    </ClientOnly>
+    {/* always render underlying spacing, to prevent layout shifts */}
+    <div className="block pt-24" />
+  </>
 );
