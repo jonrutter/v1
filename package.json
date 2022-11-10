@@ -91,5 +91,8 @@
       "prettier --ignore-path .gitignore --check",
       "jest --passWithNoTests --bail --onlyChanged --watchAll=false --findRelatedTests"
     ]
+  },
+  "volta": {
+    "node": "18.12.1"
   }
 }
