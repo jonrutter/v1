@@ -1,4 +1,4 @@
-import React, { useState, FC, Fragment, useEffect } from 'react';
+import React, { useState, FC, Fragment } from 'react';
 import clsx from 'clsx';
 
 // components
@@ -143,12 +143,6 @@ export const NavContent: FC = () => {
   const toggleDialog = () => setDialogOpen((open) => !open);
   const closeDialog = () => setDialogOpen(false);
   const { scrollDir, scrolled } = useScroll();
-  console.log(scrolled, scrollDir);
-  console.log(window.scrollY);
-
-  useEffect(() => {
-    console.log(window.scrollY);
-  });
 
   return (
     <>
@@ -158,7 +152,8 @@ export const NavContent: FC = () => {
           scrolled ? 'bg-white dark:bg-slate-800 shadow-lg' : 'bg-transparent',
           scrollDir === 'up' || !scrolled
             ? 'translate-y-0'
-            : '-translate-y-24 md:-translate-y-28'
+            : '-translate-y-24 md:-translate-y-28',
+          'focus-within:!translate-y-0'
         )}
       >
         <div className="max-w-site-full mx-auto flex justify-between items-center">
