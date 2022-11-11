@@ -21,33 +21,33 @@ describe('AutoLinkH2', () => {
   });
   it('has the correct id', () => {
     render(TestH2);
-    const heading = screen.getByText(/test heading two/i);
+    const heading = screen.getByTestId('test-heading-two');
     expect(heading).toHaveAttribute('id', 'test-heading-two');
   });
   it('correctly renders the link', () => {
     render(TestH2);
-    const link = screen.getByLabelText(/link to heading/i);
+    const link = screen.getByText(/test heading/i);
     expect(link).toHaveAttribute('href', `#test-heading-two`);
   });
   it('correctly renders embedded text', () => {
     render(<H2>{code}</H2>);
     let heading = screen.getByTestId('test-usetitle-with-code');
     expect(heading).toHaveProperty('id', 'test-usetitle-with-code');
-    const link = screen.getByLabelText(/link to heading/i);
+    const link = screen.getByText(/with code/i);
     expect(link).toHaveAttribute('href', `#test-usetitle-with-code`);
   });
   it('correctly removes special characters', () => {
     render(<H2>{specialChars}</H2>);
     let heading = screen.getByTestId('title-with-special-chars');
     expect(heading).toHaveProperty('id', 'title-with-special-chars');
-    const link = screen.getByLabelText(/link to heading/i);
+    const link = screen.getByText(/title/i);
     expect(link).toHaveAttribute('href', `#title-with-special-chars`);
   });
   it('correctly formats titles with numbers', () => {
     render(<H2>Top 10 projects</H2>);
     let heading = screen.getByTestId('top-10-projects');
     expect(heading).toHaveProperty('id', 'top-10-projects');
-    const link = screen.getByLabelText(/link to heading/i);
+    const link = screen.getByText(/projects/i);
     expect(link).toHaveAttribute('href', `#top-10-projects`);
   });
 });
@@ -59,33 +59,33 @@ describe('AutoLinkH3', () => {
   });
   it('has the correct id', () => {
     render(TestH3);
-    const heading = screen.getByText(/test heading three/i);
+    const heading = screen.getByTestId('test-heading-three');
     expect(heading).toHaveAttribute('id', 'test-heading-three');
   });
   it('correctly renders the link', () => {
     render(TestH3);
-    const link = screen.getByLabelText(/link to heading/i);
+    const link = screen.getByText(/test heading/i);
     expect(link).toHaveAttribute('href', `#test-heading-three`);
   });
   it('correctly renders embedded text', () => {
     render(<H3>{code}</H3>);
     let heading = screen.getByTestId('test-usetitle-with-code');
     expect(heading).toHaveProperty('id', 'test-usetitle-with-code');
-    const link = screen.getByLabelText(/link to heading/i);
+    const link = screen.getByText(/with code/i);
     expect(link).toHaveAttribute('href', `#test-usetitle-with-code`);
   });
   it('correctly removes special characters', () => {
     render(<H3>{specialChars}</H3>);
     let heading = screen.getByTestId('title-with-special-chars');
     expect(heading).toHaveProperty('id', 'title-with-special-chars');
-    const link = screen.getByLabelText(/link to heading/i);
+    const link = screen.getByText(/title/i);
     expect(link).toHaveAttribute('href', `#title-with-special-chars`);
   });
   it('correctly formats titles with numbers', () => {
     render(<H3>Top 10 projects</H3>);
     let heading = screen.getByTestId('top-10-projects');
     expect(heading).toHaveProperty('id', 'top-10-projects');
-    const link = screen.getByLabelText(/link to heading/i);
+    const link = screen.getByText(/projects/i);
     expect(link).toHaveAttribute('href', `#top-10-projects`);
   });
 });

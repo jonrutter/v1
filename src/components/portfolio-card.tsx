@@ -4,7 +4,7 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 
 // components
 import { Icon, IconButton, StyledLink } from '@/components';
-import { Chip } from '../chips';
+import { Chip } from './chips';
 
 // types
 import { SkillType, PortfolioItemType } from '@/types';
@@ -18,8 +18,10 @@ type PCardProps = {
 
 const Skill = ({ skill }: { skill: SkillType }) => (
   <div style={{ color: skill.color }} className="flex items-center">
-    {skill.icon && <Icon name={skill.icon} className="mr-2 dark:text-white" />}
-    <span className="text-slate-700 dark:text-slate-200 leading-none">
+    {skill.icon && (
+      <Icon name={skill.icon} className="mr-2 dark:text-slate-200" />
+    )}
+    <span className="text-slate-600 dark:text-slate-200 leading-none">
       {skill.label}
     </span>
   </div>
@@ -52,13 +54,13 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
       </div>
       <div
         className={clsx(
-          'row-start-2 row-end-4 md:row-span-full z-[5] bg-white/95 backdrop-blur dark:bg-slate-900/95 py-8 px-6 rounded-xl shadow-lg place-self-end md:place-self-auto',
+          'row-start-2 row-end-4 md:row-span-full z-[5] bg-white/95 backdrop-blur dark:bg-slate-700/95 text-slate-600 dark:text-slate-200 py-8 px-6 rounded-xl shadow-lg place-self-end md:place-self-auto',
           reversed
             ? 'col-start-1 col-end-11 md:col-start-1 md:col-end-10 lg:col-end-7'
             : 'col-start-3 col-end-13 md:col-start-4 md:col-end-13 lg:col-start-7'
         )}
       >
-        <h3 className="mb-1 lg:mb-2 font-heading font-bold text-2xl text-slate-900 dark:text-slate-50">
+        <h3 className="mb-1 lg:mb-2 font-heading font-bold text-2xl text-slate-900 dark:text-white">
           <StyledLink
             as="a"
             href={url}
@@ -81,9 +83,10 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
                   <Chip
                     color={skill.color}
                     as="a"
-                    href={skill.href || ''}
+                    href={skill.href}
                     target="_blank"
                     rel="noreferrer"
+                    data-testid={`chip-${skill.label}`}
                   >
                     <Skill skill={skill} />
                   </Chip>

@@ -44,6 +44,13 @@ export const Input = <T extends React.ElementType = 'input'>({
   const type =
     as === 'textarea' ? undefined : name === 'your-email' ? 'email' : 'text';
 
+  const className = {
+    'border-red-600 focus:ring-red-600 dark:border-red-500 dark:focus:ring-red-500':
+      error,
+    'border-slate-400 dark:border-slate-500 focus:ring-sky-600 dark:focus:ring-sky-400':
+      !error,
+  };
+
   return (
     <>
       <Label htmlFor={name} required>
@@ -51,10 +58,8 @@ export const Input = <T extends React.ElementType = 'input'>({
       </Label>
       <Tag
         className={clsx(
-          'w-full min-w-full rounded-xl py-2 px-4 transition-all appearance-none bg-white dark:bg-slate-900 border-2 dark:text-white outline-none focus:outline-none focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-900 focus:ring-2',
-          !!error
-            ? 'border-red-600 focus:ring-red-600'
-            : 'border-slate-400 dark:border-slate-500 focus:ring-slate-900 dark:focus:ring-white',
+          'w-full min-w-full rounded-xl py-2 px-4 transition-all appearance-none bg-white dark:bg-slate-800 border-2 dark:text-white outline-none focus:outline-none focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-900 focus:ring-2',
+          className,
           as === 'textarea' && 'resize-vertical h-40'
         )}
         {...register(name, { required, pattern })}

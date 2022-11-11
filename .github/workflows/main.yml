@@ -13,7 +13,7 @@ jobs:
   Typecheck:
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -26,7 +26,7 @@ jobs:
   Lint:
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -39,7 +39,7 @@ jobs:
   Tests:
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -51,7 +51,7 @@ jobs:
   Build:
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

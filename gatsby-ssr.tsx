@@ -13,7 +13,7 @@ import '@fontsource/poppins/900.css';
 import { PageWrap } from '@/components/app';
 
 // light/dark theme
-import { InjectInitialTheme } from '@/styles/useColorTheme';
+import { InjectInitialTheme } from '@/hooks/useColorTheme';
 
 // tailwind
 import '@/styles/main.css';

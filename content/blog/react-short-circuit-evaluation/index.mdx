@@ -1,5 +1,5 @@
 ---
-title: The Potential Pitfalls of Short-Circuit Evaluation in React
+title: The Pitfalls of React Short-Circuit Evaluation
 date: '2022-08-18'
 featured_image: ./images/featured.jpg
 featured_image_alt: A pedestrian traffic light, with don't walk hand and zero seconds remaining
@@ -19,7 +19,7 @@ const Component = ({ input }) => {
 // if input is falsy -> `<div></div>`
 ```
 
-Many developers prefer using short-circuit evaluation because it's a little more concise than an explicit conditional, like a ternary operator:
+Many developers like using short-circuit evaluation because it's a bit more concise than an explicit conditional, like a ternary operator:
 
 ```jsx
 const Component = ({ input }) => {
@@ -27,7 +27,7 @@ const Component = ({ input }) => {
 };
 ```
 
-Although this is a valid and useful React pattern, there are a couple potential pitfalls that React developers can unwittingly fall into when using short-circuit evaluation. This blog post will give a brief overview of short-circuit evaluation, why it works, what kind of issues you could face with it, and how to use this syntax safely.
+Although short-circuit evaluation is a valid and useful React pattern, there are a couple potential traps that React developers can unwittingly fall into when using it. This blog post will give a brief overview of short-circuit evaluation, why it works, what kind of issues you could face with it, and how to use this syntax safely.
 
 ## What is it, and why does it work?
 
@@ -43,7 +43,7 @@ const varTwo = false || 'B';
 // varTwo === 'B'
 ```
 
-This works because logical operators in JavaScript don't function exactly as you might expect. You're probably used to seeing logical operators in `if` statements, like:
+The result of the code above may be surprising to you, especially if you're used to seeing logical operators in `if` statements, like:
 
 ```javascript
 if (5 === 5 && true === true) {
@@ -51,7 +51,7 @@ if (5 === 5 && true === true) {
 }
 ```
 
-So it would be natural to think think that logical operators return a boolean value, based on a comparison of their operands. However, this isn't technically what happens. Logical operators actually return **one of their operands**, based on a fairly obscure set of rules.
+It would be natural to think that `varOne` and `varTwo` would both have values of `true`, since you're probably used to seeing logical operators like `&&` and `||` used to return a boolean, in a conditional statement. However, this isn't technically how logical operators work. Logical operators actually return **one of their operands**, based on a fairly obscure set of rules.
 
 The way the [logical AND operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND) (`&&`) works is that it starts evaluating the operands, from left to right, and returns the value of the first operand if it can be converted to `false`. Otherwise it evaluates and returns the value of the second operand, regardless of its truthiness. So for example:
 
@@ -97,7 +97,7 @@ An important thing to note about short-circuiting evaluation is that it stops ev
 console.log(false && someDangerousCode());
 console.log(true || someDangerousCode());
 // in both cases, someDangerousCode() will NOT run,
-// because the code can stops on the first operand
+// because the code stops on the first operand
 
 // BUT:
 console.log(true && someDangerousCode());
@@ -130,7 +130,7 @@ You may be wondering what happens if `user.name` is **not** truthy (e.g., it is 
 
 ## Potential issues
 
-However, consider the following component, which is code that I've adapted from my [weather app project](https://github.com/rutterjt/weather-app):
+However, consider the following component, which is code that I've adapted from a [weather app project](https://github.com/rutterjt/weather-app) that I built:
 
 ```jsx
 export const WeatherDetails = ({ weather }) => {
@@ -157,14 +157,14 @@ export const WeatherDetails = ({ weather }) => {
 
 For some background: the component accepts a `weather` object as props, which contains details about the current day's weather. The component then extracts the data and renders it in an HTML table.
 
-The problem is that I get my weather data from an API that doesn't always return a consistent response. For example, if there are no recorded wind gusts in the forecast, the API will send a response that doesn't include `windGusts` at all (instead of just having `weather.windGusts: 0` or something). So in other words, `weather.windGusts` could be a `number` or `undefined`, or maybe even `null`, depending entirely on the API.
+The problem is that I get my weather data from an API that doesn't always return a consistent response. For example, if there are no recorded wind gusts in the forecast, the API will send a response that doesn't include `windGusts` at all (instead of something like `weather.windGusts: 0`). So in other words, `weather.windGusts` could be a `number` or `undefined`, or maybe even `null`, depending entirely on the API.
 
 Because the API is (frankly) not great about documenting which weather properties may or may not be included in the response, I need to check all of the entries in the API response, to be safe. If I didn't check the data before trying to render it, bad things could happen. I might pass my data to functions that expect one data type (like a `number`), when the actual value is `undefined` (potentially causing a `TypeError`). Or I might render empty data, like:
 
 ```html
 <tr>
-  <th>Humidity</th>
-  <td>%</td>
+  <th>Wind Gusts</th>
+  <td>mph</td>
 </tr>
 ```
 
@@ -198,7 +198,7 @@ const BrokenComponent = ({ numFromApi }) => {
 // renders <div>NaN</div>
 ```
 
-The consequence of all of this is that if you're not being careful with your code, you could accidentally end up rendering rogue `0`s and `NaN`s to your page or app. And because this likely won't produce any actual errors, it might be some time before you even notice the problem.
+The consequence of all of this is that if you're not being careful with your code, you could accidentally end up rendering rogue `0`s and `NaN`s to your page or app. And because this likely won't produce any actual errors, it could be a long time before you even notice the problem.
 
 ## Possible solutions
 
@@ -214,7 +214,7 @@ This is a pretty straightforward fix, and it's usually what I do. But you could 
 return <div>{!!num && <SomeComponent />}</div>;
 ```
 
-But there might also be cases where you actually _want_ to render something if `num === 0`, and you're really only trying to check if `num` is `undefined` or `null`. This is probably what we're really going for in our weather app example, since 0% humidity is actually useful weather data to give to our users:
+But there might also be cases where you actually _want_ to render something if `num === 0`. For example, in our weather app, 0% humidity is actually useful weather data to give to our users, so we really just want to make sure it's a `number`, and not `undefined` or `null`:
 
 ```jsx
 return (
@@ -235,4 +235,6 @@ return (
 
 ## Conclusion
 
-Short-circuit evaluation is a great tool for conditionally rendering components in React. But if you use it, just make sure to be careful with your types!
+After all this, you might be asking, "why should I use short-circuit evaluation at all, when I could just use the ternary operator?" And sure, if you wanted to be safe, you could stop using short-circuit evaluation entirely, and just rely on ternary operators to conditionally render JSX. Your code wouldn't be that much longer, and nothing bad would happen. That would be a totally valid choice to make!
+
+But I'm a big proponent of not throwing the baby out with the bathwater. I think short-circuit evaluation is a great declarative syntax for conditionally rendering components in React. It's just that, like a lot of things with JavaScript, the trick is understanding the nuances of how it works behind the scenes, so you can learn how to use it safely.

@@ -5,12 +5,12 @@ import { graphql, PageProps } from 'gatsby';
 import {
   Layout,
   Seo,
-  HomeHero,
-  CTABox,
+  Hero,
   PortfolioCard,
   BlogCard,
   Section,
   PrimaryButton,
+  SecondaryButton,
 } from '@/components';
 
 // types
@@ -28,12 +28,36 @@ type DataProps = {
 const IndexPage = ({
   data: { allPortfolioItemsJson, allMdx },
 }: PageProps<DataProps>) => {
-  console.log(allPortfolioItemsJson);
   return (
-    <Layout withCTA>
+    <Layout>
       <Seo title="Jon Rutter | Web Developer" pathname="/" />
-      <HomeHero />
-      <div className="bg-slate-50 dark:bg-slate-800">
+      <Hero
+        title={
+          <>
+            <div>Building websites </div>
+            <div>that shine</div>
+          </>
+        }
+      >
+        <p className="mb-4">
+          Hi! I'm Jon: a front-end web developer specializing in building fast,
+          accessible, and responsive websites with React.
+        </p>
+        <p className="mb-4">
+          I'm passionate about building great websites for my clients,
+          contributing to open source projects, and expanding my knowledge about
+          web and software development.
+        </p>
+        <div className="text-center md:text-left mt-8 md:mt-8 flex flex-col sm:flex-row sm:items-center space-y-6 sm:space-y-0 sm:space-x-8">
+          <PrimaryButton to="/contact" className="w-full sm:w-auto">
+            Contact me
+          </PrimaryButton>
+          <SecondaryButton to="/portfolio" className="w-full sm:w-auto">
+            My portfolio
+          </SecondaryButton>
+        </div>
+      </Hero>
+      <div className="bg-slate-100 dark:bg-slate-900">
         <Section>
           <h2 className="font-heading font-black text-3xl md:text-4xl lg:text-5xl mb-8 md:mb-10 lg:mb-12 text-center text-slate-900 dark:text-slate-50">
             Recent projects
@@ -75,7 +99,6 @@ const IndexPage = ({
             <PrimaryButton to="/blog">More posts</PrimaryButton>
           </div>
         </Section>
-        <CTABox />
       </div>
     </Layout>
   );

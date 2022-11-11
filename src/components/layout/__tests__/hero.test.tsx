@@ -4,7 +4,7 @@ import { render, screen } from 'test-utils';
 import { Hero } from '../hero';
 
 const Component: React.FC<{ short?: boolean }> = ({ short = false }) => (
-  <Hero title="Test Title" short={short}>
+  <Hero title="Test Title">
     <p>This is a test Hero component.</p>
   </Hero>
 );

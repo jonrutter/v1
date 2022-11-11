@@ -6,7 +6,7 @@ import { Icon } from './icon';
 import { RingButton } from './buttons';
 
 // hooks
-import { useColorThemeContext, ColorTheme } from '@/styles/useColorTheme';
+import { useColorThemeContext, ColorTheme } from '@/hooks/useColorTheme';
 
 type SlideIndex = 0 | 1 | 2 | 3;
 

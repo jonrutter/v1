@@ -34,6 +34,7 @@ module.exports = {
   coveragePathIgnorePatterns: [
     '/node_modules/',
     '<rootDir>/test/mock-contact-form/',
-    '<rootDir>/src/styles/useColorTheme.tsx',
+    '<rootDir>/src/hooks/useColorTheme.tsx',
+    'index.tsx',
   ],
 };

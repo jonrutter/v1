@@ -7,12 +7,15 @@ import { Tab } from '@headlessui/react';
 import {
   Layout,
   Seo,
-  PortfolioHero,
+  Hero,
   PortfolioCard,
   Section,
-  CTABox,
   PrimaryButton,
+  SecondaryButton,
 } from '@/components';
+
+// data
+import { links } from '@/config';
 
 // types
 import { PortfolioItemType } from '@/types';
@@ -37,10 +40,10 @@ const StyledTab: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <Tab
     className={({ selected }) =>
       clsx(
-        'px-4 py-2 outline-none border-none active:bg-transparent focus:ring-2 ring-slate-900 focus:ring-offset-2 focus:ring-offset-white focus:dark:ring-offset-slate-900 dark:ring-slate-50 rounded-xl',
+        'px-4 py-2 outline-none border-none active:bg-transparent focus-visible:ring-2 ring-slate-900 focus-visible:ring-offset-2 focus-visible:ring-offset-white focus-visible:dark:ring-offset-slate-700 dark:ring-white rounded-xl',
         selected
-          ? 'text-slate-50 dark:text-slate-900 bg-slate-900 dark:bg-slate-50'
-          : 'text-slate-900 dark:text-slate-50 hover:bg-slate-200 dark:hover:bg-slate-700'
+          ? 'text-white bg-sky-700 dark:text-slate-800 dark:bg-slate-50'
+          : 'bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-50 hover:bg-sky-100 dark:hover:bg-slate-600'
       )
     }
   >
@@ -67,17 +70,37 @@ const PortfolioPage = ({
   const appContent = useCreatePortfolio(appItems, expanded);
 
   return (
-    <Layout withCTA>
+    <Layout>
       <Seo title="Jon Rutter | Web Developer" pathname="/portfolio" />
-      <PortfolioHero />
-      <div className="bg-slate-50 dark:bg-slate-800">
+      <Hero title="My portfolio">
+        <p className="mb-4">
+          Here are some of my recent projects and client websites.
+        </p>
+        <p className="mb-4">
+          Feel free to also check out my GitHub account to see more of my
+          projects and open source contributions.
+        </p>
+        <div className="text-center md:text-left mt-8 md:mt-8 flex flex-col sm:flex-row sm:items-center space-y-6 sm:space-y-0 sm:space-x-8">
+          <PrimaryButton to="/contact" className="w-full sm:w-auto">
+            Contact me
+          </PrimaryButton>
+          <SecondaryButton
+            as="a"
+            href={links.github}
+            className="w-full sm:w-auto"
+          >
+            My GitHub
+          </SecondaryButton>
+        </div>
+      </Hero>
+      <div className="bg-slate-100 dark:bg-slate-900">
         <Section>
-          <h2 className="font-heading font-black text-3xl md:text-4xl lg:text-5xl mb-8 md:mb-10 lg:mb-12 text-center text-slate-900 dark:text-slate-50">
+          <h2 className="font-heading font-black text-3xl md:text-4xl lg:text-5xl mb-8 md:mb-10 lg:mb-12 text-center text-slate-900 dark:text-white">
             My portfolio
           </h2>
           <Tab.Group>
             <div className="flex items-center justify-center mb-6 lg:mb-10">
-              <Tab.List className="p-1 text-lg rounded-xl relative z-10 gap-1 grid grid-cols-2 overflow-hidden shadow-lg bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-50 transition-all">
+              <Tab.List className="p-1 text-lg rounded-xl relative z-10 gap-1 grid grid-cols-2 overflow-hidden shadow-lg bg-white text-slate-900 dark:bg-slate-700 dark:text-white">
                 <StyledTab>Websites</StyledTab>
                 <StyledTab>Apps</StyledTab>
               </Tab.List>
@@ -104,7 +127,6 @@ const PortfolioPage = ({
             </PrimaryButton>
           </div>
         </Section>
-        <CTABox />
       </div>
     </Layout>
   );
@@ -112,6 +134,7 @@ const PortfolioPage = ({
 
 export default PortfolioPage;
 
+// page query
 export const query = graphql`
   query {
     allPortfolioItemsJson {

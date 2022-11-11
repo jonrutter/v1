@@ -6,9 +6,9 @@ import { Layout, Seo, Hero, PrimaryButton } from '@/components';
 const NotFoundPage: React.FC = () => (
   <Layout>
     <Seo title="404: Not Found" />
-    <Hero title="Oops!" subtitle="404: Not Found">
+    <Hero title="404: Not Found">
       <p className="mb-4">
-        The page you were looking for could not be found. It may have been
+        Oops! The page you were looking for could not be found. It may have been
         moved, deleted, or never existed at all. Sorry about that!
       </p>
       <div className="text-center md:text-left mt-12 md:mt-8 mb-16">

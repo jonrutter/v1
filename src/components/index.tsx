@@ -1,7 +1,5 @@
-export * from './cards';
 export * from './form';
 export * from './layout';
-export * from './sections';
 
 export * from './app';
 export * from './buttons';
@@ -14,3 +12,5 @@ export * from './seo';
 export * from './spinner';
 export * from './styled-link';
 export * from './theme-toggle';
+export * from './blog-card';
+export * from './portfolio-card';

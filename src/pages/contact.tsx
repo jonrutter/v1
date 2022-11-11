@@ -10,16 +10,24 @@ const ContactPage = () => {
     <Layout>
       <Seo title="Contact Me | Jon Rutter" pathname="/contact" />
       {!sent ? (
-        <Hero title="Contact me" subtitle="Let's get in touch" short>
-          <p className="mb-4">
-            Use this form to get in touch with me about anything web development
-            related, or to just to say hello. I'll get back to you as soon as I
-            can!
-          </p>
-        </Hero>
+        <>
+          <Hero title="Contact me">
+            <p className="mb-4">I'd love to hear from you!</p>
+            <p className="mb-4">
+              Use this form to get in touch with me about anything web
+              development related, or to just to say hello. I'll try to get back
+              to you as soon as I can!
+            </p>
+          </Hero>
+          <div className="pt-12 pb-16 px-6 md:px-12 bg-slate-100 dark:bg-slate-900">
+            <div className="max-w-site-sm md:max-w-site-md mx-auto">
+              <ContactForm sent={sent} setSent={setSent} />
+            </div>
+          </div>
+        </>
       ) : (
-        <Hero title="Message sent" subtitle="Thank you!" short>
-          <p className="mb-4">
+        <Hero title="Message sent">
+          <p className="mb-8">
             Thanks for your message! I'll get back to you as soon as I can!{' '}
           </p>
           <PrimaryButton as={Link} to="/">
@@ -27,12 +35,6 @@ const ContactPage = () => {
           </PrimaryButton>
         </Hero>
       )}
-
-      <div className="pb-16 px-6 md:px-12 transition-all bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-50">
-        <div className="max-w-site-sm md:max-w-site-md mx-auto">
-          <ContactForm sent={sent} setSent={setSent} />
-        </div>
-      </div>
     </Layout>
   );
 };

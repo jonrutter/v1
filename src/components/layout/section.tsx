@@ -22,7 +22,7 @@ export const Section = <T extends React.ElementType = 'section'>({
   return (
     <div
       className={clsx(
-        'py-12 sm:py-16 md:py-20 px-6 md:px-12 transition-all bg-inherit text-inherit',
+        'py-12 sm:py-16 md:py-20 px-6 md:px-12 bg-inherit text-inherit',
         className
       )}
     >

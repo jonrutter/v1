@@ -6,7 +6,7 @@ type Props = {
 };
 
 export const Label: React.FC<Props> = ({ htmlFor, required, children }) => (
-  <label htmlFor={htmlFor}>
+  <label htmlFor={htmlFor} className="block mb-1">
     {children}
     {required && <abbr title="required">*</abbr>}
   </label>

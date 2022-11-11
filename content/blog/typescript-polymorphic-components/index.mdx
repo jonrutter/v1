@@ -1,35 +1,37 @@
 ---
 title: Create Polymorphic React Components With TypeScript
-date: '2022-07-19'
+date: '2022-11-10'
 featured_image: ./images/featured.jpg
 featured_image_alt: Rubik's cubes stacked on top of each other
 featured_image_credit: Fletcher Pride
 featured_image_link: https://unsplash.com/photos/liMvhbUq4Xg
-excerpt: Build your own strongly typed polymorphic React components with ref forwarding.
+excerpt: Build your own strongly typed polymorphic components with ref forwarding.
 topics: ['react', 'typescript']
 ---
 
-Polymorphic components are a React pattern for reusing code, which involves designing a component to accept a prop that modifies the type of the underlying node.
+Polymorphic components are a React pattern for code reuse, which involves designing a component to accept a prop that modifies the type of the underlying node.
 
-You may be familiar with polymorphic components if you've worked with certain React component libraries. For example, [Material UI](https://mui.com/) supports passing a `component` prop to some of its components to change the base HTML tag:
+You may be familiar with polymorphic components if you've worked with certain React component libraries. For example, [Material UI](https://mui.com/) supports passing a `component` prop to some of its components to change their base HTML tag:
 
+<!-- prettier-ignore -->
 ```jsx
 import React from 'react';
 import Box from '@mui/material/Box';
 
-// renders as <section>
-export const BoxAsSection = () => (
+const BoxAsSection = () => (
   <Box component="section">This is a section</Box>
 );
+// -> <section>This is a section</section>
 
-// renders as <main>
-export const BoxAsMain = () => (
+const BoxAsMain = () => (
   <Box component="main">This is the main content</Box>
 );
+// -> <main>This is the main content</main>
 ```
 
 [Reach UI](https://reach.tech/) has a similar api, only it uses `as` as the prop:
 
+<!-- prettier-ignore -->
 ```jsx
 import React from 'react';
 import {
@@ -39,26 +41,29 @@ import {
   AccordionPanel,
 } from '@reach/accordion';
 
-export const AccordionExample = () => (
+const AccordionExample = () => (
   <Accordion>
     <AccordionItem as="section">
       <h3>
-        <AccordionButton>Button to expand the accordion</AccordionButton>
+        <AccordionButton>
+          Button to expand the accordion
+        </AccordionButton>
       </h3>
-      <AccordionPanel>Accordion content</AccordionPanel>
+      <AccordionPanel>
+        Accordion content
+      </AccordionPanel>
     </AccordionItem>
-    // ...
   </Accordion>
 );
 ```
 
-While you may not need to use polymorphic components in your own code every day, they can be very helpful in certain cases for reusing logic or styling between components that only really differ in their underlying tags.
+While you may not need to use polymorphic components in your own code every day, they can be very helpful in certain cases to avoid having to build multiple components with the same logic or styling, where the only real difference is the underlying HTML tag they use.
 
-Polymorphic components are simple enough to create with JavaScript, but (as is often the case) TypeScript throws some unexpected curveballs. In this post I'll show you a method for creating your own polymorphic components with TypeScript, by walking you through creating a polymorphic `<Container />` component.
+Polymorphic components are simple enough to create with JavaScript, but (as is often the case) TypeScript throws some unexpected curveballs. In this post I'll show you a method for creating polymorphic components with TypeScript, by walking you through creating a polymorphic `<Container />` component.
 
 <CodeNote href="https://github.com/rutterjt/blog-examples/tree/main/typescript-polymorphic-components" />
 
-## JavaScript Foundation
+## Polymorphic Components in JavaScript
 
 Creating our polymorphic component in JavaScript is fairly straightforward:
 
@@ -75,7 +80,7 @@ export const Container = ({ as, children, ...rest }) => {
 const MainContainer = () => {
   return <Container as="main">Hello, world!</Container>;
 };
-// renders: <main>Hello, world!</main>
+// -> <main>Hello, world!</main>
 ```
 
 <Note color="blue">
@@ -98,38 +103,45 @@ _**Note**: it's important to re-assign `as` to a capitalized variable like `Tag`
 
 ## Enter TypeScript
 
-JavaScript is great, but web developers are increasingly turning to TypeScript to add static type checking to their applications, as this can reduce bugs and greatly improve the development experience.
+JavaScript is great, but developers are increasingly turning to TypeScript to add static type checking to their applications, as this can reduce bugs and greatly improve the development experience.
 
 Without TypeScript, we could accidentally render some wonky and invalid HTML with our polymorphic components.
 
-Consider a polymorphic `<Button />` component that is styled as a button, but is designed to render polymorphically as an `<a>` or a `<button>`. Even though we _intend_ that the component only renders as a button or link, what if a future developer passes in an invalid HTML element, like `as="potato"`, or accidentally writes a typo, like `as="buton"`. Nothing in our JavaScript code would prevent that from happening, or warn us if it does.
+Let's say we wanted to create a polymorphic `<Button />` component, which is designed to be able to render as either a `<button>` or an `<a>` tag. Even though we _intend_ that the component only render as a button or anchor, nothing in our approach above would enforce that.
 
-Also, links and buttons use different attributes. For example: if our `<Button />` was a link, it would need an `href` attribute to tell the link where to point to. But `<button>`s don't support the `href` attribute, so it would be invalid to use an `href` if our component was a button. But, like incorrect element names, nothing in our code would stop us from accidentally passing the wrong attributes to our component.
+Consider the following bugs, none of which would be caught by JavaScript:
 
-So with JavaScript, we might accidentally introduce invalid markup into our code, such as:
-
+<!-- prettier-ignore -->
 ```jsx
 import React from 'react';
 import { Button } from './button';
 
-// element with an invalid attribute
-const BadButton = () => {
-  // buttons aren't supposed to have an 'href'!
-  return (
-    <Button as="button" href="/">
-      Button
-    </Button>
-  );
-};
+// typo in the tag name:
+const TypoButton = () => (
+  <Button as="buton">
+    Button
+  </Button>
+);
+// -> <buton>Button</buton>
 
-// element with an invalid tag type:
-const InvalidTag = () => {
-  // will render as <potato>...</potato>
-  return <Button as="potato">This is totally wrong.</Button>;
-};
+// element with an invalid attribute:
+const InvalidButton = () => (
+  <Button as="button" href="/">
+    Button
+  </Button>
+);
+// -> <button href="/">Button</button>
+
+// element with an unknown element type:
+const InvalidTag = () => (
+  <Button as="potato">
+    Button
+  </Button>
+);
+// -> <potato>Button</potato>
 ```
 
-Both of these components would result in invalid HTML, but JavaScript will happily render them, assuming that this was what we meant to do. Needless to say, that isn't ideal!
+All of these components would result in invalid HTML, but JavaScript will happily render them, assuming that this was what we meant to do. Needless to say, that isn't ideal!
 
 One big benefit of TypeScript is that, if we build our component correctly, it will catch all of these problems immediately and give us a helpful error message right in our editor. As an added bonus, TypeScript can work with our editor to intelligently autocomplete and suggest props based on what we pass with `as`.
 
@@ -157,7 +169,7 @@ Predictably, this code produces a TypeScript error, complaining that 'Tag does n
 
 ![no call signature](./images/error1.png)
 
-To fix the error we need to correctly type `as`. Looking at the React type definitions, there is a built-in React type called `ElementType` that represents a [JSX element or React Component](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts#L70). This seems like the right fit, so let's use that:
+To fix the error we need to correctly type `as`. If you take a look at the React type definitions, you'll see that there's a built-in React type called `ElementType` that represents a [JSX element or React Component](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts#L70). This seems like the right fit, so let's use that:
 
 ```tsx filename=src/components/container.tsx
 import React from 'react';
@@ -175,26 +187,25 @@ export const Container = ({ as, children, ...rest }: Props) => {
 
 The error is gone! By typing `as` as a `React.ElementType`, we get two benefits:
 
-1. We can pass both native HTML elements and custom components to our polymorphic container, and it will render both correctly.
-2. We will now get an error if `as` is not a valid HTML element or a component
+1. We can pass both native HTML elements and custom components to our polymorphic container, and it will understand both.
+2. We will now get an error if `as` is not a valid HTML element or a component.
 
-Great! But our component still isn't ready. Let's try passing some props and see what happens:
+Great! But now let's see what happens when we try to pass props to our new component:
 
+<!-- prettier-ignore -->
 ```tsx filename=src/App.tsx
-export const App = () => {
-  return (
-    <Container as="main" style={{ fontSize: '1.5rem' }}>
-      Hello, world!
-    </Container>
-  );
-};
+export const App = () => (
+  <Container as="main" style={{ fontSize: '1.5rem' }}>
+    Hello, world!
+  </Container>
+);
 ```
 
 ![property does not exist](./images/error2.png)
 
-Uh oh. Now we've got another error. TypeScript complains that "Property 'style' does not exist on type 'IntrinsicAttributes & Props".
+Uh oh. Now we have another error. TypeScript is now complaining that "Property 'style' does not exist on type 'IntrinsicAttributes & Props".
 
-What's happening is that we haven't typed the `style` prop, so TypeScript doesn't know how to deal with it. We could just add `style` to our user-defined `Props`, but what if we wanted to also pass `className`, or some `aria` attributes. Wouldn't it be better if we could just tell TypeScript: "this component should accept all props defined in `Props`, and also all props associated with whatever HTML tag was passed with `as`"?
+So what happened? We haven't typed the `style` prop, so TypeScript doesn't know how to deal with it. We could just add `style` to our user-defined `Props` inside `<Container />`, but what if we wanted to also pass `className`, or some `aria` attributes. Wouldn't it be better if we could just tell TypeScript: "this component should accept all props defined in `Props`, and also all props associated with whatever HTML tag was passed with `as`"?
 
 It turns out that there's a React type that does exactly this: ComponentProps. There are two varieties of ComponentProps that we can use: `ComponentPropsWithoutRef` and `ComponentPropsWithRef`. Later on we'll deal with passing a `ref` to our polymorphic component, but for now let's focus on `ComponentPropsWithoutRef`.
 
@@ -239,17 +250,16 @@ _**Note**: we also needed to provide a default type value of `React.ElementType 
 
 Now, TypeScript will correctly evaluate our props based on what we specify with `as`, so if we try something like:
 
+<!-- prettier-ignore -->
 ```tsx filename=src/App.tsx
-export const App = () => {
-  return (
-    <Container as="main" href="/">
-      Hello, world!
-    </Container>
-  );
-};
+export const App = () => (
+  <Container as="main" href="/">
+    Hello, world!
+  </Container>
+);
 ```
 
-TypeScript will correctly give us an error message, telling us that "Property 'href' does not exist" on our props' type.
+TypeScript will correctly give us an error message, telling us that "Property 'href' does not exist" on our `Props` type.
 
 There's just one more thing we need to do before our component is fully functional. There are possible edge cases where our user-specified props might clash with the default HTML props. For a (somewhat contrived) example, we might want to modify our `<Container />` component to accept an optional `title` prop, as an HTML element to put before the main content:
 
@@ -261,9 +271,9 @@ type Props<T extends React.ElementType> = {
 } & React.ComponentPropsWithoutRef<T>;
 ```
 
-The problem is that ['title' is also a valid HTML attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/title), which is meant to contain information about the element, and usually appears as a tooltip. If we try passing a title as an HTML element to our component now, it will produce an error. There are a number of other little-used or depreciated [HTML attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes) (e.g. 'color', 'bgcolor', 'border', 'height', 'width'), that shadow the sorts of name we might want give to our own props, and thus could also unexpectedly cause problems in our component.
+The problem is that ['title' is also a valid HTML attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/title), which is meant to contain information about the element, and usually appears as a tooltip. If we try passing a title as an HTML element to our component now, it will produce an error. There are a number of other little-used or depreciated [HTML attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes) (e.g. 'color', 'bgcolor', 'border', 'height', 'width'), that shadow the kind of names we might want give to our own props, and thus could also unexpectedly cause problems in our component.
 
-So really what we want is to remove from `ComponentPropsWithoutRef` anything that is also in `Props`. Fortunately, TypeScript has an [Omit utility](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys) that will do just that. Let's restructure our props to make this easier, and update `Props` to use `Omit`:
+So really what we want is to remove from `ComponentPropsWithoutRef` anything that is also in `Props`. Fortunately, TypeScript has an [Omit utility](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys) that will do just that. Let's refactor our props to make this clearer, and update `Props` to use `Omit`:
 
 ```tsx filename=src/components/container.tsx
 type ContainerProps<T extends React.ElementType> = {
@@ -276,9 +286,9 @@ type Props<T extends React.ElementType> = ContainerProps<T> &
   Omit<React.ComponentPropsWithoutRef<T>, keyof ContainerProps<T>>;
 ```
 
-That's a bit complex, so it might warrant some extra explanation:
+That's a bit complex, so let's take a closer look:
 
-1. We've moved the container's props to its own type, `ContainerProps`
+1. We've moved the container-specific props to its own type, `ContainerProps`.
 2. We define our base `Props` to be the union of our new `ContainerProps`, and all elements of `ComponentPropsWithoutRef` that are not also present in `ContainerProps`.
 
 Doing that, we've dynamically filtered `title` out of `ComponentPropsWithoutRef`.
@@ -310,7 +320,7 @@ export const Container = <T extends React.ElementType = 'div'>({
 
 ## Make It Reusable
 
-Our polymorphic component is now working correctly, but it's got some boilerplate that would be annoying to write out every time we want to make a new component polymorphic. Let's refactor our code to make the polymorphic logic reusable.
+Our polymorphic component is now working correctly, but it's not very reusable. Every time we want to create a new polymorphic component, we'll have to copy all this boilerplate. Since we'd like to avoid repeating ourselves, let's refactor our code to make the polymorphic logic reusable.
 
 First let's create a new file, `src/utils/polymorphic.ts`, and give it a basic type export:
 
@@ -319,6 +329,8 @@ import React from 'react';
 
 export type PolymorphicProps<T extends React.ElementType, P = {}> = P;
 ```
+
+Notice that `PolymorphicProps` will accept two type variables: `T`, which is the tag type, and `P`, which represents the component-specific props that we'll eventually need to filter out of `ComponentPropsWithoutRef`.
 
 What can we generalize about all polymorphic components? All polymorphic components will use the `as` prop, so that's a good place to start. Let's extract that to its own type and add it to `PolymorphicProps`:
 
@@ -332,7 +344,7 @@ type As<T extends React.ElementType> = {
 export type PolymorphicProps<T extends React.ElementType, P = {}> = P & As<T>;
 ```
 
-Finally, all that's left is to add the props inherited from `ComponentPropsWithoutRef`. Like `As`, let's extract that to its own type for simplicity, and then add it to `PolymorphicProps`.
+We also need to grab the props that were inherited from `ComponentPropsWithoutRef`, excluding the component props. Like `As`, let's extract that to its own type for simplicity, and then add it to `PolymorphicProps`.
 
 ```typescript filename=src/utils/polymorphic.ts
 import React from 'react';
@@ -434,28 +446,31 @@ export const Container = React.forwardRef(
 
 This code should work, but unfortunately there's a problem: by wrapping our component in `forwardRef`, TypeScript no longer knows how to type the `<Container />` component, so all of our type support is suddenly broken! You can verify this by trying out:
 
+<!-- prettier-ignore -->
 ```tsx filename=src/App.tsx
-export const App = () => {
-  return (
-    <div>
-      <Container as="main" href="/">
-        Oops!
-      </Container>
-    </div>
-  );
-};
+export const App = () => (
+  <div>
+    <Container as="main" href="/">
+      Oops!
+    </Container>
+  </div>
+);
 ```
 
-Oops! That's not what we wanted.
+Well that's not what we wanted.
 
 The solution I found to this problem is to explicitly type the component itself. Here's an example of one way to do that:
 
+<!-- prettier-ignore -->
 ```tsx filename=src/components/container.tsx
 type ContainerType = <T extends React.ElementType = 'div'>(
   props: PolymorphicPropsWithRef<T, Props>
 ) => React.ReactElement | null;
 
-export const Container: ContainerType = // ...
+export const Container: ContainerType = React.forwardRef
+  (
+    // ...
+  );
 ```
 
 Basically what we're doing here is mirroring [React's own component type defintitions](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts#L519), except we're explicitly typing `props` as the `PolymorphicPropsWithRef`.
@@ -480,7 +495,6 @@ This is largely just copied from `ContainerType`, except we've added an optional
 import { PolymorphicComponent } from '../utils/polymorphic';
 
 // `Props` omitted
-
 export const Button: PolymorphicComponent<Props, 'button'> = // ...
 ```
 
@@ -526,4 +540,4 @@ export const Container: PC<Props, 'div'> = React.forwardRef(
 
 ## Summary
 
-That's it! Congratulations, you now have fully functional, strongly typed polymorphic components, with support for ref forwarding. Isn't that neat! Now go out there and build your own React component library! 💪
+That's it! If you made it this far, congratulations! You now have fully functional, strongly typed polymorphic components, with support for ref forwarding.

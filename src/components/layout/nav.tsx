@@ -1,4 +1,5 @@
 import React, { useState, FC, Fragment } from 'react';
+import clsx from 'clsx';
 
 // components
 import { Dialog, Transition } from '@headlessui/react';
@@ -10,6 +11,10 @@ import { ThemeToggle } from '../theme-toggle';
 // data
 import { menu, socialLinks } from '@/config';
 
+// hooks
+import { useScroll } from '@/hooks/useScroll';
+import { ClientOnly } from '@/hooks/useHasMounted';
+
 // ~~~ Nav Bar ~~~
 const NavLinks: FC = () => (
   <>
@@ -17,7 +22,7 @@ const NavLinks: FC = () => (
       <li key={link.name}>
         <StyledLink
           to={link.url}
-          activeClassName="before:scale-x-100 !text-slate-900 dark:!text-slate-50"
+          activeClassName="before:scale-x-100 !text-slate-900 dark:!text-white"
           partiallyActive={link.name === 'Blog'}
         >
           {link.name}
@@ -40,7 +45,6 @@ const SocialLinks: FC = () => (
           rel="noreferrer"
           fontSize={5}
           aria-label={link.name}
-          className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-50 focus:text-slate-900 dark:focus:text-slate-50"
         >
           <Icon name={link.icon} />
         </IconButton>
@@ -78,7 +82,7 @@ export const NavDialog: FC<NavDialogProps> = ({ open, onClose }) => {
 
   return (
     <Transition show={open} as={Fragment}>
-      <Dialog onClose={handleClose} className="relative z-30">
+      <Dialog onClose={handleClose} className="relative z-50">
         <Transition.Child
           as={Fragment}
           enter="transition-all"
@@ -107,8 +111,8 @@ export const NavDialog: FC<NavDialogProps> = ({ open, onClose }) => {
             id="nav-drawer"
             data-testid="nav-drawer"
           >
-            <Dialog.Panel className="fixed top-0 right-0 w-10/12 max-w-sm overflow-y-auto transition-all font-heading h-full bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-50 text-xl shadow-xl border-l-[1px] border-l-slate-800/20 dark:border-l-slate-50/20 translate-x-0">
-              <div className="py-8 px-8 md:px-12 flex justify-end">
+            <Dialog.Panel className="fixed top-0 right-0 w-10/12 max-w-sm overflow-y-auto font-heading h-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-200 text-xl shadow-xl border-l border-l-slate-800/20 dark:border-l-slate-50/20 translate-x-0">
+              <div className="py-4 md:py-6 px-6 md:px-12 flex justify-end">
                 <NavButton open={open} onClick={handleClose} />
               </div>
               <div className="py-8 px-6 text-center">
@@ -133,34 +137,56 @@ export const NavDialog: FC<NavDialogProps> = ({ open, onClose }) => {
 /**
  * The main navigation.
  */
-export const Nav: FC = () => {
+export const NavContent: FC = () => {
   // state for opening and closing the nav drawer
   const [dialogOpen, setDialogOpen] = useState(false);
   const toggleDialog = () => setDialogOpen((open) => !open);
   const closeDialog = () => setDialogOpen(false);
+  const { scrollDir, scrolled } = useScroll();
 
   return (
-    <nav className="py-8 lg:py-12 px-6 md:px-12 w-full z-40 transition-all text-slate-900 dark:text-slate-50 motion-reduce:!translate-y-0 bg-transparent">
-      <div className="max-w-site-full mx-auto flex justify-between items-center">
-        <div className="max-w-[3rem] h-auto">
-          <Logo />
-        </div>
-        <ul className="hidden md:flex items-center space-x-8 font-heading font-medium text-lg text-slate-600 dark:text-slate-300">
-          <NavLinks />
-        </ul>
-        <ul className="hidden lg:flex space-x-4 items-center">
-          <SocialLinks />
-        </ul>
-        <div className="flex items-center space-x-4">
-          <div className="hidden md:block">
-            <ThemeToggle />
+    <>
+      <nav
+        className={clsx(
+          'py-4 md:py-6 px-6 md:px-12 w-full z-40 motion-reduce:!translate-y-0 text-slate-600 dark:text-slate-200 fixed top-0 transition-transform',
+          scrolled ? 'bg-white dark:bg-slate-800 shadow-lg' : 'bg-transparent',
+          scrollDir === 'up' || !scrolled
+            ? 'translate-y-0'
+            : '-translate-y-24 md:-translate-y-28',
+          'focus-within:!translate-y-0'
+        )}
+      >
+        <div className="max-w-site-full mx-auto flex justify-between items-center">
+          <div className="max-w-[3rem] h-auto">
+            <Logo />
           </div>
-          <div className="block lg:hidden">
-            <NavButton open={dialogOpen} onClick={toggleDialog} />
+          <ul className="hidden md:flex items-center space-x-8 font-heading font-medium text-lg">
+            <NavLinks />
+          </ul>
+          <ul className="hidden lg:flex space-x-4 items-center">
+            <SocialLinks />
+          </ul>
+          <div className="flex items-center space-x-4">
+            <div className="hidden md:block">
+              <ThemeToggle />
+            </div>
+            <div className="block lg:hidden">
+              <NavButton open={dialogOpen} onClick={toggleDialog} />
+            </div>
           </div>
+          <NavDialog open={dialogOpen} onClose={closeDialog} />
         </div>
-        <NavDialog open={dialogOpen} onClose={closeDialog} />
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 };
+
+export const Nav: FC = () => (
+  <>
+    <ClientOnly>
+      <NavContent />
+    </ClientOnly>
+    {/* always render underlying spacing, to prevent layout shifts */}
+    <div className="block pt-24" />
+  </>
+);

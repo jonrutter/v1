@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, RenderOptions } from '@testing-library/react';
-import { ColorThemeContextProvider } from '@/styles/useColorTheme';
+import { ColorThemeContextProvider } from '@/hooks/useColorTheme';
 
 const Wrapper: React.FC = ({ children }) => (
   <ColorThemeContextProvider>{children}</ColorThemeContextProvider>

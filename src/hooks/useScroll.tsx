@@ -1,6 +1,11 @@
 /**
- * Adapted from Brittany Chiang's useScrollDirection() custom hook (https://github.com/bchiang7/v4/blob/main/src/hooks/useScrollDirection.js), original (c) 2018 Brittany Chiang, licensed under the MIT License (https://github.com/bchiang7/v4/blob/main/LICENSE)
- * My modifications: add code for determining whether the user has scrolled, modify return type to a memoized object including both scroll direction and scrolled boolean, convert to TypeScript & add type definitions
+ * Adapted from Brittany Chiang's useScrollDirection() custom hook
+ * (https://github.com/bchiang7/v4/blob/main/src/hooks/useScrollDirection.js),
+ * original code (c) 2018 Brittany Chiang, licensed under the MIT License (https://github.com/bchiang7/v4/blob/main/LICENSE)
+ * My modifications:
+ * - add code for determining whether the user has scrolled
+ * - modify return type to a memoized object including both scroll direction and scrolled boolean
+ * - convert to TypeScript & add type definitions
  */
 
 import { useState, useEffect, useMemo } from 'react';
@@ -19,7 +24,7 @@ type ScrollInformation = {
 };
 
 const defaultProps = {
-  initialDirection: 'down' as Direction,
+  initialDirection: 'up' as Direction,
   thresholdPixels: 0,
   off: false,
 };
@@ -30,15 +35,19 @@ export const useScroll = ({
   off,
 }: Props = defaultProps): ScrollInformation => {
   const [scrollDir, setScrollDir] = useState<Direction>(initialDirection);
-  const [scrolled, setScrolled] = useState(window.pageYOffset > 20);
+  const [scrolled, setScrolled] = useState(window.scrollY > 20);
+
+  useEffect(() => {
+    setScrolled(window.scrollY > 20);
+  }, []);
 
   useEffect(() => {
     const threshold = thresholdPixels || 0;
-    let lastScrollY = window.pageYOffset;
+    let lastScrollY = window.scrollY;
     let ticking = false;
 
     const updateScroll = () => {
-      const scrollY = window.pageYOffset;
+      const scrollY = window.scrollY;
 
       if (Math.abs(scrollY - lastScrollY) < threshold) {
         // We haven't exceeded the threshold
