@@ -1,6 +1,6 @@
 ---
 title: Create Polymorphic React Components With TypeScript
-date: '2022-07-19'
+date: '2022-11-10'
 featured_image: ./images/featured.jpg
 featured_image_alt: Rubik's cubes stacked on top of each other
 featured_image_credit: Fletcher Pride
@@ -57,7 +57,7 @@ const AccordionExample = () => (
 );
 ```
 
-While you may not need to use polymorphic components in your own code every day, they can be very helpful in certain cases for reusing logic or styling between components that only really differ in their underlying tags.
+While you may not need to use polymorphic components in your own code every day, they can be very helpful in certain cases to avoid having to build multiple components with the same logic or styling, where the only real difference is the underlying HTML tag they use.
 
 Polymorphic components are simple enough to create with JavaScript, but (as is often the case) TypeScript throws some unexpected curveballs. In this post I'll show you a method for creating polymorphic components with TypeScript, by walking you through creating a polymorphic `<Container />` component.
 
@@ -169,7 +169,7 @@ Predictably, this code produces a TypeScript error, complaining that 'Tag does n
 
 ![no call signature](./images/error1.png)
 
-To fix the error we need to correctly type `as`. If ypu take a look at the React type definitions, you'll see that there's a built-in React type called `ElementType` that represents a [JSX element or React Component](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts#L70). This seems like the right fit, so let's use that:
+To fix the error we need to correctly type `as`. If you take a look at the React type definitions, you'll see that there's a built-in React type called `ElementType` that represents a [JSX element or React Component](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts#L70). This seems like the right fit, so let's use that:
 
 ```tsx filename=src/components/container.tsx
 import React from 'react';
