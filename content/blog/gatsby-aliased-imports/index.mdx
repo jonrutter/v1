@@ -13,16 +13,16 @@ Have you ever written code like this?
 
 ```javascript
 import { CustomButton } from '../../../components/buttons/custom-button';
-import { customHook } from '../../../hooks/custom-hook';
+import { useCustomHook } from '../../../hooks/use-custom-hook';
 ```
 
-When you're working with any kind of non-trivial codebase, it's easy to end up with multiple embedded layers of folders, and that can turn your file imports into a tangled web of dots and slashes.
+As your project's codebase expands, it's easy to end up with multiple embedded layers of folders, and that can turn your file imports into a tangled web of dots and slashes.
 
-This tutorial will show you how you can update your Gatsby project to convert your old relative file imports into absolute, aliased imports, like this:
+This tutorial will walk you through converting your Gatsby project's relative imports into absolute, aliased imports:
 
 ```javascript
 import { CustomButton } from '@/components';
-import { customHook } from '@/hooks';
+import { useCustomHook } from '@/hooks';
 ```
 
 <CodeNote href="https://github.com/rutterjt/blog-examples/tree/main/gatsby-aliased-imports" />
@@ -48,7 +48,7 @@ Because Gatsby uses [webpack](https://www.gatsbyjs.com/docs/glossary/webpack/) u
 npm install gatsby-plugin-root-import
 ```
 
-Next, we'll need to add the plugin to our `gatsby-config`:
+Next, you'll need to add the plugin to your `gatsby-config`:
 
 <CodeTabs one="JavaScript" two="TypeScript">
   <CodePanel>
@@ -83,13 +83,13 @@ export default config;
   </CodePanel>
 </CodeTabs>
 
-This plugin supports root imports out of the box, without any need for additional configuration. So now our new imports should be working:
+This plugin supports root imports out of the box, without any need for additional configuration. So the following should work automatically:
 
 ```javascript
 import { CustomButton } from 'src/components/buttons/custom-button';
 ```
 
-Already that's an improvement over the old relative imports!
+Already that's an improvement over our old relative imports. It's easier to understand exactly where the file is, and the import statement won't break if the file we're importing to is moved.
 
 <Note color="blue">
 
@@ -112,9 +112,9 @@ In your `tsconfig.json` file, add the following:
 }
 ```
 
-This lets TypeScript know that whatever you set as the `baseUrl` (in this case, the project root) should be treated as the base directory when resolving non-relative file imports. So in our example, when TypeScript encounters `src/components`, it'll understand that this means `./src/components`.
+This lets TypeScript know that whatever you set as the `baseUrl` (in this case, the project root) should be treated as the base directory when resolving non-relative file imports. So when TypeScript encounters `src/components`, it'll understand that this means `./src/components`.
 
-## Adding import aliases
+## Upgrading to import aliases
 
 Your project should now support absolute file paths in import statements. Great! But there are a few more tweaks we can do to make file imports even simpler.
 
@@ -183,11 +183,11 @@ So what's happening here? Every entry added to `options` will be treated by the 
 
 You can add as many import aliases as you like. For example, you could add a separate alias for `@components` or `@hooks`.
 
-This is especially useful if you're using deeply nested folders. For example, Redux recommends [organizing your logic into "feature folders"](https://redux.js.org/faq/code-structure#what-should-my-file-structure-look-like-how-should-i-group-my-action-creators-and-reducers-in-my-project-where-should-my-selectors-go), like `./src/features/todos`. If you choose to structure your program like that, you may find it convenient to alias `./src/features/todos` as simply `@todos`.
+This is especially useful if you're using deeply nested folders. For example, the Redux docs recommend [organizing your logic into "feature folders"](https://redux.js.org/faq/code-structure#what-should-my-file-structure-look-like-how-should-i-group-my-action-creators-and-reducers-in-my-project-where-should-my-selectors-go), like `./src/features/todos`. If you choose to structure your program like that, you may find it convenient to alias `./src/features/todos` as simply `@todos`.
 
 ### Configuring TypeScript to support aliases
 
-Just like before, we'll need to update TypeScript to mirror our new config. In our `tsconfig.json` file:
+Just like before, we'll need to update TypeScript to mirror our new config. In your `tsconfig.json` file, add:
 
 ```json filename=tsconfig.json lines=4,5,6
 {
