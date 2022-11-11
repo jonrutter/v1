@@ -33,7 +33,7 @@ console.log('Hello, world!');
 
 ## Setup
 
-In order to add syntax highlighting in MDX, we'll need to use a package called [prism-react-renderer](https://github.com/FormidableLabs/prism-react-renderer). This package exports a React component `<Highlight />`, which can render code blocks with the [Prism](https://prismjs.com/) syntax highlighter. Let's install it:
+In order to support syntax highlighting in MDX, we'll need to use a package called [prism-react-renderer](https://github.com/FormidableLabs/prism-react-renderer). This package exports a React component `<Highlight />`, which can render code blocks with the [Prism](https://prismjs.com/) syntax highlighter. Let's install it:
 
 ```bash
 npm install prism-react-renderer
@@ -82,7 +82,7 @@ That's a lot, so let's break it down.
 - `defaultProps`, which is exported from the package and is simply destructured as props directly into the component. We'll take a closer look at this later.
 - A [render prop](https://reactjs.org/docs/render-props.html), passed as `children`.
 
-As you can see, the bulk of the code is the render prop. That's where the main work of rendering the code block is done. `<Highlight />` works by parsing the input code line-by-line, separating each line into 'tokens', which represent specific bits of code (e.g., variables, strings, functions). `<Highlight />` then exposes all the line/token data to our render function, which lets us map over it to render the code with class names matching the tokens. For our purposes, we'll just copy and paste the render function from the example. But if you want to modify how the code gets displayed (e.g., adding line numbers or individual line diff highlighting), this is where you'd do it.
+As you can see, the bulk of the code is the render prop. That's where the main work of rendering the code block is done. `<Highlight />` works by parsing the input code line-by-line, dividing each line into 'tokens', which represent specific bits of code (e.g., variables, strings, functions). `<Highlight />` then exposes all the line/token data to our render function, along with methods for adding class names to the tokens for styling. For our purposes, we'll just copy and paste the render function from the example. But if you want to modify how the code gets displayed (e.g., adding line numbers or individual line diff highlighting), this is where you'd do it.
 
 This is a lot of boilerplate to write every time we want to render a code block. Ideally, we'd like to have one component that accepts the code and language as props, and then passes them directly to `<Highlight />`. Let's create that component now.
 
@@ -208,7 +208,7 @@ This will convert every `<pre>` tag in our MDX to the `<CodeBlock />` component.
 <CodeBlock>
 ```
 
-The code that we want to parse is actually the `children` of `<code class="language-javascript">`, which is itself now the `children` of `<CodeBlock />`. So, inside our `<CodeBlock />` component, we can access the code with `props.children.props.children`. It's a little cumbersome, but it works! All that's left to do now is call `trim()` on the code's text to remove any lingering whitespace, then pass it to the `<Highlight />` component:
+The code that we want to parse is actually the `children` of `<code class="language-javascript">`, which is itself now the `children` of `<CodeBlock />`. So, inside our `<CodeBlock />` component, we can access the code with `props.children.props.children`. It's a little cumbersome, but it works! All that's left to do now is call `trim()` on the code's text to remove any trailing whitespace, then pass it to the `<Highlight />` component:
 
 <CodeTabs one="JSX" two="TSX">
   <CodePanel>
@@ -306,7 +306,7 @@ return (
 
 ### The Final `<CodeBlock />` Component
 
-Putting it all together, our shiny new `<CodeBlock />` component looks like:
+Putting it all together, our shiny new `<CodeBlock />` component looks like this:
 
 <CodeTabs one="JSX" two="TSX">
   <CodePanel>
@@ -381,7 +381,7 @@ export const CodeBlock: React.FC<Props> = ({ children }) => {
 
 ## Customization
 
-There are a lot of ways that you could customize your new syntax-highlighted code blocks. Most of them (like adding line-numbers or diff highlighting) involve getting into the nitty-gritty of `<Highlight />`'s render function. Those really deserve their own post, and I won't get into them here. But we can look at one really easy way of customizing our code blocks: themes.
+There are a lot of ways that you could customize your new syntax-highlighted code blocks. Most of them (like adding line-numbers or diff highlighting) involve getting into the nitty-gritty of `<Highlight />`'s render function. That would really deserve its own post, and I won't get into that here. But we can look at one really easy way of customizing our code blocks: themes.
 
 ### Theme Customization
 
