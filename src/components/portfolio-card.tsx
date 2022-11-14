@@ -37,7 +37,7 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
       {/* preview image wrapper */}
       <div
         className={clsx(
-          'row-start-1 row-end-3 md:row-span-full select-none pointer-events-none rounded-xl',
+          'row-start-1 row-end-3 md:row-span-full select-none pointer-events-none',
           reversed
             ? 'col-span-full md:col-start-6 md:col-end-13'
             : 'col-span-full md:col-start-1 md:col-end-8'
@@ -47,7 +47,7 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
           <GatsbyImage
             image={image}
             alt={`Picture of ${title}`}
-            className="w-full h-full select-none pointer-events-none rounded-xl shadow-xl"
+            className="w-full h-full select-none pointer-events-none shadow-xl rounded-xl overflow-hidden isolate"
             imgClassName="w-full h-full object-cover select-none pointer-events-none"
           />
         )}
