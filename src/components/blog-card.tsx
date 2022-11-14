@@ -15,7 +15,7 @@ type Props = {
 
 export const BlogCard: React.FC<Props> = ({ item }) => {
   return (
-    <article className="shadow-lg rounded-xl overflow-hidden bg-white dark:bg-slate-700 flex flex-col md:flex-row lg:flex-col w-full max-w-[325px] md:max-w-full lg:max-w-[325px] mx-auto text-slate-600 dark:text-slate-200">
+    <article className="shadow-lg rounded-xl overflow-hidden bg-white dark:bg-slate-700 flex flex-col md:flex-row lg:flex-col w-full max-w-[325px] md:max-w-full lg:max-w-[325px] mx-auto text-slate-600 dark:text-slate-200 isolate">
       {/* image wrap */}
       {item.frontmatter.featured_image && (
         <div className="md:flex-[3] lg:flex-auto overflow-hidden">
