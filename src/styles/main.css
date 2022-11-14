@@ -133,9 +133,9 @@
     border-radius: 2.5rem;
     filter: blur(50px);
     background-size: 200% 200%;
-    overflow: visible;
     animation: shine 3s ease infinite alternate;
     @apply opacity-60 dark:opacity-50 select-none pointer-events-none;
+    will-change: filter;
   }
 
   .shine-2 {
