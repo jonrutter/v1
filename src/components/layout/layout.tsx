@@ -14,7 +14,7 @@ type Props = {
  */
 export const Layout: React.FC<Props> = ({ blogPost, children }) => (
   <div
-    className={`overflow-x-hidden max-w-[100vw] text-slate-600 dark:text-slate-200 ${
+    className={`overflow-x-hidden max-w-[100vw] text-slate-600 dark:text-slate-200 min-h-screen ${
       blogPost ? 'bg-slate-100 dark:bg-slate-900' : 'bg-white dark:bg-slate-800'
     }`}
   >
