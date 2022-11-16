@@ -76,18 +76,6 @@
   }
 }
 
-@keyframes shine {
-  0% {
-    background-position: 0 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0 50%;
-  }
-}
-
 @keyframes rotate-outer {
   from {
     transform: rotate(0deg);
@@ -130,33 +118,6 @@
 }
 
 @layer components {
-  .shine {
-    background-image: linear-gradient(
-      to bottom right,
-      #33d3ff,
-      #60a5fa,
-      #8b5cf6,
-      #f43f5e,
-      #fde047
-    );
-    position: absolute;
-    z-index: -1;
-    top: -1rem;
-    bottom: -1rem;
-    left: -1rem;
-    right: -1rem;
-    border-radius: 2.5rem;
-    filter: blur(50px);
-    background-size: 200% 200%;
-    animation: shine 3s ease infinite alternate;
-    @apply opacity-60 dark:opacity-50 select-none pointer-events-none;
-    will-change: filter;
-  }
-
-  .shine-2 {
-    backdrop-filter: blur(50px);
-  }
-
   .title-shine {
     position: absolute;
     inset: -1rem;
@@ -208,15 +169,6 @@
     );
     transform: translate(-50%, -50%);
     animation: shine-animation 3s infinite alternate;
-  }
-
-  @media (prefers-reduced-motion) {
-    .title-shine > div,
-    .aurora-lg > div,
-    .aurora-md > div,
-    .star-decoration > div {
-      animation: none;
-    }
   }
 }
 
