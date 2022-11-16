@@ -61,6 +61,21 @@
   }
 }
 
+@keyframes shine-animation {
+  0% {
+    transform: translate(-50% -50%);
+  }
+  33% {
+    transform: translate(0%, -50%);
+  }
+  66% {
+    transform: translate(0%, 0%);
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
+}
+
 @keyframes shine {
   0% {
     background-position: 0 50%;
