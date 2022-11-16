@@ -46,7 +46,9 @@ export const Hero: React.FC<Props> = ({ title, children }) => (
             >
               {title}
             </h1>
-            <div className="shine" />
+            <div className="title-shine">
+              <div />
+            </div>
           </div>
           {/* everything that should appear below the heading */}
           {children}

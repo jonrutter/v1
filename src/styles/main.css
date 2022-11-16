@@ -157,6 +157,17 @@
     backdrop-filter: blur(50px);
   }
 
+  .title-shine {
+    position: absolute;
+    inset: -1rem;
+    overflow: hidden;
+    z-index: -1;
+    user-select: none;
+    pointer-events: none;
+    filter: blur(50px);
+    @apply opacity-60 dark:opacity-50;
+  }
+
   .aurora-lg {
     width: 391px;
     height: 185px;
@@ -181,6 +192,7 @@
       center/contain no-repeat;
   }
 
+  .title-shine > div,
   .aurora-lg > div,
   .aurora-md > div,
   .star-decoration > div {
@@ -199,6 +211,7 @@
   }
 
   @media (prefers-reduced-motion) {
+    .title-shine > div,
     .aurora-lg > div,
     .aurora-md > div,
     .star-decoration > div {
