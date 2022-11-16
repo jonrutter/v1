@@ -23,10 +23,18 @@ export const Hero: React.FC<Props> = ({ title, children }) => (
         )}
       >
         {/* background svgs */}
-        <div className="aurora-lg absolute bottom-0 left-0 hidden xl:block scale-90 2xl:scale-100 -translate-x-[120%] opacity-10 " />
-        <div className="aurora-md absolute top-0 right-0 hidden xl:block scale-90 2xl:scale-100 translate-x-[120%] -translate-y-2/3 opacity-10 " />
-        <div className="star-decoration absolute top-0 left-0 hidden md:block md:-translate-y-24 md:-translate-x-16 opacity-10 xl:-translate-x-60 xl:-translate-y-8" />
-        <div className="star-decoration absolute bottom-0 right-0 hidden md:block md:translate-y-16 md:translate-x-8 opacity-10 xl:translate-x-40 xl:translate-y-8" />
+        <div className="aurora-lg absolute bottom-0 left-0 hidden xl:block scale-90 2xl:scale-100 -translate-x-[120%] opacity-10 ">
+          <div />
+        </div>
+        <div className="aurora-md absolute top-0 right-0 hidden xl:block scale-90 2xl:scale-100 translate-x-[120%] -translate-y-2/3 opacity-10 ">
+          <div />
+        </div>
+        <div className="star-decoration absolute top-0 left-0 hidden md:block md:-translate-y-24 md:-translate-x-16 opacity-10 xl:-translate-x-60 xl:-translate-y-8">
+          <div />
+        </div>
+        <div className="star-decoration absolute bottom-0 right-0 hidden md:block md:translate-y-16 md:translate-x-8 opacity-10 xl:translate-x-40 xl:translate-y-8">
+          <div />
+        </div>
 
         <div className="w-full max-w-prose">
           {/* hero content */}
@@ -38,7 +46,9 @@ export const Hero: React.FC<Props> = ({ title, children }) => (
             >
               {title}
             </h1>
-            <div className="shine" />
+            <div className="title-shine">
+              <div />
+            </div>
           </div>
           {/* everything that should appear below the heading */}
           {children}
