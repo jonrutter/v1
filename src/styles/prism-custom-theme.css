@@ -51,6 +51,10 @@ pre:not([data-language='bash']) .token-line::before {
   color: #f8fafc;
 }
 
+.dark pre:not([data-language='bash']) .token-line::before {
+  background-color: #1e293b;
+}
+
 /* re-add left padding in bash, since no line numbers */
 pre[data-language='bash'] .token-line {
   padding-left: 1.5rem;
@@ -81,6 +85,10 @@ code[class*='language-'] *::selection {
 
 pre[class*='language-'] {
   background-color: #0f172a;
+}
+
+.dark pre[class*='language-'] {
+  background-color: #1e293b;
 }
 
 /*********************************************************
