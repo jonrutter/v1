@@ -10,7 +10,7 @@ import type {
   PC,
 } from '@/utils/polymorphic';
 
-/* ~~~ Base Button ~~~ */
+/* ~~~ Button ~~~ */
 interface Props {
   className?: string;
   variant?: 'primary' | 'secondary';
@@ -37,40 +37,6 @@ export const Button = <T extends React.ElementType = typeof Link>({
     >
       {children}
     </Tag>
-  );
-};
-
-/* ~~~ Primary Button ~~~ */
-
-/**
- * Renders the site's primary button component
- *
- * A polymorphic component, supports rendering as `<button>`, `<a>`, or `<Link>`
- */
-export const PrimaryButton = <T extends React.ElementType = typeof Link>(
-  props: PolymorphicProps<T, Props>
-) => {
-  return (
-    <Button {...props} variant="primary">
-      {props.children}
-    </Button>
-  );
-};
-
-/* ~~~ Secondary Button ~~~ */
-
-/**
- * Renders the site's secondary button component
- *
- * A polymorphic component, supports rendering as `<button>`, `<a>`, or `<Link>`
- */
-export const SecondaryButton = <T extends React.ElementType = typeof Link>(
-  props: PolymorphicProps<T, Props>
-) => {
-  return (
-    <Button {...props} variant="secondary">
-      {props.children}
-    </Button>
   );
 };
 
