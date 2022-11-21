@@ -73,7 +73,7 @@ export const IconButton = <T extends React.ElementType = typeof Link>({
       {children}
       <div
         aria-hidden
-        className="absolute top-0 left-0 right-0 bottom-0 rounded-full transition-all border-2 border-current opacity-0 group-hover:opacity-100 group-focus:opacity-100 outline-none overflow-hidden"
+        className="absolute top-0 left-0 right-0 bottom-0 rounded-full transition-all border-2 border-current scale-50 opacity-0 group-hover:scale-100 group-hover:opacity-100 group-focus:scale-100 group-focus:opacity-100 outline-none overflow-hidden"
       />
     </Tag>
   );
