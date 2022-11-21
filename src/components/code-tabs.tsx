@@ -64,7 +64,7 @@ const CodeTab: React.FC<TabProps> = ({ children }) => {
         clsx(
           'p-2 text-base block border-b-2 rounded-t-sm rounded-b-none outline-none hover:bg-sky-50 focus:bg-sky-50 dark:hover:bg-sky-900 dark:focus:bg-sky-900 font-heading font-medium',
           selected
-            ? 'text-sky-700 border-b-sky-700 dark:text-white dark:border-b-white'
+            ? 'text-slate-900 border-b-slate-900 dark:text-white dark:border-b-white'
             : 'text-slate-500 hover:text-slate-600 focus:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300 focus:hover:text-slate-300  border-b-transparent'
         )
       }
