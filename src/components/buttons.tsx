@@ -58,7 +58,7 @@ export const SecondaryButton = <T extends React.ElementType = typeof Link>({
   return (
     <Tag
       className={clsx(
-        'group leading-none py-[calc(1rem-2px)] px-[calc(2rem-2px)] text-heading font-bold relative inline-block rounded-xl overflow-hidden z-10 transition-all shadow-md text-lg font-heading bg-transparent text-sky-700  dark:focus-visible:text-white focus:outline-none dark:text-sky-200 border-2 border-sky-700 dark:border-sky-200 outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus-visible:ring-2 focus-visible:ring-offset-2 hover:bg-sky-50 dark:hover:bg-sky-900',
+        'group leading-none py-[calc(1rem-2px)] px-[calc(2rem-2px)] text-heading font-bold relative inline-block rounded-xl overflow-hidden z-10 transition-all shadow-md text-lg font-heading bg-transparent text-sky-700  dark:focus-visible:text-white focus:outline-none dark:text-white border-2 border-sky-700 dark:border-white outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus-visible:ring-2 focus-visible:ring-offset-2 hover:bg-sky-50 dark:hover:bg-sky-900',
         className
       )}
       {...rest}
