@@ -12,7 +12,6 @@ import { links } from '@/config';
 import {
   Layout,
   Seo,
-  Section,
   CodeBlock,
   CodeTabs,
   CodePanel,
@@ -102,38 +101,36 @@ const BlogPostTemplate = ({
         description={node.frontmatter.excerpt}
         image={seoImage}
       />
-      <div className="bg-slate-100 dark:bg-slate-900">
-        <Section as="div">
-          <article className="w-full max-w-[960px] mx-auto bg-white dark:bg-slate-800 rounded-3xl shadow-md">
+      <div className="bg-white dark:bg-slate-900">
+        <div className="py-12 sm:py-16 md:py-20 px-6 md:px-12 bg-inherit text-inherit">
+          <article className="w-full max-w-xl md:max-w-screen-md mx-auto">
             <header className="mb-10 sm:mb-12 md:mb-16">
-              <div className="px-4 md:px-6 lg:px-8 py-6 md:py-8 max-w-xl md:max-w-screen-md">
-                <div className="mb-8 lg:mb-12">
-                  <BlogLink to="/blog" className="-ml-2">
-                    <span className="group-hover:animate-arrow inline-block px-2">
-                      ←
-                    </span>
-                    All posts
-                  </BlogLink>
-                </div>
-                <h1 className="transition-all font-heading font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-slate-900 dark:text-white mb-3 md:mb-4 lg:mb-6 md:leading-[1.1] lg:leading-[1.1]">
-                  {node.frontmatter.title}
-                </h1>
-                <p className="text-base md:text-lg font-normal mt-0 space-x-4 flex">
-                  <time dateTime={node.frontmatter.date}>
-                    {format(parseISO(node.frontmatter.date), 'MMMM d, yyyy')}
-                  </time>{' '}
-                  <span>•</span> <span>{node.timeToRead} minute read</span>
-                </p>
+              <div className="mb-8 lg:mb-12">
+                <BlogLink to="/blog" className="-ml-2">
+                  <span className="group-hover:animate-arrow inline-block px-2">
+                    ←
+                  </span>
+                  All posts
+                </BlogLink>
               </div>
+              <h1 className="transition-all font-heading font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-slate-900 dark:text-white mb-3 md:mb-6 md:leading-[1.1] lg:leading-[1.1]">
+                {node.frontmatter.title}
+              </h1>
+              <p className="text-base md:text-lg font-normal mt-0 space-x-4 flex mb-6 md:mb-8">
+                <time dateTime={node.frontmatter.date}>
+                  {format(parseISO(node.frontmatter.date), 'MMMM d, yyyy')}
+                </time>{' '}
+                <span>•</span> <span>{node.timeToRead} minute read</span>
+              </p>
               {image && (
                 <figure>
                   <GatsbyImage
                     image={image}
                     alt={node.frontmatter.featured_image_alt || ''}
                     className="select-none pointer-events-none dark:opacity-80"
-                    imgClassName="select-none pointer-events-none dark:opacity-80"
+                    imgClassName="select-none pointer-events-none dark:opacity-80 rounded-lg"
                   />
-                  <figcaption className="italic mt-3 px-4 md:px-6">
+                  <figcaption className="italic mt-3 lg:px-6">
                     Image credit:{' '}
                     <a
                       href={node.frontmatter.featured_image_link}
@@ -147,14 +144,14 @@ const BlogPostTemplate = ({
                 </figure>
               )}
             </header>
-            <div className="prose md:prose-lg prose-slate mx-auto dark:prose-invert px-4 md:px-6 lg:px-0">
+            <div className="prose md:prose-lg prose-slate mx-auto dark:prose-invert">
               <MDXProvider components={shortcodes}>
                 <MDXRenderer>{node.body}</MDXRenderer>
               </MDXProvider>
               <hr />
             </div>
 
-            <footer className="px-4 md:px-6 lg:px-0 pb-4 md:pb-8 mx-auto max-w-prose md:text-lg">
+            <footer className="pb-4 md:pb-8 mx-auto max-w-prose md:text-lg">
               <div className="flex flex-col items-start sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 sm:items-center flex-wrap not-prose py-8">
                 <StyledLink
                   as="a"
@@ -209,7 +206,7 @@ const BlogPostTemplate = ({
               </div>
             </footer>
           </article>
-        </Section>
+        </div>
       </div>
     </Layout>
   );

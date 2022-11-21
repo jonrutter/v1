@@ -57,5 +57,9 @@ export type BlogPost = {
         };
       };
     };
+    headings?: {
+      value: string;
+      depth?: number;
+    }[];
   };
 };
