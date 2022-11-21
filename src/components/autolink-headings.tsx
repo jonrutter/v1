@@ -2,13 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'gatsby';
 
 // util func
-const formatId = (str: string) =>
-  str
-    .replace(/[^\w|\s]/g, '')
-    .replace(/\s{2,}/g, ' ')
-    .toLowerCase()
-    .split(' ')
-    .join('-');
+import { formatId } from '@/utils/formatId';
 
 /* Hash Link Component */
 
