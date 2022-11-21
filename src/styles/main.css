@@ -10,6 +10,12 @@
       animation: none !important;
       transition-duration: 0ms !important;
     }
+    .title-shine > div,
+    .aurora-lg > div,
+    .aurora-md > div,
+    .star-decoration > div {
+      transform: translate(0%, -50%) !important;
+    }
   }
 
   /* override a few @tailwindcss/typography styles */
@@ -120,7 +126,7 @@
 @layer components {
   .title-shine {
     position: absolute;
-    inset: -1rem;
+    inset: -0.5rem;
     overflow: hidden;
     z-index: -1;
     user-select: none;

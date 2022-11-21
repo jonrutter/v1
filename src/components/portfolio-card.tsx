@@ -47,7 +47,7 @@ export const PortfolioCard: React.FC<PCardProps> = ({ item, reversed }) => {
           <GatsbyImage
             image={image}
             alt={`Picture of ${title}`}
-            className="w-full h-full select-none pointer-events-none shadow-xl rounded-xl overflow-hidden isolate"
+            className="w-full h-full select-none pointer-events-none shadow-md rounded-xl overflow-hidden isolate"
             imgClassName="w-full h-full object-cover select-none pointer-events-none"
           />
         )}

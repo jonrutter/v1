@@ -40,10 +40,10 @@ const StyledTab: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <Tab
     className={({ selected }) =>
       clsx(
-        'px-4 py-2 outline-none border-none active:bg-transparent focus-visible:ring-2 ring-slate-900 focus-visible:ring-offset-2 focus-visible:ring-offset-white focus-visible:dark:ring-offset-slate-700 dark:ring-white rounded-xl',
+        'px-4 py-2 outline-none border-none active:bg-transparent focus-visible:ring-2 ring-slate-900 focus-visible:ring-offset-2 focus-visible:ring-offset-white focus-visible:dark:ring-offset-slate-700 dark:ring-white rounded-xl font-heading font-medium',
         selected
-          ? 'text-white bg-sky-700 dark:text-slate-800 dark:bg-slate-50'
-          : 'bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-50 hover:bg-sky-100 dark:hover:bg-slate-600'
+          ? 'text-white bg-sky-700 dark:text-slate-700 dark:bg-slate-50'
+          : 'bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-50 hover:bg-sky-100 dark:hover:bg-slate-600'
       )
     }
   >
@@ -100,7 +100,7 @@ const PortfolioPage = ({
           </h2>
           <Tab.Group>
             <div className="flex items-center justify-center mb-6 lg:mb-10">
-              <Tab.List className="p-1 text-lg rounded-xl relative z-10 gap-1 grid grid-cols-2 overflow-hidden shadow-lg bg-white text-slate-900 dark:bg-slate-700 dark:text-white">
+              <Tab.List className="p-1 text-lg rounded-xl relative z-10 gap-1 grid grid-cols-2 overflow-hidden shadow-md bg-white text-slate-900 dark:bg-slate-700 dark:text-white">
                 <StyledTab>Websites</StyledTab>
                 <StyledTab>Apps</StyledTab>
               </Tab.List>

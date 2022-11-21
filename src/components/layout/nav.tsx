@@ -111,7 +111,7 @@ export const NavDialog: FC<NavDialogProps> = ({ open, onClose }) => {
             id="nav-drawer"
             data-testid="nav-drawer"
           >
-            <Dialog.Panel className="fixed top-0 right-0 w-10/12 max-w-sm overflow-y-auto font-heading h-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-200 text-xl shadow-xl border-l border-l-slate-800/20 dark:border-l-slate-50/20 translate-x-0">
+            <Dialog.Panel className="fixed top-0 right-0 w-10/12 max-w-sm overflow-y-auto font-heading h-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-200 text-xl shadow-lg border-l border-l-slate-800/20 dark:border-l-slate-50/20 translate-x-0">
               <div className="py-4 md:py-6 px-6 md:px-12 flex justify-end">
                 <NavButton open={open} onClick={handleClose} />
               </div>
