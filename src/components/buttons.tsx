@@ -10,19 +10,15 @@ import type {
   PC,
 } from '@/utils/polymorphic';
 
-/* ~~~ Primary Button ~~~ */
-
+/* ~~~ Base Button ~~~ */
 interface Props {
   className?: string;
+  variant?: 'primary' | 'secondary';
 }
 
-/**
- * Renders the site's primary button component
- *
- * A polymorphic component, supports rendering as `<button>`, `<a>`, or `<Link>`
- */
-export const PrimaryButton = <T extends React.ElementType = typeof Link>({
+export const Button = <T extends React.ElementType = typeof Link>({
   as,
+  variant = 'primary',
   className = '',
   children,
   ...rest
@@ -31,13 +27,33 @@ export const PrimaryButton = <T extends React.ElementType = typeof Link>({
   return (
     <Tag
       className={clsx(
-        'group leading-none py-4 px-8 text-heading font-bold relative inline-block rounded-xl overflow-hidden z-10 transition-all shadow-md text-lg font-heading bg-sky-700 text-white outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus-visible:ring-2 focus-visible:ring-offset-2 hover:bg-sky-600',
-        className
+        'leading-none text-heading font-bold inline-block rounded-xl overflow-hidden transition-all shadow-md text-lg font-heading outline-none ring-0 ring-offset-0 focus-visible:ring-2 focus-visible:ring-offset-2 ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900',
+        className,
+        variant === 'primary'
+          ? 'py-4 px-8 bg-sky-700 text-white hover:bg-sky-600'
+          : 'py-[calc(1rem-2px)] px-[calc(2rem-2px)] bg-transparent text-sky-700 dark:text-white hover:bg-sky-50 dark:hover:bg-sky-900 border-2 border-sky-700 dark:border-white'
       )}
       {...rest}
     >
       {children}
     </Tag>
+  );
+};
+
+/* ~~~ Primary Button ~~~ */
+
+/**
+ * Renders the site's primary button component
+ *
+ * A polymorphic component, supports rendering as `<button>`, `<a>`, or `<Link>`
+ */
+export const PrimaryButton = <T extends React.ElementType = typeof Link>(
+  props: PolymorphicProps<T, Props>
+) => {
+  return (
+    <Button {...props} variant="primary">
+      {props.children}
+    </Button>
   );
 };
 
@@ -48,23 +64,13 @@ export const PrimaryButton = <T extends React.ElementType = typeof Link>({
  *
  * A polymorphic component, supports rendering as `<button>`, `<a>`, or `<Link>`
  */
-export const SecondaryButton = <T extends React.ElementType = typeof Link>({
-  as,
-  className = '',
-  children,
-  ...rest
-}: PolymorphicProps<T, Props>) => {
-  const Tag = as || Link;
+export const SecondaryButton = <T extends React.ElementType = typeof Link>(
+  props: PolymorphicProps<T, Props>
+) => {
   return (
-    <Tag
-      className={clsx(
-        'group leading-none py-[calc(1rem-2px)] px-[calc(2rem-2px)] text-heading font-bold relative inline-block rounded-xl overflow-hidden z-10 transition-all shadow-md text-lg font-heading bg-transparent text-sky-700  dark:focus-visible:text-white focus:outline-none dark:text-white border-2 border-sky-700 dark:border-white outline-none ring-slate-900 ring-offset-white dark:ring-white dark:ring-offset-slate-900 ring-0 ring-offset-0 focus-visible:ring-2 focus-visible:ring-offset-2 hover:bg-sky-50 dark:hover:bg-sky-900',
-        className
-      )}
-      {...rest}
-    >
-      {children}
-    </Tag>
+    <Button {...props} variant="secondary">
+      {props.children}
+    </Button>
   );
 };
 
