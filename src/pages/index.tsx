@@ -9,8 +9,7 @@ import {
   PortfolioCard,
   BlogCard,
   Section,
-  PrimaryButton,
-  SecondaryButton,
+  Button,
 } from '@/components';
 
 // types
@@ -49,12 +48,16 @@ const IndexPage = ({
           web and software development.
         </p>
         <div className="text-center md:text-left mt-8 md:mt-8 flex flex-col sm:flex-row sm:items-center space-y-6 sm:space-y-0 sm:space-x-8">
-          <PrimaryButton to="/contact" className="w-full sm:w-auto">
+          <Button to="/contact" className="w-full sm:w-auto" variant="primary">
             Contact me
-          </PrimaryButton>
-          <SecondaryButton to="/portfolio" className="w-full sm:w-auto">
+          </Button>
+          <Button
+            to="/portfolio"
+            className="w-full sm:w-auto"
+            variant="secondary"
+          >
             My portfolio
-          </SecondaryButton>
+          </Button>
         </div>
       </Hero>
       <div className="bg-slate-100 dark:bg-slate-900">
@@ -71,7 +74,9 @@ const IndexPage = ({
               />
             ))}
             <div className="text-center">
-              <PrimaryButton to="/portfolio">Full portfolio</PrimaryButton>
+              <Button to="/portfolio" variant="primary">
+                Full portfolio
+              </Button>
             </div>
           </div>
         </Section>
@@ -96,7 +101,9 @@ const IndexPage = ({
             ))}
           </div>
           <div className="text-center">
-            <PrimaryButton to="/blog">More posts</PrimaryButton>
+            <Button to="/blog" variant="primary">
+              More posts
+            </Button>
           </div>
         </Section>
       </div>

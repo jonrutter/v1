@@ -10,8 +10,7 @@ import {
   Hero,
   PortfolioCard,
   Section,
-  PrimaryButton,
-  SecondaryButton,
+  Button,
 } from '@/components';
 
 // data
@@ -81,16 +80,17 @@ const PortfolioPage = ({
           projects and open source contributions.
         </p>
         <div className="text-center md:text-left mt-8 md:mt-8 flex flex-col sm:flex-row sm:items-center space-y-6 sm:space-y-0 sm:space-x-8">
-          <PrimaryButton to="/contact" className="w-full sm:w-auto">
+          <Button to="/contact" className="w-full sm:w-auto" variant="primary">
             Contact me
-          </PrimaryButton>
-          <SecondaryButton
+          </Button>
+          <Button
             as="a"
             href={links.github}
             className="w-full sm:w-auto"
+            variant="secondary"
           >
             My GitHub
-          </SecondaryButton>
+          </Button>
         </div>
       </Hero>
       <div className="bg-slate-100 dark:bg-slate-900">
@@ -119,12 +119,13 @@ const PortfolioPage = ({
             </Tab.Panels>
           </Tab.Group>
           <div className="flex items-center justify-center">
-            <PrimaryButton
+            <Button
               as="button"
               onClick={() => setExpanded((expanded) => !expanded)}
+              variant="primary"
             >
               {expanded ? 'See less' : 'See more'}
-            </PrimaryButton>
+            </Button>
           </div>
         </Section>
       </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'gatsby';
 
 // components
-import { Layout, Seo, Hero, ContactForm, PrimaryButton } from '@/components';
+import { Layout, Seo, Hero, ContactForm, Button } from '@/components';
 
 const ContactPage = () => {
   const [sent, setSent] = useState<boolean>(false);
@@ -30,9 +30,9 @@ const ContactPage = () => {
           <p className="mb-8">
             Thanks for your message! I'll get back to you as soon as I can!{' '}
           </p>
-          <PrimaryButton as={Link} to="/">
+          <Button as={Link} to="/" variant="primary">
             Home
-          </PrimaryButton>
+          </Button>
         </Hero>
       )}
     </Layout>
