@@ -12,7 +12,6 @@ import { links } from '@/config';
 import {
   Layout,
   Seo,
-  Section,
   CodeBlock,
   CodeTabs,
   CodePanel,
@@ -103,7 +102,7 @@ const BlogPostTemplate = ({
         image={seoImage}
       />
       <div className="bg-white dark:bg-slate-900">
-        <Section as="div">
+        <div className="py-12 sm:py-16 md:py-20 px-6 md:px-12 bg-inherit text-inherit">
           <article className="w-full max-w-xl md:max-w-screen-md mx-auto">
             <header className="mb-10 sm:mb-12 md:mb-16">
               <div className="mb-8 lg:mb-12">
@@ -207,7 +206,7 @@ const BlogPostTemplate = ({
               </div>
             </footer>
           </article>
-        </Section>
+        </div>
       </div>
     </Layout>
   );
