@@ -7,14 +7,20 @@ import { menu, socialLinks } from '@/config';
 import { Icon, StyledLink, IconButton } from '@/components';
 import { Logo } from '../logo';
 
-const FooterDivider: React.FC<{ blogPost: boolean }> = ({ blogPost }) => (
+type Props = {
+  blogPost?: boolean;
+};
+
+const FooterDivider: React.FC<Props> = ({ blogPost }) => (
   <svg
     height="148"
     viewBox="0 0 1920 148"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     className={`w-full min-w-full max-w-full ${
-      blogPost ? 'bg-white dark:bg-slate-900' : 'bg-slate-100 dark:bg-slate-900'
+      !!blogPost
+        ? 'bg-white dark:bg-slate-900'
+        : 'bg-slate-100 dark:bg-slate-900'
     }`}
     preserveAspectRatio="none"
   >
@@ -102,9 +108,9 @@ const FooterContent: React.FC = () => (
   </footer>
 );
 
-export const Footer: React.FC<{ blogPost: boolean }> = (props) => (
+export const Footer: React.FC<Props> = ({ blogPost }) => (
   <>
-    <FooterDivider {...props} />
+    <FooterDivider blogPost={blogPost} />
     <FooterContent />
   </>
 );
