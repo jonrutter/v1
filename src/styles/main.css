@@ -126,7 +126,7 @@
 @layer components {
   .title-shine {
     position: absolute;
-    inset: -1rem;
+    inset: -0.5rem;
     overflow: hidden;
     z-index: -1;
     user-select: none;
