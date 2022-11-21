@@ -22,7 +22,7 @@ export const Layout: React.FC<Props> = ({ blogPost, children }) => (
     <Nav />
     <div id="main">
       <main>{children}</main>
-      <Footer />
+      <Footer blogPost={!!blogPost} />
     </div>
   </div>
 );
