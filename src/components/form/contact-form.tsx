@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 // components
-import { Input, Spinner, PrimaryButton } from '@/components';
+import { Input, Spinner, Button } from '@/components';
 
 // types
 export type FormDataType = {
@@ -134,9 +134,14 @@ export const ContactForm: React.FC<Props> = ({ sent, setSent }) => {
         {loading ? (
           <Spinner />
         ) : (
-          <PrimaryButton as="button" type="submit" tabIndex={tabIndex}>
+          <Button
+            as="button"
+            type="submit"
+            tabIndex={tabIndex}
+            variant="primary"
+          >
             Send
-          </PrimaryButton>
+          </Button>
         )}
       </div>
       {/* form error message */}
