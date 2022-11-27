@@ -92,10 +92,7 @@ export const NavDialog: FC<NavDialogProps> = ({ open, onClose }) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div
-            className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm"
-            aria-hidden={true}
-          />
+          <div className="fixed inset-0 bg-slate-900/60" aria-hidden={true} />
         </Transition.Child>
         <Transition.Child
           as={Fragment}
