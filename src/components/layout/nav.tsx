@@ -11,10 +11,6 @@ import { ThemeToggle } from '../theme-toggle';
 // data
 import { menu, socialLinks } from '@/config';
 
-// hooks
-import { useScroll } from '@/hooks/useScroll';
-import { ClientOnly } from '@/hooks/useHasMounted';
-
 // ~~~ Nav Bar ~~~
 const NavLinks: FC = () => (
   <>
@@ -139,18 +135,14 @@ export const NavContent: FC = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const toggleDialog = () => setDialogOpen((open) => !open);
   const closeDialog = () => setDialogOpen(false);
-  const { scrollDir, scrolled } = useScroll();
 
   return (
     <>
       <nav
         className={clsx(
           'py-4 md:py-6 px-6 md:px-12 w-full z-40 motion-reduce:!translate-y-0 text-slate-600 dark:text-slate-200 fixed top-0 transition-transform',
-          scrolled ? 'bg-white dark:bg-slate-800 shadow-lg' : 'bg-transparent',
-          scrollDir === 'up' || !scrolled
-            ? 'translate-y-0'
-            : '-translate-y-24 md:-translate-y-28',
-          'focus-within:!translate-y-0'
+          'bg-white dark:bg-slate-800 shadow-lg',
+          'translate-y-0'
         )}
       >
         <div className="max-w-site-full mx-auto flex justify-between items-center">
@@ -180,10 +172,8 @@ export const NavContent: FC = () => {
 
 export const Nav: FC = () => (
   <>
-    <ClientOnly>
-      <NavContent />
-    </ClientOnly>
+    <NavContent />
     {/* always render underlying spacing, to prevent layout shifts */}
-    <div className="block pt-24" />
+    <div className="block pt-32" />
   </>
 );
