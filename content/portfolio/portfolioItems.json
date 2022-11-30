@@ -3,7 +3,7 @@
     "title": "TaskList",
     "description": "TaskList is a lightweight, intuitive, open source to-do list app, that supports tagging and filtering tasks by labels, due date, and priority level.",
     "url": "https://tasklist-rutterjt.netlify.app/",
-    "code": "https://github.com/rutterjt/tasklist",
+    "code": "https://github.com/jonrutter/tasklist",
     "type": "app",
     "featured": true,
     "skills": [
@@ -57,7 +57,7 @@
     "title": "React Film Database",
     "description": "React Film Database is a web application that allows users to browse and search for details about films.",
     "url": "https://rfdb.netlify.app/",
-    "code": "https://github.com/rutterjt/react-film-db",
+    "code": "https://github.com/jonrutter/react-film-database",
     "type": "app",
     "featured": true,
     "skills": [
@@ -174,7 +174,7 @@
     "title": "React Quiz",
     "description": "A quiz game, built with TypeScript, React, and Tailwind CSS. Fetches questions and answers from the Open Trivia Database API, keeps track of the user's answers, and gives real-time feedback.",
     "url": "https://jonrutter-quiz.netlify.app/",
-    "code": "https://github.com/rutterjt/react-ts-quiz",
+    "code": "https://github.com/jonrutter/ts-quiz",
     "type": "app",
     "featured": false,
     "skills": [
@@ -227,7 +227,7 @@
     "title": "Blogr Landing Page",
     "description": "A demo landing page for a fictional blogging platform, with interactive navigation components. Built with Gatsby and Tailwind CSS, and deployed with Netlify.",
     "url": "https://jonrutter-blogr-landing-page.netlify.app/",
-    "code": "https://github.com/rutterjt/blogr-landing-page/",
+    "code": "https://github.com/jonrutter/blogr-demo",
     "type": "website",
     "featured": true,
     "skills": [
@@ -291,7 +291,7 @@
     "title": "Manage Landing Page",
     "description": "A demo landing page for a fictitious software company, with various interactive elements.",
     "url": "https://jonrutter-manage-landing.netlify.app/",
-    "code": "https://github.com/rutterjt/manage-landing-page/",
+    "code": "https://github.com/jonrutter/manage-demo",
     "type": "website",
     "featured": false,
     "skills": [
@@ -344,7 +344,7 @@
     "title": "Shortly Landing Page",
     "description": "A demo landing page for a web analytics company, with functioning url shortener component.",
     "url": "https://jonrutter-url-shortener.netlify.app/",
-    "code": "https://github.com/rutterjt/url-shortener/",
+    "code": "https://github.com/jonrutter/shortly-demo",
     "type": "website",
     "featured": false,
     "skills": [
@@ -503,7 +503,7 @@
     "title": "Huddle Landing Page",
     "description": "A demo landing page for a fictional software company. Built with Gatsby and Tailwind CSS, and deployed with Netlify.",
     "url": "https://jonrutter-huddle-landing-page.netlify.app/",
-    "code": "https://github.com/rutterjt/huddle-landing-page",
+    "code": "https://github.com/jonrutter/huddle-demo",
     "type": "website",
     "featured": false,
     "skills": [
@@ -567,7 +567,7 @@
     "title": "Splitter Tip Calculator",
     "description": "A tip calculator. Allows users to input a price, tip, and split amount, and calculates the per-person tip and price.",
     "url": "https://jonrutter-splitter.netlify.app/",
-    "code": "https://github.com/rutterjt/react-tip-calculator",
+    "code": "https://github.com/jonrutter/tip-calculator-app",
     "type": "app",
     "featured": false,
     "skills": [
@@ -625,7 +625,7 @@
     "title": "Markdown Previewer",
     "description": "A markdown previewer. Users can enter text in the editor in markdown format, and see it rendered in real time.",
     "url": "https://jonrutter-markdown-previewer.netlify.app/",
-    "code": "https://github.com/rutterjt/markdown-previewer",
+    "code": "https://github.com/jonrutter/markdown-previewer-app",
     "type": "app",
     "featured": false,
     "skills": [
@@ -677,54 +677,6 @@
     ],
     "featuredImage": {
       "src": "./images/markdown.png"
-    }
-  },
-  {
-    "title": "Grocery List App",
-    "description": "A grocery list web app. Users can add entries to the list, check off completed entries, and delete entries from the list.",
-    "url": "https://rutterjt.github.io/js-grocery-list/",
-    "code": "https://github.com/rutterjt/js-grocery-list",
-    "type": "app",
-    "featured": false,
-    "skills": [
-      {
-        "label": "CSS",
-        "icon": "css",
-        "color": "#1572B6",
-        "href": "https://developer.mozilla.org/en-US/docs/Glossary/CSS"
-      },
-      {
-        "label": "JavaScript",
-        "icon": "javascript",
-        "color": "#F7DF1E",
-        "href": "https://developer.mozilla.org/en-US/docs/Glossary/JavaScript"
-      },
-      {
-        "label": "HTML",
-        "icon": "html",
-        "color": "#E34F26",
-        "href": "https://developer.mozilla.org/en-US/docs/Glossary/HTML5"
-      }
-    ],
-    "tools": [
-      {
-        "label": "Git",
-        "icon": "git",
-        "color": "#F05032"
-      },
-      {
-        "label": "GitHub",
-        "icon": "github",
-        "color": "#181717"
-      },
-      {
-        "label": "VS Code",
-        "icon": "vscode",
-        "color": "#007ACC"
-      }
-    ],
-    "featuredImage": {
-      "src": "./images/grocery.png"
     }
   }
 ]
