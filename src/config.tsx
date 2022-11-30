@@ -47,7 +47,7 @@ export const menu: MenuItem[] = [
 ];
 
 export const links = {
-  github: 'https://github.com/rutterjt',
+  github: 'https://github.com/jonrutter',
   twitter: 'https://twitter.com/rutterjt',
   linkedin: 'https://www.linkedin.com/in/rutterjt/',
   email: 'mailto:contact@jonrutter.io',
