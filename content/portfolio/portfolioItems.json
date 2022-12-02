@@ -224,6 +224,59 @@
     }
   },
   {
+    "title": "Grocery List",
+    "description": "A lightweight, intuitive grocery list progressive web app, built with TypeScript, React, and Tailwind CSS.",
+    "url": "https://jonrutter-grocery.netlify.app/",
+    "code": "https://github.com/jonrutter/grocery-list",
+    "type": "app",
+    "featured": false,
+    "skills": [
+      {
+        "label": "React",
+        "icon": "react",
+        "color": "#61DAFB",
+        "href": "https://reactjs.org/"
+      },
+      {
+        "label": "Tailwind CSS",
+        "icon": "tailwind",
+        "color": "#38B2AC",
+        "href": "https://tailwindcss.com/"
+      },
+      {
+        "label": "TypeScript",
+        "icon": "typescript",
+        "color": "#3178C6",
+        "href": "https://www.typescriptlang.org/"
+      }
+    ],
+    "tools": [
+      {
+        "label": "Git",
+        "icon": "git",
+        "color": "#F05032"
+      },
+      {
+        "label": "GitHub",
+        "icon": "github",
+        "color": "#181717"
+      },
+      {
+        "label": "Netlify",
+        "icon": "netlify",
+        "color": "#00C7B7"
+      },
+      {
+        "label": "VS Code",
+        "icon": "vscode",
+        "color": "#007ACC"
+      }
+    ],
+    "featuredImage": {
+      "src": "./images/grocery.png"
+    }
+  },
+  {
     "title": "Blogr Landing Page",
     "description": "A demo landing page for a fictional blogging platform, with interactive navigation components. Built with Gatsby and Tailwind CSS, and deployed with Netlify.",
     "url": "https://jonrutter-blogr-landing-page.netlify.app/",

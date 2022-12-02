@@ -92,7 +92,7 @@ export const portfolioItems: DraftPortfolioItemType[] = [
   {
     title: 'React Quiz',
     description:
-      "A quiz game, built with TypeScript, React, and TailwindCSS. Fetches questions and answers from the Open Trivia Database API, keeps track of the user's answers, and gives real-time feedback.",
+      "A quiz game, built with TypeScript, React, and Tailwind CSS. Fetches questions and answers from the Open Trivia Database API, keeps track of the user's answers, and gives real-time feedback.",
     url: 'https://jonrutter-quiz.netlify.app/',
     code: 'https://github.com/jonrutter/ts-quiz',
     type: 'app',
@@ -100,6 +100,18 @@ export const portfolioItems: DraftPortfolioItemType[] = [
     skills: [React, Tailwind, TypeScript],
     tools: [Git, GitHub, Netlify, VSCode],
     src: './images/quiz.png',
+  },
+  {
+    title: 'Grocery List',
+    description:
+      'A lightweight, intuitive grocery list progressive web app, built with TypeScript, React, and Tailwind CSS.',
+    url: 'https://jonrutter-grocery.netlify.app/',
+    code: 'https://github.com/jonrutter/grocery-list',
+    type: 'app',
+    featured: false,
+    skills: [React, Tailwind, TypeScript],
+    tools: [Git, GitHub, Netlify, VSCode],
+    src: './images/grocery.png',
   },
   {
     title: 'Blogr Landing Page',
