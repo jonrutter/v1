@@ -296,7 +296,34 @@ Now, any of our components can be imported directly from `./components` as:
 import { CustomButton } from '@/components';
 ```
 
-This is a personal preference, and some developers may disagree with re-exporting everything from the root components folder. But you might find it helpful for organizing your code.
+This can also give you a higher degree of control over the encapsulation of different parts of your codebase. For example, say you have a todo list application, with a folder structure like this:
+
+```
+src
+└── features
+    ├── todos
+        ├── index.ts
+        ├── todos-slice.ts
+        ├── utils.ts
+        ├── TodoList.ts
+        └── Todo.tsx
+    ├── user-settings
+    └── authentication
+```
+
+Imagine that `utils.ts` is part of the internal implementation of `todos`. As such, it isn't meant to be used by outside code, and doing so could cause some pretty big problems. If some other code outside of `todos` depended on `utils`, any refactor of the implementation of `todos` could unexpectedly cause the rest of your app to break! Obviously that wouldn't be ideal.
+
+So to prevent problems like this, you might want to avoid exposing the functions in `utils` to the rest of your application. Now, you could just put in a comment telling your future self (and other developers working on the project) not to import it, and hope that works, but that's not a very reliable approach.
+
+Instead, you could write your feature's `index.ts` file like this:
+
+```typescript filename=src/features/todos/index.ts
+export * from 'todos-slice';
+export * from 'TodoList';
+export * from 'Todo';
+```
+
+Notice that `utils.ts` isn't re-exported by `index.ts`. As long as you remember to always import a feature's code from the feature's root `index.ts` file, you can create a standard interface to control which parts of `todos` are exposed to the rest of your project, and which parts are hidden as implementation details.
 
 ## Summary
 
