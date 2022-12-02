@@ -18,6 +18,10 @@
     }
   }
 
+  body {
+    @apply bg-white dark:bg-slate-900;
+  }
+
   /* override a few @tailwindcss/typography styles */
   /* prevent adding backticks to code excerpts */
   /* .prose code::before,
