@@ -323,7 +323,7 @@ export * from 'TodoList';
 export * from 'Todo';
 ```
 
-Notice that `utils.ts` isn't included in `index.ts`. As long as you remember to always import a feature's code from the feature's root `index.ts` file, you can create a standard interface to control which parts of `todos` are exposed to the rest of your project, and which parts are hidden as implementation details.
+Notice that `utils.ts` isn't re-exported by `index.ts`. As long as you remember to always import a feature's code from the feature's root `index.ts` file, you can create a standard interface to control which parts of `todos` are exposed to the rest of your project, and which parts are hidden as implementation details.
 
 ## Summary
 
