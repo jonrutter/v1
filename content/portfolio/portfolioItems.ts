@@ -175,7 +175,7 @@ export const portfolioItems: DraftPortfolioItemType[] = [
     title: 'Huddle Landing Page',
     description:
       'A demo landing page for a fictional software company. Built with Gatsby and Tailwind CSS, and deployed with Netlify.',
-    url: 'https://jonrutter-huddle-landing-page.netlify.app/',
+    url: 'https://jonrutter-huddle.vercel.app/',
     code: 'https://github.com/jonrutter/huddle-demo',
     type: 'website',
     featured: false,
