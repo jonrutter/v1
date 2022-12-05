@@ -97,7 +97,7 @@ const FooterContent: React.FC = () => (
             as="a"
             target="_blank"
             rel="noreferrer"
-            href="https://github.com/rutterjt/v1/tree/main#license"
+            href="https://github.com/jonrutter/v1/tree/main#license"
             className="text-slate-500 dark:text-slate-300"
           >
             © {new Date().getFullYear()}, Jon Rutter
