@@ -130,23 +130,25 @@ const BlogPage = ({ data: { allMdx } }: PageProps<DataProps>) => {
 
 export default BlogPage;
 
-export const query = graphql`{
-  allMdx(sort: {frontmatter: {date: DESC}}) {
-    nodes {
-      slug
-      id
-      timeToRead
-      frontmatter {
-        title
-        excerpt
-        date
-        featured_image {
-          childImageSharp {
-            gatsbyImageData(placeholder: BLURRED, width: 650)
+export const query = graphql`
+  {
+    allMdx(sort: { frontmatter: { date: DESC } }) {
+      nodes {
+        slug
+        id
+        timeToRead
+        frontmatter {
+          title
+          excerpt
+          date
+          featured_image {
+            childImageSharp {
+              gatsbyImageData(placeholder: BLURRED, width: 650)
+            }
           }
+          topics
         }
-        topics
       }
     }
   }
-}`;
+`;
