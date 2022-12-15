@@ -113,53 +113,51 @@ const IndexPage = ({
 
 export default IndexPage;
 
-export const query = graphql`
-  query {
-    allPortfolioItemsJson(filter: { featured: { eq: true } }) {
-      nodes {
-        title
-        description
-        url
-        code
-        type
-        featured
-        skills {
-          label
-          icon
-          color
-          href
-        }
-        tools {
-          label
-          icon
-          color
-        }
-        id
-        featuredImage {
-          src {
-            childImageSharp {
-              gatsbyImageData(width: 1200, placeholder: BLURRED)
-            }
-          }
-        }
+export const query = graphql`{
+  allPortfolioItemsJson(filter: {featured: {eq: true}}) {
+    nodes {
+      title
+      description
+      url
+      code
+      type
+      featured
+      skills {
+        label
+        icon
+        color
+        href
       }
-    }
-    allMdx(limit: 3, sort: { fields: frontmatter___date, order: DESC }) {
-      nodes {
-        id
-        slug
-        timeToRead
-        frontmatter {
-          title
-          excerpt
-          date
-          featured_image {
-            childImageSharp {
-              gatsbyImageData(placeholder: BLURRED, width: 650)
-            }
+      tools {
+        label
+        icon
+        color
+      }
+      id
+      featuredImage {
+        src {
+          childImageSharp {
+            gatsbyImageData(width: 1200, placeholder: BLURRED)
           }
         }
       }
     }
   }
-`;
+  allMdx(limit: 3, sort: {frontmatter: {date: DESC}}) {
+    nodes {
+      id
+      slug
+      timeToRead
+      frontmatter {
+        title
+        excerpt
+        date
+        featured_image {
+          childImageSharp {
+            gatsbyImageData(placeholder: BLURRED, width: 650)
+          }
+        }
+      }
+    }
+  }
+}`;

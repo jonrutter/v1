@@ -28,39 +28,37 @@ export const createPages: GatsbyNode['createPages'] = async ({
   reporter,
 }) => {
   // query for post archive
-  const results = await graphql<Data>(`
-    query {
-      allFile(
-        filter: { sourceInstanceName: { eq: "blog" }, extension: { eq: "mdx" } }
-        sort: { fields: childrenMdx___frontmatter___date, order: DESC }
-      ) {
-        edges {
-          node {
-            id
-            childMdx {
-              slug
-            }
+  const results = await graphql<Data>(`{
+  allFile(
+    filter: {sourceInstanceName: {eq: "blog"}, extension: {eq: "mdx"}}
+    sort: {childrenMdx: {frontmatter: {date: DESC}}}
+  ) {
+    edges {
+      node {
+        id
+        childMdx {
+          slug
+        }
+      }
+      next {
+        childMdx {
+          slug
+          frontmatter {
+            title
           }
-          next {
-            childMdx {
-              slug
-              frontmatter {
-                title
-              }
-            }
-          }
-          previous {
-            childMdx {
-              slug
-              frontmatter {
-                title
-              }
-            }
+        }
+      }
+      previous {
+        childMdx {
+          slug
+          frontmatter {
+            title
           }
         }
       }
     }
-  `);
+  }
+}`);
 
   if (results.errors) {
     reporter.panicOnBuild(`Error running GraphQL query.`);
