@@ -3,6 +3,7 @@ import React from 'react';
 type Props = {
   htmlFor: string;
   required: boolean;
+  children: React.ReactNode;
 };
 
 export const Label: React.FC<Props> = ({ htmlFor, required, children }) => (

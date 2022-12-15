@@ -15,6 +15,7 @@ const colors = className;
 
 type Props = {
   color?: keyof typeof colors;
+  children: React.ReactNode;
 };
 
 export const Note: React.FC<Props> = ({ color = 'grey', children }) => (

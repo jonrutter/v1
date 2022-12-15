@@ -3,6 +3,7 @@ import clsx from 'clsx';
 
 type Props = {
   title: React.ReactNode;
+  children: React.ReactNode;
 };
 
 /**

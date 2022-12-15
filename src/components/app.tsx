@@ -7,6 +7,8 @@ import { ColorThemeContextProvider } from '@/hooks/useColorTheme';
  *
  * Currently includes the `<ColorThemeContextProvider />`
  */
-export const PageWrap: React.FC = ({ children }) => {
+export const PageWrap: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return <ColorThemeContextProvider>{children}</ColorThemeContextProvider>;
 };
