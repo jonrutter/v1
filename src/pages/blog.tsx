@@ -134,10 +134,9 @@ export const query = graphql`
   {
     allMdx(sort: { frontmatter: { date: DESC } }) {
       nodes {
-        slug
         id
-        timeToRead
         frontmatter {
+          slug
           title
           excerpt
           date
@@ -147,6 +146,11 @@ export const query = graphql`
             }
           }
           topics
+        }
+        fields {
+          timeToRead {
+            minutes
+          }
         }
       }
     }

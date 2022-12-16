@@ -147,16 +147,20 @@ export const query = graphql`
     allMdx(limit: 3, sort: { frontmatter: { date: DESC } }) {
       nodes {
         id
-        slug
-        timeToRead
         frontmatter {
           title
           excerpt
           date
+          slug
           featured_image {
             childImageSharp {
               gatsbyImageData(placeholder: BLURRED, width: 650)
             }
+          }
+        }
+        fields {
+          timeToRead {
+            text
           }
         }
       }
