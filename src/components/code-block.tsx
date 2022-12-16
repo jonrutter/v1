@@ -1,10 +1,6 @@
-import React from 'react';
+import React, { ComponentPropsWithoutRef } from 'react';
 import Highlight, { defaultProps, Language } from 'prism-react-renderer';
 import clsx from 'clsx';
-
-type Props = {
-  children: React.ReactElement;
-};
 
 /**
  * Returns a string of tailwind classes to style the code language indicator, or an empty string the language is if not found
@@ -34,7 +30,12 @@ const formatDisplayLanguage = (language: string) => {
   return language;
 };
 
-export const CodeBlock: React.FC<Props> = ({ children }) => {
+export const CodeBlock: React.FC<ComponentPropsWithoutRef<'pre'>> = ({
+  children,
+}) => {
+  // verify `children` is a React element
+  if (!React.isValidElement(children)) return null;
+
   // getting the code language
   // attempt to select the child node's className
   const className = children.props.className || '';
