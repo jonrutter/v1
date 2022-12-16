@@ -7,13 +7,14 @@ featured_image_credit: Fletcher Pride
 featured_image_link: https://unsplash.com/photos/liMvhbUq4Xg
 excerpt: Build your own strongly typed polymorphic components with ref forwarding.
 topics: ['react', 'typescript']
+slug: typescript-polymorphic-components
 ---
 
 Polymorphic components are a React pattern for code reuse, which involves designing a component to accept a prop that modifies the type of the underlying node.
 
 You may be familiar with polymorphic components if you've worked with certain React component libraries. For example, [Material UI](https://mui.com/) supports passing a `component` prop to some of its components to change their base HTML tag:
 
-<!-- prettier-ignore -->
+{/* prettier-ignore */}
 ```jsx
 import React from 'react';
 import Box from '@mui/material/Box';
@@ -31,7 +32,7 @@ const BoxAsMain = () => (
 
 [Reach UI](https://reach.tech/) has a similar api, only it uses `as` as the prop:
 
-<!-- prettier-ignore -->
+{/* prettier-ignore */}
 ```jsx
 import React from 'react';
 import {
@@ -111,7 +112,7 @@ Let's say we wanted to create a polymorphic `<Button />` component, which is des
 
 Consider the following bugs, none of which would be caught by JavaScript:
 
-<!-- prettier-ignore -->
+{/* prettier-ignore */}
 ```jsx
 import React from 'react';
 import { Button } from './button';
@@ -192,7 +193,7 @@ The error is gone! By typing `as` as a `React.ElementType`, we get two benefits:
 
 Great! But now let's see what happens when we try to pass props to our new component:
 
-<!-- prettier-ignore -->
+{/* prettier-ignore */}
 ```tsx filename=src/App.tsx
 export const App = () => (
   <Container as="main" style={{ fontSize: '1.5rem' }}>
@@ -250,7 +251,7 @@ _**Note**: we also needed to provide a default type value of `React.ElementType 
 
 Now, TypeScript will correctly evaluate our props based on what we specify with `as`, so if we try something like:
 
-<!-- prettier-ignore -->
+{/* prettier-ignore */}
 ```tsx filename=src/App.tsx
 export const App = () => (
   <Container as="main" href="/">
@@ -446,7 +447,7 @@ export const Container = React.forwardRef(
 
 This code should work, but unfortunately there's a problem: by wrapping our component in `forwardRef`, TypeScript no longer knows how to type the `<Container />` component, so all of our type support is suddenly broken! You can verify this by trying out:
 
-<!-- prettier-ignore -->
+{/* prettier-ignore */}
 ```tsx filename=src/App.tsx
 export const App = () => (
   <div>
@@ -461,7 +462,7 @@ Well that's not what we wanted.
 
 The solution I found to this problem is to explicitly type the component itself. Here's an example of one way to do that:
 
-<!-- prettier-ignore -->
+{/* prettier-ignore */}
 ```tsx filename=src/components/container.tsx
 type ContainerType = <T extends React.ElementType = 'div'>(
   props: PolymorphicPropsWithRef<T, Props>
