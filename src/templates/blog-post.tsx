@@ -2,7 +2,6 @@ import React from 'react';
 import { graphql, PageProps } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { MDXProvider } from '@mdx-js/react';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
 import parseISO from 'date-fns/parseISO';
 import format from 'date-fns/format';
 
@@ -24,13 +23,13 @@ import {
 } from '@/components';
 
 // types
-import type { PostNode, BlogPost } from '@/types';
+import type { PostNode, BlogNode } from '@/types';
 
 type DataProps = {
-  allFile: {
+  allMdx: {
     edges: [
       {
-        node: BlogPost;
+        node: BlogNode;
       }
     ];
   };
@@ -54,10 +53,16 @@ const shortcodes = {
   AutoLinkH3,
 };
 
+type BlogLinkProps = {
+  to: string;
+  className: string;
+  children: React.ReactNode;
+};
+
 /**
  * Custom link for blog posts
  */
-const BlogLink: React.FC<{ to: string; className: string }> = ({
+const BlogLink: React.FC<BlogLinkProps> = ({
   to,
   className = '',
   children,
@@ -73,8 +78,9 @@ const BlogLink: React.FC<{ to: string; className: string }> = ({
 const BlogPostTemplate = ({
   data,
   pageContext,
+  children,
 }: PageProps<DataProps, PageContext>) => {
-  const node = data.allFile.edges[0].node.childMdx;
+  const node = data.allMdx.edges[0].node;
   const { next, previous } = pageContext;
 
   const image =
@@ -86,16 +92,13 @@ const BlogPostTemplate = ({
 
   let seoImage = src && height && width ? { src, height, width } : undefined;
 
-  const editLink = `${links.github}/v1/edit/main/content/blog/${node.slug.slice(
-    0,
-    -1
-  )}/index.mdx`;
+  const editLink = `${links.github}/v1/edit/main/content/blog/${node.frontmatter.slug}/index.mdx`;
 
   return (
     <Layout blogPost>
       <Seo
         title={`${node.frontmatter.title} | Jon Rutter`}
-        pathname={`/blog/${node.slug}`}
+        pathname={`/blog/${node.frontmatter.slug}`}
         article
         author="Jon Rutter"
         description={node.frontmatter.excerpt}
@@ -120,7 +123,7 @@ const BlogPostTemplate = ({
                 <time dateTime={node.frontmatter.date}>
                   {format(parseISO(node.frontmatter.date), 'MMMM d, yyyy')}
                 </time>{' '}
-                <span>•</span> <span>{node.timeToRead} minute read</span>
+                <span>•</span> <span>{node.fields.timeToRead.text}</span>
               </p>
               {image && (
                 <figure>
@@ -145,9 +148,7 @@ const BlogPostTemplate = ({
               )}
             </header>
             <div className="prose md:prose-lg prose-slate mx-auto dark:prose-invert">
-              <MDXProvider components={shortcodes}>
-                <MDXRenderer>{node.body}</MDXRenderer>
-              </MDXProvider>
+              <MDXProvider components={shortcodes}>{children}</MDXProvider>
               <hr />
             </div>
 
@@ -155,7 +156,7 @@ const BlogPostTemplate = ({
               <div className="flex flex-col items-start sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 sm:items-center flex-wrap not-prose py-8">
                 <StyledLink
                   as="a"
-                  href={`https://twitter.com/intent/tweet?url=https://www.jonrutter.io/blog/${node.slug}`}
+                  href={`https://twitter.com/intent/tweet?url=https://www.jonrutter.io/blog/${node.frontmatter.slug}`}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -180,23 +181,23 @@ const BlogPostTemplate = ({
                 {previous && (
                   <div className="self-start">
                     <BlogLink
-                      to={`/blog/${previous.childMdx.slug}`}
+                      to={`/blog/${previous.frontmatter.slug}`}
                       className="-ml-2"
                     >
                       <span className="group-hover:animate-arrow inline-block px-2">
                         ←
                       </span>
-                      {previous.childMdx.frontmatter.title}
+                      {previous.frontmatter.title}
                     </BlogLink>
                   </div>
                 )}
                 {next && (
                   <div className="self-end">
                     <BlogLink
-                      to={`/blog/${next.childMdx.slug}`}
+                      to={`/blog/${next.frontmatter.slug}`}
                       className="-mr-2"
                     >
-                      {next.childMdx.frontmatter.title}{' '}
+                      {next.frontmatter.title}{' '}
                       <span className="group-hover:animate-arrow inline-block px-2">
                         →
                       </span>
@@ -213,31 +214,32 @@ const BlogPostTemplate = ({
 };
 
 export const pageQuery = graphql`
-  query ($id: String) {
-    allFile(filter: { id: { eq: $id } }) {
+  query BlogPostTemplate($id: String) {
+    allMdx(filter: { id: { eq: $id } }) {
       edges {
         node {
           id
-          childMdx {
-            id
+          fields {
+            timeToRead {
+              text
+            }
+          }
+          body
+          frontmatter {
             slug
-            timeToRead
-            body
-            frontmatter {
-              date
-              title
-              excerpt
-              featured_image_link
-              featured_image_credit
-              featured_image_alt
-              featured_image {
-                childImageSharp {
-                  gatsbyImageData(placeholder: BLURRED)
-                  original {
-                    src
-                    width
-                    height
-                  }
+            date
+            title
+            excerpt
+            featured_image_link
+            featured_image_credit
+            featured_image_alt
+            featured_image {
+              childImageSharp {
+                gatsbyImageData(placeholder: BLURRED)
+                original {
+                  src
+                  width
+                  height
                 }
               }
             }
