@@ -8,11 +8,9 @@ import {
 export type { PortfolioItemType, SkillType };
 
 export type PostNode = {
-  childMdx: {
+  frontmatter: {
     slug: string;
-    frontmatter: {
-      title: string;
-    };
+    title: string;
   };
 };
 
@@ -21,6 +19,7 @@ export type BlogPostPreview = {
     title: string;
     date: string;
     excerpt: string;
+    slug: string;
     featured_image?: {
       childImageSharp: {
         gatsbyImageData: IGatsbyImageData;
@@ -28,38 +27,40 @@ export type BlogPostPreview = {
     };
     topics?: string[] | null;
   };
-  slug: string;
-  timeToRead: number;
+  fields: {
+    timeToRead: {
+      text: string;
+    };
+  };
   id: string;
 };
 
-export type BlogPost = {
-  childMdx: {
-    id: string;
+export type BlogNode = {
+  id: string;
+  body: string;
+  fields: {
+    timeToRead: {
+      text: string;
+    };
+  };
+  frontmatter: {
+    date: string;
+    excerpt: string;
     slug: string;
-    timeToRead: number;
-    body: string;
-    frontmatter: {
-      excerpt: string;
-      date: string;
-      title: string;
-      featured_image_alt?: string;
-      featured_image_credit?: string;
-      featured_image_link?: string;
-      featured_image?: {
-        childImageSharp: {
-          gatsbyImageData: IGatsbyImageData;
-          original: {
-            src: string;
-            width: number;
-            height: number;
-          };
+    title: string;
+    topics: string[];
+    featured_image_alt?: string;
+    featured_image_credit?: string;
+    featured_image_link?: string;
+    featured_image?: {
+      childImageSharp: {
+        gatsbyImageData: IGatsbyImageData;
+        original: {
+          src: string;
+          width: number;
+          height: number;
         };
       };
     };
-    headings?: {
-      value: string;
-      depth?: number;
-    }[];
   };
 };
