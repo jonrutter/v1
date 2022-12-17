@@ -29,7 +29,6 @@ const IndexPage = ({
 }: PageProps<DataProps>) => {
   return (
     <Layout>
-      <Seo title="Jon Rutter | Web Developer" pathname="/" />
       <Hero
         title={
           <>
@@ -114,7 +113,7 @@ const IndexPage = ({
 export default IndexPage;
 
 export const query = graphql`
-  query {
+  {
     allPortfolioItemsJson(filter: { featured: { eq: true } }) {
       nodes {
         title
@@ -144,22 +143,30 @@ export const query = graphql`
         }
       }
     }
-    allMdx(limit: 3, sort: { fields: frontmatter___date, order: DESC }) {
+    allMdx(limit: 3, sort: { frontmatter: { date: DESC } }) {
       nodes {
         id
-        slug
-        timeToRead
         frontmatter {
           title
           excerpt
           date
+          slug
           featured_image {
             childImageSharp {
               gatsbyImageData(placeholder: BLURRED, width: 650)
             }
           }
         }
+        fields {
+          timeToRead {
+            text
+          }
+        }
       }
     }
   }
 `;
+
+export const Head = () => (
+  <Seo title="Jon Rutter | Web Developer" pathname="/" />
+);

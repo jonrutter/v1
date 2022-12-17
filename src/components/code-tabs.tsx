@@ -79,6 +79,7 @@ const CodeTab: React.FC<TabProps> = ({ children }) => {
 type Props = {
   one: string;
   two: string;
+  children: React.ReactNode;
 };
 
 /**
@@ -107,6 +108,6 @@ export const CodeTabs: React.FC<Props> = ({ one, two, children }) => (
  *
  * Should directly wrap a `<CodeBlock>` component.
  */
-export const CodePanel: React.FC = ({ children }) => (
-  <Tab.Panel>{children}</Tab.Panel>
-);
+export const CodePanel: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => <Tab.Panel>{children}</Tab.Panel>;

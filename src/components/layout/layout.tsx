@@ -7,6 +7,7 @@ import { SkipToContent } from './skip-to-main';
 
 type Props = {
   blogPost?: boolean;
+  children: React.ReactNode;
 };
 
 /**

@@ -5,10 +5,14 @@ import { BlogCard } from '../blog-card';
 import { BlogPostPreview } from '@/types';
 
 const item: BlogPostPreview = {
-  slug: 'test-slug/',
   id: '1',
-  timeToRead: 3,
+  fields: {
+    timeToRead: {
+      text: '3 min read',
+    },
+  },
   frontmatter: {
+    slug: 'test-project',
     date: '2022-06-01',
     excerpt: 'This is a test excerpt',
     title: 'Test Blog Post',
@@ -55,11 +59,11 @@ describe('Blog Card', () => {
 
     // metadata
     screen.getByText('June 1, 2022');
-    screen.getByText(`• ${item.timeToRead} minute read`);
+    screen.getByText(/3 min read/i);
 
     // title link: should have inner text of the title, and href to the blog slug
     const titleLink = screen.getByText(item.frontmatter.title);
-    expect(titleLink).toHaveAttribute('href', `/blog/${item.slug}`);
+    expect(titleLink).toHaveAttribute('href', `/blog/${item.frontmatter.slug}`);
 
     // should display the featured image
     screen.getByAltText(/preview image for post/i);

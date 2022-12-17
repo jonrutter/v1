@@ -23,6 +23,7 @@ const ColorThemeContext = React.createContext<ContextValueType>(defaultContext);
 
 type ProviderProps = {
   initial?: ColorTheme;
+  children: React.ReactNode;
 };
 /**
  * Provider for the site's colorTheme context.

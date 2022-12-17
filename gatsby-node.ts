@@ -1,5 +1,6 @@
 import type { GatsbyNode } from 'gatsby';
 import path from 'path';
+import readingTime from 'reading-time';
 
 // types
 import type { PostNode } from '@/types';
@@ -7,8 +8,11 @@ import type { PostNode } from '@/types';
 type PostEdge = {
   node: {
     id: string;
-    childMdx: {
+    frontmatter: {
       slug: string;
+    };
+    internal: {
+      contentFilePath: string;
     };
   };
   next: PostNode | null;
@@ -16,10 +20,25 @@ type PostEdge = {
 };
 
 type Data = {
-  allFile: {
+  allMdx: {
     edges: PostEdge[];
   };
 };
+
+// add reading time to nodes
+export const onCreateNode: GatsbyNode['onCreateNode'] = ({ node, actions }) => {
+  const { createNodeField } = actions;
+  if (node.internal.type === 'Mdx') {
+    createNodeField({
+      node,
+      name: 'timeToRead',
+      value: readingTime(node.body as string),
+    });
+  }
+};
+
+// blog post template path
+const blogTemplate = path.resolve(`./src/templates/blog-post.tsx`);
 
 // generate pages for blog posts
 export const createPages: GatsbyNode['createPages'] = async ({
@@ -30,31 +49,27 @@ export const createPages: GatsbyNode['createPages'] = async ({
   // query for post archive
   const results = await graphql<Data>(`
     query {
-      allFile(
-        filter: { sourceInstanceName: { eq: "blog" }, extension: { eq: "mdx" } }
-        sort: { fields: childrenMdx___frontmatter___date, order: DESC }
-      ) {
+      allMdx(sort: { frontmatter: { date: DESC } }) {
         edges {
           node {
             id
-            childMdx {
+            internal {
+              contentFilePath
+            }
+            frontmatter {
               slug
             }
           }
           next {
-            childMdx {
+            frontmatter {
+              title
               slug
-              frontmatter {
-                title
-              }
             }
           }
           previous {
-            childMdx {
+            frontmatter {
+              title
               slug
-              frontmatter {
-                title
-              }
             }
           }
         }
@@ -67,14 +82,15 @@ export const createPages: GatsbyNode['createPages'] = async ({
     return;
   }
 
-  const posts = results.data?.allFile.edges;
+  const posts = results.data?.allMdx.edges;
 
   if (posts) {
     posts.forEach(({ node, next, previous }) => {
-      reporter.log(`Building node: ${node.childMdx.slug}`);
+      reporter.log(`Building node: ${node.frontmatter.slug}`);
+
       createPage({
-        path: `/blog/${node.childMdx.slug}`,
-        component: path.resolve(`./src/templates/blog-post.tsx`),
+        path: `/blog/${node.frontmatter.slug}`,
+        component: `${blogTemplate}?__contentFilePath=${node.internal.contentFilePath}`,
         context: { id: node.id, next, previous },
       });
     });

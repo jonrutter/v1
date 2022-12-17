@@ -84,7 +84,6 @@ const BlogPage = ({ data: { allMdx } }: PageProps<DataProps>) => {
 
   return (
     <Layout>
-      <Seo title="Blog | Jon Rutter" pathname="/blog" />
       <Hero title="My blog">
         <p className="mb-8">
           Articles sharing my thoughts, opinions, and tutorials on web
@@ -131,13 +130,12 @@ const BlogPage = ({ data: { allMdx } }: PageProps<DataProps>) => {
 export default BlogPage;
 
 export const query = graphql`
-  query {
-    allMdx(sort: { fields: frontmatter___date, order: DESC }) {
+  {
+    allMdx(sort: { frontmatter: { date: DESC } }) {
       nodes {
-        slug
         id
-        timeToRead
         frontmatter {
+          slug
           title
           excerpt
           date
@@ -148,7 +146,14 @@ export const query = graphql`
           }
           topics
         }
+        fields {
+          timeToRead {
+            minutes
+          }
+        }
       }
     }
   }
 `;
+
+export const Head = () => <Seo title="Blog | Jon Rutter" pathname="/blog" />;

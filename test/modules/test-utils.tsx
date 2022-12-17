@@ -2,7 +2,7 @@ import React from 'react';
 import { render, RenderOptions } from '@testing-library/react';
 import { ColorThemeContextProvider } from '@/hooks/useColorTheme';
 
-const Wrapper: React.FC = ({ children }) => (
+const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <ColorThemeContextProvider>{children}</ColorThemeContextProvider>
 );
 

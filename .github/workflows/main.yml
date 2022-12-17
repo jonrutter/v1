@@ -11,12 +11,12 @@ jobs:
 
   # checks that there are no type errors
   Typecheck:
-    strategy:
-      matrix:
-        node-version: [18.x]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
       - name: Install dependencies
         run: npm ci
       - name: Check types
@@ -24,12 +24,12 @@ jobs:
 
   # lints code
   Lint:
-    strategy:
-      matrix:
-        node-version: [18.x]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
       - name: Install dependencies
         run: npm ci
       - name: Lint files
@@ -37,24 +37,24 @@ jobs:
 
   # runs all jest tests
   Tests:
-    strategy:
-      matrix:
-        node-version: [18.x]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
       - name: Install dependencies
         run: npm ci
       - name: Run tests
         run: npm run test:ci
 
   Build:
-    strategy:
-      matrix:
-        node-version: [18.x]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
       - name: Install dependencies
         run: npm ci
       - name: Test build

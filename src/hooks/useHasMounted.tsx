@@ -50,7 +50,9 @@ export const useHasMounted = (): boolean => {
  *   <StatefulComponent />
  * </ClientOnly>
  */
-export const ClientOnly: React.FC = ({ children }) => {
+export const ClientOnly: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const hasMounted = useHasMounted();
   if (!hasMounted) return null;
   return <>{children}</>;

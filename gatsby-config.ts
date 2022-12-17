@@ -13,7 +13,6 @@ const config: GatsbyConfig = {
   },
   plugins: [
     'gatsby-plugin-image',
-    'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
@@ -56,28 +55,28 @@ const config: GatsbyConfig = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
-        path: './src/images/',
+        path: `${__dirname}/src/images/`,
       },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'blog',
-        path: './content/blog/',
+        path: `${__dirname}/content/blog/`,
       },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'portfolio',
-        path: './content/portfolio/',
+        path: `${__dirname}/content/portfolio/`,
       },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'portfolioImages',
-        path: './content/portfolio/images',
+        path: `${__dirname}/content/portfolio/images/`,
       },
     },
     'gatsby-plugin-postcss',

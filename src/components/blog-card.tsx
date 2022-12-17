@@ -32,7 +32,10 @@ export const BlogCard: React.FC<Props> = ({ item }) => {
       <div className="max-w-prose p-8 lg:p-6 md:flex-[5] lg:flex-auto">
         <header>
           <h3 className="font-heading font-bold mb-1 text-2xl text-slate-900 dark:text-white">
-            <StyledLink to={`/blog/${item.slug}`} className="inline-block">
+            <StyledLink
+              to={`/blog/${item.frontmatter.slug}`}
+              className="inline-block"
+            >
               {item.frontmatter.title}
             </StyledLink>
           </h3>
@@ -40,7 +43,7 @@ export const BlogCard: React.FC<Props> = ({ item }) => {
             <time dateTime={item.frontmatter.date}>
               {format(parseISO(item.frontmatter.date), 'MMMM d, yyyy')}
             </time>{' '}
-            • {item.timeToRead} minute read
+            • {item.fields.timeToRead.text}
           </small>
         </header>
         <div>

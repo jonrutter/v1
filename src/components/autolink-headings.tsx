@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  ComponentPropsWithoutRef,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { Link } from 'gatsby';
 
 // util func
@@ -29,11 +35,9 @@ const Hash: React.FC = () => (
 );
 
 /* Header components */
-type Props = {
-  children: React.ReactNode;
-};
-
-export const AutoLinkH2: React.FC<Props> = ({ children }) => {
+export const AutoLinkH2: React.FC<ComponentPropsWithoutRef<'h2'>> = ({
+  children,
+}) => {
   const [title, ref] = useTitle(children);
   const id = formatId(title);
   return (
@@ -49,7 +53,9 @@ export const AutoLinkH2: React.FC<Props> = ({ children }) => {
   );
 };
 
-export const AutoLinkH3: React.FC<Props> = ({ children }) => {
+export const AutoLinkH3: React.FC<ComponentPropsWithoutRef<'h3'>> = ({
+  children,
+}) => {
   const [title, ref] = useTitle(children);
   const id = formatId(title);
   return (

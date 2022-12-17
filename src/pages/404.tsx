@@ -21,3 +21,5 @@ const NotFoundPage: React.FC = () => (
 );
 
 export default NotFoundPage;
+
+export const Head = () => <Seo title="404: Not Found" />;

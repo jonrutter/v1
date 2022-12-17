@@ -1,8 +1,7 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { render } from 'test-utils';
 
-import { PureSeo } from '../seo';
+import { BaseSeo } from '../seo';
 
 const siteMetadata = {
   title: `Jon Rutter's Portfolio Website`,
@@ -23,56 +22,79 @@ const props = {
   lang: 'en-us',
 };
 
-const meta = [
-  {
-    name: 'theme-color',
-    content: '#ffffff',
-  },
-];
-
 describe('Seo component', () => {
   it('renders the correct default content', () => {
-    render(<PureSeo siteMetadata={siteMetadata} pathname="/" />);
-    const helmet = Helmet.peek();
-    // extract tag info from helmet metadata
-    const { metaTags, linkTags } = helmet;
-    const author = metaTags.find((tag) => tag?.name === 'author');
-    const description = metaTags.find((tag) => tag.name === 'description');
-    const twitter = metaTags.find((tag) => tag.name === 'twitter:creator');
-    const canonical = linkTags.find((tag) => tag.rel === 'canonical');
+    render(<BaseSeo siteMetadata={siteMetadata} pathname="/" />);
+    // select meta tags
+    const title = document.querySelector('title');
+    const ogTitle = document.querySelector('[property="og:title"]');
+    const ogType = document.querySelector('[property="og:type"]');
+    const twitterTitle = document.querySelector('[name="twitter:title"]');
+    const description = document.querySelector('[name="description"]');
+    const ogDescription = document.querySelector('[property="og:description"]');
+    const twitterDescription = document.querySelector(
+      '[name="twitter:description"]'
+    );
+    const twitterCard = document.querySelector('[name="twitter:card"]');
+    const twitterUsername = document.querySelector('[name="twitter:creator"]');
+    const author = document.querySelector('[name="author"]');
+    const ogUrl = document.querySelector('[property="og:url"]');
+    const canonicalLink = document.querySelector('[rel="canonical"]');
 
-    // because no overriding props were passed in, all metadata should reflect the default in the mocked siteMetadata query
-    expect(helmet.title).toBe(siteMetadata.title);
-    expect(description?.content).toBe(siteMetadata.description);
-    expect(author?.content).toBe(siteMetadata.author);
-    expect(canonical?.href).toBe(siteMetadata.siteUrl); // seo curtails trailing slashes in canonical links, so even though a pathname was passed in, the canonical link should still be just the siteUrl
-    expect(twitter?.content).toBe(siteMetadata.twitterUsername);
-    expect(helmet.htmlAttributes?.lang).toBe(siteMetadata.lang);
+    // because no overriding props were passed in, all metadata content should reflect the defaults in the mocked siteMetadata query
+    expect(title).toHaveTextContent(siteMetadata.title);
+    expect(ogTitle).toHaveAttribute('content', siteMetadata.title);
+    expect(twitterTitle).toHaveAttribute('content', siteMetadata.title);
+    expect(ogType).toHaveAttribute('content', 'website');
+    expect(description).toHaveAttribute('content', siteMetadata.description);
+    expect(ogDescription).toHaveAttribute('content', siteMetadata.description);
+    expect(twitterDescription).toHaveAttribute(
+      'content',
+      siteMetadata.description
+    );
+    expect(twitterCard).toHaveAttribute('content', 'summary');
+    expect(twitterUsername).toHaveAttribute(
+      'content',
+      siteMetadata.twitterUsername
+    );
+    expect(author).toHaveAttribute('content', siteMetadata.author);
+    expect(ogUrl).toHaveAttribute('content', siteMetadata.siteUrl);
+    expect(canonicalLink).toHaveAttribute('href', siteMetadata.siteUrl);
   });
   it('renders overriding metadata correctly', () => {
-    render(<PureSeo siteMetadata={siteMetadata} {...props} />);
-    const helmet = Helmet.peek();
-    // extract tag info from helmet metadata
-    const { metaTags, linkTags } = helmet;
-    const author = metaTags.find((tag) => tag?.name === 'author');
-    const description = metaTags.find((tag) => tag.name === 'description');
-    const twitter = metaTags.find((tag) => tag.name === 'twitter:creator');
-    const canonical = linkTags.find((tag) => tag.rel === 'canonical');
+    render(<BaseSeo siteMetadata={siteMetadata} {...props} />);
+    // select meta tags
+    const title = document.querySelector('title');
+    const ogTitle = document.querySelector('[property="og:title"]');
+    const ogType = document.querySelector('[property="og:type"]');
+    const twitterTitle = document.querySelector('[name="twitter:title"]');
+    const description = document.querySelector('[name="description"]');
+    const ogDescription = document.querySelector('[property="og:description"]');
+    const twitterDescription = document.querySelector(
+      '[name="twitter:description"]'
+    );
+    const twitterUsername = document.querySelector('[name="twitter:creator"]');
+    const author = document.querySelector('[name="author"]');
+    const ogUrl = document.querySelector('[property="og:url"]');
+    const canonicalLink = document.querySelector('[rel="canonical"]');
 
-    // because overriding props were passed in, all metadata should reflect the updated information, instead of the base siteMetadata
-    expect(helmet.title).toBe(props.title);
-    expect(description?.content).toBe(props.description);
-    expect(author?.content).toBe(props.author);
-    expect(canonical?.href).toBe(`${siteMetadata.siteUrl}${props.pathname}`);
-    expect(twitter?.content).toBe(props.twitterUsername);
-    expect(helmet.htmlAttributes?.lang).toBe(props.lang);
-  });
-  it('renders extra passed metadata', () => {
-    // the seo component supports passing arbitrary extra metadata as an array throught the `meta` prop, every key/value pair in the `meta` array should have its own `<meta>` tag, where the key is the meta name, and the value is the meta content
-    render(<PureSeo siteMetadata={siteMetadata} meta={meta} />);
-    const helmet = Helmet.peek();
-    const { metaTags } = helmet;
-    const color = metaTags.find((tag) => tag.name === meta[0].name);
-    expect(color?.content).toBe(meta[0].content);
+    // because overriding props were passed in, all metadata should reflect the updated information, instead of the default siteMetadata
+    expect(title).toHaveTextContent(props.title);
+    expect(ogTitle).toHaveAttribute('content', props.title);
+    expect(twitterTitle).toHaveAttribute('content', props.title);
+    expect(ogType).toHaveAttribute('content', 'article');
+    expect(description).toHaveAttribute('content', props.description);
+    expect(ogDescription).toHaveAttribute('content', props.description);
+    expect(twitterDescription).toHaveAttribute('content', props.description);
+    expect(twitterUsername).toHaveAttribute('content', props.twitterUsername);
+    expect(author).toHaveAttribute('content', props.author);
+    expect(ogUrl).toHaveAttribute(
+      'content',
+      `${siteMetadata.siteUrl}${props.pathname}`
+    );
+    expect(canonicalLink).toHaveAttribute(
+      'href',
+      `${siteMetadata.siteUrl}${props.pathname}`
+    );
   });
 });
