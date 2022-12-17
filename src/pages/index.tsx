@@ -29,7 +29,6 @@ const IndexPage = ({
 }: PageProps<DataProps>) => {
   return (
     <Layout>
-      <Seo title="Jon Rutter | Web Developer" pathname="/" />
       <Hero
         title={
           <>
@@ -167,3 +166,7 @@ export const query = graphql`
     }
   }
 `;
+
+export const Head = () => (
+  <Seo title="Jon Rutter | Web Developer" pathname="/" />
+);

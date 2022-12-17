@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
 type HeaderImage = {
@@ -13,12 +12,11 @@ type BaseProps = {
   description?: string;
   author?: string;
   twitterUsername?: string;
-  lang?: string;
   image?: HeaderImage;
   keywords?: string[];
   article?: boolean;
   pathname?: string;
-  meta?: any[];
+  children?: React.ReactNode;
 };
 
 type SiteMetadata = {
@@ -34,18 +32,17 @@ interface Props extends BaseProps {
   siteMetadata: SiteMetadata;
 }
 
-export const PureSeo: React.FC<Props> = ({
+export const BaseSeo: React.FC<Props> = ({
   siteMetadata,
   title,
   description,
   author,
   twitterUsername,
-  lang,
   image: metaImage,
   pathname,
   article,
   keywords = [],
-  meta = [],
+  children,
 }) => {
   // remove trailing slashes from pathname
   let seoPathname;
@@ -58,7 +55,6 @@ export const PureSeo: React.FC<Props> = ({
   const seo = {
     title: title || siteMetadata.title,
     description: description || siteMetadata.description,
-    lang: lang || siteMetadata.lang || 'en', // fall back to english
     image:
       metaImage && metaImage.src
         ? {
@@ -76,98 +72,83 @@ export const PureSeo: React.FC<Props> = ({
     author: author || siteMetadata.author,
   };
 
-  // attributes to be injected into the html tag
-  const htmlContent = { lang: seo.lang };
-
-  // metadata
-  const metaContent = [
-    // metadata that can always be set
-    { property: 'og:title', content: seo.title },
-    { property: 'og:type', content: article ? 'article' : 'website' },
-    { name: 'twitter:title', content: seo.title },
-  ]
-    .concat(
-      seo.description
-        ? [
-            // description
-            { name: 'description', content: seo.description },
-            { property: 'og:description', content: seo.description },
-            { name: 'twitter:description', content: seo.description },
-          ]
-        : []
-    )
-    .concat(
-      seo.keywords.length
-        ? [
-            // keywords
-            { name: 'keywords', content: seo.keywords.join(',') },
-          ]
-        : []
-    )
-    .concat(
-      seo.image
-        ? [
-            // image
-            { name: 'image', content: seo.image.src },
-            { property: 'og:image', content: seo.image.src },
-            { property: 'og:image:width', content: `${seo.image.width}` },
-            {
-              property: 'og:image:height',
-              content: `${seo.image.height}`,
-            },
-            { name: 'twitter:card', content: 'summary_large_image' },
-            { name: 'twitter:image', content: `${seo.image.src}` },
-          ]
-        : [
-            // fallback twitter card type, in case of no image
-            { name: 'twitter:card', content: 'summary' },
-          ]
-    )
-    .concat(
-      seo.twitterUsername
-        ? [
-            // twitter username
-            {
-              name: 'twitter:creator',
-              content: seo.twitterUsername,
-            },
-          ]
-        : []
-    )
-    .concat(seo.author ? [{ name: 'author', content: seo.author }] : [])
-    .concat(
-      seo.canonical
-        ? [
-            // canonical link
-            {
-              property: 'og:url',
-              content: seo.canonical,
-            },
-          ]
-        : []
-    )
-    .concat(meta ? meta : []); // concatenate any extra meta passed directly to the component
-
-  // page's title
-  let pageTitle = seo.title;
-
-  // if there is a canonical link, render it
-  const pageLink = seo.canonical
-    ? [{ rel: 'canonical', href: seo.canonical }]
-    : [];
-
   return (
-    <Helmet
-      htmlAttributes={htmlContent}
-      title={pageTitle}
-      link={pageLink}
-      meta={metaContent}
-    />
+    <>
+      <title id="title">{seo.title}</title>
+      <meta id="og:title" property="og:title" content={seo.title} />
+      <meta
+        id="og:type"
+        property="og:type"
+        content={article ? 'article' : 'website'}
+      />
+      <meta id="twitter:title" name="twitter:title" content={seo.title} />
+      {seo.description && (
+        <>
+          <meta id="description" name="description" content={seo.description} />
+          <meta
+            id="og:description"
+            property="og:description"
+            content={seo.description}
+          />
+          <meta
+            id="twitter:description"
+            name="twitter:description"
+            content={seo.description}
+          />
+        </>
+      )}
+      {seo.keywords.length > 0 && (
+        <meta id="keywords" name="keywords" content={keywords.join(',')} />
+      )}
+      {seo.image ? (
+        <>
+          <meta id="image" name="image" content={seo.image.src} />
+          <meta id="og:image" property="og:image" content={seo.image.src} />
+          <meta
+            id="og:image:width"
+            property="og:image:width"
+            content={String(seo.image.width)}
+          />
+          <meta
+            id="og:image:height"
+            property="og:image:height"
+            content={String(seo.image.height)}
+          />
+          <meta
+            id="twitter:card"
+            name="twitter:card"
+            content="summary_large_image"
+          />
+          <meta
+            id="twitter:image"
+            name="twitter:image"
+            content={String(seo.image.src)}
+          />
+        </>
+      ) : (
+        <meta id="twitter:card" name="twitter:card" content="summary" />
+      )}
+      {seo.twitterUsername && (
+        <meta
+          id="twitter:creator"
+          name="twitter:creator"
+          content={seo.twitterUsername}
+        />
+      )}
+      {seo.author && <meta id="author" name="author" content={seo.author} />}
+      {seo.canonical && (
+        <>
+          <meta id="og:url" property="og:url" content={seo.canonical} />
+          <link id="canonical" rel="canonical" href={seo.canonical} />
+        </>
+      )}
+      {children}
+    </>
   );
 };
 
 /**
- * An extensible, general-purpose SEO component for Gatsby sites. Queries your siteMetadata, accepts overriding props, and injects the metadata into your page's head.
+ * Page SEO component.
  */
 export const Seo: React.FC<BaseProps> = (props) => {
   // query to get site metadata
@@ -187,5 +168,9 @@ export const Seo: React.FC<BaseProps> = (props) => {
       }
     }
   `);
-  return <PureSeo siteMetadata={siteMetadata} {...props} />;
+  return (
+    <BaseSeo {...props} siteMetadata={siteMetadata}>
+      {props.children}
+    </BaseSeo>
+  );
 };

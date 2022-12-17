@@ -70,7 +70,6 @@ const PortfolioPage = ({
 
   return (
     <Layout>
-      <Seo title="Jon Rutter | Web Developer" pathname="/portfolio" />
       <Hero title="My portfolio">
         <p className="mb-4">
           Here are some of my recent projects and client websites.
@@ -169,3 +168,7 @@ export const query = graphql`
     }
   }
 `;
+
+export const Head = () => (
+  <Seo title="Portfolio | Jon Rutter" pathname="/portfolio" />
+);

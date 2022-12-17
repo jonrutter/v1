@@ -13,7 +13,6 @@ const config: GatsbyConfig = {
   },
   plugins: [
     'gatsby-plugin-image',
-    'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-plugin-manifest',
       options: {

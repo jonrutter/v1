@@ -8,7 +8,6 @@ const ContactPage = () => {
   const [sent, setSent] = useState<boolean>(false);
   return (
     <Layout>
-      <Seo title="Contact Me | Jon Rutter" pathname="/contact" />
       {!sent ? (
         <>
           <Hero title="Contact me">
@@ -39,3 +38,7 @@ const ContactPage = () => {
   );
 };
 export default ContactPage;
+
+export const Head = () => (
+  <Seo title="Contact | Jon Rutter" pathname="/contact" />
+);

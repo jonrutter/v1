@@ -84,7 +84,6 @@ const BlogPage = ({ data: { allMdx } }: PageProps<DataProps>) => {
 
   return (
     <Layout>
-      <Seo title="Blog | Jon Rutter" pathname="/blog" />
       <Hero title="My blog">
         <p className="mb-8">
           Articles sharing my thoughts, opinions, and tutorials on web
@@ -156,3 +155,5 @@ export const query = graphql`
     }
   }
 `;
+
+export const Head = () => <Seo title="Blog | Jon Rutter" pathname="/blog" />;

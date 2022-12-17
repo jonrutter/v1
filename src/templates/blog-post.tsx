@@ -86,24 +86,10 @@ const BlogPostTemplate = ({
   const image =
     node.frontmatter.featured_image?.childImageSharp?.gatsbyImageData;
 
-  let src = node.frontmatter.featured_image?.childImageSharp.original.src;
-  let height = node.frontmatter.featured_image?.childImageSharp.original.height;
-  let width = node.frontmatter.featured_image?.childImageSharp.original.width;
-
-  let seoImage = src && height && width ? { src, height, width } : undefined;
-
   const editLink = `${links.github}/v1/edit/main/content/blog/${node.frontmatter.slug}/index.mdx`;
 
   return (
     <Layout blogPost>
-      <Seo
-        title={`${node.frontmatter.title} | Jon Rutter`}
-        pathname={`/blog/${node.frontmatter.slug}`}
-        article
-        author="Jon Rutter"
-        description={node.frontmatter.excerpt}
-        image={seoImage}
-      />
       <div className="bg-white dark:bg-slate-900">
         <div className="py-12 sm:py-16 md:py-20 px-6 md:px-12 bg-inherit text-inherit">
           <article className="w-full max-w-xl md:max-w-screen-md mx-auto">
@@ -251,3 +237,24 @@ export const pageQuery = graphql`
 `;
 
 export default BlogPostTemplate;
+
+export const Head = ({ data }: PageProps<DataProps>) => {
+  const node = data.allMdx.edges[0].node;
+
+  let src = node.frontmatter.featured_image?.childImageSharp.original.src;
+  let height = node.frontmatter.featured_image?.childImageSharp.original.height;
+  let width = node.frontmatter.featured_image?.childImageSharp.original.width;
+
+  let seoImage = src && height && width ? { src, height, width } : undefined;
+
+  return (
+    <Seo
+      title={`${node.frontmatter.title} | Jon Rutter`}
+      pathname={`/blog/${node.frontmatter.slug}`}
+      article
+      author="Jon Rutter"
+      description={node.frontmatter.excerpt}
+      image={seoImage}
+    />
+  );
+};
