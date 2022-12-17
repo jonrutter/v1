@@ -27,6 +27,8 @@ export const wrapPageElement: GatsbySSR['wrapPageElement'] = ({ element }) => {
 
 export const onRenderBody: GatsbySSR['onRenderBody'] = ({
   setPreBodyComponents,
+  setHtmlAttributes,
 }) => {
   setPreBodyComponents([<InjectInitialTheme key="inject-initial-theme" />]);
+  setHtmlAttributes({ lang: 'en' });
 };
