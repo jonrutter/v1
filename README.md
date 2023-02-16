@@ -1,10 +1,12 @@
-# jonrutter.io
+# ARCHIVE: jonrutter.io version 1
 
-[![Production deployment](https://img.shields.io/github/deployments/jonrutter/v1/production?label=vercel&logo=vercel&logoColor=white)](https://www.jonrutter.io)
+[![Production deployment](https://img.shields.io/github/deployments/jonrutter/v1/production?label=vercel&logo=vercel&logoColor=white)](https://v1-rutterjt.vercel.app/)
 [![Current Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/jonrutter/v1)
 ![Workflow status](https://github.com/jonrutter/v1/actions/workflows/main.yml/badge.svg?event=push)
 
-My personal portfolio website.
+This is a previous version of my personal portfolio website: jonrutter.io. This repo is now archived and is not being maintained, but a [demo of the site](https://v1-rutterjt.vercel.app/) is still live, so feel free to check it out!
+
+For the current version of my website, see [https://github.com/jonrutter/v2](https://github.com/jonrutter/v2).
 
 <details>
   <summary>Table of Contents</summary>
@@ -18,7 +20,7 @@ My personal portfolio website.
 
 ## Live Site
 
-See the live site: [https://www.jonrutter.io](https://www.jonrutter.io)
+See the live site: [https://v1-rutterjt.vercel.app/](https://v1-rutterjt.vercel.app/)
 
 ## Built with
 
